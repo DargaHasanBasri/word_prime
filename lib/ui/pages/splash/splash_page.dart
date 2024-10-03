@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:word_prime/base/base_stateful_state.dart';
+import 'package:word_prime/routes/routes.dart';
 import 'package:word_prime/utils/app_colors.dart';
 
 class SplashPage extends StatefulWidget {
@@ -10,6 +11,13 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends BaseStatefulState<SplashPage> {
+
+  @override
+  void initState() {
+    waitAndNavigate(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +59,15 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> waitAndNavigate(BuildContext context) async {
+    await Future.delayed(
+      const Duration(seconds: 4),
+      () {
+        appRoutes.navigateToReplacement(Routes.Onboarding);
+      },
     );
   }
 }
