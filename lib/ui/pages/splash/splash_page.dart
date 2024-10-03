@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:word_prime/base/base_stateful_state.dart';
 import 'package:word_prime/utils/app_colors.dart';
 
 class SplashPage extends StatefulWidget {
@@ -8,7 +9,7 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends BaseStatefulState<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
