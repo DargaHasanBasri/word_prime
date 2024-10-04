@@ -1,0 +1,28 @@
+{
+  "appTitle": "WordPrime",
+  "emailHintText": "Email Girin",
+  "passwordHintText": "Parola Girin",
+  "nameHintText": "Adınızı Girin",
+  "continueTitle": "Devam Et",
+  "skip": "Atla",
+  "signIn": "Kayıt Ol",
+  "or": "Ya da",
+  "splashPage": {
+    "title": "Potansiyelinizi bizimle ortaya çıkarın!"
+  },
+  "loginPage": {
+    "welcomeTitle": "MERHABA! Tekrar hoşgeldiniz",
+    "welcomeSubTitle": "Sizi WordPrime'a dahil edelim",
+    "forgotPassword": "Parolanızı mı unuttunuz?",
+    "withApple": "Apple ile devam et",
+    "withGoogle": "Google ile devam et",
+    "isSignUpMsg": "Hesabınız yok mu? Üye olun"
+  },
+  "registerPage": {
+    "registerTitle": "WordPrime'a kaydolun",
+    "registerSubTitle": "İngilizce kelime öğrenmek için testler, oyunlar ve kelime paylaşımı içeren en iyi uygulamayı keşfedin.",
+    "passwordHintText": "Min. 8 karakter girin",
+    "privacyMsg": "Kaydolarak WordPrime'ın Hizmet Koşullarını ve Gizlilik Politikasını kabul etmiş olursunuz.",
+    "isSignInMsg": "Zaten bir hesabınız var mı? Giriş Yapın"
+  }
+}

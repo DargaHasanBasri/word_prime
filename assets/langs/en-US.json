@@ -1,0 +1,28 @@
+{
+  "appTitle": "WordPrime",
+  "emailHintText": "Your email",
+  "passwordHintText": "Your password",
+  "nameHintText": "Your name",
+  "continueTitle": "Continue",
+  "skip": "Skip",
+  "signIn": "Sing In",
+  "or": "Or",
+  "splash": {
+    "title": "Unlock your potential with us!"
+  },
+  "loginPage": {
+    "welcomeTitle": "Hi! Welcome Back",
+    "welcomeSubTitle": "Let’s get you in to WordPrime",
+    "forgotPassword": "Forgot Password?",
+    "withApple": "Continue with Apple",
+    "withGoogle": "Continue with Google",
+    "isSignUpMsg": "Don’t have an account? Sign Up"
+  },
+  "registerPage": {
+    "registerTitle": "Sign up to WordPrime",
+    "registerSubTitle": "Discover the best app with tests, games and vocabulary sharing to learn English vocabulary.",
+    "passwordHintText": "Min. 8 characters",
+    "privacyMsg": "By signing up you agree to WordPrime’s Terms of Services and Privacy Policy.",
+    "isSignInMsg": "Already have an account? Sign In"
+  }
+}
