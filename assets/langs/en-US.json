@@ -6,6 +6,7 @@
   "continueTitle": "Continue",
   "skip": "Skip",
   "signIn": "Sing In",
+  "signUp": "Sing Up",
   "or": "Or",
   "splash": {
     "title": "Unlock your potential with us!"
@@ -16,7 +17,7 @@
     "forgotPassword": "Forgot Password?",
     "withApple": "Continue with Apple",
     "withGoogle": "Continue with Google",
-    "isSignUpMsg": "Don’t have an account? Sign Up"
+    "isSignUpMsg": "Don’t have an account?"
   },
   "registerPage": {
     "registerTitle": "Sign up to WordPrime",
