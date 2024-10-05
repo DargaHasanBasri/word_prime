@@ -12,6 +12,7 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
     ),
   );
   await setupLocator();
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: locator<AppRoutes>().baseNavigatorKey,
       onGenerateRoute: Routes.generateRoute,
-      initialRoute: Routes.Splash,
+      initialRoute: Routes.Login,
       builder: (context, widget) {
         return widget!;
       },
