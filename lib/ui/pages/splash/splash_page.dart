@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:word_prime/base/base_stateful_state.dart';
+import 'package:word_prime/generated/locale_keys.g.dart';
 import 'package:word_prime/routes/routes.dart';
+import 'package:word_prime/utils/app_assets.dart';
 import 'package:word_prime/utils/app_colors.dart';
+import 'package:word_prime/utils/string_localizations_ext.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -35,13 +38,13 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
             radius: 60,
             backgroundColor: AppColors.white,
             child: Image.asset(
-              'assets/images/ic_app_logo.png',
+              AppAssets.appLogoPath,
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 24, bottom: 10),
             child: Text(
-              'WordPrime',
+              LocaleKeys.appTitle.locale,
               style: TextStyle(
                 fontSize: 24,
                 color: AppColors.white,
@@ -50,7 +53,7 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
             ),
           ),
           Text(
-            'Unlock your potential with us!',
+            LocaleKeys.splash_title.locale,
             style: TextStyle(
               fontSize: 14,
               color: AppColors.white,
