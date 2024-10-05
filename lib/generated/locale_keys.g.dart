@@ -8,6 +8,7 @@ abstract class  LocaleKeys {
   static const continueTitle = 'continueTitle';
   static const skip = 'skip';
   static const signIn = 'signIn';
+  static const signUp = 'signUp';
   static const or = 'or';
   static const splash_title = 'splash.title';
   static const splash = 'splash';

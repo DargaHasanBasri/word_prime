@@ -5,7 +5,8 @@
   "nameHintText": "Adınızı Girin",
   "continueTitle": "Devam Et",
   "skip": "Atla",
-  "signIn": "Kayıt Ol",
+  "signIn": "Giriş Yap",
+  "signUp": "Kayıt Ol",
   "or": "Ya da",
   "splashPage": {
     "title": "Potansiyelinizi bizimle ortaya çıkarın!"
@@ -16,7 +17,7 @@
     "forgotPassword": "Parolanızı mı unuttunuz?",
     "withApple": "Apple ile devam et",
     "withGoogle": "Google ile devam et",
-    "isSignUpMsg": "Hesabınız yok mu? Üye olun"
+    "isSignUpMsg": "Hesabınız yok mu?"
   },
   "registerPage": {
     "registerTitle": "WordPrime'a kaydolun",
