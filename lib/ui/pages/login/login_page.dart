@@ -1,15 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:word_prime/base/base_stateful_state.dart';
-import 'package:word_prime/generated/locale_keys.g.dart';
-import 'package:word_prime/ui/pages/login/components/or_text_container.dart';
-import 'package:word_prime/ui/pages/login/login_view_model.dart';
-import 'package:word_prime/ui/widgets/custom_button.dart';
-import 'package:word_prime/ui/widgets/custom_text_form_field.dart';
-import 'package:word_prime/utils/app_assets.dart';
-import 'package:word_prime/utils/app_colors.dart';
-import 'package:word_prime/utils/app_paddings.dart';
-import 'package:word_prime/utils/string_localizations_ext.dart';
+import 'package:word_prime/export.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

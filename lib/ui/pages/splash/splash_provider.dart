@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:word_prime/ui/pages/splash/splash_page.dart';
-import 'package:word_prime/ui/pages/splash/splash_view_model.dart';
+import 'package:word_prime/export.dart';
 
 class SplashProvider extends StatelessWidget {
   const SplashProvider({super.key});

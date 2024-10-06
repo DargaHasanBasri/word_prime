@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:word_prime/ui/pages/onboarding/onboarding_page.dart';
-import 'package:word_prime/ui/pages/onboarding/onboarding_view_model.dart';
+import 'package:word_prime/export.dart';
 
 class OnboardingProvider extends StatelessWidget {
   const OnboardingProvider({super.key});

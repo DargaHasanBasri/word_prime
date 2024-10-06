@@ -1,4 +1,4 @@
-import 'package:word_prime/base/base_view_model.dart';
+import 'package:word_prime/export.dart';
 
 class SplashViewModel extends BaseViewModel {
 

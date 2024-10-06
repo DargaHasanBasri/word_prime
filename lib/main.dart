@@ -1,10 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:word_prime/routes/app_routes.dart';
-import 'package:word_prime/routes/routes.dart';
-import 'package:word_prime/services/service_locator.dart';
-import 'package:word_prime/utils/app_locale_constants.dart';
+import 'package:word_prime/export.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:word_prime/base/base_stateful_state.dart';
+import 'package:word_prime/export.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});

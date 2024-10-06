@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:word_prime/base/base_stateful_state.dart';
-import 'package:word_prime/generated/locale_keys.g.dart';
-import 'package:word_prime/routes/routes.dart';
-import 'package:word_prime/utils/app_assets.dart';
-import 'package:word_prime/utils/app_colors.dart';
-import 'package:word_prime/utils/string_localizations_ext.dart';
+import 'package:word_prime/export.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
