@@ -6,6 +6,7 @@ final class Routes {
   static const String Onboarding = 'onboardingProvider';
   static const String Login = 'loginProvider';
   static const String Register = 'registerProvider';
+  static const String ForgotPassword = 'forgotPasswordProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -24,6 +25,10 @@ final class Routes {
       case Routes.Register:
         return MaterialPageRoute(
           builder: (context) => const RegisterProvider(),
+        );
+      case Routes.ForgotPassword:
+        return MaterialPageRoute(
+          builder: (context) => const ForgotPasswordProvider(),
         );
       default:
         return MaterialPageRoute(

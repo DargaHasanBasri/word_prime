@@ -27,3 +27,6 @@ export 'package:word_prime/ui/pages/login/login_provider.dart';
 export 'package:word_prime/ui/pages/onboarding/onboarding_provider.dart';
 export 'package:word_prime/ui/pages/register/register_provider.dart';
 export 'package:word_prime/ui/pages/splash/splash_provider.dart';
+export 'package:word_prime/ui/pages/forgot_password/forgot_password_page.dart';
+export 'package:word_prime/ui/pages/forgot_password/forgot_password_view_model.dart';
+export 'package:word_prime/ui/pages/forgot_password/forgot_password_provider.dart';
