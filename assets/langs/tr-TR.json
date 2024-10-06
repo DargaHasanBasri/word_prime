@@ -25,5 +25,11 @@
     "passwordHintText": "Min. 8 karakter girin",
     "privacyMsg": "Kaydolarak WordPrime'ın Hizmet Koşullarını ve Gizlilik Politikasını kabul etmiş olursunuz.",
     "isSignInMsg": "Zaten bir hesabınız var mı?"
+  },
+  "forgotPassword": {
+    "forgotTitle": "Parolanı mı Unuttun?",
+    "forgotSubTitle" : "Lütfen parola sıfırlama talebinde bulunmak için bir yöntem seçin.",
+    "enterMailHintText": "Email girin",
+    "enterNameHintText": "Adınızı Girin"
   }
 }

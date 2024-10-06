@@ -25,5 +25,11 @@
     "passwordHintText": "Min. 8 characters",
     "privacyMsg": "By signing up you agree to WordPrime’s Terms of Services and Privacy Policy.",
     "isSignInMsg": "Already have an account?"
+  },
+  "forgotPassword": {
+    "forgotTitle": "Forgot password?",
+    "forgotSubTitle" : "Please choose a method to request a password reset.",
+    "enterMailHintText": "Enter your email",
+    "enterNameHintText": "Enter your name"
   }
 }

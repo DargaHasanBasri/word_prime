@@ -9,4 +9,5 @@ final class AppColors {
   static Color paleSky = const Color(0xff6B7280);
   static Color santaGrey = const Color(0xff9CA3AF);
   static Color softPeach = const Color(0xffEEEFF2);
+  static Color alabaster = const Color(0xffF9FAFB);
 }

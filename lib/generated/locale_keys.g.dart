@@ -25,5 +25,10 @@ abstract class  LocaleKeys {
   static const registerPage_privacyMsg = 'registerPage.privacyMsg';
   static const registerPage_isSignInMsg = 'registerPage.isSignInMsg';
   static const registerPage = 'registerPage';
+  static const forgotPassword_forgotTitle = 'forgotPassword.forgotTitle';
+  static const forgotPassword_forgotSubTitle = 'forgotPassword.forgotSubTitle';
+  static const forgotPassword_enterMailHintText = 'forgotPassword.enterMailHintText';
+  static const forgotPassword_enterNameHintText = 'forgotPassword.enterNameHintText';
+  static const forgotPassword = 'forgotPassword';
 
 }
