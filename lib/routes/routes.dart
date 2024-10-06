@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:word_prime/ui/pages/login/login_provider.dart';
-import 'package:word_prime/ui/pages/onboarding/onboarding_provider.dart';
-import 'package:word_prime/ui/pages/splash/splash_provider.dart';
+import 'package:word_prime/export.dart';
 
 final class Routes {
   const Routes._();
   static const String Splash = 'splashProvider';
   static const String Onboarding = 'onboardingProvider';
   static const String Login = 'loginProvider';
+  static const String Register = 'registerProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -22,6 +20,10 @@ final class Routes {
       case Routes.Login:
         return MaterialPageRoute(
           builder: (context) => const LoginProvider(),
+        );
+      case Routes.Register:
+        return MaterialPageRoute(
+          builder: (context) => const RegisterProvider(),
         );
       default:
         return MaterialPageRoute(
