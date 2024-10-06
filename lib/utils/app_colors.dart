@@ -2,6 +2,7 @@ import 'dart:ui';
 
 final class AppColors {
   AppColors._();
+  static Color backgroundColor = const Color(0xffffffff);
   static Color cornflowerBlue = const Color(0xff699CF4);
   static Color white = const Color(0xffffffff);
   static Color mirage = const Color(0xff111827);
