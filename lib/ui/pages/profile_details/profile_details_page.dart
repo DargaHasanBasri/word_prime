@@ -41,7 +41,9 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
       children: [
         Padding(
           padding: AppPaddings.paddingMediumVertical,
-          child: CustomUserCircleAvatar(circleRadius: 40),
+          child: Center(
+            child: CustomUserCircleAvatar(circleRadius: 40),
+          ),
         ),
         Padding(
           padding: AppPaddings.paddingPaddingBottom,
