@@ -8,6 +8,7 @@ final class Routes {
   static const String Register = 'registerProvider';
   static const String ForgotPassword = 'forgotPasswordProvider';
   static const String ForgotPasswordMethod = 'forgotPasswordMethodProvider';
+  static const String AddPost = 'addPostProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -37,6 +38,10 @@ final class Routes {
           builder: (context) => ForgotPasswordMethodProvider(
             whichMethod: methodType,
           ),
+        );
+      case Routes.AddPost:
+        return MaterialPageRoute(
+          builder: (context) => const AddPostProvider(),
         );
       default:
         return MaterialPageRoute(

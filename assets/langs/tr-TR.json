@@ -31,5 +31,21 @@
     "forgotSubTitle" : "Lütfen parola sıfırlama talebinde bulunmak için bir yöntem seçin.",
     "enterMailHintText": "Email girin",
     "enterNameHintText": "Adınızı Girin"
+  },
+  "addPost": {
+    "title": "Yeni Kelime Ekle",
+    "englishWordTitle": "Kelimenin İngilizcesi",
+    "turkishWordTitle": "Kelimenin Türkçesi",
+    "englishSentencesTitle": "İngilizce Cümle",
+    "turkishSentencesTitle": "Türkçe Cümle",
+    "selectImage": "Resim Seç",
+    "buttonTitle": "Kelime Ekle",
+    "backHome": "Ana Sayfaya Geri Dön",
+    "successTitle": "Başarılı!",
+    "successMsg": "Yeni bir kelime eklediniz! Öğrenme deneyiminin tadını çıkarın!",
+    "exampleTurkishWord": "Örnek: Elma",
+    "exampleTurkishSentences": "Örnek: Marketten elma al",
+    "exampleEnglishWord": "Example: Apple",
+    "exampleEnglishSentences": "Example: Buy apples from the market"
   }
 }

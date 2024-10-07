@@ -30,5 +30,20 @@ abstract class  LocaleKeys {
   static const forgotPassword_enterMailHintText = 'forgotPassword.enterMailHintText';
   static const forgotPassword_enterNameHintText = 'forgotPassword.enterNameHintText';
   static const forgotPassword = 'forgotPassword';
+  static const addPost_title = 'addPost.title';
+  static const addPost_englishWordTitle = 'addPost.englishWordTitle';
+  static const addPost_turkishWordTitle = 'addPost.turkishWordTitle';
+  static const addPost_englishSentencesTitle = 'addPost.englishSentencesTitle';
+  static const addPost_turkishSentencesTitle = 'addPost.turkishSentencesTitle';
+  static const addPost_selectImage = 'addPost.selectImage';
+  static const addPost_buttonTitle = 'addPost.buttonTitle';
+  static const addPost_backHome = 'addPost.backHome';
+  static const addPost_successTitle = 'addPost.successTitle';
+  static const addPost_successMsg = 'addPost.successMsg';
+  static const addPost_exampleTurkishWord = 'addPost.exampleTurkishWord';
+  static const addPost_exampleTurkishSentences = 'addPost.exampleTurkishSentences';
+  static const addPost_exampleEnglishWord = 'addPost.exampleEnglishWord';
+  static const addPost_exampleEnglishSentences = 'addPost.exampleEnglishSentences';
+  static const addPost = 'addPost';
 
 }

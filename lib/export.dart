@@ -33,3 +33,6 @@ export 'package:word_prime/ui/pages/forgot_password/forgot_password_provider.dar
 export 'package:word_prime/ui/pages/forgot_password_method/forgot_password_method_page.dart';
 export 'package:word_prime/ui/pages/forgot_password_method/forgot_password_method_view_model.dart';
 export 'package:word_prime/ui/pages/forgot_password_method/forgot_password_method_provider.dart';
+export 'package:word_prime/ui/pages/add_post/add_post_page.dart';
+export 'package:word_prime/ui/pages/add_post/add_post_view_model.dart';
+export 'package:word_prime/ui/pages/add_post/add_post_provider.dart';
