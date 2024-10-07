@@ -39,3 +39,6 @@ export 'package:word_prime/ui/pages/add_post/add_post_provider.dart';
 export 'package:word_prime/ui/pages/add_post_successful/add_post_successful_page.dart';
 export 'package:word_prime/ui/pages/add_post_successful/add_post_successful_view_model.dart';
 export 'package:word_prime/ui/pages/add_post_successful/add_post_successful_provider.dart';
+export 'package:word_prime/ui/pages/settings/settings_page.dart';
+export 'package:word_prime/ui/pages/settings/settings_view_model.dart';
+export 'package:word_prime/ui/pages/settings/settings_provider.dart';
