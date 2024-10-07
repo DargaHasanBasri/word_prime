@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: locator<AppRoutes>().baseNavigatorKey,
       onGenerateRoute: Routes.generateRoute,
-      initialRoute: Routes.Settings,
+      initialRoute: Routes.ProfileDetails,
       builder: (context, widget) {
         return widget!;
       },

@@ -127,7 +127,7 @@ class CustomTextFormField extends StatelessWidget {
             Text(
               textFieldTitle,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 color: textFieldTitleColor ?? AppColors.white,
                 fontWeight: FontWeight.w700,
               ),

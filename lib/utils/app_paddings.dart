@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 final class AppPaddings {
   AppPaddings._();
 
-  static const appPaddingVertical= EdgeInsets.symmetric(vertical: 24);
+  static const appPaddingVertical = EdgeInsets.symmetric(vertical: 24);
 
   static const paddingMediumVertical = EdgeInsets.symmetric(vertical: 16);
 
@@ -15,11 +15,13 @@ final class AppPaddings {
 
   static const paddingSmallHorizontal = EdgeInsets.symmetric(horizontal: 8);
 
+  static const appPaddingAll = EdgeInsets.all(24);
+
   static const paddingMediumAll = EdgeInsets.all(16);
 
   static const paddingSmallAll = EdgeInsets.all(8);
 
-
+  static const paddingPaddingBottom = EdgeInsets.only(bottom: 24);
 
 
 }

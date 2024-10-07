@@ -46,14 +46,22 @@ abstract class  LocaleKeys {
   static const addPost_exampleEnglishSentences = 'addPost.exampleEnglishSentences';
   static const addPost = 'addPost';
   static const settings_title = 'settings.title';
-  static const settings_userDetail = 'settings.userDetail';
+  static const settings_profileDetails = 'settings.profileDetails';
   static const settings_darkMode = 'settings.darkMode';
   static const settings_lightMode = 'settings.lightMode';
+  static const settings_chooseTheme = 'settings.chooseTheme';
   static const settings_faqs = 'settings.faqs';
   static const settings_helpCenter = 'settings.helpCenter';
   static const settings_language = 'settings.language';
   static const settings_privacy = 'settings.privacy';
   static const settings_notifications = 'settings.notifications';
   static const settings = 'settings';
+  static const profileDetail_title = 'profileDetail.title';
+  static const profileDetail_changePicture = 'profileDetail.changePicture';
+  static const profileDetail_fullNameTitle = 'profileDetail.fullNameTitle';
+  static const profileDetail_emailTitle = 'profileDetail.emailTitle';
+  static const profileDetail_passwordTitle = 'profileDetail.passwordTitle';
+  static const profileDetail_update = 'profileDetail.update';
+  static const profileDetail = 'profileDetail';
 
 }

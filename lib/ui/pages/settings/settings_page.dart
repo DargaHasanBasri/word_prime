@@ -15,7 +15,7 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
       backgroundColor: AppColors.backgroundColor,
       appBar: _buildAppBar(),
       body: Padding(
-        padding: AppPaddings.appPaddingHorizontal,
+        padding: AppPaddings.appPaddingAll,
         child: _buildBody(),
       ),
     );
@@ -33,19 +33,13 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           SettingsItem(
-            title: LocaleKeys.settings_userDetail.locale,
+            title: LocaleKeys.settings_profileDetails.locale,
             onTab: () {},
             iconAddress: AppAssets.icUserPath,
           ),
           Padding(
             padding: AppPaddings.paddingMediumVertical,
-            child: Container(
-              height: 2,
-              decoration: BoxDecoration(
-                color: AppColors.softPeach,
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
+            child: customDivider(),
           ),
           SettingsItem(
             title: LocaleKeys.settings_language.locale,
@@ -54,13 +48,7 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
           ),
           Padding(
             padding: AppPaddings.paddingMediumVertical,
-            child: Container(
-              height: 2,
-              decoration: BoxDecoration(
-                color: AppColors.softPeach,
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
+            child: customDivider(),
           ),
           SettingsItem(
             title: LocaleKeys.settings_notifications.locale,
@@ -69,28 +57,16 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
           ),
           Padding(
             padding: AppPaddings.paddingMediumVertical,
-            child: Container(
-              height: 2,
-              decoration: BoxDecoration(
-                color: AppColors.softPeach,
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
+            child: customDivider(),
           ),
           SettingsItem(
-            title: LocaleKeys.settings_darkMode.locale,
+            title: LocaleKeys.settings_chooseTheme.locale,
             onTab: () {},
             iconAddress: AppAssets.icDarkModePath,
           ),
           Padding(
             padding: AppPaddings.paddingMediumVertical,
-            child: Container(
-              height: 2,
-              decoration: BoxDecoration(
-                color: AppColors.softPeach,
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
+            child: customDivider(),
           ),
           SettingsItem(
             title: LocaleKeys.settings_faqs.locale,
@@ -99,13 +75,7 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
           ),
           Padding(
             padding: AppPaddings.paddingMediumVertical,
-            child: Container(
-              height: 2,
-              decoration: BoxDecoration(
-                color: AppColors.softPeach,
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
+            child: customDivider(),
           ),
           SettingsItem(
             title: LocaleKeys.settings_helpCenter.locale,
@@ -113,6 +83,16 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
             iconAddress: AppAssets.icHelpPath,
           ),
         ],
+      ),
+    );
+  }
+
+  Widget customDivider() {
+    return Container(
+      height: 2,
+      decoration: BoxDecoration(
+        color: AppColors.softPeach,
+        borderRadius: BorderRadius.circular(16),
       ),
     );
   }
