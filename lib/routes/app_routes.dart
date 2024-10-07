@@ -111,7 +111,7 @@ class AppRoutes {
     if (theKey.currentState!.canPop()) {
       theKey.currentState!.pop(arguments);
     } else {
-      navigateRemoveUntil(Routes.Splash, arguments: arguments);
+      navigateRemoveUntil(Routes.Login, arguments: arguments);
     }
     return Future.value(arguments);
   }

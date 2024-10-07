@@ -5,6 +5,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     required this.controller,
     this.hintTextColor,
+    this.textFieldTitleColor,
     super.key,
     TextInputType? inputType,
     TextInputAction? textInputAction,
@@ -44,6 +45,7 @@ class CustomTextFormField extends StatelessWidget {
   final double borderRadius;
   final Color textFieldBgColor;
   final Color? hintTextColor;
+  final Color? textFieldTitleColor;
   final bool isAutoTrue;
   final bool isPrefixIcon;
   final bool isSuffixIcon;
@@ -63,6 +65,8 @@ class CustomTextFormField extends StatelessWidget {
           textInputAction: textInputAction,
           onChanged: _onChanged,
           style: TextStyle(
+            decoration: TextDecoration.none,
+            decorationThickness: 0,
             color: AppColors.mirage,
             fontSize: 16,
             fontWeight: FontWeight.w400,
@@ -84,8 +88,8 @@ class CustomTextFormField extends StatelessWidget {
             filled: true,
             fillColor: textFieldBgColor,
             contentPadding: const EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 16,
+              horizontal: 16,
+              vertical: 12,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(borderRadius),
@@ -124,8 +128,8 @@ class CustomTextFormField extends StatelessWidget {
               textFieldTitle,
               style: TextStyle(
                 fontSize: 16,
-                color: AppColors.white.withOpacity(0.87),
-                fontWeight: FontWeight.w400,
+                color: textFieldTitleColor ?? AppColors.white,
+                fontWeight: FontWeight.w700,
               ),
             ),
             const SizedBox(width: 6),
@@ -133,7 +137,9 @@ class CustomTextFormField extends StatelessWidget {
               Text(
                 '*',
                 style: TextStyle(
-                  color: AppColors.white.withOpacity(0.87),
+                  color: AppColors.watermelon,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
           ],

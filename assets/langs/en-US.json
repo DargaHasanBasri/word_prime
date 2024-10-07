@@ -31,5 +31,21 @@
     "forgotSubTitle" : "Please choose a method to request a password reset.",
     "enterMailHintText": "Enter your email",
     "enterNameHintText": "Enter your name"
+  },
+  "addPost": {
+    "title": "Add New Word",
+    "englishWordTitle": "English of the word",
+    "turkishWordTitle": "Turkish of the word",
+    "englishSentencesTitle": "English Sentences",
+    "turkishSentencesTitle": "Turkish Sentences",
+    "selectImage": "Select Image",
+    "buttonTitle": "Add Word",
+    "backHome": "Back to Home",
+    "successTitle": "Successfully!",
+    "successMsg": "You have added a new word! Enjoy the learning experience!",
+    "exampleTurkishWord": "Örnek: Elma",
+    "exampleTurkishSentences": "Örnek: Marketten elma al",
+    "exampleEnglishWord": "Example: Apple",
+    "exampleEnglishSentences": "Example: Buy apples from the market"
   }
 }

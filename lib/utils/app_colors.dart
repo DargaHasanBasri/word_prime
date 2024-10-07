@@ -10,4 +10,5 @@ final class AppColors {
   static Color santaGrey = const Color(0xff9CA3AF);
   static Color softPeach = const Color(0xffEEEFF2);
   static Color alabaster = const Color(0xffF9FAFB);
+  static Color watermelon = const Color(0xffFF445D);
 }
