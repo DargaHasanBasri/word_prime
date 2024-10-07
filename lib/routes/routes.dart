@@ -11,6 +11,7 @@ final class Routes {
   static const String AddPost = 'addPostProvider';
   static const String AddPostSuccessful = 'addPostSuccessfulProvider';
   static const String Settings = 'settingsProvider';
+  static const String ProfileDetails = 'profileDetailsProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -52,6 +53,10 @@ final class Routes {
       case Routes.Settings:
         return MaterialPageRoute(
           builder: (context) => const SettingsProvider(),
+        );
+      case Routes.ProfileDetails:
+        return MaterialPageRoute(
+          builder: (context) => const ProfileDetailsProvider(),
         );
       default:
         return MaterialPageRoute(

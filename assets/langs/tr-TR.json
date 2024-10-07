@@ -50,13 +50,22 @@
   },
   "settings": {
     "title": "Ayarlar",
-    "userDetail": "Kullanıcı Detayları",
+    "profileDetails": "Profil Detayları",
     "darkMode": "Karanlık Mod",
     "lightMode": "Aydınlık Mod",
+    "chooseTheme": "Tema Seç",
     "faqs": "FAQs",
     "helpCenter": "Yardım Merkezi",
     "language": "Dil",
     "privacy": "Gizlilik",
     "notifications": "Bildirimler"
+  },
+  "profileDetail": {
+    "title": "Profil Detayları",
+    "changePicture": "Fotoğrafı Değiştir",
+    "fullNameTitle": "Ad Soyad",
+    "emailTitle": "Email",
+    "passwordTitle": "Parola",
+    "update": "Güncelle"
   }
 }

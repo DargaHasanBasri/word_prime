@@ -50,13 +50,22 @@
   },
   "settings": {
     "title": "Settings",
-    "userDetail": "User Detail",
+    "profileDetails": "Profile Details",
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode",
+    "chooseTheme": "Change Theme",
     "faqs": "FAQs",
     "helpCenter": "Help Center",
     "language": "Language",
     "privacy": "Privacy",
     "notifications": "Notifications"
+  },
+  "profileDetail": {
+    "title": "Profile Detail",
+    "changePicture": "Change Picture",
+    "fullNameTitle": "Full Name",
+    "emailTitle": "Email",
+    "passwordTitle": "Password",
+    "update": "Update"
   }
 }
