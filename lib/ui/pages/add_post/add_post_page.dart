@@ -126,7 +126,13 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
                       backgroundColor: _vm.isEmptyInputText()
                           ? AppColors.cornflowerBlue.withOpacity(0.4)
                           : AppColors.cornflowerBlue,
-                      onClick: () {},
+                      onClick: () {
+                        _vm.isEmptyInputText()
+                            ? debugPrint(LocaleKeys.addPost_buttonTitle.locale)
+                            : appRoutes.navigateToReplacement(
+                                Routes.AddPostSuccessful,
+                              );
+                      },
                     ),
                   );
                 },
