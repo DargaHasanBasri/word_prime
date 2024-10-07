@@ -45,5 +45,15 @@ abstract class  LocaleKeys {
   static const addPost_exampleEnglishWord = 'addPost.exampleEnglishWord';
   static const addPost_exampleEnglishSentences = 'addPost.exampleEnglishSentences';
   static const addPost = 'addPost';
+  static const settings_title = 'settings.title';
+  static const settings_userDetail = 'settings.userDetail';
+  static const settings_darkMode = 'settings.darkMode';
+  static const settings_lightMode = 'settings.lightMode';
+  static const settings_faqs = 'settings.faqs';
+  static const settings_helpCenter = 'settings.helpCenter';
+  static const settings_language = 'settings.language';
+  static const settings_privacy = 'settings.privacy';
+  static const settings_notifications = 'settings.notifications';
+  static const settings = 'settings';
 
 }

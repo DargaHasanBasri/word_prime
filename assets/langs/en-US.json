@@ -47,5 +47,16 @@
     "exampleTurkishSentences": "Örnek: Marketten elma al",
     "exampleEnglishWord": "Example: Apple",
     "exampleEnglishSentences": "Example: Buy apples from the market"
+  },
+  "settings": {
+    "title": "Settings",
+    "userDetail": "User Detail",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "faqs": "FAQs",
+    "helpCenter": "Help Center",
+    "language": "Language",
+    "privacy": "Privacy",
+    "notifications": "Notifications"
   }
 }
