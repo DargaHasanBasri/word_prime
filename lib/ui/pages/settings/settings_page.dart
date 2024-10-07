@@ -22,68 +22,73 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
   }
 
   Widget _buildBody() {
-    return Container(
-      padding: AppPaddings.paddingMediumAll,
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        border: Border.all(color: AppColors.softPeach),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SettingsItem(
-            title: LocaleKeys.settings_profileDetails.locale,
-            onTab: () {},
-            iconAddress: AppAssets.icUserPath,
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            border: Border.all(color: AppColors.softPeach),
+            borderRadius: BorderRadius.circular(16),
           ),
-          Padding(
-            padding: AppPaddings.paddingMediumVertical,
-            child: customDivider(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SettingsItem(
+                title: LocaleKeys.settings_profileDetails.locale,
+                onTab: () => appRoutes.navigateTo(Routes.ProfileDetails),
+                iconAddress: AppAssets.icUserPath,
+                isFirst: true,
+              ),
+              customDivider(),
+              SettingsItem(
+                title: LocaleKeys.settings_language.locale,
+                onTab: () {},
+                iconAddress: AppAssets.icLanguagePath,
+              ),
+              customDivider(),
+              SettingsItem(
+                title: LocaleKeys.settings_notifications.locale,
+                onTab: () {},
+                iconAddress: AppAssets.icNotificationPath,
+              ),
+              customDivider(),
+              SettingsItem(
+                title: LocaleKeys.settings_chooseTheme.locale,
+                onTab: () {},
+                iconAddress: AppAssets.icDarkModePath,
+              ),
+              customDivider(),
+              SettingsItem(
+                title: LocaleKeys.settings_faqs.locale,
+                onTab: () {},
+                iconAddress: AppAssets.icFaqsPath,
+              ),
+              customDivider(),
+              SettingsItem(
+                title: LocaleKeys.settings_helpCenter.locale,
+                onTab: () {},
+                iconAddress: AppAssets.icHelpPath,
+                isLast: true,
+              ),
+            ],
           ),
-          SettingsItem(
-            title: LocaleKeys.settings_language.locale,
-            onTab: () {},
-            iconAddress: AppAssets.icLanguagePath,
+        ),
+        const Spacer(),
+        Image.asset(
+          AppAssets.appLogoPath,
+          height: 40,
+          width: 40,
+        ),
+        SizedBox(height: 10),
+        Text(
+          LocaleKeys.appTitle.locale,
+          style: TextStyle(
+            fontSize: 16,
+            color: AppColors.mirage,
+            fontWeight: FontWeight.w500,
           ),
-          Padding(
-            padding: AppPaddings.paddingMediumVertical,
-            child: customDivider(),
-          ),
-          SettingsItem(
-            title: LocaleKeys.settings_notifications.locale,
-            onTab: () {},
-            iconAddress: AppAssets.icNotificationPath,
-          ),
-          Padding(
-            padding: AppPaddings.paddingMediumVertical,
-            child: customDivider(),
-          ),
-          SettingsItem(
-            title: LocaleKeys.settings_chooseTheme.locale,
-            onTab: () {},
-            iconAddress: AppAssets.icDarkModePath,
-          ),
-          Padding(
-            padding: AppPaddings.paddingMediumVertical,
-            child: customDivider(),
-          ),
-          SettingsItem(
-            title: LocaleKeys.settings_faqs.locale,
-            onTab: () {},
-            iconAddress: AppAssets.icFaqsPath,
-          ),
-          Padding(
-            padding: AppPaddings.paddingMediumVertical,
-            child: customDivider(),
-          ),
-          SettingsItem(
-            title: LocaleKeys.settings_helpCenter.locale,
-            onTab: () {},
-            iconAddress: AppAssets.icHelpPath,
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
