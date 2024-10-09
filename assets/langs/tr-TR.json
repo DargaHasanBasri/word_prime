@@ -4,6 +4,7 @@
   "passwordHintText": "Parola Girin",
   "nameHintText": "Adınızı Girin",
   "continueTitle": "Devam Et",
+  "change": "Değiştir",
   "skip": "Atla",
   "signIn": "Giriş Yap",
   "signUp": "Kayıt Ol",
@@ -57,6 +58,7 @@
     "faqs": "FAQs",
     "helpCenter": "Yardım Merkezi",
     "language": "Dil",
+    "changeLanguageTitle": "Dil Değiştir",
     "privacy": "Gizlilik",
     "notifications": "Bildirimler"
   },

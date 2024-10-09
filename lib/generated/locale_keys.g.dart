@@ -6,6 +6,7 @@ abstract class  LocaleKeys {
   static const passwordHintText = 'passwordHintText';
   static const nameHintText = 'nameHintText';
   static const continueTitle = 'continueTitle';
+  static const change = 'change';
   static const skip = 'skip';
   static const signIn = 'signIn';
   static const signUp = 'signUp';
@@ -53,6 +54,8 @@ abstract class  LocaleKeys {
   static const settings_faqs = 'settings.faqs';
   static const settings_helpCenter = 'settings.helpCenter';
   static const settings_language = 'settings.language';
+  static const settings_changeLanguageTitle = 'settings.changeLanguageTitle';
+  static const settings_changeLanguageSubTitle = 'settings.changeLanguageSubTitle';
   static const settings_privacy = 'settings.privacy';
   static const settings_notifications = 'settings.notifications';
   static const settings = 'settings';
