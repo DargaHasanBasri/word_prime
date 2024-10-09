@@ -4,6 +4,7 @@
   "passwordHintText": "Your password",
   "nameHintText": "Your name",
   "continueTitle": "Continue",
+  "change": "Change",
   "skip": "Skip",
   "signIn": "Sing In",
   "signUp": "Sing Up",
@@ -57,6 +58,8 @@
     "faqs": "FAQs",
     "helpCenter": "Help Center",
     "language": "Language",
+    "changeLanguageTitle": "Change Language",
+    "changeLanguageSubTitle": "Please Select a Language",
     "privacy": "Privacy",
     "notifications": "Notifications"
   },

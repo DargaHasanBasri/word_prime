@@ -46,3 +46,4 @@ export 'package:word_prime/ui/pages/profile_details/profile_details_page.dart';
 export 'package:word_prime/ui/pages/profile_details/profile_details_view_model.dart';
 export 'package:word_prime/ui/pages/profile_details/profile_details_provider.dart';
 export 'package:word_prime/ui/widgets/custom_user_circle_avatar.dart';
+export 'package:word_prime/ui/widgets/custom_radio_button.dart';

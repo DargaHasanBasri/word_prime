@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:word_prime/export.dart';
+import 'package:word_prime/ui/pages/settings/components/change_language_popup.dart';
 import 'package:word_prime/ui/pages/settings/components/settings_item.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -9,6 +11,14 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends BaseStatefulState<SettingsPage> {
+  late final SettingsViewModel _vm;
+
+  @override
+  void initState() {
+    _vm = Provider.of<SettingsViewModel>(context, listen: false);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,12 +26,13 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
       appBar: _buildAppBar(),
       body: Padding(
         padding: AppPaddings.appPaddingAll,
-        child: _buildBody(),
+        child: _buildBody(context),
       ),
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
+    _vm.selectedLanguage.value = _vm.getStringFromLocale(context.locale);
     return Column(
       children: [
         Container(
@@ -42,7 +53,32 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
               customDivider(),
               SettingsItem(
                 title: LocaleKeys.settings_language.locale,
-                onTab: () {},
+                onTab: () {
+                  showPopupDialog(
+                    context: context,
+                    child: ValueListenableBuilder(
+                      valueListenable: _vm.selectedLanguage,
+                      builder: (_, __, ___) {
+                        return ChangeLanguagePopup(
+                          groupValue: _vm.selectedLanguage.value,
+                          onChangedEnglish: (String? value) {
+                            _vm.selectedLanguage.value = value!;
+                          },
+                          onChangedTurkish: (String? value) {
+                            _vm.selectedLanguage.value = value!;
+                          },
+                          onTabChangeButton: () {
+                            _vm.changeLanguage(
+                              _vm.selectedLanguage.value,
+                              context,
+                            );
+                            appRoutes.popIfBackStackNotEmpty();
+                          },
+                        );
+                      },
+                    ),
+                  );
+                },
                 iconAddress: AppAssets.icLanguagePath,
               ),
               customDivider(),

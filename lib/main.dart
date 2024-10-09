@@ -18,6 +18,7 @@ Future<void> main() async {
         AppLocaleConstants.EN_LOCALE,
       ],
       path: AppLocaleConstants.LANG_PATH,
+      saveLocale: true,
       fallbackLocale: AppLocaleConstants.EN_LOCALE,
       child: const MyApp(),
     ),
