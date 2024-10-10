@@ -11,4 +11,7 @@ final class AppColors {
   static Color softPeach = const Color(0xffEEEFF2);
   static Color alabaster = const Color(0xffF9FAFB);
   static Color watermelon = const Color(0xffFF445D);
+  static Color rhino = const Color(0xff2C3658);
+  static Color artyClickRed = const Color(0xffFF0000);
+  static Color pastelBlue = const Color(0xff9BBDF8);
 }

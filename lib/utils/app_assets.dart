@@ -19,6 +19,15 @@ final class AppAssets {
   static String icLanguagePath = _imagePath('ic_language');
   static String icNotificationPath = _imagePath('ic_notification');
   static String icPrivacyPath = _imagePath('ic_privacy');
+  static String icMainTabHomePath = _imagePath('ic_main_tab_home');
+  static String icMainTabGamePath = _imagePath('ic_main_tab_game');
+  static String icMainTabWordAddPath = _imagePath('ic_main_tab_word_add');
+  static String icMainTabTaskPath = _imagePath('ic_main_tab_task');
+  static String icMainTabProfilePath = _imagePath('ic_main_tab_profile');
+  static String icLikePath = _imagePath('ic_like');
+  static String icCommentPath = _imagePath('ic_comment');
+  static String icSavePath = _imagePath('ic_save');
+  static String icSharePath = _imagePath('ic_share');
   static String imgSuccessfulPath = _imagePath('img_successful');
 
   static String _imagePath(String fileName) => '$_basePath$fileName.png';

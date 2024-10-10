@@ -12,6 +12,7 @@ final class Routes {
   static const String AddPostSuccessful = 'addPostSuccessfulProvider';
   static const String Settings = 'settingsProvider';
   static const String ProfileDetails = 'profileDetailsProvider';
+  static const String MainTab = 'mainTabProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -57,6 +58,10 @@ final class Routes {
       case Routes.ProfileDetails:
         return MaterialPageRoute(
           builder: (context) => const ProfileDetailsProvider(),
+        );
+      case Routes.MainTab:
+        return MaterialPageRoute(
+          builder: (context) => const MainTabProvider(),
         );
       default:
         return MaterialPageRoute(
