@@ -60,6 +60,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
               return PostListItem(
                 isActiveLike: _vm.isActiveLike,
                 isActiveSave: _vm.isActiveSave,
+                isTranslate: _vm.isActiveTranslate,
                 onTabLike: () {
                   _vm.isActiveLike.value = !_vm.isActiveLike.value;
                 },
@@ -67,11 +68,13 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                   _vm.isActiveSave.value = !_vm.isActiveSave.value;
                 },
                 onTabComment: () {
-                  _vm.isActiveComment.value = !_vm.isActiveComment.value;
                   showCustomBottomSheet(
                     context: context,
                     child: CustomCommentBottomSheet(),
                   );
+                },
+                onTabTranslate: () {
+                  _vm.isActiveTranslate.value = !_vm.isActiveTranslate.value;
                 },
               );
             },

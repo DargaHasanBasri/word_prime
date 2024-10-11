@@ -4,9 +4,11 @@ import 'package:word_prime/ui/pages/home/components/icon_interact_item.dart';
 class PostListItem extends StatelessWidget {
   final ValueNotifier<bool> isActiveLike;
   final ValueNotifier<bool> isActiveSave;
+  final ValueNotifier<bool> isTranslate;
   final VoidCallback onTabLike;
   final VoidCallback onTabComment;
   final VoidCallback onTabSave;
+  final VoidCallback onTabTranslate;
 
   const PostListItem({
     super.key,
@@ -15,6 +17,8 @@ class PostListItem extends StatelessWidget {
     required this.onTabLike,
     required this.onTabComment,
     required this.onTabSave,
+    required this.isTranslate,
+    required this.onTabTranslate,
   });
 
   @override
@@ -30,12 +34,12 @@ class PostListItem extends StatelessWidget {
         children: [
           _getUserInfo(),
           Padding(
-            padding: const EdgeInsets.only(top: 16),
-            child: _getUserSentences(),
-          ),
-          Padding(
             padding: AppPaddings.paddingMediumVertical,
             child: _getPostPicture(),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: _getUserSentences(),
           ),
           ValueListenableBuilder(
             valueListenable: isActiveSave,
@@ -99,13 +103,78 @@ class PostListItem extends StatelessWidget {
   }
 
   Widget _getUserSentences() {
-    return Text(
-      'Dolor morbi non arcu risus quis varius. sed nisi lacus sed viverra. Dolor morbi non arcu risus quis varius.',
-      style: TextStyle(
-        color: AppColors.ebonyClay,
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
+    return ValueListenableBuilder(
+      valueListenable: isTranslate,
+      builder: (_, __, ___) {
+        return Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: AppPaddings.paddingSmallAll,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: AppColors.softPeach, width: 2),
+                    ),
+                    child: Text(
+                      'Dolor morbi non arcu risus quis varius. sed nisi lacus sed viverra. Dolor morbi non arcu risus quis varius.',
+                      style: TextStyle(
+                        color: AppColors.ebonyClay,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      maxLines: 4,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                GestureDetector(
+                  onTap: () => onTabTranslate.call(),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: AppColors.cornflowerBlue),
+                    ),
+                    child: Image.asset(
+                      isTranslate.value
+                          ? AppAssets.icArrowUpPath
+                          : AppAssets.icArrowDownPath,
+                      width: AppSizes.appOverallIconWidth,
+                      height: AppSizes.appOverallIconHeight,
+                      color: AppColors.cornflowerBlue,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Visibility(
+              visible: isTranslate.value,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 14, right: 50, top: 8),
+                child: Container(
+                  padding: AppPaddings.paddingSmallAll,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: AppColors.pastelBlue.withOpacity(0.8), width: 2),
+                  ),
+                  child: Text(
+                    'Dolor morbi non arcu risus quis varius. sed nisi lacus sed viverra. Dolor morbi non arcu risus quis varius.',
+                    style: TextStyle(
+                      color: AppColors.ebonyClay,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 4,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 

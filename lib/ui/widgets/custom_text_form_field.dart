@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:word_prime/export.dart';
-import 'package:word_prime/utils/app_colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
