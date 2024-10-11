@@ -50,3 +50,7 @@ export 'package:word_prime/ui/widgets/custom_radio_button.dart';
 export 'package:word_prime/ui/pages/main_tab/main_tab_page.dart';
 export 'package:word_prime/ui/pages/main_tab/main_tab_view_model.dart';
 export 'package:word_prime/ui/pages/main_tab/main_tab_provider.dart';
+export 'package:word_prime/ui/pages/home/home_page.dart';
+export 'package:word_prime/ui/pages/home/home_view_model.dart';
+export 'package:word_prime/ui/pages/home/home_provider.dart';
+export 'package:word_prime/utils/app_sizes.dart';
