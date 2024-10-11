@@ -21,6 +21,7 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
+      extendBody: true,
       bottomNavigationBar: ValueListenableBuilder(
         valueListenable: _vm.currentIndex,
         builder: (_, __, ___) {
@@ -29,13 +30,29 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
           );
         },
       ),
-      body: _buildBody(),
+      body: ValueListenableBuilder(
+        valueListenable: _vm.currentIndex,
+        builder: (_, __, ___) {
+          return _buildBody(_vm.currentIndex.value);
+        },
+      ),
     );
   }
 
-  Widget _buildBody() {
-    return Column(
-      children: [],
-    );
+  Widget _buildBody(int whichIndex) {
+    switch (whichIndex) {
+      case 0:
+        return HomeProvider();
+      case 1:
+        return HomeProvider();
+      case 2:
+        return HomeProvider();
+      case 3:
+        return HomeProvider();
+      case 4:
+        return HomeProvider();
+      default:
+        return HomeProvider();
+    }
   }
 }
