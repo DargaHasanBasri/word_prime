@@ -5,20 +5,28 @@ class CustomUserCircleAvatar extends StatelessWidget {
   final double? circleRadius;
   final String? profileImgAddress;
   final Color? borderColor;
+  final double? borderPadding;
+  final double? borderWidth;
   const CustomUserCircleAvatar({
     super.key,
     this.circleRadius,
     this.profileImgAddress,
     this.borderColor,
+    this.borderPadding,
+    this.borderWidth,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(3),
+      padding: EdgeInsets.all(borderPadding ?? 3),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: borderColor ?? Colors.white,
+        color: Colors.white,
+        border: Border.all(
+          color: borderColor ?? Colors.transparent,
+          width: borderWidth ?? 0,
+        ),
       ),
       child: CircleAvatar(
         backgroundColor: Colors.transparent,

@@ -24,11 +24,14 @@ final class AppAssets {
   static String icMainTabWordAddPath = _imagePath('ic_main_tab_word_add');
   static String icMainTabTaskPath = _imagePath('ic_main_tab_task');
   static String icMainTabProfilePath = _imagePath('ic_main_tab_profile');
-  static String icLikePath = _imagePath('ic_like');
+  static String icActiveLikePath = _imagePath('ic_active_like');
+  static String icInactiveLikePath = _imagePath('ic_inactive_like');
   static String icCommentPath = _imagePath('ic_comment');
-  static String icSavePath = _imagePath('ic_save');
+  static String icActiveSavePath = _imagePath('ic_active_save');
+  static String icInactiveSavePath = _imagePath('ic_inactive_save');
   static String icSharePath = _imagePath('ic_share');
   static String imgSuccessfulPath = _imagePath('img_successful');
+  static String imgExampPostPath = _imagePath('img_examp_post');
 
   static String _imagePath(String fileName) => '$_basePath$fileName.png';
 }

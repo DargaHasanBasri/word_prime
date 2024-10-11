@@ -5,6 +5,7 @@ final class AppColors {
   static Color backgroundColor = const Color(0xffffffff);
   static Color cornflowerBlue = const Color(0xff699CF4);
   static Color white = const Color(0xffffffff);
+  static Color black = const Color(0xff000000);
   static Color mirage = const Color(0xff111827);
   static Color paleSky = const Color(0xff6B7280);
   static Color santaGrey = const Color(0xff9CA3AF);
@@ -14,4 +15,6 @@ final class AppColors {
   static Color rhino = const Color(0xff2C3658);
   static Color artyClickRed = const Color(0xffFF0000);
   static Color pastelBlue = const Color(0xff9BBDF8);
+  static Color ebonyClay = const Color(0xff1E293B);
+  static Color riverBed = const Color(0xff475569);
 }
