@@ -83,8 +83,8 @@ class CustomCommentBottomSheet extends StatelessWidget {
                           Text(
                             'Examp Comment  abc',
                             style: TextStyle(
-                              color: AppColors.riverBed,
-                              fontSize: 16,
+                              color: AppColors.ebonyClay,
+                              fontSize: 14,
                               fontWeight: FontWeight.w400,
                               overflow: TextOverflow.ellipsis,
                             ),
