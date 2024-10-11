@@ -23,9 +23,7 @@ class PostListItem extends StatelessWidget {
       padding: AppPaddings.paddingMediumAll,
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(
-            color: AppColors.softPeach,
-          ),
+          top: BorderSide(color: AppColors.softPeach),
         ),
       ),
       child: Column(
@@ -45,32 +43,7 @@ class PostListItem extends StatelessWidget {
               return ValueListenableBuilder(
                 valueListenable: isActiveLike,
                 builder: (_, __, ___) {
-                  return Row(
-                    children: [
-                      IconInteractItem(
-                        onTap: () => onTabLike.call(),
-                        iconAddress: isActiveLike.value
-                            ? AppAssets.icActiveLikePath
-                            : AppAssets.icInactiveLikePath,
-                        interactCount: '12',
-                      ),
-                      Padding(
-                        padding: AppPaddings.appPaddingHorizontal,
-                        child: IconInteractItem(
-                          onTap: () => onTabComment.call(),
-                          iconAddress: AppAssets.icCommentPath,
-                          interactCount: '12',
-                        ),
-                      ),
-                      IconInteractItem(
-                        onTap: () => onTabSave.call(),
-                        iconAddress: isActiveSave.value
-                            ? AppAssets.icActiveSavePath
-                            : AppAssets.icInactiveSavePath,
-                        interactCount: '12',
-                      ),
-                    ],
-                  );
+                  return _getInteractItems();
                 },
               );
             },
@@ -151,6 +124,35 @@ class PostListItem extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _getInteractItems() {
+    return Row(
+      children: [
+        IconInteractItem(
+          onTap: () => onTabLike.call(),
+          iconAddress: isActiveLike.value
+              ? AppAssets.icActiveLikePath
+              : AppAssets.icInactiveLikePath,
+          interactCount: '12',
+        ),
+        Padding(
+          padding: AppPaddings.appPaddingHorizontal,
+          child: IconInteractItem(
+            onTap: () => onTabComment.call(),
+            iconAddress: AppAssets.icCommentPath,
+            interactCount: '12',
+          ),
+        ),
+        IconInteractItem(
+          onTap: () => onTabSave.call(),
+          iconAddress: isActiveSave.value
+              ? AppAssets.icActiveSavePath
+              : AppAssets.icInactiveSavePath,
+          interactCount: '12',
+        ),
+      ],
     );
   }
 }

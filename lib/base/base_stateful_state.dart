@@ -24,4 +24,22 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
       },
     );
   }
+
+  void showCustomBottomSheet({
+    required BuildContext context,
+    required Widget child,
+  }) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: child,
+        );
+      },
+    );
+  }
 }

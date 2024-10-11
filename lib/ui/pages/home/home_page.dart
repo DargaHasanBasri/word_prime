@@ -1,6 +1,7 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/home/components/post_list_item.dart';
 import 'package:word_prime/ui/pages/home/components/user_list_item.dart';
+import 'package:word_prime/ui/widgets/custom_comment_bottom_sheet.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -65,7 +66,13 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                 onTabSave: () {
                   _vm.isActiveSave.value = !_vm.isActiveSave.value;
                 },
-                onTabComment: () {},
+                onTabComment: () {
+                  _vm.isActiveComment.value = !_vm.isActiveComment.value;
+                  showCustomBottomSheet(
+                    context: context,
+                    child: CustomCommentBottomSheet(),
+                  );
+                },
               );
             },
             separatorBuilder: (context, index) => SizedBox(
