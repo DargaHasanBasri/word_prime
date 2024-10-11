@@ -30,6 +30,7 @@ final class AppAssets {
   static String icActiveSavePath = _imagePath('ic_active_save');
   static String icInactiveSavePath = _imagePath('ic_inactive_save');
   static String icSharePath = _imagePath('ic_share');
+  static String icSendPath = _imagePath('ic_send');
   static String imgSuccessfulPath = _imagePath('img_successful');
   static String imgExampPostPath = _imagePath('img_examp_post');
 

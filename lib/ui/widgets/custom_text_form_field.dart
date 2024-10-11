@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:word_prime/export.dart';
 import 'package:word_prime/utils/app_colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -72,11 +73,21 @@ class CustomTextFormField extends StatelessWidget {
             fontWeight: FontWeight.w400,
           ),
           decoration: InputDecoration(
-            prefixIcon: isPrefixIcon ? Image.asset(prefixIconAddress) : null,
+            prefixIcon: isPrefixIcon
+                ? Image.asset(
+                    prefixIconAddress,
+                    width: AppSizes.appOverallIconWidth,
+                    height: AppSizes.appOverallIconHeight,
+                  )
+                : null,
             suffixIcon: isSuffixIcon
                 ? IconButton(
                     onPressed: () => onPressSuffixIcon?.call(),
-                    icon: Image.asset(suffixIconAddress),
+                    icon: Image.asset(
+                      suffixIconAddress,
+                      width: AppSizes.appOverallIconWidth,
+                      height: AppSizes.appOverallIconHeight,
+                    ),
                   )
                 : null,
             hintText: hintText,
