@@ -75,7 +75,6 @@
     "helpCenter": "Help Center",
     "language": "Language",
     "changeLanguageTitle": "Change Language",
-    "changeLanguageSubTitle": "Please Select a Language",
     "privacy": "Privacy",
     "notifications": "Notifications"
   },
@@ -105,6 +104,8 @@
     "tasksDaily": "Daily Tasks",
     "chapter": "Chapter",
     "viewAll": "View All",
-    "currentResultsMsg": "Current Ranking Results"
+    "currentResultsMsg": "Current Ranking Results",
+    "activeTasks": "Active Tasks",
+    "completed": "Completed"
   }
 }

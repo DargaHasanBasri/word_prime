@@ -104,6 +104,8 @@
     "tasksDaily": "Günlük Görevler",
     "chapter": "Bölüm",
     "viewAll": "Tümünü Gör",
-    "currentResultsMsg": "Güncel Sıralama Sonucları"
+    "currentResultsMsg": "Güncel Sıralama Sonucları",
+    "activeTasks": "Aktif Görevler",
+    "completed": "Tamamlandı"
   }
 }

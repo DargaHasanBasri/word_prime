@@ -33,7 +33,9 @@ class _TasksPageState extends BaseStatefulState<TasksPage> {
           iconAddress: AppAssets.icTaskWeeklyPath,
           title: LocaleKeys.tasksPage_tasksWeekly.locale,
           chapterCount: 10,
-          onTapStart: () {},
+          onTapStart: () {
+            appRoutes.navigateTo(Routes.TaskList, arguments: 'Weekly');
+          },
         ),
         Padding(
           padding: AppPaddings.paddingMediumVertical,
@@ -42,7 +44,9 @@ class _TasksPageState extends BaseStatefulState<TasksPage> {
             iconAddress: AppAssets.icTaskDailyPath,
             title: LocaleKeys.tasksPage_tasksDaily.locale,
             chapterCount: 10,
-            onTapStart: () {},
+            onTapStart: () {
+              appRoutes.navigateTo(Routes.TaskList, arguments: 'Daily');
+            },
           ),
         ),
         RankingResults(),
