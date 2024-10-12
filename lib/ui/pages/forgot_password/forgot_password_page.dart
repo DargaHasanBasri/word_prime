@@ -42,7 +42,7 @@ class _ForgotPasswordPageState extends BaseStatefulState<ForgotPasswordPage> {
             onClick: () {
               appRoutes.navigateTo(
                 Routes.ForgotPasswordMethod,
-                arguments: 'Email',
+                arguments: AppLocaleConstants.FORGOT_METHOD_EMAIL,
               );
             },
             title: LocaleKeys.emailHintText.locale,
@@ -54,7 +54,7 @@ class _ForgotPasswordPageState extends BaseStatefulState<ForgotPasswordPage> {
             onClick: () {
               appRoutes.navigateTo(
                 Routes.ForgotPasswordMethod,
-                arguments: 'Name',
+                arguments: AppLocaleConstants.FORGOT_METHOD_NAME,
               );
             },
             title: LocaleKeys.nameHintText.locale,

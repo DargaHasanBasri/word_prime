@@ -1,5 +1,7 @@
 {
   "appTitle": "WordPrime",
+  "english": "İngilizce",
+  "turkish": "Türkçe",
   "home": "Ana Sayfa",
   "activity": "Aktivite",
   "addWord": "Kelime Ekle",
@@ -40,7 +42,12 @@
     "forgotTitle": "Parolanı mı Unuttun?",
     "forgotSubTitle" : "Lütfen parola sıfırlama talebinde bulunmak için bir yöntem seçin.",
     "enterMailHintText": "Email girin",
-    "enterNameHintText": "Adınızı Girin"
+    "enterNameHintText": "Adınızı Girin",
+    "forgotMethodEmailMsg": "Şifre sıfırlama talebinde bulunmak için lütfen bir email adresi girin.",
+    "forgotMethodNameMsg": "Şifre sıfırlama talebinde bulunmak için lütfen bir ad girin.",
+    "email": "Email",
+    "name": "Ad",
+    "sendLink": "Link Gönder"
   },
   "addPost": {
     "title": "Yeni Kelime Ekle",

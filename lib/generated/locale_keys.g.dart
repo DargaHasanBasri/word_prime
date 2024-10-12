@@ -2,6 +2,8 @@
 
 abstract class  LocaleKeys {
   static const appTitle = 'appTitle';
+  static const english = 'english';
+  static const turkish = 'turkish';
   static const home = 'home';
   static const activity = 'activity';
   static const addWord = 'addWord';
@@ -39,6 +41,11 @@ abstract class  LocaleKeys {
   static const forgotPassword_forgotSubTitle = 'forgotPassword.forgotSubTitle';
   static const forgotPassword_enterMailHintText = 'forgotPassword.enterMailHintText';
   static const forgotPassword_enterNameHintText = 'forgotPassword.enterNameHintText';
+  static const forgotPassword_forgotMethodEmailMsg = 'forgotPassword.forgotMethodEmailMsg';
+  static const forgotPassword_forgotMethodNameMsg = 'forgotPassword.forgotMethodNameMsg';
+  static const forgotPassword_email = 'forgotPassword.email';
+  static const forgotPassword_name = 'forgotPassword.name';
+  static const forgotPassword_sendLink = 'forgotPassword.sendLink';
   static const forgotPassword = 'forgotPassword';
   static const addPost_title = 'addPost.title';
   static const addPost_englishWordTitle = 'addPost.englishWordTitle';

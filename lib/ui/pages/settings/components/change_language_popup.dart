@@ -37,14 +37,14 @@ class ChangeLanguagePopup extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomRadioButton(
-                title: 'English',
-                value: 'English',
+                title: LocaleKeys.english.locale,
+                value: AppLocaleConstants.EN_RADIO_BTN_VALUE,
                 groupValue: groupValue,
                 onChanged: onChangedEnglish,
               ),
               CustomRadioButton(
-                title: 'Türkçe',
-                value: 'Turkish',
+                title: LocaleKeys.turkish.locale,
+                value: AppLocaleConstants.TR_RADIO_BTN_VALUE,
                 groupValue: groupValue,
                 onChanged: onChangedTurkish,
               ),

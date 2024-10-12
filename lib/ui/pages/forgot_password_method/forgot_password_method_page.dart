@@ -41,7 +41,7 @@ class _ForgotPasswordMethodPageState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24),
+          padding: AppPaddings.appPaddingVertical,
           child: ValueListenableBuilder(
             valueListenable: _vm.whichTabBar,
             builder: (_, __, ___) {
@@ -51,13 +51,13 @@ class _ForgotPasswordMethodPageState
                   MethodTabBar(
                     whichMethod: _vm.whichTabBar.value,
                     onTapEmailBar: () {
-                      _vm.whichTabBar.value = 'Email';
+                      _vm.whichTabBar.value = AppLocaleConstants.FORGOT_METHOD_EMAIL;
                     },
                     onTapNameBar: () {
-                      _vm.whichTabBar.value = 'Name';
+                      _vm.whichTabBar.value = AppLocaleConstants.FORGOT_METHOD_NAME;
                     },
                   ),
-                  _vm.whichTabBar.value == 'Email'
+                  _vm.whichTabBar.value == AppLocaleConstants.FORGOT_METHOD_EMAIL
                       ? Padding(
                           padding: const EdgeInsets.only(top: 32),
                           child: MethodEmail(
@@ -76,7 +76,7 @@ class _ForgotPasswordMethodPageState
           ),
         ),
         CustomButton(
-          title: 'Send Link',
+          title: LocaleKeys.forgotPassword_sendLink.locale,
           onClick: () {},
         ),
         const Spacer(),

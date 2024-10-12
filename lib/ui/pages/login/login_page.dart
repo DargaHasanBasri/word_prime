@@ -39,7 +39,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 60),
+                      padding: AppPaddings.paddingXLargeTop,
                       child: _titleSubtitleText(),
                     ),
                     ValueListenableBuilder(
@@ -104,7 +104,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                           valueListenable: _vm.passwordInput,
                           builder: (_, __, ___) {
                             return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 24),
+                              padding: AppPaddings.appPaddingVertical,
                               child: CustomButton(
                                 title: LocaleKeys.signIn.locale,
                                 backgroundColor: _vm.isEmptyInputText()
@@ -119,7 +119,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                     ),
                     const OrTextContainer(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      padding: AppPaddings.paddingMediumVertical,
                       child: CustomButton(
                         title: LocaleKeys.loginPage_withApple.locale,
                         titleColor: AppColors.mirage,

@@ -35,8 +35,8 @@ class PasswordResetMethod extends StatelessWidget {
               ),
               child: Image.asset(
                 iconAddress,
-                width: 24,
-                height: 24,
+                width: AppSizes.appOverallIconWidth,
+                height: AppSizes.appOverallIconHeight,
               ),
             ),
             SizedBox(width: 16),
@@ -64,8 +64,8 @@ class PasswordResetMethod extends StatelessWidget {
             const Spacer(),
             Image.asset(
               AppAssets.icArrowBackRightPath,
-              width: 24,
-              height: 24,
+              width: AppSizes.appOverallIconWidth,
+              height: AppSizes.appOverallIconHeight,
               color: AppColors.mirage,
             ),
           ],

@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:word_prime/generated/locale_keys.g.dart';
-import 'package:word_prime/utils/app_colors.dart';
-import 'package:word_prime/utils/app_paddings.dart';
-import 'package:word_prime/utils/string_localizations_ext.dart';
+import 'package:word_prime/export.dart';
 
 class OrTextContainer extends StatelessWidget {
   const OrTextContainer({super.key});
