@@ -1,5 +1,7 @@
 {
   "appTitle": "WordPrime",
+  "english": "English",
+  "turkish": "Turkish",
   "home": "Home",
   "activity": "Activity",
   "addWord": "Add Word",
@@ -40,7 +42,12 @@
     "forgotTitle": "Forgot password?",
     "forgotSubTitle" : "Please choose a method to request a password reset.",
     "enterMailHintText": "Enter your email",
-    "enterNameHintText": "Enter your name"
+    "enterNameHintText": "Enter your name",
+    "forgotMethodEmailMsg": "Please enter a email address to request a password reset.",
+    "forgotMethodNameMsg": "Please enter a name to request a password reset.",
+    "email": "Email",
+    "name": "Name",
+    "sendLink": "Send Link"
   },
   "addPost": {
     "title": "Add New Word",

@@ -13,7 +13,7 @@ class MethodName extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'Enter your name',
+          LocaleKeys.forgotPassword_enterNameHintText.locale,
           style: TextStyle(
             color: AppColors.mirage,
             fontSize: 24,
@@ -22,7 +22,7 @@ class MethodName extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          'Please enter a name to request a password reset.',
+          LocaleKeys.forgotPassword_forgotMethodNameMsg.locale,
           style: TextStyle(
             color: AppColors.paleSky,
             fontSize: 16,

@@ -13,7 +13,7 @@ class MethodEmail extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'Enter your email',
+          LocaleKeys.forgotPassword_enterMailHintText.locale,
           style: TextStyle(
             color: AppColors.mirage,
             fontSize: 24,
@@ -22,7 +22,7 @@ class MethodEmail extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          'Please enter a email address to request a password reset.',
+          LocaleKeys.forgotPassword_forgotMethodEmailMsg.locale,
           style: TextStyle(
             color: AppColors.paleSky,
             fontSize: 16,

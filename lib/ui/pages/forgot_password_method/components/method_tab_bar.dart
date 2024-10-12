@@ -25,7 +25,7 @@ class MethodTabBar extends StatelessWidget {
             child: GestureDetector(
               onTap: () => onTapEmailBar.call(),
               child: Container(
-                decoration: whichMethod == 'Email'
+                decoration: whichMethod == AppLocaleConstants.FORGOT_METHOD_EMAIL
                     ? BoxDecoration(
                         color: AppColors.white,
                         borderRadius: BorderRadius.circular(6),
@@ -43,9 +43,9 @@ class MethodTabBar extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 8),
                 alignment: Alignment.center,
                 child: Text(
-                  'Email',
+                  LocaleKeys.forgotPassword_email.locale,
                   style: TextStyle(
-                    color: whichMethod == 'Email'
+                    color: whichMethod == AppLocaleConstants.FORGOT_METHOD_EMAIL
                         ? AppColors.mirage
                         : AppColors.santaGrey,
                     fontSize: 12,
@@ -59,7 +59,7 @@ class MethodTabBar extends StatelessWidget {
             child: GestureDetector(
               onTap: () => onTapNameBar.call(),
               child: Container(
-                decoration: whichMethod == 'Name'
+                decoration: whichMethod == AppLocaleConstants.FORGOT_METHOD_NAME
                     ? BoxDecoration(
                         color: AppColors.white,
                         borderRadius: BorderRadius.circular(6),
@@ -77,9 +77,9 @@ class MethodTabBar extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 8),
                 alignment: Alignment.center,
                 child: Text(
-                  'Name',
+                  LocaleKeys.forgotPassword_name.locale,
                   style: TextStyle(
-                    color: whichMethod == 'Name'
+                    color: whichMethod == AppLocaleConstants.FORGOT_METHOD_NAME
                         ? AppColors.mirage
                         : AppColors.santaGrey,
                     fontSize: 12,
