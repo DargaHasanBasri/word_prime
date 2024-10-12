@@ -98,5 +98,13 @@
     "quizAnalysis": "My Quiz Analysis Results",
     "seeAll": "See All",
     "chapter": "Chapter"
+  },
+  "tasksPage": {
+    "myTasks": "My Tasks",
+    "tasksWeekly": "Weekly Tasks",
+    "tasksDaily": "Daily Tasks",
+    "chapter": "Chapter",
+    "viewAll": "View All",
+    "currentResultsMsg": "Current Ranking Results"
   }
 }

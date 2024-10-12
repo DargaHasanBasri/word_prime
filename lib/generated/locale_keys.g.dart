@@ -92,5 +92,12 @@ abstract class  LocaleKeys {
   static const activityPage_seeAll = 'activityPage.seeAll';
   static const activityPage_chapter = 'activityPage.chapter';
   static const activityPage = 'activityPage';
+  static const tasksPage_myTasks = 'tasksPage.myTasks';
+  static const tasksPage_tasksWeekly = 'tasksPage.tasksWeekly';
+  static const tasksPage_tasksDaily = 'tasksPage.tasksDaily';
+  static const tasksPage_chapter = 'tasksPage.chapter';
+  static const tasksPage_viewAll = 'tasksPage.viewAll';
+  static const tasksPage_currentResultsMsg = 'tasksPage.currentResultsMsg';
+  static const tasksPage = 'tasksPage';
 
 }

@@ -58,3 +58,6 @@ export 'package:word_prime/ui/pages/activity/activity_page.dart';
 export 'package:word_prime/ui/pages/activity/activity_view_model.dart';
 export 'package:word_prime/ui/pages/activity/activity_provider.dart';
 export 'package:word_prime/ui/widgets/custom_comment_bottom_sheet.dart';
+export 'package:word_prime/ui/pages/tasks/tasks_page.dart';
+export 'package:word_prime/ui/pages/tasks/tasks_view_model.dart';
+export 'package:word_prime/ui/pages/tasks/tasks_provider.dart';

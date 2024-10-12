@@ -97,5 +97,13 @@
     "quizAnalysis": "Quiz Analiz Sonuçlarım",
     "seeAll": "Tümünü Gör",
     "chapter": "Bölüm"
+  },
+  "tasksPage": {
+    "myTasks": "Görevler",
+    "tasksWeekly": "Haftalık Görevler",
+    "tasksDaily": "Günlük Görevler",
+    "chapter": "Bölüm",
+    "viewAll": "Tümünü Gör",
+    "currentResultsMsg": "Güncel Sıralama Sonucları"
   }
 }

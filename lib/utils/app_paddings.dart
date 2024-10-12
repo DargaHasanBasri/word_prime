@@ -23,5 +23,11 @@ final class AppPaddings {
   static const paddingLargeBottom = EdgeInsets.only(bottom: 24);
   static const paddingMediumBottom = EdgeInsets.only(bottom: 16);
 
+  static const paddingLargeLeft= EdgeInsets.only(left: 24);
+  static const paddingMediumLeft = EdgeInsets.only(left: 16);
+  static const paddingSmallLeft = EdgeInsets.only(left: 8);
 
+  static const paddingLargeRight = EdgeInsets.only(right: 24);
+  static const paddingMediumRight = EdgeInsets.only(right: 16);
+  static const paddingSmallRight = EdgeInsets.only(right: 8);
 }
