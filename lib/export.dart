@@ -54,3 +54,6 @@ export 'package:word_prime/ui/pages/home/home_page.dart';
 export 'package:word_prime/ui/pages/home/home_view_model.dart';
 export 'package:word_prime/ui/pages/home/home_provider.dart';
 export 'package:word_prime/utils/app_sizes.dart';
+export 'package:word_prime/ui/pages/activity/activity_page.dart';
+export 'package:word_prime/ui/pages/activity/activity_view_model.dart';
+export 'package:word_prime/ui/pages/activity/activity_provider.dart';

@@ -9,15 +9,19 @@ class CustomButton extends StatelessWidget {
     Color? borderColor,
     String? title,
     String? iconLogoAddress,
+    double? titleFontSize,
     double? borderRadius,
+    double? titleVerticalPadding,
     VoidCallback? onClick,
     bool? isIcon,
   })  : title = title ?? 'NEXT',
         iconLogoAddress = iconLogoAddress ?? '',
         backgroundColor = backgroundColor ?? AppColors.cornflowerBlue,
         titleColor = titleColor ?? AppColors.white,
+        titleFontSize = titleFontSize ?? 16,
         borderColor = borderColor ?? Colors.transparent,
         borderRadius = borderRadius ?? 40,
+        titleVerticalPadding = titleVerticalPadding ?? 16,
         isIcon = isIcon ?? false,
         onClick = onClick ?? (() {});
   final Color? backgroundColor;
@@ -25,7 +29,9 @@ class CustomButton extends StatelessWidget {
   final String title;
   final String iconLogoAddress;
   final VoidCallback? onClick;
+  final double titleFontSize;
   final double borderRadius;
+  final double titleVerticalPadding;
   final Color borderColor;
   final bool? isIcon;
 
@@ -48,7 +54,7 @@ class CustomButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRadius),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: EdgeInsets.symmetric(vertical: titleVerticalPadding),
               child: isIcon == true
                   ? Row(
                       children: [
@@ -67,7 +73,7 @@ class CustomButton extends StatelessWidget {
                               title,
                               style: TextStyle(
                                 color: titleColor,
-                                fontSize: 16,
+                                fontSize: titleFontSize,
                                 fontWeight: FontWeight.w700,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -81,7 +87,7 @@ class CustomButton extends StatelessWidget {
                       title,
                       style: TextStyle(
                         color: titleColor,
-                        fontSize: 16,
+                        fontSize: titleFontSize,
                         fontWeight: FontWeight.w700,
                         overflow: TextOverflow.ellipsis,
                       ),
