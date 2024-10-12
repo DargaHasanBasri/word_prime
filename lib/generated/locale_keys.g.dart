@@ -2,6 +2,11 @@
 
 abstract class  LocaleKeys {
   static const appTitle = 'appTitle';
+  static const home = 'home';
+  static const activity = 'activity';
+  static const addWord = 'addWord';
+  static const tasks = 'tasks';
+  static const profile = 'profile';
   static const emailHintText = 'emailHintText';
   static const passwordHintText = 'passwordHintText';
   static const nameHintText = 'nameHintText';
@@ -11,6 +16,10 @@ abstract class  LocaleKeys {
   static const signIn = 'signIn';
   static const signUp = 'signUp';
   static const or = 'or';
+  static const level = 'level';
+  static const start = 'start';
+  static const comments = 'comments';
+  static const commentsHintText = 'commentsHintText';
   static const splash_title = 'splash.title';
   static const splash = 'splash';
   static const loginPage_welcomeTitle = 'loginPage.welcomeTitle';
@@ -66,5 +75,15 @@ abstract class  LocaleKeys {
   static const profileDetail_passwordTitle = 'profileDetail.passwordTitle';
   static const profileDetail_update = 'profileDetail.update';
   static const profileDetail = 'profileDetail';
+  static const homePage_welcome = 'homePage.welcome';
+  static const homePage = 'homePage';
+  static const activityPage_myActivity = 'activityPage.myActivity';
+  static const activityPage_popularQuiz = 'activityPage.popularQuiz';
+  static const activityPage_addedWordsQuiz = 'activityPage.addedWordsQuiz';
+  static const activityPage_soon = 'activityPage.soon';
+  static const activityPage_quizAnalysis = 'activityPage.quizAnalysis';
+  static const activityPage_seeAll = 'activityPage.seeAll';
+  static const activityPage_chapter = 'activityPage.chapter';
+  static const activityPage = 'activityPage';
 
 }

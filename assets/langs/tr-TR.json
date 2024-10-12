@@ -1,5 +1,10 @@
 {
   "appTitle": "WordPrime",
+  "home": "Ana Sayfa",
+  "activity": "Aktivite",
+  "addWord": "Kelime Ekle",
+  "tasks": "Görevler",
+  "profile": "Profil",
   "emailHintText": "Email Girin",
   "passwordHintText": "Parola Girin",
   "nameHintText": "Adınızı Girin",
@@ -9,6 +14,10 @@
   "signIn": "Giriş Yap",
   "signUp": "Kayıt Ol",
   "or": "Ya da",
+  "level": "Level",
+  "start": "Başla",
+  "comments": "Yorumlar",
+  "commentsHintText": "Yorumunuzu yazın...",
   "splashPage": {
     "title": "Potansiyelinizi bizimle ortaya çıkarın!"
   },
@@ -69,5 +78,17 @@
     "emailTitle": "Email",
     "passwordTitle": "Parola",
     "update": "Güncelle"
+  },
+  "homePage": {
+    "welcome": "Hoşgeldin"
+  },
+  "activityPage": {
+    "myActivity": "Aktiviteler",
+    "popularQuiz": "En Popüler Kelimelerle Quiz",
+    "addedWordsQuiz": "Eklediğin Kelimelerle Quiz",
+    "soon": "Yakında",
+    "quizAnalysis": "Quiz Analiz Sonuçlarım",
+    "seeAll": "Tümünü Gör",
+    "chapter": "Bölüm"
   }
 }

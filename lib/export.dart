@@ -57,3 +57,4 @@ export 'package:word_prime/utils/app_sizes.dart';
 export 'package:word_prime/ui/pages/activity/activity_page.dart';
 export 'package:word_prime/ui/pages/activity/activity_view_model.dart';
 export 'package:word_prime/ui/pages/activity/activity_provider.dart';
+export 'package:word_prime/ui/widgets/custom_comment_bottom_sheet.dart';

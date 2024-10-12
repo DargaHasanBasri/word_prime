@@ -1,5 +1,10 @@
 {
   "appTitle": "WordPrime",
+  "home": "Home",
+  "activity": "Activity",
+  "addWord": "Add Word",
+  "tasks": "Tasks",
+  "profile": "Profile",
   "emailHintText": "Your email",
   "passwordHintText": "Your password",
   "nameHintText": "Your name",
@@ -9,6 +14,10 @@
   "signIn": "Sing In",
   "signUp": "Sing Up",
   "or": "Or",
+  "level": "Level",
+  "start": "Start",
+  "comments": "Comments",
+  "commentsHintText": "Write your comment...",
   "splash": {
     "title": "Unlock your potential with us!"
   },
@@ -70,5 +79,17 @@
     "emailTitle": "Email",
     "passwordTitle": "Password",
     "update": "Update"
+  },
+  "homePage": {
+    "welcome": "Welcome"
+  },
+  "activityPage": {
+    "myActivity": "My Activity",
+    "popularQuiz": "Quiz with the Most Popular Words",
+    "addedWordsQuiz": "Quiz with the Words You Added",
+    "soon": "Soon",
+    "quizAnalysis": "My Quiz Analysis Results",
+    "seeAll": "See All",
+    "chapter": "Chapter"
   }
 }

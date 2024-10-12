@@ -17,7 +17,7 @@ class UserListItem extends StatelessWidget {
           SizedBox(height: 4),
           Expanded(
             child: Text(
-              'Test User',
+              AppLocaleConstants.DEFAULT_USER_NAME,
               style: TextStyle(
                 color: AppColors.mirage,
                 fontSize: 12,

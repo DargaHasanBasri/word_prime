@@ -43,7 +43,7 @@ class ActivityItem extends StatelessWidget {
           ),
           SizedBox(height: 8),
           Container(
-            height: 44,
+            height: AppSizes.activityItemTitleContainerHeight,
             child: Text(
               title,
               style: TextStyle(
@@ -59,7 +59,7 @@ class ActivityItem extends StatelessWidget {
           Visibility(
             visible: !isZeroChapterCount,
             child: Text(
-              '${chapterCount} Chapter',
+              '${chapterCount} ${LocaleKeys.activityPage_chapter.locale}',
               style: TextStyle(
                 color: AppColors.white,
                 fontSize: 12,
@@ -69,7 +69,7 @@ class ActivityItem extends StatelessWidget {
           ),
           SizedBox(height: 24),
           CustomButton(
-            title: 'Start',
+            title: LocaleKeys.start.locale,
             titleFontSize: 12,
             titleVerticalPadding: 8,
             backgroundColor: Colors.transparent,
