@@ -21,7 +21,9 @@ final class AppPaddings {
 
   static const paddingSmallAll = EdgeInsets.all(8);
 
-  static const paddingPaddingBottom = EdgeInsets.only(bottom: 24);
+  static const paddingLargeBottom = EdgeInsets.only(bottom: 24);
+
+  static const paddingMediumBottom = EdgeInsets.only(bottom: 16);
 
 
 }

@@ -46,7 +46,7 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
           ),
         ),
         Padding(
-          padding: AppPaddings.paddingPaddingBottom,
+          padding: AppPaddings.paddingLargeBottom,
           child: Text(
             LocaleKeys.profileDetail_changePicture.locale,
             style: TextStyle(

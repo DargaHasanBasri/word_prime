@@ -1,7 +1,13 @@
 import 'package:word_prime/export.dart';
 
 class CustomCommentBottomSheet extends StatelessWidget {
-  const CustomCommentBottomSheet({super.key});
+  final TextEditingController commentController;
+  final VoidCallback onPressSuffixIcon;
+  const CustomCommentBottomSheet({
+    super.key,
+    required this.commentController,
+    required this.onPressSuffixIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +24,8 @@ class CustomCommentBottomSheet extends StatelessWidget {
           Padding(
             padding: AppPaddings.paddingSmallVertical,
             child: Container(
-              height: 4,
-              width: 50,
+              height: AppSizes.bottomSheetDragHandleHeight,
+              width: AppSizes.bottomSheetDragHandleWidth,
               decoration: BoxDecoration(
                 color: AppColors.mirage,
                 borderRadius: BorderRadius.circular(6),
@@ -27,7 +33,7 @@ class CustomCommentBottomSheet extends StatelessWidget {
             ),
           ),
           Text(
-            'Yorumlar',
+            LocaleKeys.comments.locale,
             style: TextStyle(
               color: AppColors.mirage,
               fontSize: 16,
@@ -57,7 +63,7 @@ class CustomCommentBottomSheet extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Test User',
+                                AppLocaleConstants.DEFAULT_USER_NAME,
                                 style: TextStyle(
                                   color: AppColors.mirage,
                                   fontSize: 12,
@@ -134,14 +140,15 @@ class CustomCommentBottomSheet extends StatelessWidget {
                 SizedBox(width: AppSizes.sizedBoxSmallWidth),
                 Expanded(
                   child: CustomTextFormField(
-                    controller: TextEditingController(),
+                    controller: commentController,
                     borderRadius: 60,
-                    hintText: 'Write your comment...',
+                    hintText: LocaleKeys.commentsHintText.locale,
                     hintTextColor: AppColors.riverBed,
                     textInputAction: TextInputAction.done,
                     isSuffixIcon: true,
                     suffixIconAddress: AppAssets.icSendPath,
-                    onPressSuffixIcon: () {},
+                    onPressSuffixIcon: () => onPressSuffixIcon.call(),
+                    onChanged: (String text) {},
                   ),
                 ),
               ],

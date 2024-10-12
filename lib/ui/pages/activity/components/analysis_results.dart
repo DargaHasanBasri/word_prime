@@ -22,23 +22,24 @@ class AnalysisResults extends StatelessWidget {
           Padding(
             padding: AppPaddings.appPaddingAll,
             child: Container(
-              width: 100,
+              width: AppSizes.analysisResultsContainerWidth,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "Quiz Analiz Sonuçlarım",
+                    LocaleKeys.activityPage_quizAnalysis.locale,
                     style: TextStyle(
                       color: AppColors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
                       overflow: TextOverflow.ellipsis,
                     ),
+                    textAlign: TextAlign.center,
                     maxLines: 2,
                   ),
                   SizedBox(height: 16),
                   CustomButton(
-                    title: 'Tümünü Gör',
+                    title: LocaleKeys.activityPage_seeAll.locale,
                     titleFontSize: 12,
                     titleVerticalPadding: 8,
                     borderRadius: 8,

@@ -22,8 +22,8 @@ class ActiveBottomNavigationBarItem extends StatelessWidget {
           children: [
             Image.asset(
               iconAddress,
-              width: 24,
-              height: 24,
+              width: AppSizes.appOverallIconWidth,
+              height: AppSizes.appOverallIconHeight,
               color: AppColors.white,
             ),
             SizedBox(width: 8),

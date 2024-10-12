@@ -5,6 +5,11 @@ final class AppSizes {
 
   static const double toolbarHeight = 80.0;
   static const double bottomNavigationBarHeight = kBottomNavigationBarHeight;
+  static const double activityItemTitleContainerHeight = 44;
+  static const double analysisResultsContainerWidth = 150;
+
+  static const double bottomSheetDragHandleWidth = 50;
+  static const double bottomSheetDragHandleHeight = 4;
 
   static const double appOverallIconWidth = 24.0;
   static const double appOverallIconHeight = 24.0;

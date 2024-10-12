@@ -36,7 +36,7 @@ class _ActivityPageState extends State<ActivityPage> {
               child: ActivityItem(
                 backgroundColor: AppColors.lavenderPurple,
                 titleEmoji: AppLocaleConstants.EMOJI_BRAIN,
-                title: 'En Popüler Kelimelerle Quiz',
+                title: LocaleKeys.activityPage_addedWordsQuiz.locale,
                 chapterCount: 10,
                 isZeroChapterCount: false,
                 onTapStart: () {},
@@ -47,7 +47,7 @@ class _ActivityPageState extends State<ActivityPage> {
               child: ActivityItem(
                 backgroundColor: AppColors.wildBlueYonder,
                 titleEmoji: AppLocaleConstants.EMOJI_CONTROL,
-                title: 'En Popüler Kelimelerle Quiz',
+                title: LocaleKeys.activityPage_popularQuiz.locale,
                 chapterCount: 10,
                 isZeroChapterCount: false,
                 onTapStart: () {},
@@ -62,7 +62,7 @@ class _ActivityPageState extends State<ActivityPage> {
               child: ActivityItem(
                 backgroundColor: AppColors.neptune,
                 titleEmoji: AppLocaleConstants.EMOJI_QUESTION_MARK,
-                title: 'YAKINDA...',
+                title: '${LocaleKeys.activityPage_soon.locale}...',
                 chapterCount: 0,
                 isZeroChapterCount: true,
                 onTapStart: () {},
@@ -73,7 +73,7 @@ class _ActivityPageState extends State<ActivityPage> {
               child: ActivityItem(
                 backgroundColor: AppColors.watermelon,
                 titleEmoji: AppLocaleConstants.EMOJI_LIGHTBULB,
-                title: 'YAKINDA...',
+                title: '${LocaleKeys.activityPage_soon.locale}...',
                 chapterCount: 0,
                 isZeroChapterCount: true,
                 onTapStart: () {},
@@ -118,7 +118,7 @@ class _ActivityPageState extends State<ActivityPage> {
           Expanded(
             child: Center(
               child: Text(
-                'My Activity \u{1F3AF}',
+                '${LocaleKeys.activityPage_myActivity.locale} ${AppLocaleConstants.EMOJI_TARGET}',
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 18,

@@ -1,7 +1,6 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/home/components/post_list_item.dart';
 import 'package:word_prime/ui/pages/home/components/user_list_item.dart';
-import 'package:word_prime/ui/widgets/custom_comment_bottom_sheet.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,6 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends BaseStatefulState<HomePage> {
   late final HomeViewModel _vm;
+  TextEditingController _commentController = TextEditingController();
 
   @override
   void initState() {
@@ -70,7 +70,10 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                 onTabComment: () {
                   showCustomBottomSheet(
                     context: context,
-                    child: CustomCommentBottomSheet(),
+                    child: CustomCommentBottomSheet(
+                      commentController: _commentController,
+                      onPressSuffixIcon: () {},
+                    ),
                   );
                 },
                 onTabTranslate: () {
@@ -94,7 +97,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
       title: Row(
         children: [
           Text(
-            'Welcome, Zephyra \u{1F44B}',
+            '${LocaleKeys.homePage_welcome.locale}, Zephyra ${AppLocaleConstants.EMOJI_WAVING}',
             style: TextStyle(
               color: AppColors.white,
               fontSize: 18,

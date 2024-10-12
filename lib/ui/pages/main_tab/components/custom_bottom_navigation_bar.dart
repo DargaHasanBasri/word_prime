@@ -39,12 +39,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   child: whichIndex.value == 0
                       ? ActiveBottomNavigationBarItem(
                           iconAddress: AppAssets.icMainTabHomePath,
-                          pageName: 'Home',
+                          pageName: LocaleKeys.home.locale,
                         )
                       : Image.asset(
                           AppAssets.icMainTabHomePath,
-                          width: 24,
-                          height: 24,
+                          width: AppSizes.appOverallIconWidth,
+                          height: AppSizes.appOverallIconHeight,
                           color: AppColors.pastelBlue,
                         ),
                 ),
@@ -55,12 +55,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   child: whichIndex.value == 1
                       ? ActiveBottomNavigationBarItem(
                           iconAddress: AppAssets.icMainTabActivityPath,
-                          pageName: 'Game',
+                          pageName: LocaleKeys.activity.locale,
                         )
                       : Image.asset(
                           AppAssets.icMainTabActivityPath,
-                          width: 24,
-                          height: 24,
+                          width: AppSizes.appOverallIconWidth,
+                          height: AppSizes.appOverallIconHeight,
                           color: AppColors.pastelBlue,
                         ),
                 ),
@@ -71,12 +71,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   child: whichIndex.value == 2
                       ? ActiveBottomNavigationBarItem(
                           iconAddress: AppAssets.icMainTabWordAddPath,
-                          pageName: 'Add Word',
+                          pageName: LocaleKeys.addWord.locale,
                         )
                       : Image.asset(
                           AppAssets.icMainTabWordAddPath,
-                          width: 24,
-                          height: 24,
+                          width: AppSizes.appOverallIconWidth,
+                          height: AppSizes.appOverallIconHeight,
                           color: AppColors.pastelBlue,
                         ),
                 ),
@@ -87,12 +87,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   child: whichIndex.value == 3
                       ? ActiveBottomNavigationBarItem(
                           iconAddress: AppAssets.icMainTabTaskPath,
-                          pageName: 'Tasks',
+                          pageName: LocaleKeys.tasks.locale,
                         )
                       : Image.asset(
                           AppAssets.icMainTabTaskPath,
-                          width: 24,
-                          height: 24,
+                          width: AppSizes.appOverallIconWidth,
+                          height: AppSizes.appOverallIconHeight,
                           color: AppColors.pastelBlue,
                         ),
                 ),
@@ -103,12 +103,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   child: whichIndex.value == 4
                       ? ActiveBottomNavigationBarItem(
                           iconAddress: AppAssets.icMainTabProfilePath,
-                          pageName: 'Profile',
+                          pageName: LocaleKeys.profile.locale,
                         )
                       : Image.asset(
                           AppAssets.icMainTabProfilePath,
-                          width: 24,
-                          height: 24,
+                          width: AppSizes.appOverallIconWidth,
+                          height: AppSizes.appOverallIconHeight,
                           color: AppColors.pastelBlue,
                         ),
                 ),

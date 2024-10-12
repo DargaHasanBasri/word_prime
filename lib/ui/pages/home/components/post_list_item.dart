@@ -38,7 +38,7 @@ class PostListItem extends StatelessWidget {
             child: _getPostPicture(),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 16),
+            padding: AppPaddings.paddingMediumBottom,
             child: _getUserSentences(),
           ),
           ValueListenableBuilder(
@@ -72,7 +72,7 @@ class PostListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'X_AE_A-13',
+                AppLocaleConstants.DEFAULT_USER_NAME,
                 style: TextStyle(
                   color: AppColors.ebonyClay,
                   fontSize: 14,
@@ -81,7 +81,7 @@ class PostListItem extends StatelessWidget {
                 ),
               ),
               Text(
-                'Level  10',
+                '${LocaleKeys.level.locale}  10',
                 style: TextStyle(
                   color: AppColors.riverBed,
                   fontSize: 14,
@@ -118,7 +118,7 @@ class PostListItem extends StatelessWidget {
                       border: Border.all(color: AppColors.softPeach, width: 2),
                     ),
                     child: Text(
-                      'Dolor morbi non arcu risus quis varius. sed nisi lacus sed viverra. Dolor morbi non arcu risus quis varius.',
+                      AppLocaleConstants.DEFAULT_SENTENCES,
                       style: TextStyle(
                         color: AppColors.ebonyClay,
                         fontSize: 14,
@@ -152,15 +152,22 @@ class PostListItem extends StatelessWidget {
             Visibility(
               visible: isTranslate.value,
               child: Padding(
-                padding: const EdgeInsets.only(left: 14, right: 50, top: 8),
+                padding: const EdgeInsets.only(
+                  left: 14,
+                  right: 50,
+                  top: 8,
+                ),
                 child: Container(
                   padding: AppPaddings.paddingSmallAll,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: AppColors.pastelBlue.withOpacity(0.8), width: 2),
+                    border: Border.all(
+                      color: AppColors.pastelBlue.withOpacity(0.8),
+                      width: 2,
+                    ),
                   ),
                   child: Text(
-                    'Dolor morbi non arcu risus quis varius. sed nisi lacus sed viverra. Dolor morbi non arcu risus quis varius.',
+                    AppLocaleConstants.DEFAULT_SENTENCES,
                     style: TextStyle(
                       color: AppColors.ebonyClay,
                       fontSize: 14,
