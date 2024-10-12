@@ -15,6 +15,7 @@ final class Routes {
   static const String MainTab = 'mainTabProvider';
   static const String Home = 'homeProvider';
   static const String Activity = 'activityProvider';
+  static const String Tasks = 'tasksProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -72,6 +73,10 @@ final class Routes {
       case Routes.Activity:
         return MaterialPageRoute(
           builder: (context) => const ActivityProvider(),
+        );
+      case Routes.Tasks:
+        return MaterialPageRoute(
+          builder: (context) => const TasksProvider(),
         );
       default:
         return MaterialPageRoute(

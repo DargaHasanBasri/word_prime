@@ -49,7 +49,7 @@ class CustomButton extends StatelessWidget {
               color: backgroundColor,
               border: Border.all(
                 color: borderColor,
-                width: 2,
+                width: 1,
               ),
               borderRadius: BorderRadius.circular(borderRadius),
             ),
