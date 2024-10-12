@@ -71,7 +71,6 @@ abstract class  LocaleKeys {
   static const settings_helpCenter = 'settings.helpCenter';
   static const settings_language = 'settings.language';
   static const settings_changeLanguageTitle = 'settings.changeLanguageTitle';
-  static const settings_changeLanguageSubTitle = 'settings.changeLanguageSubTitle';
   static const settings_privacy = 'settings.privacy';
   static const settings_notifications = 'settings.notifications';
   static const settings = 'settings';
@@ -98,6 +97,8 @@ abstract class  LocaleKeys {
   static const tasksPage_chapter = 'tasksPage.chapter';
   static const tasksPage_viewAll = 'tasksPage.viewAll';
   static const tasksPage_currentResultsMsg = 'tasksPage.currentResultsMsg';
+  static const tasksPage_activeTasks = 'tasksPage.activeTasks';
+  static const tasksPage_completed = 'tasksPage.completed';
   static const tasksPage = 'tasksPage';
 
 }

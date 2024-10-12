@@ -61,3 +61,6 @@ export 'package:word_prime/ui/widgets/custom_comment_bottom_sheet.dart';
 export 'package:word_prime/ui/pages/tasks/tasks_page.dart';
 export 'package:word_prime/ui/pages/tasks/tasks_view_model.dart';
 export 'package:word_prime/ui/pages/tasks/tasks_provider.dart';
+export 'package:word_prime/ui/pages/task_list/task_list_page.dart';
+export 'package:word_prime/ui/pages/task_list/task_list_view_model.dart';
+export 'package:word_prime/ui/pages/task_list/task_list_provider.dart';
