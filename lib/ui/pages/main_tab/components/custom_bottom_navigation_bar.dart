@@ -54,11 +54,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   },
                   child: whichIndex.value == 1
                       ? ActiveBottomNavigationBarItem(
-                          iconAddress: AppAssets.icMainTabGamePath,
+                          iconAddress: AppAssets.icMainTabActivityPath,
                           pageName: 'Game',
                         )
                       : Image.asset(
-                          AppAssets.icMainTabGamePath,
+                          AppAssets.icMainTabActivityPath,
                           width: 24,
                           height: 24,
                           color: AppColors.pastelBlue,

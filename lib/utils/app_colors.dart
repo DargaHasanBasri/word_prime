@@ -17,4 +17,7 @@ final class AppColors {
   static Color pastelBlue = const Color(0xff9BBDF8);
   static Color ebonyClay = const Color(0xff1E293B);
   static Color riverBed = const Color(0xff475569);
+  static Color lavenderPurple = const Color(0xff877ABA);
+  static Color wildBlueYonder = const Color(0xff7A94BA);
+  static Color neptune = const Color(0xff7ABAAE);
 }

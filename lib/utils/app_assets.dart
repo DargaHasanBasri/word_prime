@@ -21,7 +21,7 @@ final class AppAssets {
   static String icNotificationPath = _imagePath('ic_notification');
   static String icPrivacyPath = _imagePath('ic_privacy');
   static String icMainTabHomePath = _imagePath('ic_main_tab_home');
-  static String icMainTabGamePath = _imagePath('ic_main_tab_game');
+  static String icMainTabActivityPath = _imagePath('ic_main_tab_activity');
   static String icMainTabWordAddPath = _imagePath('ic_main_tab_word_add');
   static String icMainTabTaskPath = _imagePath('ic_main_tab_task');
   static String icMainTabProfilePath = _imagePath('ic_main_tab_profile');
@@ -32,8 +32,11 @@ final class AppAssets {
   static String icInactiveSavePath = _imagePath('ic_inactive_save');
   static String icSharePath = _imagePath('ic_share');
   static String icSendPath = _imagePath('ic_send');
+  static String icScorePath = _imagePath('ic_score');
   static String imgSuccessfulPath = _imagePath('img_successful');
   static String imgExampPostPath = _imagePath('img_examp_post');
+  static String imgQuizAnalysisPath = _imagePath('img_quiz_analysis');
+  static String imgQuizAnalysisIllustrationPath = _imagePath('img_quiz_analysis_illustration');
 
   static String _imagePath(String fileName) => '$_basePath$fileName.png';
 }

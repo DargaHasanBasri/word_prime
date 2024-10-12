@@ -44,7 +44,7 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
       case 0:
         return HomeProvider();
       case 1:
-        return HomeProvider();
+        return ActivityProvider();
       case 2:
         return HomeProvider();
       case 3:
