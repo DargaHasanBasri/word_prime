@@ -20,6 +20,9 @@
   "start": "Start",
   "comments": "Comments",
   "commentsHintText": "Write your comment...",
+  "follow": "Follow",
+  "following": "Following",
+  "score": "Score",
   "splash": {
     "title": "Unlock your potential with us!"
   },
@@ -106,6 +109,9 @@
     "viewAll": "View All",
     "currentResultsMsg": "Current Ranking Results",
     "activeTasks": "Active Tasks",
-    "completed": "Completed"
+    "completed": "Completed",
+    "leaderboard": "Leaderboard",
+    "weekly": "Weekly",
+    "allTime": "All Time"
   }
 }

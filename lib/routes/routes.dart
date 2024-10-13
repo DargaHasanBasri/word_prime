@@ -17,6 +17,7 @@ final class Routes {
   static const String Activity = 'activityProvider';
   static const String Tasks = 'tasksProvider';
   static const String TaskList = 'taskListProvider';
+  static const String LeaderBoard = 'leaderBoardProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -85,6 +86,10 @@ final class Routes {
           builder: (context) => TaskListProvider(
             whichTaskMethod: taskMethodType,
           ),
+        );
+      case Routes.LeaderBoard:
+        return MaterialPageRoute(
+          builder: (context) => const LeaderboardProvider(),
         );
       default:
         return MaterialPageRoute(

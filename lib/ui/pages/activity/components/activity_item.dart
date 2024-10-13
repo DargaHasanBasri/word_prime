@@ -70,7 +70,6 @@ class ActivityItem extends StatelessWidget {
           SizedBox(height: 24),
           CustomButton(
             title: LocaleKeys.start.locale,
-            titleFontSize: 12,
             titleVerticalPadding: 8,
             backgroundColor: Colors.transparent,
             borderColor: AppColors.white,

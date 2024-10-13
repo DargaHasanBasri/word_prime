@@ -8,6 +8,7 @@ final class AppSizes {
 
   static const double activityItemTitleContainerHeight = 44;
   static const double analysisResultsContainerWidth = 150;
+  static const double firstHundredContainerWidth = 100;
 
   static const double bottomSheetDragHandleWidth = 50;
   static const double bottomSheetDragHandleHeight = 4;
@@ -17,6 +18,9 @@ final class AppSizes {
 
   static const double sizedBoxOverallWidth = 24.0;
   static const double sizedBoxOverallHeight = 24.0;
+
+  static const double sizedBoxLargeWidth = 24.0;
+  static const double sizedBoxLargeHeight = 24.0;
 
   static const double sizedBoxMediumWidth = 16.0;
   static const double sizedBoxMediumHeight = 16.0;

@@ -49,7 +49,11 @@ class _TasksPageState extends BaseStatefulState<TasksPage> {
             },
           ),
         ),
-        RankingResults(),
+        RankingResults(
+          onTabViewAll: () {
+            appRoutes.navigateTo(Routes.LeaderBoard);
+          },
+        ),
       ],
     );
   }
