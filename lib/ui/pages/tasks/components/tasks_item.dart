@@ -76,7 +76,6 @@ class TasksItem extends StatelessWidget {
                     title: LocaleKeys.start.locale,
                     backgroundColor: Colors.transparent,
                     borderColor: AppColors.white,
-                    titleFontSize: 12,
                     titleVerticalPadding: 8,
                     borderRadius: 40,
                     onClick: () => onTapStart.call(),

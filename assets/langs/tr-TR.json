@@ -20,6 +20,9 @@
   "start": "Başla",
   "comments": "Yorumlar",
   "commentsHintText": "Yorumunuzu yazın...",
+  "follow": "Takip Et",
+  "following": "Takip",
+  "score": "Puan",
   "splashPage": {
     "title": "Potansiyelinizi bizimle ortaya çıkarın!"
   },
@@ -106,6 +109,9 @@
     "viewAll": "Tümünü Gör",
     "currentResultsMsg": "Güncel Sıralama Sonucları",
     "activeTasks": "Aktif Görevler",
-    "completed": "Tamamlandı"
+    "completed": "Tamamlandı",
+    "leaderboard": "Liderlik Tablosu",
+    "weekly": "Haftalık",
+    "allTime": "Tüm Zamanlar"
   }
 }

@@ -40,7 +40,6 @@ class AnalysisResults extends StatelessWidget {
                   SizedBox(height: 16),
                   CustomButton(
                     title: LocaleKeys.activityPage_seeAll.locale,
-                    titleFontSize: 12,
                     titleVerticalPadding: 8,
                     borderRadius: 8,
                   )

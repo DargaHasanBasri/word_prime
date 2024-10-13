@@ -9,7 +9,6 @@ class CustomButton extends StatelessWidget {
     Color? borderColor,
     String? title,
     String? iconLogoAddress,
-    double? titleFontSize,
     double? borderRadius,
     double? titleVerticalPadding,
     VoidCallback? onClick,
@@ -18,7 +17,6 @@ class CustomButton extends StatelessWidget {
         iconLogoAddress = iconLogoAddress ?? '',
         backgroundColor = backgroundColor ?? AppColors.cornflowerBlue,
         titleColor = titleColor ?? AppColors.white,
-        titleFontSize = titleFontSize ?? 16,
         borderColor = borderColor ?? Colors.transparent,
         borderRadius = borderRadius ?? 40,
         titleVerticalPadding = titleVerticalPadding ?? 16,
@@ -29,7 +27,6 @@ class CustomButton extends StatelessWidget {
   final String title;
   final String iconLogoAddress;
   final VoidCallback? onClick;
-  final double titleFontSize;
   final double borderRadius;
   final double titleVerticalPadding;
   final Color borderColor;
@@ -73,7 +70,7 @@ class CustomButton extends StatelessWidget {
                               title,
                               style: TextStyle(
                                 color: titleColor,
-                                fontSize: titleFontSize,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w700,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -87,7 +84,7 @@ class CustomButton extends StatelessWidget {
                       title,
                       style: TextStyle(
                         color: titleColor,
-                        fontSize: titleFontSize,
+                        fontSize: 14,
                         fontWeight: FontWeight.w700,
                         overflow: TextOverflow.ellipsis,
                       ),

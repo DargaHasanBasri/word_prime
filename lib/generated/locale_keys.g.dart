@@ -22,6 +22,9 @@ abstract class  LocaleKeys {
   static const start = 'start';
   static const comments = 'comments';
   static const commentsHintText = 'commentsHintText';
+  static const follow = 'follow';
+  static const following = 'following';
+  static const score = 'score';
   static const splash_title = 'splash.title';
   static const splash = 'splash';
   static const loginPage_welcomeTitle = 'loginPage.welcomeTitle';
@@ -99,6 +102,9 @@ abstract class  LocaleKeys {
   static const tasksPage_currentResultsMsg = 'tasksPage.currentResultsMsg';
   static const tasksPage_activeTasks = 'tasksPage.activeTasks';
   static const tasksPage_completed = 'tasksPage.completed';
+  static const tasksPage_leaderboard = 'tasksPage.leaderboard';
+  static const tasksPage_weekly = 'tasksPage.weekly';
+  static const tasksPage_allTime = 'tasksPage.allTime';
   static const tasksPage = 'tasksPage';
 
 }

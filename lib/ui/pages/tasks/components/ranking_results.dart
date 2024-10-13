@@ -1,7 +1,11 @@
 import 'package:word_prime/export.dart';
 
 class RankingResults extends StatelessWidget {
-  const RankingResults({super.key});
+  final VoidCallback onTabViewAll;
+  const RankingResults({
+    super.key,
+    required this.onTabViewAll,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +43,9 @@ class RankingResults extends StatelessWidget {
                       Expanded(
                         child: CustomButton(
                           title: LocaleKeys.tasksPage_viewAll.locale,
-                          titleFontSize: 12,
                           titleVerticalPadding: 8,
                           borderRadius: 8,
+                          onClick: () => onTabViewAll.call(),
                         ),
                       ),
                       SizedBox(width: AppSizes.sizedBoxSmallWidth),

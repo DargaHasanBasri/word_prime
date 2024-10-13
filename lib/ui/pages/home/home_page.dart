@@ -35,10 +35,11 @@ class _HomePageState extends BaseStatefulState<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 16, top: 24),
+            padding: AppPaddings.paddingLargeTop,
             child: SizedBox(
               height: AppSizes.sizedBoxUserListViewHeight,
               child: ListView.separated(
+                padding: AppPaddings.paddingMediumHorizontal,
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemCount: 20,
