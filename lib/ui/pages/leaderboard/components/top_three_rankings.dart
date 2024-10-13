@@ -4,7 +4,7 @@ class TopThreeRankings extends StatelessWidget {
   final String profileImgAddress;
   final String userName;
   final int userScore;
-  final double rankContainerHeight;
+  final double rankHeight;
   final int rankOrder;
   final bool? isFirst;
   const TopThreeRankings({
@@ -13,7 +13,7 @@ class TopThreeRankings extends StatelessWidget {
     required this.profileImgAddress,
     required this.userName,
     required this.userScore,
-    required this.rankContainerHeight,
+    required this.rankHeight,
     required this.rankOrder,
   });
 
@@ -21,7 +21,9 @@ class TopThreeRankings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
+        SizedBox(height: rankHeight),
         Center(
           child: Stack(
             alignment: Alignment.topCenter,
@@ -81,23 +83,24 @@ class TopThreeRankings extends StatelessWidget {
           ),
         ),
         SizedBox(height: AppSizes.sizedBoxMediumHeight),
-        Container(
-          height: rankContainerHeight,
-          decoration: BoxDecoration(
-            color: AppColors.metallicBlue,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(25),
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.metallicBlue,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(25),
+              ),
+              border: Border.all(color: AppColors.gulGrey),
             ),
-            border: Border.all(color: AppColors.gulGrey),
-          ),
-          child: Text(
-            '${rankOrder}',
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 40,
-              fontWeight: FontWeight.w700,
+            child: Text(
+              '${rankOrder}',
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: 40,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
         ),
       ],

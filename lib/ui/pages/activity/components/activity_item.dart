@@ -41,7 +41,7 @@ class ActivityItem extends StatelessWidget {
               fontSize: 24,
             ),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 4),
           Container(
             height: AppSizes.activityItemTitleContainerHeight,
             child: Text(
@@ -55,7 +55,7 @@ class ActivityItem extends StatelessWidget {
               maxLines: 2,
             ),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 4),
           Visibility(
             visible: !isZeroChapterCount,
             child: Text(

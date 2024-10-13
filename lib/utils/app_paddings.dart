@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+import 'app_sizes.dart';
+
 final class AppPaddings {
   AppPaddings._();
 
@@ -19,11 +21,13 @@ final class AppPaddings {
   static const paddingLargeTop = EdgeInsets.only(top: 24);
   static const paddingMediumTop = EdgeInsets.only(top: 16);
 
+  static const appPaddingMainTabBottom =
+      EdgeInsets.only(bottom: 24 + AppSizes.bottomNavigationBarHeight);
   static const paddingXLargeBottom = EdgeInsets.only(bottom: 60);
   static const paddingLargeBottom = EdgeInsets.only(bottom: 24);
   static const paddingMediumBottom = EdgeInsets.only(bottom: 16);
 
-  static const paddingLargeLeft= EdgeInsets.only(left: 24);
+  static const paddingLargeLeft = EdgeInsets.only(left: 24);
   static const paddingMediumLeft = EdgeInsets.only(left: 16);
   static const paddingSmallLeft = EdgeInsets.only(left: 8);
 

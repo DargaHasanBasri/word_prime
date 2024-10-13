@@ -55,7 +55,7 @@ class _ActivityPageState extends State<ActivityPage> {
             ),
           ],
         ),
-        SizedBox(height: AppSizes.sizedBoxOverallHeight),
+        SizedBox(height: AppSizes.sizedBoxMediumHeight),
         Row(
           children: [
             Expanded(
@@ -96,6 +96,7 @@ class _ActivityPageState extends State<ActivityPage> {
     return AppBar(
       backgroundColor: AppColors.rhino,
       toolbarHeight: AppSizes.toolbarHeight,
+      scrolledUnderElevation: 0,
       title: Row(
         children: [
           Row(

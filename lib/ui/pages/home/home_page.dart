@@ -95,6 +95,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
     return AppBar(
       backgroundColor: AppColors.rhino,
       toolbarHeight: AppSizes.toolbarHeight,
+      scrolledUnderElevation: 0,
       title: Row(
         children: [
           Text(

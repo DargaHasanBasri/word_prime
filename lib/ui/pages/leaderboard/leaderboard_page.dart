@@ -51,10 +51,9 @@ class _LeaderboardPageState extends BaseStatefulState<LeaderboardPage> {
                     timeType: _vm.timeType.value,
                   ),
                   SizedBox(height: AppSizes.sizedBoxLargeHeight),
-                  Container(
-                    color: Colors.transparent,
+                  Expanded(
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: TopThreeRankings(
@@ -63,7 +62,7 @@ class _LeaderboardPageState extends BaseStatefulState<LeaderboardPage> {
                             userName: AppLocaleConstants.DEFAULT_USER_NAME,
                             userScore: 12,
                             rankOrder: 2,
-                            rankContainerHeight: 130,
+                            rankHeight: 32,
                           ),
                         ),
                         Expanded(
@@ -74,7 +73,7 @@ class _LeaderboardPageState extends BaseStatefulState<LeaderboardPage> {
                             userName: AppLocaleConstants.DEFAULT_USER_NAME,
                             userScore: 27,
                             rankOrder: 1,
-                            rankContainerHeight: 150,
+                            rankHeight: 8,
                           ),
                         ),
                         Expanded(
@@ -84,7 +83,7 @@ class _LeaderboardPageState extends BaseStatefulState<LeaderboardPage> {
                             userName: AppLocaleConstants.DEFAULT_USER_NAME,
                             userScore: 8,
                             rankOrder: 3,
-                            rankContainerHeight: 110,
+                            rankHeight: 42,
                           ),
                         ),
                       ],
@@ -94,12 +93,14 @@ class _LeaderboardPageState extends BaseStatefulState<LeaderboardPage> {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height / 2,
+              height: MediaQuery.of(context).size.height * 0.45,
               width: double.infinity,
               padding: AppPaddings.appPaddingHorizontal,
               decoration: BoxDecoration(
                 color: AppColors.catskillWhite,
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(25),
+                ),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
@@ -133,6 +134,7 @@ class _LeaderboardPageState extends BaseStatefulState<LeaderboardPage> {
     return AppBar(
       backgroundColor: AppColors.rhino,
       toolbarHeight: AppSizes.toolbarHeight,
+      scrolledUnderElevation: 0,
       leading: Row(
         children: [
           IconButton(

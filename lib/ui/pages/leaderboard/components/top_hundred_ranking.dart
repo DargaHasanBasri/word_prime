@@ -18,10 +18,7 @@ class TopHundredRanking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 8,
-        horizontal: 16,
-      ),
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12),
@@ -86,7 +83,7 @@ class TopHundredRanking extends StatelessWidget {
           Expanded(
             flex: 4,
             child: Padding(
-              padding: AppPaddings.paddingMediumHorizontal,
+              padding: AppPaddings.paddingSmallLeft,
               child: CustomButton(
                 title: LocaleKeys.follow.locale,
                 titleVerticalPadding: 6,
