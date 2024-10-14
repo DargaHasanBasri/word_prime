@@ -67,3 +67,6 @@ export 'package:word_prime/ui/pages/task_list/task_list_provider.dart';
 export 'package:word_prime/ui/pages/leaderboard/leaderboard_provider.dart';
 export 'package:word_prime/ui/pages/leaderboard/leaderboard_page.dart';
 export 'package:word_prime/ui/pages/leaderboard/leaderboard_view_model.dart';
+export 'package:word_prime/ui/pages/profile/profile_page.dart';
+export 'package:word_prime/ui/pages/profile/profile_view_model.dart';
+export 'package:word_prime/ui/pages/profile/profile_provider.dart';

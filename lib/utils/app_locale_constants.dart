@@ -9,7 +9,7 @@ final class AppLocaleConstants {
   static const EN_LOCALE = Locale('en', 'US');
   static const LANG_PATH = 'assets/langs';
 
-  static const TR_RADIO_BTN_VALUE= 'Turkish';
+  static const TR_RADIO_BTN_VALUE = 'Turkish';
   static const EN_RADIO_BTN_VALUE = 'English';
 
   static const EMOJI_QUESTION_MARK = '\u{2754}';
@@ -20,10 +20,14 @@ final class AppLocaleConstants {
   static const EMOJI_TARGET = '\u{1F3AF}';
   static const EMOJI_HOURGLASS = '\u{231B}';
 
-  static const DEFAULT_USER_NAME = 'X_AE_A-13';
+  static const DEFAULT_USER_NAME = 'Zephyra Valentina';
+  static const DEFAULT_USER_EMAIL = 'zephyra@mail.com';
+  static const DEFAULT_USER_INFO_1 = 'UI/UX';
+  static const DEFAULT_USER_INFO_2 = 'Development';
+  static const DEFAULT_USER_INFO_3 = 'Finance';
+
   static const FORGOT_METHOD_EMAIL = "Email";
   static const FORGOT_METHOD_NAME = "Name";
-
 
   static const DEFAULT_PROFILE_PICTURE =
       'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
@@ -33,5 +37,4 @@ final class AppLocaleConstants {
 
   static const DEFAULT_SENTENCES =
       'Dolor morbi non arcu risus quis varius. sed nisi lacus sed viverra. Dolor morbi non arcu risus quis varius.';
-
 }

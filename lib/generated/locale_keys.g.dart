@@ -25,6 +25,7 @@ abstract class  LocaleKeys {
   static const follow = 'follow';
   static const following = 'following';
   static const score = 'score';
+  static const word = 'word';
   static const splash_title = 'splash.title';
   static const splash = 'splash';
   static const loginPage_welcomeTitle = 'loginPage.welcomeTitle';
@@ -106,5 +107,12 @@ abstract class  LocaleKeys {
   static const tasksPage_weekly = 'tasksPage.weekly';
   static const tasksPage_allTime = 'tasksPage.allTime';
   static const tasksPage = 'tasksPage';
+  static const profilePage_myProfile = 'profilePage.myProfile';
+  static const profilePage_follower = 'profilePage.follower';
+  static const profilePage_follow = 'profilePage.follow';
+  static const profilePage_myWords = 'profilePage.myWords';
+  static const profilePage_saved = 'profilePage.saved';
+  static const profilePage_favorites = 'profilePage.favorites';
+  static const profilePage = 'profilePage';
 
 }
