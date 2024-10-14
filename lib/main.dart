@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: locator<AppRoutes>().baseNavigatorKey,
       onGenerateRoute: Routes.generateRoute,
-      initialRoute: Routes.MainTab,
+      initialRoute: Routes.Onboarding,
       builder: (context, widget) {
         return widget!;
       },

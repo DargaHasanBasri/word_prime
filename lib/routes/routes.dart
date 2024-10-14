@@ -4,6 +4,7 @@ final class Routes {
   const Routes._();
   static const String Splash = 'splashProvider';
   static const String Onboarding = 'onboardingProvider';
+  static const String GetStarted = 'getStartedProvider';
   static const String Login = 'loginProvider';
   static const String Register = 'registerProvider';
   static const String ForgotPassword = 'forgotPasswordProvider';
@@ -29,6 +30,10 @@ final class Routes {
       case Routes.Onboarding:
         return MaterialPageRoute(
           builder: (context) => const OnboardingProvider(),
+        );
+      case Routes.GetStarted:
+        return MaterialPageRoute(
+          builder: (context) => const GetStartedProvider(),
         );
       case Routes.Login:
         return MaterialPageRoute(

@@ -42,6 +42,9 @@ final class AppAssets {
   static String imgExampPostPath = _imagePath('img_examp_post');
   static String imgQuizAnalysisPath = _imagePath('img_quiz_analysis');
   static String imgQuizAnalysisIllustrationPath = _imagePath('img_quiz_analysis_illustration');
+  static String imgImgOnboardingFirstPath = _imagePath('img_onboarding_first');
+  static String imgImgOnboardingSecondPath = _imagePath('img_onboarding_second');
+  static String imgImgGetStartedPath = _imagePath('img_get_started');
 
   static String _imagePath(String fileName) => '$_basePath$fileName.png';
 }

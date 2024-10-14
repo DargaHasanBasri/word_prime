@@ -5,6 +5,7 @@ import 'app_sizes.dart';
 final class AppPaddings {
   AppPaddings._();
 
+  static const appPaddingLargeVertical = EdgeInsets.symmetric(vertical: 32);
   static const appPaddingVertical = EdgeInsets.symmetric(vertical: 24);
   static const paddingMediumVertical = EdgeInsets.symmetric(vertical: 16);
   static const paddingSmallVertical = EdgeInsets.symmetric(vertical: 8);
