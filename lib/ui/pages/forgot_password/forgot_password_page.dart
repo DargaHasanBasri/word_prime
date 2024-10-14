@@ -98,7 +98,7 @@ class _ForgotPasswordPageState extends BaseStatefulState<ForgotPasswordPage> {
       backgroundColor: AppColors.white,
       elevation: 0,
       leading: IconButton(
-        onPressed: () => appRoutes.popIfBackStackNotEmpty,
+        onPressed: () => appRoutes.popIfBackStackNotEmpty(),
         color: AppColors.mirage,
         icon: Icon(
           Icons.arrow_back_ios,

@@ -26,8 +26,8 @@ abstract class  LocaleKeys {
   static const following = 'following';
   static const score = 'score';
   static const word = 'word';
-  static const splash_title = 'splash.title';
-  static const splash = 'splash';
+  static const splashPage_title = 'splashPage.title';
+  static const splashPage = 'splashPage';
   static const loginPage_welcomeTitle = 'loginPage.welcomeTitle';
   static const loginPage_welcomeSubTitle = 'loginPage.welcomeSubTitle';
   static const loginPage_forgotPassword = 'loginPage.forgotPassword';

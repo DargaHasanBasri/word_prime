@@ -199,7 +199,7 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
       backgroundColor: AppColors.white,
       elevation: 0,
       leading: IconButton(
-        onPressed: () => appRoutes.popIfBackStackNotEmpty,
+        onPressed: () => appRoutes.popIfBackStackNotEmpty(),
         color: AppColors.mirage,
         icon: Icon(
           Icons.arrow_back_ios,

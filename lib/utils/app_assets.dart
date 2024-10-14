@@ -6,6 +6,7 @@ final class AppAssets {
   static String icSmsPath = _imagePath('ic_sms');
   static String icLockPath = _imagePath('ic_lock');
   static String icCloseEyePath = _imagePath('ic_close_eye');
+  static String icOpenEyePath = _imagePath('ic_open_eye');
   static String icApplePath = _imagePath('ic_apple');
   static String icGooglePath = _imagePath('ic_google');
   static String icUserPath = _imagePath('ic_user');

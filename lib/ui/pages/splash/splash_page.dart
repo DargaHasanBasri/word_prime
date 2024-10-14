@@ -47,7 +47,7 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
             ),
           ),
           Text(
-            LocaleKeys.splash_title.locale,
+            LocaleKeys.splashPage_title.locale,
             style: TextStyle(
               fontSize: 14,
               color: AppColors.white,

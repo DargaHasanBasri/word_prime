@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:word_prime/export.dart';
 
 class LoginPage extends StatefulWidget {
@@ -73,7 +74,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                               prefixIconAddress: AppAssets.icLockPath,
                               suffixIconAddress: _vm.isActive.value == true
                                   ? AppAssets.icCloseEyePath
-                                  : AppAssets.icLockPath,
+                                  : AppAssets.icOpenEyePath,
                               hintText: LocaleKeys.passwordHintText.locale,
                               textInputAction: TextInputAction.done,
                               onPressSuffixIcon: () {
@@ -88,14 +89,17 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    Text(
-                      LocaleKeys.loginPage_forgotPassword.locale,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.cornflowerBlue,
+                    GestureDetector(
+                      onTap: () => appRoutes.navigateTo(Routes.ForgotPassword),
+                      child: Text(
+                        LocaleKeys.loginPage_forgotPassword.locale,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.cornflowerBlue,
+                        ),
+                        textAlign: TextAlign.end,
                       ),
-                      textAlign: TextAlign.end,
                     ),
                     ValueListenableBuilder(
                       valueListenable: _vm.emailInput,
@@ -110,7 +114,9 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                                 backgroundColor: _vm.isEmptyInputText()
                                     ? AppColors.cornflowerBlue.withOpacity(0.4)
                                     : AppColors.cornflowerBlue,
-                                onClick: () {},
+                                onClick: () {
+                                  appRoutes.navigateRemoveUntil(Routes.MainTab);
+                                },
                               ),
                             );
                           },
@@ -201,6 +207,10 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
               fontWeight: FontWeight.w700,
               color: AppColors.cornflowerBlue,
             ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                appRoutes.navigateTo(Routes.Register);
+              },
           ),
         ],
       ),

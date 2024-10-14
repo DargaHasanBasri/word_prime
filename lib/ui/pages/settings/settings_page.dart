@@ -72,7 +72,7 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
                               _vm.selectedLanguage.value,
                               context,
                             );
-                            appRoutes.popIfBackStackNotEmpty();
+                            appRoutes.navigateRemoveUntil(Routes.MainTab);
                           },
                         );
                       },
