@@ -70,3 +70,6 @@ export 'package:word_prime/ui/pages/leaderboard/leaderboard_view_model.dart';
 export 'package:word_prime/ui/pages/profile/profile_page.dart';
 export 'package:word_prime/ui/pages/profile/profile_view_model.dart';
 export 'package:word_prime/ui/pages/profile/profile_provider.dart';
+export 'package:word_prime/ui/pages/get_started/get_started_page.dart';
+export 'package:word_prime/ui/pages/get_started/get_started_view_model.dart';
+export 'package:word_prime/ui/pages/get_started/get_started_provider.dart';
