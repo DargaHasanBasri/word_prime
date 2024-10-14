@@ -23,4 +23,6 @@ final class AppColors {
   static Color wildBlueYonder = const Color(0xff7A94BA);
   static Color neptune = const Color(0xff7ABAAE);
   static Color metallicBlue = const Color(0xff5B6C8C);
+  static Color goldenDream = const Color(0xffFDC83D);
+  static Color greenishTeal = const Color(0xff25D076);
 }

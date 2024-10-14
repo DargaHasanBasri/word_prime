@@ -23,6 +23,7 @@
   "follow": "Follow",
   "following": "Following",
   "score": "Score",
+  "word": "Word",
   "splash": {
     "title": "Unlock your potential with us!"
   },
@@ -113,5 +114,13 @@
     "leaderboard": "Leaderboard",
     "weekly": "Weekly",
     "allTime": "All Time"
+  },
+  "profilePage": {
+    "myProfile": "My Profile",
+    "follower": "Follower",
+    "follow": "Follow",
+    "myWords": "My Words",
+    "saved": "Saved",
+    "favorites": "Favorites"
   }
 }

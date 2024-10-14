@@ -144,7 +144,7 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
       elevation: 0,
       forceMaterialTransparency: true,
       leading: IconButton(
-        onPressed: () => appRoutes.popIfBackStackNotEmpty(),
+        onPressed: () => appRoutes.navigateRemoveUntil(Routes.MainTab),
         color: AppColors.mirage,
         icon: Icon(
           Icons.arrow_back_ios,

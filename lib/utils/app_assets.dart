@@ -37,6 +37,7 @@ final class AppAssets {
   static String icTaskWeeklyPath = _imagePath('ic_task_weekly');
   static String icScoreFlashPath = _imagePath('ic_score_flash');
   static String icRankFirstPath = _imagePath('ic_rank_first');
+  static String icSettingsPath = _imagePath('ic_settings');
   static String imgSuccessfulPath = _imagePath('img_successful');
   static String imgExampPostPath = _imagePath('img_examp_post');
   static String imgQuizAnalysisPath = _imagePath('img_quiz_analysis');

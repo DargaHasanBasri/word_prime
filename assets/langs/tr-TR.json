@@ -23,6 +23,7 @@
   "follow": "Takip Et",
   "following": "Takip",
   "score": "Puan",
+  "word": "Kelime",
   "splashPage": {
     "title": "Potansiyelinizi bizimle ortaya çıkarın!"
   },
@@ -113,5 +114,13 @@
     "leaderboard": "Liderlik Tablosu",
     "weekly": "Haftalık",
     "allTime": "Tüm Zamanlar"
+  },
+  "profilePage": {
+    "myProfile": "Profilim",
+    "follower": "Takipçi",
+    "follow": "Takip",
+    "myWords": "Kelimelerim",
+    "saved": "Kaydedilenler",
+    "favorites": "Beğenilenler"
   }
 }
