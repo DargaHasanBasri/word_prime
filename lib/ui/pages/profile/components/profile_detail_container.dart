@@ -5,33 +5,39 @@ class ProfileDetailContainer extends StatelessWidget {
   final int detailCount;
   final String detailIcon;
   final Color detailColor;
+  final VoidCallback onTap;
   const ProfileDetailContainer({
     super.key,
     required this.detailTitle,
     required this.detailCount,
     required this.detailIcon,
     required this.detailColor,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          padding: AppPaddings.paddingMediumAll,
-          decoration: BoxDecoration(
-            color: AppColors.alabaster,
+        Material(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(50),
+          child: InkWell(
+            onTap: () => onTap.call(),
             borderRadius: BorderRadius.circular(50),
-          ),
-          child: Row(
-            children: [
-              Image.asset(
+            child: Ink(
+              padding: AppPaddings.paddingMediumAll,
+              decoration: BoxDecoration(
+                color: AppColors.alabaster,
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: Image.asset(
                 detailIcon,
                 color: detailColor,
                 width: AppSizes.appOverallIconWidth,
                 height: AppSizes.appOverallIconHeight,
               ),
-            ],
+            ),
           ),
         ),
         Padding(
