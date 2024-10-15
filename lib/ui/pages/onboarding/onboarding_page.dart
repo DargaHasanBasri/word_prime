@@ -90,8 +90,8 @@ class _OnboardingPageState extends BaseStatefulState<OnboardingPage> {
         children: [
           Image.asset(
             AppAssets.appLogoPath,
-            width: 16,
-            height: 24,
+            width: AppSizes.sizedBoxMediumWidth,
+            height: AppSizes.appOverallIconHeight,
           ),
           SizedBox(width: AppSizes.sizedBoxMediumWidth),
           Text(

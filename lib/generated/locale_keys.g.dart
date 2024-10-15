@@ -114,5 +114,10 @@ abstract class  LocaleKeys {
   static const profilePage_saved = 'profilePage.saved';
   static const profilePage_favorites = 'profilePage.favorites';
   static const profilePage = 'profilePage';
+  static const onboardingPage_onboardingFirstTitle = 'onboardingPage.onboardingFirstTitle';
+  static const onboardingPage_onboardingFirstSubTitle = 'onboardingPage.onboardingFirstSubTitle';
+  static const onboardingPage_onboardingSecondTitle = 'onboardingPage.onboardingSecondTitle';
+  static const onboardingPage_onboardingSecondSubTitle = 'onboardingPage.onboardingSecondSubTitle';
+  static const onboardingPage = 'onboardingPage';
 
 }

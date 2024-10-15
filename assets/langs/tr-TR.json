@@ -25,7 +25,7 @@
   "score": "Puan",
   "word": "Kelime",
   "splashPage": {
-    "title": "Potansiyelinizi bizimle ortaya çıkarın!"
+    "title": "Kelimelerle dolu bir dünyanın kilidini bizimle açın!"
   },
   "loginPage": {
     "welcomeTitle": "MERHABA! Tekrar hoşgeldiniz",
@@ -122,5 +122,11 @@
     "myWords": "Kelimelerim",
     "saved": "Kaydedilenler",
     "favorites": "Beğenilenler"
+  },
+  "onboardingPage": {
+    "onboardingFirstTitle": "Her gün yeni kelimeler keşfedin ve kelime dağarcığınızı genişletin!",
+    "onboardingFirstSubTitle": "İngilizce öğrenmek hiç bu kadar kolay ve eğlenceli olmamıştı.",
+    "onboardingSecondTitle": "İlerlemenizi takip edin ve sözcüklerde kendi hızınızda ustalaşın.",
+    "onboardingSecondSubTitle": "En sevdiğiniz kelimeleri ve cümleleri paylaşın ve başkalarının da neler öğrendiğini keşfedin."
   }
 }
