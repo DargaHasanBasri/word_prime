@@ -102,7 +102,7 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
                   isSuffixIcon: true,
                   suffixIconAddress: _vm.isActive.value == true
                       ? AppAssets.icCloseEyePath
-                      : AppAssets.icLockPath,
+                      : AppAssets.icOpenEyePath,
                   onPressSuffixIcon: () {
                     _vm.isActive.value = !_vm.isActive.value;
                   },
@@ -118,7 +118,7 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
         Padding(
           padding: AppPaddings.appPaddingVertical,
           child: CustomButton(
-            title: LocaleKeys.profileDetail_update.locale,
+            title: LocaleKeys.profileDetail_update.locale.toUpperCase(),
           ),
         ),
       ],

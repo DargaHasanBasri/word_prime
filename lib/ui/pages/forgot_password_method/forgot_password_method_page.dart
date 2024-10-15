@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/forgot_password_method/components/method_email.dart';
 import 'package:word_prime/ui/pages/forgot_password_method/components/method_name.dart';
@@ -51,13 +52,16 @@ class _ForgotPasswordMethodPageState
                   MethodTabBar(
                     whichMethod: _vm.whichTabBar.value,
                     onTapEmailBar: () {
-                      _vm.whichTabBar.value = AppLocaleConstants.FORGOT_METHOD_EMAIL;
+                      _vm.whichTabBar.value =
+                          AppLocaleConstants.FORGOT_METHOD_EMAIL;
                     },
                     onTapNameBar: () {
-                      _vm.whichTabBar.value = AppLocaleConstants.FORGOT_METHOD_NAME;
+                      _vm.whichTabBar.value =
+                          AppLocaleConstants.FORGOT_METHOD_NAME;
                     },
                   ),
-                  _vm.whichTabBar.value == AppLocaleConstants.FORGOT_METHOD_EMAIL
+                  _vm.whichTabBar.value ==
+                          AppLocaleConstants.FORGOT_METHOD_EMAIL
                       ? Padding(
                           padding: const EdgeInsets.only(top: 32),
                           child: MethodEmail(
@@ -76,8 +80,10 @@ class _ForgotPasswordMethodPageState
           ),
         ),
         CustomButton(
-          title: LocaleKeys.forgotPassword_sendLink.locale,
-          onClick: () {},
+          title: LocaleKeys.forgotPassword_sendLink.locale.toUpperCase(),
+          onClick: () {
+            appRoutes.navigateTo(Routes.Login);
+          },
         ),
         const Spacer(),
         Center(
@@ -105,6 +111,10 @@ class _ForgotPasswordMethodPageState
               fontWeight: FontWeight.w700,
               color: AppColors.cornflowerBlue,
             ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                appRoutes.navigateTo(Routes.Register);
+              },
           ),
         ],
       ),

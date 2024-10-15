@@ -27,6 +27,11 @@
   "splashPage": {
     "title": "Unlock a world full of words with us!"
   },
+  "getStartedPage": {
+    "title": "Get Started",
+    "titleMsg": "Welcome to WordPrime",
+    "subTitleMsg": "Add a plus word to your vocabulary every day with WordPrime"
+  },
   "loginPage": {
     "welcomeTitle": "Hi! Welcome Back",
     "welcomeSubTitle": "Let’s get you in to WordPrime",

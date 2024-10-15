@@ -63,7 +63,7 @@ class _TasksPageState extends BaseStatefulState<TasksPage> {
       backgroundColor: AppColors.rhino,
       toolbarHeight: AppSizes.toolbarHeight,
       title: Text(
-        'My Tasks ${AppLocaleConstants.EMOJI_HOURGLASS}',
+        '${LocaleKeys.tasksPage_myTasks.locale} ${AppLocaleConstants.EMOJI_HOURGLASS}',
         style: TextStyle(
           color: AppColors.white,
           fontSize: 18,

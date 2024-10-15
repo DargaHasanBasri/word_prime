@@ -27,7 +27,7 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
           child: Image.asset(AppAssets.imgImgGetStartedPath),
         ),
         Text(
-          'Welcome to WordPrime',
+          LocaleKeys.getStartedPage_titleMsg.locale,
           style: TextStyle(
             color: AppColors.mirage,
             fontSize: 28,
@@ -36,9 +36,10 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
           textAlign: TextAlign.center,
         ),
         Padding(
-          padding: AppPaddings.paddingSmallTop,
+          padding: AppPaddings.paddingSmallTop +
+              AppPaddings.appPaddingLargeHorizontal,
           child: Text(
-            'One Lesson at a Time with EduPrime',
+            LocaleKeys.getStartedPage_subTitleMsg.locale,
             style: TextStyle(
               color: AppColors.paleSky,
               fontSize: 16,
@@ -51,7 +52,7 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
           padding: AppPaddings.appPaddingHorizontal +
               AppPaddings.appPaddingLargeVertical,
           child: CustomButton(
-            title: 'GET STARTED',
+            title: LocaleKeys.getStartedPage_title.locale.toUpperCase(),
             onClick: () {
               appRoutes.navigateTo(Routes.Login);
             },

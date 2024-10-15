@@ -27,8 +27,13 @@
   "splashPage": {
     "title": "Kelimelerle dolu bir dünyanın kilidini bizimle açın!"
   },
+  "getStartedPage": {
+    "title": "Başlayın",
+    "titleMsg": "WordPrime'a Hoş Geldiniz",
+    "subTitleMsg": "WordPrime ile her gün kelime dağarcığına artı bir kelime"
+  },
   "loginPage": {
-    "welcomeTitle": "MERHABA! Tekrar hoşgeldiniz",
+    "welcomeTitle": "MERHABA! Tekrar Hoşgeldiniz",
     "welcomeSubTitle": "Sizi WordPrime'a dahil edelim",
     "forgotPassword": "Parolanızı mı unuttunuz?",
     "withApple": "Apple ile devam et",
