@@ -14,7 +14,7 @@ class OnboardingSecond extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Text(
-                'Expand Your Career Opportunity',
+                LocaleKeys.onboardingPage_onboardingSecondTitle.locale,
                 style: TextStyle(
                   color: AppColors.mirage,
                   fontSize: 28,
@@ -27,7 +27,7 @@ class OnboardingSecond extends StatelessWidget {
               padding: AppPaddings.appPaddingLargeHorizontal +
                   AppPaddings.paddingLargeTop,
               child: Text(
-                'Discover a world of opportunities to expand your career horizons and unlock your full potential.',
+                LocaleKeys.onboardingPage_onboardingSecondSubTitle.locale,
                 style: TextStyle(
                   color: AppColors.paleSky,
                   fontSize: 16,
@@ -39,7 +39,7 @@ class OnboardingSecond extends StatelessWidget {
           ],
         ),
         AspectRatio(
-          aspectRatio: 8/10,
+          aspectRatio: 8 / 10,
           child: Container(
             decoration: BoxDecoration(
               image: DecorationImage(

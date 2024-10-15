@@ -25,7 +25,7 @@
   "score": "Score",
   "word": "Word",
   "splashPage": {
-    "title": "Unlock your potential with us!"
+    "title": "Unlock a world full of words with us!"
   },
   "loginPage": {
     "welcomeTitle": "Hi! Welcome Back",
@@ -122,5 +122,11 @@
     "myWords": "My Words",
     "saved": "Saved",
     "favorites": "Favorites"
+  },
+  "onboardingPage": {
+    "onboardingFirstTitle": "Discover new words and expand your vocabulary every day!",
+    "onboardingFirstSubTitle": "Learning English has never been this easy and fun.",
+    "onboardingSecondTitle": "Track your progress and master words at your own pace.",
+    "onboardingSecondSubTitle": "Share your favorite words and sentences, and discover what others are learning too."
   }
 }

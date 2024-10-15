@@ -15,7 +15,7 @@ class OnboardingFirst extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Text(
-                'Various Class Choices In One App',
+                LocaleKeys.onboardingPage_onboardingFirstTitle.locale,
                 style: TextStyle(
                   color: AppColors.mirage,
                   fontSize: 28,
@@ -28,7 +28,7 @@ class OnboardingFirst extends StatelessWidget {
               padding: AppPaddings.appPaddingLargeHorizontal +
                   AppPaddings.paddingLargeTop,
               child: Text(
-                'Explore the best courses online with thousands of classes in design, business, marketing, and many more.',
+                LocaleKeys.onboardingPage_onboardingFirstSubTitle.locale,
                 style: TextStyle(
                   color: AppColors.paleSky,
                   fontSize: 16,
@@ -40,7 +40,7 @@ class OnboardingFirst extends StatelessWidget {
           ],
         ),
         AspectRatio(
-          aspectRatio: 8/10,
+          aspectRatio: 8 / 10,
           child: Container(
             decoration: BoxDecoration(
               image: DecorationImage(

@@ -33,93 +33,96 @@ class _LeaderboardPageState extends BaseStatefulState<LeaderboardPage> {
     return ValueListenableBuilder(
       valueListenable: _vm.timeType,
       builder: (_, __, ___) {
-        return Stack(
-          alignment: Alignment.bottomCenter,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: AppPaddings.appPaddingHorizontal,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  LeaderboardTabBar(
-                    onTapAllTime: () {
-                      _vm.timeType.value = 'allTime';
-                    },
-                    onTapWeekly: () {
-                      _vm.timeType.value = 'weekly';
-                    },
-                    timeType: _vm.timeType.value,
-                  ),
-                  SizedBox(height: AppSizes.sizedBoxLargeHeight),
-                  Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: TopThreeRankings(
-                            profileImgAddress:
-                                AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
-                            userName: AppLocaleConstants.DEFAULT_USER_NAME,
-                            userScore: 12,
-                            rankOrder: 2,
-                            rankHeight: 32,
-                          ),
-                        ),
-                        Expanded(
-                          child: TopThreeRankings(
-                            isFirst: true,
-                            profileImgAddress:
-                                AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
-                            userName: AppLocaleConstants.DEFAULT_USER_NAME,
-                            userScore: 27,
-                            rankOrder: 1,
-                            rankHeight: 8,
-                          ),
-                        ),
-                        Expanded(
-                          child: TopThreeRankings(
-                            profileImgAddress:
-                                AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
-                            userName: AppLocaleConstants.DEFAULT_USER_NAME,
-                            userScore: 8,
-                            rankOrder: 3,
-                            rankHeight: 42,
-                          ),
-                        ),
-                      ],
+            Expanded(
+              child: Padding(
+                padding: AppPaddings.appPaddingHorizontal,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    LeaderboardTabBar(
+                      onTapAllTime: () {
+                        _vm.timeType.value = 'allTime';
+                      },
+                      onTapWeekly: () {
+                        _vm.timeType.value = 'weekly';
+                      },
+                      timeType: _vm.timeType.value,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.45,
-              width: double.infinity,
-              padding: AppPaddings.appPaddingHorizontal,
-              decoration: BoxDecoration(
-                color: AppColors.catskillWhite,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(25),
+                    SizedBox(height: AppSizes.sizedBoxLargeHeight),
+                    Expanded(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: TopThreeRankings(
+                              profileImgAddress:
+                                  AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
+                              userName: AppLocaleConstants.DEFAULT_USER_NAME,
+                              userScore: 12,
+                              rankOrder: 2,
+                              rankHeight: 32,
+                            ),
+                          ),
+                          Expanded(
+                            child: TopThreeRankings(
+                              isFirst: true,
+                              profileImgAddress:
+                                  AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
+                              userName: AppLocaleConstants.DEFAULT_USER_NAME,
+                              userScore: 27,
+                              rankOrder: 1,
+                              rankHeight: 8,
+                            ),
+                          ),
+                          Expanded(
+                            child: TopThreeRankings(
+                              profileImgAddress:
+                                  AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
+                              userName: AppLocaleConstants.DEFAULT_USER_NAME,
+                              userScore: 8,
+                              rankOrder: 3,
+                              rankHeight: 42,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: ListView.separated(
-                  itemCount: 10,
-                  padding: AppPaddings.appPaddingVertical,
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return TopHundredRanking(
-                      rankOrder: index,
-                      profileImgAddress:
-                          AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
-                      userName: AppLocaleConstants.DEFAULT_USER_NAME,
-                      userScore: index,
-                      onTap: () {},
-                    );
-                  },
-                  separatorBuilder: (context, index) => SizedBox(
-                    height: AppSizes.sizedBoxMediumHeight,
+            ),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                padding: AppPaddings.appPaddingHorizontal,
+                decoration: BoxDecoration(
+                  color: AppColors.catskillWhite,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(25),
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: ListView.separated(
+                    itemCount: 10,
+                    padding: AppPaddings.appPaddingVertical,
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return TopHundredRanking(
+                        rankOrder: index,
+                        profileImgAddress:
+                            AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
+                        userName: AppLocaleConstants.DEFAULT_USER_NAME,
+                        userScore: index,
+                        onTap: () {},
+                      );
+                    },
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: AppSizes.sizedBoxMediumHeight,
+                    ),
                   ),
                 ),
               ),
