@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:word_prime/export.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -86,7 +87,7 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
                   isSuffixIcon: true,
                   suffixIconAddress: _vm.isActive.value == true
                       ? AppAssets.icCloseEyePath
-                      : AppAssets.icLockPath,
+                      : AppAssets.icOpenEyePath,
                   textInputAction: TextInputAction.done,
                   onPressSuffixIcon: () {
                     _vm.isActive.value = !_vm.isActive.value;
@@ -111,11 +112,13 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
                     return Padding(
                       padding: AppPaddings.appPaddingVertical,
                       child: CustomButton(
-                        title: LocaleKeys.signUp.locale,
+                        title: LocaleKeys.signUp.locale.toUpperCase(),
                         backgroundColor: _vm.isEmptyInputText()
                             ? AppColors.cornflowerBlue.withOpacity(0.4)
                             : AppColors.cornflowerBlue,
-                        onClick: () {},
+                        onClick: () {
+                          appRoutes.navigateTo(Routes.Login);
+                        },
                       ),
                     );
                   },
@@ -188,6 +191,10 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
               fontWeight: FontWeight.w700,
               color: AppColors.cornflowerBlue,
             ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                appRoutes.navigateTo(Routes.Login);
+              },
           ),
         ],
       ),

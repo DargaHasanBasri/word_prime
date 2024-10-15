@@ -22,6 +22,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.white,
       body: _buildBody(),
     );
@@ -34,123 +35,115 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Padding(
-                      padding: AppPaddings.paddingXLargeTop,
-                      child: _titleSubtitleText(),
-                    ),
-                    ValueListenableBuilder(
-                        valueListenable: _vm.emailInput,
-                        builder: (_, __, ___) {
-                          return Padding(
-                            padding: const EdgeInsets.only(top: 36, bottom: 16),
-                            child: CustomTextFormField(
-                              controller: _emailController,
-                              isPrefixIcon: true,
-                              prefixIconAddress: AppAssets.icSmsPath,
-                              hintText: LocaleKeys.emailHintText.locale,
-                              inputType: TextInputType.emailAddress,
-                              onChanged: (String text) {
-                                _vm.emailInput.value = text;
-                              },
-                            ),
-                          );
-                        }),
-                    ValueListenableBuilder(
-                      valueListenable: _vm.passwordInput,
-                      builder: (_, __, ___) {
-                        return ValueListenableBuilder(
-                          valueListenable: _vm.isActive,
-                          builder: (_, __, ___) {
-                            return CustomTextFormField(
-                              controller: _passwordController,
-                              isPrefixIcon: true,
-                              isSuffixIcon: true,
-                              isHaveObscure: _vm.isActive.value,
-                              prefixIconAddress: AppAssets.icLockPath,
-                              suffixIconAddress: _vm.isActive.value == true
-                                  ? AppAssets.icCloseEyePath
-                                  : AppAssets.icOpenEyePath,
-                              hintText: LocaleKeys.passwordHintText.locale,
-                              textInputAction: TextInputAction.done,
-                              onPressSuffixIcon: () {
-                                _vm.isActive.value = !_vm.isActive.value;
-                              },
-                              onChanged: (String text) {
-                                _vm.passwordInput.value = text;
-                              },
-                            );
-                          },
-                        );
+            Padding(
+              padding: AppPaddings.paddingXLargeTop,
+              child: _titleSubtitleText(),
+            ),
+            ValueListenableBuilder(
+                valueListenable: _vm.emailInput,
+                builder: (_, __, ___) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 36, bottom: 16),
+                    child: CustomTextFormField(
+                      controller: _emailController,
+                      isPrefixIcon: true,
+                      prefixIconAddress: AppAssets.icSmsPath,
+                      hintText: LocaleKeys.emailHintText.locale,
+                      inputType: TextInputType.emailAddress,
+                      onChanged: (String text) {
+                        _vm.emailInput.value = text;
                       },
                     ),
-                    const SizedBox(height: 16),
-                    GestureDetector(
-                      onTap: () => appRoutes.navigateTo(Routes.ForgotPassword),
-                      child: Text(
-                        LocaleKeys.loginPage_forgotPassword.locale,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.cornflowerBlue,
-                        ),
-                        textAlign: TextAlign.end,
-                      ),
-                    ),
-                    ValueListenableBuilder(
-                      valueListenable: _vm.emailInput,
-                      builder: (_, __, ___) {
-                        return ValueListenableBuilder(
-                          valueListenable: _vm.passwordInput,
-                          builder: (_, __, ___) {
-                            return Padding(
-                              padding: AppPaddings.appPaddingVertical,
-                              child: CustomButton(
-                                title: LocaleKeys.signIn.locale,
-                                backgroundColor: _vm.isEmptyInputText()
-                                    ? AppColors.cornflowerBlue.withOpacity(0.4)
-                                    : AppColors.cornflowerBlue,
-                                onClick: () {
-                                  appRoutes.navigateRemoveUntil(Routes.MainTab);
-                                },
-                              ),
-                            );
-                          },
-                        );
+                  );
+                }),
+            ValueListenableBuilder(
+              valueListenable: _vm.passwordInput,
+              builder: (_, __, ___) {
+                return ValueListenableBuilder(
+                  valueListenable: _vm.isActive,
+                  builder: (_, __, ___) {
+                    return CustomTextFormField(
+                      controller: _passwordController,
+                      isPrefixIcon: true,
+                      isSuffixIcon: true,
+                      isHaveObscure: _vm.isActive.value,
+                      prefixIconAddress: AppAssets.icLockPath,
+                      suffixIconAddress: _vm.isActive.value == true
+                          ? AppAssets.icCloseEyePath
+                          : AppAssets.icOpenEyePath,
+                      hintText: LocaleKeys.passwordHintText.locale,
+                      textInputAction: TextInputAction.done,
+                      onPressSuffixIcon: () {
+                        _vm.isActive.value = !_vm.isActive.value;
                       },
-                    ),
-                    const OrTextContainer(),
-                    Padding(
-                      padding: AppPaddings.paddingMediumVertical,
-                      child: CustomButton(
-                        title: LocaleKeys.loginPage_withApple.locale,
-                        titleColor: AppColors.mirage,
-                        backgroundColor: AppColors.white,
-                        borderColor: AppColors.softPeach,
-                        borderRadius: 12,
-                        isIcon: true,
-                        iconLogoAddress: AppAssets.icApplePath,
-                        onClick: () {},
-                      ),
-                    ),
-                    CustomButton(
-                      title: LocaleKeys.loginPage_withGoogle.locale,
-                      titleColor: AppColors.mirage,
-                      backgroundColor: AppColors.white,
-                      borderColor: AppColors.softPeach,
-                      borderRadius: 12,
-                      isIcon: true,
-                      iconLogoAddress: AppAssets.icGooglePath,
-                      onClick: () {},
-                    ),
-                  ],
+                      onChanged: (String text) {
+                        _vm.passwordInput.value = text;
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            GestureDetector(
+              onTap: () => appRoutes.navigateTo(Routes.ForgotPassword),
+              child: Text(
+                LocaleKeys.loginPage_forgotPassword.locale,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.cornflowerBlue,
                 ),
+                textAlign: TextAlign.end,
               ),
             ),
+            ValueListenableBuilder(
+              valueListenable: _vm.emailInput,
+              builder: (_, __, ___) {
+                return ValueListenableBuilder(
+                  valueListenable: _vm.passwordInput,
+                  builder: (_, __, ___) {
+                    return Padding(
+                      padding: AppPaddings.appPaddingVertical,
+                      child: CustomButton(
+                        title: LocaleKeys.signIn.locale.toUpperCase(),
+                        backgroundColor: _vm.isEmptyInputText()
+                            ? AppColors.cornflowerBlue.withOpacity(0.4)
+                            : AppColors.cornflowerBlue,
+                        onClick: () {
+                          appRoutes.navigateRemoveUntil(Routes.MainTab);
+                        },
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+            const OrTextContainer(),
+            Padding(
+              padding: AppPaddings.paddingMediumVertical,
+              child: CustomButton(
+                title: LocaleKeys.loginPage_withApple.locale,
+                titleColor: AppColors.mirage,
+                backgroundColor: AppColors.white,
+                borderColor: AppColors.softPeach,
+                borderRadius: 12,
+                isIcon: true,
+                iconLogoAddress: AppAssets.icApplePath,
+                onClick: () {},
+              ),
+            ),
+            CustomButton(
+              title: LocaleKeys.loginPage_withGoogle.locale,
+              titleColor: AppColors.mirage,
+              backgroundColor: AppColors.white,
+              borderColor: AppColors.softPeach,
+              borderRadius: 12,
+              isIcon: true,
+              iconLogoAddress: AppAssets.icGooglePath,
+              onClick: () {},
+            ),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: Center(

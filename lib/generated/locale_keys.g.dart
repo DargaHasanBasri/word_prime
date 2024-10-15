@@ -28,6 +28,10 @@ abstract class  LocaleKeys {
   static const word = 'word';
   static const splashPage_title = 'splashPage.title';
   static const splashPage = 'splashPage';
+  static const getStartedPage_title = 'getStartedPage.title';
+  static const getStartedPage_titleMsg = 'getStartedPage.titleMsg';
+  static const getStartedPage_subTitleMsg = 'getStartedPage.subTitleMsg';
+  static const getStartedPage = 'getStartedPage';
   static const loginPage_welcomeTitle = 'loginPage.welcomeTitle';
   static const loginPage_welcomeSubTitle = 'loginPage.welcomeSubTitle';
   static const loginPage_forgotPassword = 'loginPage.forgotPassword';

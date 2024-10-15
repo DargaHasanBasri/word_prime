@@ -109,21 +109,6 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
             ],
           ),
         ),
-        const Spacer(),
-        Image.asset(
-          AppAssets.appLogoPath,
-          height: 40,
-          width: 40,
-        ),
-        SizedBox(height: 10),
-        Text(
-          LocaleKeys.appTitle.locale,
-          style: TextStyle(
-            fontSize: 16,
-            color: AppColors.mirage,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
       ],
     );
   }
