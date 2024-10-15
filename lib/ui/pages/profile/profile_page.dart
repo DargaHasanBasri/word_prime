@@ -87,6 +87,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                   detailCount: 12,
                   detailIcon: AppAssets.appLogoPath,
                   detailColor: AppColors.cornflowerBlue,
+                  onTap: () {},
                 ),
                 SizedBox(height: AppSizes.sizedBoxMediumHeight),
                 ProfileDetailContainer(
@@ -94,6 +95,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                   detailCount: 50,
                   detailIcon: AppAssets.appLogoPath,
                   detailColor: AppColors.goldenDream,
+                  onTap: () {},
                 ),
               ],
             ),
@@ -107,6 +109,12 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                   detailCount: 98,
                   detailIcon: AppAssets.appLogoPath,
                   detailColor: AppColors.greenishTeal,
+                  onTap: () {
+                    appRoutes.navigateTo(
+                      Routes.FollowerFollow,
+                      arguments: true,
+                    );
+                  },
                 ),
                 SizedBox(height: AppSizes.sizedBoxMediumHeight),
                 ProfileDetailContainer(
@@ -114,6 +122,12 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                   detailCount: 5,
                   detailIcon: AppAssets.appLogoPath,
                   detailColor: AppColors.metallicBlue,
+                  onTap: () {
+                    appRoutes.navigateTo(
+                      Routes.FollowerFollow,
+                      arguments: false,
+                    );
+                  },
                 ),
               ],
             ),
