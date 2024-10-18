@@ -4,6 +4,7 @@ final class AppLocaleConstants {
   AppLocaleConstants._();
 
   static const APP_NAME = 'Word Prime';
+  static const MAX_SECONDS = 10;
 
   static const TR_LOCALE = Locale('tr', 'TR');
   static const EN_LOCALE = Locale('en', 'US');

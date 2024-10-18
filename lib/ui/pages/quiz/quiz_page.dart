@@ -1,5 +1,6 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/quiz/components/answer_options.dart';
+import 'package:word_prime/ui/widgets/custom_timer_progress_indicator.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
@@ -14,6 +15,7 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
   @override
   void initState() {
     _vm = Provider.of<QuizViewModel>(context, listen: false);
+    _vm.startTimer();
     super.initState();
   }
 
@@ -42,8 +44,14 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
           options: ['APPLE', 'BANANA', 'CHERRY'],
           correctOption: _vm.correctOption,
           selectedOption: _vm.selectedOption,
-          onCorrectAnswer: () => debugPrint('test true answer'),
-          onIncorrectAnswer: () => debugPrint('test false answer'),
+          onCorrectAnswer: () {
+            debugPrint('test true answer');
+            _vm.stopTimer(reset: false);
+          },
+          onIncorrectAnswer: () {
+            debugPrint('test false answer');
+            _vm.stopTimer(reset: false);
+          },
         ),
       ],
     );
@@ -98,7 +106,34 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
       backgroundColor: AppColors.rhino,
       toolbarHeight: AppSizes.toolbarHeight,
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(50),
+              splashColor: AppColors.white.withOpacity(0.1),
+              onTap: () {},
+              child: Ink(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(
+                    color: AppColors.white.withOpacity(0.30),
+                    width: 3,
+                  ),
+                ),
+                child: Image.asset(
+                  AppAssets.icClosePath,
+                  width: 12,
+                  height: 12,
+                ),
+              ),
+            ),
+          ),
+          CustomTimerProgressIndicator(
+            time: _vm.seconds,
+          ),
           Material(
             color: Colors.transparent,
             child: InkWell(
