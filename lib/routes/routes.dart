@@ -21,6 +21,7 @@ final class Routes {
   static const String LeaderBoard = 'leaderBoardProvider';
   static const String Profile = 'profileProvider';
   static const String FollowerFollow = 'followerFollowProvider';
+  static const String Quiz = 'quizProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -108,6 +109,10 @@ final class Routes {
           builder: (context) => FollowerFollowProvider(
             isFollow: isFollow,
           ),
+        );
+      case Routes.Quiz:
+        return MaterialPageRoute(
+          builder: (context) => const QuizProvider(),
         );
       default:
         return MaterialPageRoute(
