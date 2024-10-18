@@ -76,3 +76,6 @@ export 'package:word_prime/ui/pages/get_started/get_started_provider.dart';
 export 'package:word_prime/ui/pages/follower_follow/follower_follow_page.dart';
 export 'package:word_prime/ui/pages/follower_follow/follower_follow_view_model.dart';
 export 'package:word_prime/ui/pages/follower_follow/follower_follow_provider.dart';
+export 'package:word_prime/ui/pages/quiz/quiz_provider.dart';
+export 'package:word_prime/ui/pages/quiz/quiz_page.dart';
+export 'package:word_prime/ui/pages/quiz/quiz_view_model.dart';

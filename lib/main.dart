@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: locator<AppRoutes>().baseNavigatorKey,
       onGenerateRoute: Routes.generateRoute,
-      initialRoute: Routes.Splash,
+      initialRoute: Routes.Quiz,
       builder: (context, widget) {
         return widget!;
       },
