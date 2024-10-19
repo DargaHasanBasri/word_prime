@@ -43,7 +43,11 @@ class AnswerOptions extends StatelessWidget {
                       borderRadius: BorderRadius.circular(100),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.iron,
+                          color: isSelected
+                              ? isCorrect
+                                  ? AppColors.greenishTeal
+                                  : AppColors.artyClickRed
+                              : AppColors.iron,
                           offset: Offset(0, 6),
                         ),
                       ],
@@ -69,7 +73,8 @@ class AnswerOptions extends StatelessWidget {
                       child: Text(
                         option,
                         style: TextStyle(
-                          color: AppColors.mirage,
+                          color:
+                              isSelected ? AppColors.white : AppColors.mirage,
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),

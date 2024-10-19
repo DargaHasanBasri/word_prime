@@ -14,7 +14,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
       builder: (context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(8),
           ),
           insetPadding: EdgeInsets.symmetric(horizontal: 24),
           elevation: 0,

@@ -1,5 +1,6 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/quiz/components/answer_options.dart';
+import 'package:word_prime/ui/widgets/custom_app_popup.dart';
 import 'package:word_prime/ui/widgets/custom_timer_progress_indicator.dart';
 
 class QuizPage extends StatefulWidget {
@@ -105,56 +106,101 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
     return AppBar(
       backgroundColor: AppColors.rhino,
       toolbarHeight: AppSizes.toolbarHeight,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      automaticallyImplyLeading: false,
+      title: Stack(
         children: [
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(50),
-              splashColor: AppColors.white.withOpacity(0.1),
-              onTap: () {},
-              child: Ink(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(
-                    color: AppColors.white.withOpacity(0.30),
-                    width: 3,
-                  ),
-                ),
-                child: Image.asset(
-                  AppAssets.icClosePath,
-                  width: 12,
-                  height: 12,
-                ),
-              ),
+          _exitButton(),
+          Center(
+            child: CustomTimerProgressIndicator(
+              time: _vm.seconds,
             ),
           ),
-          CustomTimerProgressIndicator(
-            time: _vm.seconds,
+          Align(
+            alignment: Alignment.topRight,
+            child: _scoreBoard(),
           ),
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(50),
-              splashColor: AppColors.white.withOpacity(0.1),
-              onTap: () {},
-              child: Ink(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(
-                    color: AppColors.white.withOpacity(0.30),
-                    width: 3,
-                  ),
-                ),
-                child: Image.asset(
-                  AppAssets.icClosePath,
-                  width: 12,
-                  height: 12,
-                ),
+        ],
+      ),
+    );
+  }
+
+  Widget _exitButton() {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(50),
+        splashColor: AppColors.white.withOpacity(0.1),
+        onTap: () {
+          _vm.stopTimer(reset: false);
+          showPopupDialog(
+            context: context,
+            child: Padding(
+              padding: AppPaddings.appPaddingHorizontal,
+              child: CustomAppPopup(
+                title: 'Gönderiniz silinsin mi?',
+                subTitle: 'Silmek istediğinizden emin misiniz?',
+                onTapCancelButton: () {
+                  appRoutes.popIfBackStackNotEmpty();
+                  _vm.startTimer();
+                },
+                onTapConfirmButton: () {
+                  appRoutes.popPages(2);
+                },
               ),
+            ),
+          );
+        },
+        child: Ink(
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+            border: Border.all(
+              color: AppColors.white.withOpacity(0.30),
+              width: 3,
+            ),
+          ),
+          child: Image.asset(
+            AppAssets.icClosePath,
+            width: 12,
+            height: 12,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _scoreBoard() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 2) +
+          EdgeInsets.only(right: 2, left: 8),
+      decoration: ShapeDecoration(
+        shape: StadiumBorder(side: BorderSide.none),
+        color: AppColors.white,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            '12',
+            style: TextStyle(
+              color: AppColors.mirage,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          SizedBox(width: 4),
+          Container(
+            padding: EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              color: AppColors.pastelBlue,
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: Image.asset(
+              AppAssets.icScorePath,
+              width: 24,
+              height: 24,
             ),
           ),
         ],

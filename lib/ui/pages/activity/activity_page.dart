@@ -9,7 +9,7 @@ class ActivityPage extends StatefulWidget {
   State<ActivityPage> createState() => _ActivityPageState();
 }
 
-class _ActivityPageState extends State<ActivityPage> {
+class _ActivityPageState extends BaseStatefulState<ActivityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +39,9 @@ class _ActivityPageState extends State<ActivityPage> {
                 title: LocaleKeys.activityPage_addedWordsQuiz.locale,
                 chapterCount: 10,
                 isZeroChapterCount: false,
-                onTapStart: () {},
+                onTapStart: () {
+                  appRoutes.navigateTo(Routes.Quiz);
+                },
               ),
             ),
             SizedBox(width: 16),
