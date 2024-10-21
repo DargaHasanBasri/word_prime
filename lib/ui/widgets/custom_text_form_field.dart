@@ -63,13 +63,11 @@ class CustomTextFormField extends StatelessWidget {
           keyboardType: inputType,
           textInputAction: textInputAction,
           onChanged: _onChanged,
-          style: TextStyle(
-            decoration: TextDecoration.none,
-            decorationThickness: 0,
-            color: AppColors.mirage,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                decoration: TextDecoration.none,
+                decorationThickness: 0,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
           decoration: InputDecoration(
             prefixIcon: isPrefixIcon
                 ? Image.asset(
@@ -89,11 +87,10 @@ class CustomTextFormField extends StatelessWidget {
                   )
                 : null,
             hintText: hintText,
-            hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: hintTextColor ?? AppColors.santaGrey,
-            ),
+            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color:
+                      hintTextColor ?? Theme.of(context).colorScheme.onTertiary,
+                ),
             filled: true,
             fillColor: textFieldBgColor,
             contentPadding: const EdgeInsets.symmetric(
@@ -103,14 +100,14 @@ class CustomTextFormField extends StatelessWidget {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(borderRadius),
               borderSide: BorderSide(
-                color: AppColors.softPeach,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
                 width: 1,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(borderRadius),
               borderSide: BorderSide(
-                color: AppColors.softPeach,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
                 width: 1,
               ),
             ),

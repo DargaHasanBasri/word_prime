@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:word_prime/export.dart';
 
 class GetStartedPage extends StatefulWidget {
@@ -12,7 +11,6 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       appBar: _buildAppBar(),
       body: _buildBody(),
     );
@@ -28,11 +26,7 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
         ),
         Text(
           LocaleKeys.getStartedPage_titleMsg.locale,
-          style: TextStyle(
-            color: AppColors.mirage,
-            fontSize: 28,
-            fontWeight: FontWeight.w700,
-          ),
+          style: Theme.of(context).textTheme.headlineLarge,
           textAlign: TextAlign.center,
         ),
         Padding(
@@ -40,11 +34,7 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
               AppPaddings.appPaddingLargeHorizontal,
           child: Text(
             LocaleKeys.getStartedPage_subTitleMsg.locale,
-            style: TextStyle(
-              color: AppColors.paleSky,
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-            ),
+            style: Theme.of(context).textTheme.titleSmall,
             textAlign: TextAlign.center,
           ),
         ),
@@ -73,19 +63,14 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
     return RichText(
       text: TextSpan(
         text: LocaleKeys.registerPage_isSignInMsg.locale,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: AppColors.mirage,
-        ),
+        style: Theme.of(context).textTheme.titleMedium,
         children: <TextSpan>[
           TextSpan(
             text: ' ${LocaleKeys.signIn.locale}',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: AppColors.cornflowerBlue,
-            ),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: AppColors.cornflowerBlue,
+                  fontWeight: FontWeight.w700,
+                ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
                 appRoutes.navigateTo(Routes.Login);
@@ -98,8 +83,6 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.white,
-      toolbarHeight: AppSizes.toolbarHeight,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

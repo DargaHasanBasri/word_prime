@@ -8,7 +8,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends BaseStatefulState<SplashPage> {
-
   @override
   void initState() {
     waitAndNavigate(context);
@@ -18,7 +17,7 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.cornflowerBlue,
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
       body: _buildBody(),
     );
   }
@@ -29,30 +28,27 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: 60,
-            backgroundColor: AppColors.white,
+            radius: AppSizes.appLogoRadius,
+            backgroundColor: Theme.of(context).colorScheme.surfaceTint,
             child: Image.asset(
               AppAssets.appLogoPath,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 24, bottom: 10),
+            padding:
+                AppPaddings.paddingLargeTop + AppPaddings.paddingSmallBottom,
             child: Text(
               LocaleKeys.appTitle.locale,
-              style: TextStyle(
-                fontSize: 24,
-                color: AppColors.white,
-                fontWeight: FontWeight.w700,
-              ),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: AppColors.white, fontWeight: FontWeight.w700),
             ),
           ),
           Text(
             LocaleKeys.splashPage_title.locale,
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.white,
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(color: AppColors.white),
           ),
         ],
       ),

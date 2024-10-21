@@ -1,7 +1,6 @@
 import 'package:word_prime/export.dart';
+import 'package:word_prime/ui/pages/onboarding/components/onboarding_first.dart';
 import 'package:word_prime/ui/pages/onboarding/components/onboarding_second.dart';
-
-import 'components/onboarding_first.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -24,7 +23,6 @@ class _OnboardingPageState extends BaseStatefulState<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       appBar: _buildAppBar(),
       body: _buildBody(),
     );
@@ -83,8 +81,6 @@ class _OnboardingPageState extends BaseStatefulState<OnboardingPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.white,
-      toolbarHeight: AppSizes.toolbarHeight,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -96,11 +92,10 @@ class _OnboardingPageState extends BaseStatefulState<OnboardingPage> {
           SizedBox(width: AppSizes.sizedBoxMediumWidth),
           Text(
             LocaleKeys.appTitle.locale,
-            style: TextStyle(
-              color: AppColors.cornflowerBlue,
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: AppColors.cornflowerBlue,
+                  fontWeight: FontWeight.w700,
+                ),
           ),
         ],
       ),

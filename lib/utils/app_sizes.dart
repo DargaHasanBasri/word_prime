@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 final class AppSizes {
   AppSizes._();
 
+  static const double appLogoRadius = 60.0;
   static const double toolbarHeight = 80.0;
   static const double bottomNavigationBarHeight = kBottomNavigationBarHeight;
 

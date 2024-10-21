@@ -11,7 +11,7 @@ class OrTextContainer extends StatelessWidget {
           child: Container(
             height: 2,
             decoration: BoxDecoration(
-              color: AppColors.softPeach,
+              color: Theme.of(context).colorScheme.onTertiary,
               borderRadius: BorderRadius.circular(6),
             ),
           ),
@@ -20,18 +20,16 @@ class OrTextContainer extends StatelessWidget {
           padding: AppPaddings.paddingMediumHorizontal,
           child: Text(
             LocaleKeys.or.locale,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: AppColors.santaGrey,
-            ),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onTertiary,
+                ),
           ),
         ),
         Expanded(
           child: Container(
             height: 2,
             decoration: BoxDecoration(
-              color: AppColors.softPeach,
+              color: Theme.of(context).colorScheme.onTertiary,
               borderRadius: BorderRadius.circular(6),
             ),
           ),

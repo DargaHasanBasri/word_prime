@@ -12,14 +12,10 @@ class OnboardingSecond extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: AppPaddings.appPaddingXLargeHorizontal,
               child: Text(
                 LocaleKeys.onboardingPage_onboardingSecondTitle.locale,
-                style: TextStyle(
-                  color: AppColors.mirage,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: Theme.of(context).textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -28,11 +24,7 @@ class OnboardingSecond extends StatelessWidget {
                   AppPaddings.paddingLargeTop,
               child: Text(
                 LocaleKeys.onboardingPage_onboardingSecondSubTitle.locale,
-                style: TextStyle(
-                  color: AppColors.paleSky,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: Theme.of(context).textTheme.titleSmall,
                 textAlign: TextAlign.center,
               ),
             ),

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:word_prime/utils/app_colors.dart';
+import 'package:word_prime/export.dart';
 
 class CustomButton extends StatelessWidget {
   CustomButton({
@@ -56,11 +55,11 @@ class CustomButton extends StatelessWidget {
                   ? Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 16),
+                          padding: AppPaddings.paddingMediumLeft,
                           child: Image.asset(
                             iconLogoAddress,
-                            width: 24,
-                            height: 24,
+                            width: AppSizes.appOverallIconWidth,
+                            height: AppSizes.appOverallIconHeight,
                           ),
                         ),
                         Expanded(
@@ -68,12 +67,13 @@ class CustomButton extends StatelessWidget {
                             padding: const EdgeInsets.only(right: 40),
                             child: Text(
                               title,
-                              style: TextStyle(
-                                color: titleColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                    color: titleColor,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -82,12 +82,10 @@ class CustomButton extends StatelessWidget {
                     )
                   : Text(
                       title,
-                      style: TextStyle(
-                        color: titleColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: titleColor,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                       textAlign: TextAlign.center,
                     ),
             ),

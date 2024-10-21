@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:word_prime/export.dart';
 
 class LoginPage extends StatefulWidget {
@@ -23,7 +22,6 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.white,
       body: _buildBody(),
     );
   }
@@ -89,11 +87,10 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
               onTap: () => appRoutes.navigateTo(Routes.ForgotPassword),
               child: Text(
                 LocaleKeys.loginPage_forgotPassword.locale,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.cornflowerBlue,
-                ),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: AppColors.cornflowerBlue,
+                      fontWeight: FontWeight.w700,
+                    ),
                 textAlign: TextAlign.end,
               ),
             ),
@@ -123,10 +120,10 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
             Padding(
               padding: AppPaddings.paddingMediumVertical,
               child: CustomButton(
-                title: LocaleKeys.loginPage_withApple.locale,
-                titleColor: AppColors.mirage,
-                backgroundColor: AppColors.white,
-                borderColor: AppColors.softPeach,
+                title: LocaleKeys.loginPage_withApple.locale.toUpperCase(),
+                titleColor: Theme.of(context).colorScheme.secondary,
+                backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+                borderColor: Theme.of(context).colorScheme.onPrimaryContainer,
                 borderRadius: 12,
                 isIcon: true,
                 iconLogoAddress: AppAssets.icApplePath,
@@ -134,10 +131,10 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
               ),
             ),
             CustomButton(
-              title: LocaleKeys.loginPage_withGoogle.locale,
-              titleColor: AppColors.mirage,
-              backgroundColor: AppColors.white,
-              borderColor: AppColors.softPeach,
+              title: LocaleKeys.loginPage_withGoogle.locale.toUpperCase(),
+              titleColor: Theme.of(context).colorScheme.secondary,
+              backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+              borderColor: Theme.of(context).colorScheme.onPrimaryContainer,
               borderRadius: 12,
               isIcon: true,
               iconLogoAddress: AppAssets.icGooglePath,
@@ -145,7 +142,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
             ),
             const Spacer(),
             Padding(
-              padding: const EdgeInsets.only(bottom: 20),
+              padding: AppPaddings.paddingLargeBottom,
               child: Center(
                 child: _richTextSignUp(),
               ),
@@ -161,23 +158,15 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 8),
+          padding: AppPaddings.paddingSmallBottom,
           child: Text(
             LocaleKeys.loginPage_welcomeTitle.locale,
-            style: TextStyle(
-              color: AppColors.mirage,
-              fontSize: 28,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
         ),
         Text(
           LocaleKeys.loginPage_welcomeSubTitle.locale,
-          style: TextStyle(
-            color: AppColors.paleSky,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       ],
     );
@@ -187,19 +176,13 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
     return RichText(
       text: TextSpan(
         text: LocaleKeys.loginPage_isSignUpMsg.locale,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: AppColors.mirage,
-        ),
+        style: Theme.of(context).textTheme.titleMedium,
         children: <TextSpan>[
           TextSpan(
             text: ' ${LocaleKeys.signUp.locale}',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: AppColors.cornflowerBlue,
-            ),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: AppColors.cornflowerBlue,
+                ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
                 appRoutes.navigateTo(Routes.Register);

@@ -11,6 +11,7 @@ final class AppPaddings {
   static const paddingSmallVertical = EdgeInsets.symmetric(vertical: 8);
   static const paddingXSmallVertical = EdgeInsets.symmetric(vertical: 4);
 
+  static const appPaddingXLargeHorizontal = EdgeInsets.symmetric(horizontal: 40);
   static const appPaddingLargeHorizontal = EdgeInsets.symmetric(horizontal: 32);
   static const appPaddingHorizontal = EdgeInsets.symmetric(horizontal: 24);
   static const paddingMediumHorizontal = EdgeInsets.symmetric(horizontal: 16);

@@ -13,7 +13,6 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       extendBody: true,
       appBar: _buildAppBar(),
       body: SingleChildScrollView(
