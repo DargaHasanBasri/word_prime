@@ -20,7 +20,6 @@ class _ForgotPasswordPageState extends BaseStatefulState<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       appBar: _buildAppBar(),
       body: Padding(
         padding: AppPaddings.appPaddingHorizontal,
@@ -74,20 +73,12 @@ class _ForgotPasswordPageState extends BaseStatefulState<ForgotPasswordPage> {
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
             LocaleKeys.forgotPassword_forgotTitle.locale,
-            style: TextStyle(
-              color: AppColors.mirage,
-              fontSize: 28,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
         ),
         Text(
           LocaleKeys.forgotPassword_forgotSubTitle.locale,
-          style: TextStyle(
-            color: AppColors.paleSky,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       ],
     );
@@ -95,13 +86,13 @@ class _ForgotPasswordPageState extends BaseStatefulState<ForgotPasswordPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.white,
-      elevation: 0,
       leading: IconButton(
         onPressed: () => appRoutes.popIfBackStackNotEmpty(),
-        color: AppColors.mirage,
-        icon: Icon(
-          Icons.arrow_back_ios,
+        icon: Image.asset(
+          AppAssets.icArrowBackLeftPath,
+          color: Theme.of(context).colorScheme.secondary,
+          width: AppSizes.appOverallIconWidth,
+          height: AppSizes.appOverallIconHeight,
         ),
       ),
     );

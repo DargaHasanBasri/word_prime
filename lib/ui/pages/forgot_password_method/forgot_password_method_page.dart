@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/forgot_password_method/components/method_email.dart';
 import 'package:word_prime/ui/pages/forgot_password_method/components/method_name.dart';
@@ -28,7 +27,6 @@ class _ForgotPasswordMethodPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       appBar: _buildAppBar(),
       body: Padding(
         padding: AppPaddings.appPaddingHorizontal,
@@ -63,13 +61,13 @@ class _ForgotPasswordMethodPageState
                   _vm.whichTabBar.value ==
                           AppLocaleConstants.FORGOT_METHOD_EMAIL
                       ? Padding(
-                          padding: const EdgeInsets.only(top: 32),
+                          padding: AppPaddings.paddingXLargeTop,
                           child: MethodEmail(
                             emailController: _emailController,
                           ),
                         )
                       : Padding(
-                          padding: const EdgeInsets.only(top: 32),
+                          padding: AppPaddings.paddingXLargeTop,
                           child: MethodName(
                             nameController: _nameController,
                           ),
@@ -89,7 +87,7 @@ class _ForgotPasswordMethodPageState
         Center(
           child: _richTextSignUp(),
         ),
-        SizedBox(height: 20),
+        SizedBox(height: AppSizes.appOverallIconHeight),
       ],
     );
   }
@@ -98,19 +96,14 @@ class _ForgotPasswordMethodPageState
     return RichText(
       text: TextSpan(
         text: LocaleKeys.loginPage_isSignUpMsg.locale,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: AppColors.mirage,
-        ),
+        style: Theme.of(context).textTheme.titleMedium,
         children: <TextSpan>[
           TextSpan(
             text: ' ${LocaleKeys.signUp.locale}',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: AppColors.cornflowerBlue,
-            ),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: AppColors.cornflowerBlue,
+                  fontWeight: FontWeight.w700,
+                ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
                 appRoutes.navigateTo(Routes.Register);
@@ -123,13 +116,13 @@ class _ForgotPasswordMethodPageState
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.white,
-      elevation: 0,
       leading: IconButton(
         onPressed: () => appRoutes.popIfBackStackNotEmpty(),
-        color: AppColors.mirage,
-        icon: Icon(
-          Icons.arrow_back_ios,
+        icon: Image.asset(
+          AppAssets.icArrowBackLeftPath,
+          color: Theme.of(context).colorScheme.secondary,
+          width: AppSizes.appOverallIconWidth,
+          height: AppSizes.appOverallIconHeight,
         ),
       ),
     );

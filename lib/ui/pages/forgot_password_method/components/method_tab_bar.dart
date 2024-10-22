@@ -14,10 +14,10 @@ class MethodTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(6),
+      padding: EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: AppColors.alabaster,
-        borderRadius: BorderRadius.circular(6),
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
@@ -25,10 +25,11 @@ class MethodTabBar extends StatelessWidget {
             child: GestureDetector(
               onTap: () => onTapEmailBar.call(),
               child: Container(
-                decoration: whichMethod == AppLocaleConstants.FORGOT_METHOD_EMAIL
+                decoration: whichMethod ==
+                        AppLocaleConstants.FORGOT_METHOD_EMAIL
                     ? BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(6),
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(8),
                         boxShadow: [
                           BoxShadow(
                             color: AppColors.mirage.withOpacity(0.04),
@@ -38,19 +39,19 @@ class MethodTabBar extends StatelessWidget {
                         ],
                       )
                     : BoxDecoration(
-                        color: AppColors.alabaster,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                       ),
                 padding: EdgeInsets.symmetric(vertical: 8),
                 alignment: Alignment.center,
                 child: Text(
                   LocaleKeys.forgotPassword_email.locale,
-                  style: TextStyle(
-                    color: whichMethod == AppLocaleConstants.FORGOT_METHOD_EMAIL
-                        ? AppColors.mirage
-                        : AppColors.santaGrey,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: whichMethod ==
+                                AppLocaleConstants.FORGOT_METHOD_EMAIL
+                            ? Theme.of(context).colorScheme.secondary
+                            : AppColors.santaGrey,
+                      ),
                 ),
               ),
             ),
@@ -61,7 +62,7 @@ class MethodTabBar extends StatelessWidget {
               child: Container(
                 decoration: whichMethod == AppLocaleConstants.FORGOT_METHOD_NAME
                     ? BoxDecoration(
-                        color: AppColors.white,
+                        color: Theme.of(context).colorScheme.primaryContainer,
                         borderRadius: BorderRadius.circular(6),
                         boxShadow: [
                           BoxShadow(
@@ -72,19 +73,19 @@ class MethodTabBar extends StatelessWidget {
                         ],
                       )
                     : BoxDecoration(
-                        color: AppColors.alabaster,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                       ),
                 padding: EdgeInsets.symmetric(vertical: 8),
                 alignment: Alignment.center,
                 child: Text(
                   LocaleKeys.forgotPassword_name.locale,
-                  style: TextStyle(
-                    color: whichMethod == AppLocaleConstants.FORGOT_METHOD_NAME
-                        ? AppColors.mirage
-                        : AppColors.santaGrey,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color:
+                            whichMethod == AppLocaleConstants.FORGOT_METHOD_NAME
+                                ? Theme.of(context).colorScheme.secondary
+                                : AppColors.santaGrey,
+                      ),
                 ),
               ),
             ),

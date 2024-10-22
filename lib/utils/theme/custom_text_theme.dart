@@ -113,34 +113,34 @@ final class CustomTextTheme {
     bodyLarge: TextStyle().copyWith(
       fontSize: 14,
       fontWeight: FontWeight.w700,
-      color: AppColors.mirage,
+      color: AppColors.white,
     ),
     bodyMedium: TextStyle().copyWith(
       fontSize: 14,
       fontWeight: FontWeight.w600,
-      color: AppColors.mirage,
+      color: AppColors.white,
     ),
     bodySmall: TextStyle().copyWith(
       fontSize: 14,
       fontWeight: FontWeight.w500,
-      color: AppColors.mirage,
+      color: AppColors.white,
     ),
 
     /// label dark
     labelLarge: TextStyle().copyWith(
       fontSize: 12,
       fontWeight: FontWeight.w600,
-      color: AppColors.mirage,
+      color: AppColors.white,
     ),
     labelMedium: TextStyle().copyWith(
       fontSize: 12,
       fontWeight: FontWeight.w500,
-      color: AppColors.mirage,
+      color: AppColors.white,
     ),
     labelSmall: TextStyle().copyWith(
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      color: AppColors.mirage,
+      color: AppColors.white,
     ),
   );
 }

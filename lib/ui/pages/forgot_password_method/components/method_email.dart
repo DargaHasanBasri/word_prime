@@ -14,22 +14,15 @@ class MethodEmail extends StatelessWidget {
       children: [
         Text(
           LocaleKeys.forgotPassword_enterMailHintText.locale,
-          style: TextStyle(
-            color: AppColors.mirage,
-            fontSize: 24,
-            fontWeight: FontWeight.w700,
-          ),
+          style:
+              Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize: 24),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: AppSizes.sizedBoxSmallHeight),
         Text(
           LocaleKeys.forgotPassword_forgotMethodEmailMsg.locale,
-          style: TextStyle(
-            color: AppColors.paleSky,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
-        SizedBox(height: 40),
+        SizedBox(height: AppSizes.sizedBoxLargeHeight),
         CustomTextFormField(
           controller: emailController,
           hintText: LocaleKeys.emailHintText.locale,

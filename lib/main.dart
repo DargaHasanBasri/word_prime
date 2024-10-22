@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       darkTheme: CustomAppTheme.darkTheme,
       navigatorKey: locator<AppRoutes>().baseNavigatorKey,
       onGenerateRoute: Routes.generateRoute,
-      initialRoute: Routes.Login,
+      initialRoute: Routes.Splash,
       builder: (context, widget) {
         return widget!;
       },

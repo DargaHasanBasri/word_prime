@@ -20,18 +20,22 @@ class PasswordResetMethod extends StatelessWidget {
       child: Container(
         padding: AppPaddings.paddingMediumAll,
         decoration: BoxDecoration(
-          color: AppColors.alabaster,
+          color: Theme.of(context).colorScheme.surfaceContainer,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.softPeach),
+          border: Border.all(
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
+          ),
         ),
         child: Row(
           children: [
             Container(
               padding: AppPaddings.paddingSmallAll,
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: Theme.of(context).colorScheme.surfaceTint,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppColors.softPeach),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
               ),
               child: Image.asset(
                 iconAddress,
@@ -45,28 +49,22 @@ class PasswordResetMethod extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(
-                    color: AppColors.mirage,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(
                   subTitle,
-                  style: TextStyle(
-                    color: AppColors.paleSky,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
                 ),
               ],
             ),
             const Spacer(),
             Image.asset(
               AppAssets.icArrowBackRightPath,
+              color: Theme.of(context).colorScheme.secondary,
               width: AppSizes.appOverallIconWidth,
               height: AppSizes.appOverallIconHeight,
-              color: AppColors.mirage,
             ),
           ],
         ),

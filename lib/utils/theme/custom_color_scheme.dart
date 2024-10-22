@@ -8,11 +8,11 @@ final class CustomColorScheme {
     primary: Color(0xffFFFFFF), ///
     surfaceTint: Color(0xffFFFFFF), /// splash logo arka plan
     onPrimary: Color(0xff699CF4), /// splash background
-    primaryContainer: Color(0xff699CF4), ///
-    onPrimaryContainer: Color(0xffEEEFF2),
+    primaryContainer: Color(0xffFFFFFF), ///
+    onPrimaryContainer: Color(0xffEEEFF2), ///
     secondary: Color(0xff111827),
     onSecondary: Color(4294967295),
-    secondaryContainer: Color(4294958033),
+    secondaryContainer: Color(0xffF9FAFB), ///
     onSecondaryContainer: Color(4281079055),
     tertiary: Color(0xff6B7280), ///
     onTertiary: Color(0xff9CA3AF), ///
@@ -57,11 +57,11 @@ final class CustomColorScheme {
     primary: Color(0xff111827),
     surfaceTint: Color(0XFF1F2937), /// splash logo arka plan
     onPrimary: Color(0xff111827),
-    primaryContainer: Color(0xff699CF4),
-    onPrimaryContainer: Color(0xff374151),
+    primaryContainer: Color(0xff374151), ///
+    onPrimaryContainer: Color(0xff374151), ///
     secondary: Color(0xffFFFFFF),
     onSecondary: Color(4282657314),
-    secondaryContainer: Color(4284301367),
+    secondaryContainer: Color(0xff1F2937),
     onSecondaryContainer: Color(4294958033),
     tertiary: Color(0xff6B7280),
     onTertiary: Color(0xff6B7280), ///

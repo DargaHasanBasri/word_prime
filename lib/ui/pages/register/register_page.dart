@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:word_prime/export.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -24,7 +23,6 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundColor,
       appBar: _buildAppBar(),
       body: Padding(
         padding: AppPaddings.appPaddingHorizontal,
@@ -38,7 +36,8 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 16, bottom: 24),
+          padding:
+              AppPaddings.paddingMediumTop + AppPaddings.paddingLargeBottom,
           child: _titleSubtitleText(),
         ),
         ValueListenableBuilder(
@@ -130,15 +129,14 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
         Text(
           LocaleKeys.registerPage_privacyMsg.locale,
           textAlign: TextAlign.center,
-          style: TextStyle(
-            color: AppColors.mirage,
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
+          style: Theme.of(context)
+              .textTheme
+              .bodySmall
+              ?.copyWith(fontWeight: FontWeight.w400),
         ),
         const Spacer(),
         Padding(
-          padding: const EdgeInsets.only(bottom: 20),
+          padding: AppPaddings.paddingLargeBottom,
           child: Center(
             child: _richTextSignUp(),
           ),
@@ -152,23 +150,15 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 8),
+          padding: AppPaddings.paddingSmallBottom,
           child: Text(
             LocaleKeys.registerPage_registerTitle.locale,
-            style: TextStyle(
-              color: AppColors.mirage,
-              fontSize: 28,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
         ),
         Text(
           LocaleKeys.registerPage_registerSubTitle.locale,
-          style: TextStyle(
-            color: AppColors.paleSky,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       ],
     );
@@ -178,19 +168,14 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
     return RichText(
       text: TextSpan(
         text: LocaleKeys.registerPage_isSignInMsg.locale,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: AppColors.mirage,
-        ),
+        style: Theme.of(context).textTheme.titleMedium,
         children: <TextSpan>[
           TextSpan(
             text: ' ${LocaleKeys.signIn.locale}',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: AppColors.cornflowerBlue,
-            ),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.cornflowerBlue,
+                ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
                 appRoutes.navigateTo(Routes.Login);
@@ -203,13 +188,13 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.white,
-      elevation: 0,
       leading: IconButton(
         onPressed: () => appRoutes.popIfBackStackNotEmpty(),
-        color: AppColors.mirage,
-        icon: Icon(
-          Icons.arrow_back_ios,
+        icon: Image.asset(
+          AppAssets.icArrowBackLeftPath,
+          color: Theme.of(context).colorScheme.secondary,
+          width: AppSizes.appOverallIconWidth,
+          height: AppSizes.appOverallIconHeight,
         ),
       ),
     );

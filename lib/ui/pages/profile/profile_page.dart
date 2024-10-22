@@ -35,7 +35,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
         Column(
           children: [
             Padding(
-              padding: AppPaddings.paddingXLargeBottom * 2,
+              padding: AppPaddings.paddingXXLargeBottom * 2,
               child: CurrentUserProfileInfo(),
             ),
             Padding(

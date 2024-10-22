@@ -57,6 +57,7 @@ class CustomTextFormField extends StatelessWidget {
       children: [
         getTextFieldTitle(),
         TextFormField(
+          cursorColor: Theme.of(context).colorScheme.secondary,
           controller: controller,
           obscureText: isHaveObscure,
           autofocus: isAutoTrue,

@@ -17,11 +17,11 @@ final class AppSizes {
   static const double appOverallIconWidth = 24.0;
   static const double appOverallIconHeight = 24.0;
 
+  static const double sizedBoxLargeWidth = 40.0;
+  static const double sizedBoxLargeHeight = 40.0;
+
   static const double sizedBoxOverallWidth = 24.0;
   static const double sizedBoxOverallHeight = 24.0;
-
-  static const double sizedBoxLargeWidth = 24.0;
-  static const double sizedBoxLargeHeight = 24.0;
 
   static const double sizedBoxMediumWidth = 16.0;
   static const double sizedBoxMediumHeight = 16.0;

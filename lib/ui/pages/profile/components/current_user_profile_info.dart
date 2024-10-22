@@ -44,7 +44,7 @@ class CurrentUserProfileInfo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: AppPaddings.paddingXLargeBottom,
+                  padding: AppPaddings.paddingXXLargeBottom,
                   child: Text(
                     '${AppLocaleConstants.DEFAULT_USER_INFO_1}, ',
                     style: TextStyle(
@@ -55,7 +55,7 @@ class CurrentUserProfileInfo extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: AppPaddings.paddingXLargeBottom,
+                  padding: AppPaddings.paddingXXLargeBottom,
                   child: Text(
                     '${AppLocaleConstants.DEFAULT_USER_INFO_2}, ',
                     style: TextStyle(
@@ -66,7 +66,7 @@ class CurrentUserProfileInfo extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: AppPaddings.paddingXLargeBottom,
+                  padding: AppPaddings.paddingXXLargeBottom,
                   child: Text(
                     '${AppLocaleConstants.DEFAULT_USER_INFO_3}',
                     style: TextStyle(

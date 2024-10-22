@@ -22,7 +22,8 @@ final class AppPaddings {
   static const paddingMediumAll = EdgeInsets.all(16);
   static const paddingSmallAll = EdgeInsets.all(8);
 
-  static const paddingXLargeTop = EdgeInsets.only(top: 60);
+  static const paddingXXLargeTop = EdgeInsets.only(top: 60);
+  static const paddingXLargeTop = EdgeInsets.only(top: 32);
   static const paddingLargeTop = EdgeInsets.only(top: 24);
   static const paddingMediumTop = EdgeInsets.only(top: 16);
   static const paddingSmallTop = EdgeInsets.only(top: 8);
@@ -30,7 +31,8 @@ final class AppPaddings {
 
   static const appPaddingMainTabBottom =
       EdgeInsets.only(bottom: 24 + AppSizes.bottomNavigationBarHeight);
-  static const paddingXLargeBottom = EdgeInsets.only(bottom: 60);
+  static const paddingXXLargeBottom = EdgeInsets.only(bottom: 60);
+  static const paddingXLargeBottom = EdgeInsets.only(bottom: 32);
   static const paddingLargeBottom = EdgeInsets.only(bottom: 24);
   static const paddingMediumBottom = EdgeInsets.only(bottom: 16);
   static const paddingSmallBottom = EdgeInsets.only(bottom: 8);

@@ -34,7 +34,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: AppPaddings.paddingXLargeTop,
+              padding: AppPaddings.paddingXXLargeTop,
               child: _titleSubtitleText(),
             ),
             ValueListenableBuilder(
