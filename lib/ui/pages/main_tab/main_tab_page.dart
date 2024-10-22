@@ -20,7 +20,6 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       extendBody: true,
       bottomNavigationBar: ValueListenableBuilder(
         valueListenable: _vm.currentIndex,

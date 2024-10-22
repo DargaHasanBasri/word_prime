@@ -22,7 +22,7 @@ class CustomUserCircleAvatar extends StatelessWidget {
       padding: EdgeInsets.all(borderPadding ?? 3),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.primary,
         border: Border.all(
           color: borderColor ?? Colors.transparent,
           width: borderWidth ?? 0,

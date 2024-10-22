@@ -12,7 +12,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(30),
         ),
@@ -25,7 +25,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: AppPaddings.paddingLargeBottom + AppPaddings.paddingMediumTop,
         child: ValueListenableBuilder(
           valueListenable: whichIndex,
           builder: (_, __, ___) {
@@ -45,7 +45,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
                           AppAssets.icMainTabHomePath,
                           width: AppSizes.appOverallIconWidth,
                           height: AppSizes.appOverallIconHeight,
-                          color: AppColors.pastelBlue,
+                          color:
+                              Theme.of(context).colorScheme.tertiaryContainer,
                         ),
                 ),
                 GestureDetector(
@@ -61,7 +62,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
                           AppAssets.icMainTabActivityPath,
                           width: AppSizes.appOverallIconWidth,
                           height: AppSizes.appOverallIconHeight,
-                          color: AppColors.pastelBlue,
+                          color:
+                              Theme.of(context).colorScheme.tertiaryContainer,
                         ),
                 ),
                 GestureDetector(
@@ -77,7 +79,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
                           AppAssets.icMainTabWordAddPath,
                           width: AppSizes.appOverallIconWidth,
                           height: AppSizes.appOverallIconHeight,
-                          color: AppColors.pastelBlue,
+                          color:
+                              Theme.of(context).colorScheme.tertiaryContainer,
                         ),
                 ),
                 GestureDetector(
@@ -93,7 +96,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
                           AppAssets.icMainTabTaskPath,
                           width: AppSizes.appOverallIconWidth,
                           height: AppSizes.appOverallIconHeight,
-                          color: AppColors.pastelBlue,
+                          color:
+                              Theme.of(context).colorScheme.tertiaryContainer,
                         ),
                 ),
                 GestureDetector(
@@ -109,7 +113,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
                           AppAssets.icMainTabProfilePath,
                           width: AppSizes.appOverallIconWidth,
                           height: AppSizes.appOverallIconHeight,
-                          color: AppColors.pastelBlue,
+                          color:
+                              Theme.of(context).colorScheme.tertiaryContainer,
                         ),
                 ),
               ],

@@ -26,11 +26,8 @@ class IconInteractItem extends StatelessWidget {
         SizedBox(width: AppSizes.sizedBoxSmallWidth),
         Text(
           interactCount,
-          style: TextStyle(
-            color: AppColors.ebonyClay,
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Theme.of(context).colorScheme.surfaceContainerHigh),
         ),
       ],
     );

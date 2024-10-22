@@ -16,7 +16,7 @@ final class CustomColorScheme {
     onSecondaryContainer: Color(4281079055),
     tertiary: Color(0xff6B7280), ///
     onTertiary: Color(0xff9CA3AF), ///
-    tertiaryContainer: Color(4294304167),
+    tertiaryContainer: Color(0xff9BBDF8),
     onTertiaryContainer: Color(4280490752),
     error: Color(4290386458),
     onError: Color(4294967295),
@@ -25,7 +25,7 @@ final class CustomColorScheme {
     surface: Color(4294965494),
     onSurface: Color(4280490263),
     onSurfaceVariant: Color(4283646783),
-    outline: Color(4286935918),
+    outline: Color(0xff2C3658), ///
     outlineVariant: Color(4292395708),
     shadow: Color(4278190080),
     scrim: Color(4278190080),
@@ -48,8 +48,8 @@ final class CustomColorScheme {
     surfaceContainerLowest: Color(4294967295),
     surfaceContainerLow: Color(4294963693),
     surfaceContainer: Color(0xffffffff),
-    surfaceContainerHigh: Color(4294436064),
-    surfaceContainerHighest: Color(4294041562),
+    surfaceContainerHigh: Color(0xff1E293B), ///
+    surfaceContainerHighest: Color(0xff475569), ///
   );
 
   static const darkColorScheme = ColorScheme(
@@ -59,13 +59,13 @@ final class CustomColorScheme {
     onPrimary: Color(0xff111827),
     primaryContainer: Color(0xff374151), ///
     onPrimaryContainer: Color(0xff374151), ///
-    secondary: Color(0xffFFFFFF),
+    secondary: Color(0xffFFFFFF), ///
     onSecondary: Color(4282657314),
     secondaryContainer: Color(0xff1F2937),
     onSecondaryContainer: Color(4294958033),
     tertiary: Color(0xff6B7280),
     onTertiary: Color(0xff6B7280), ///
-    tertiaryContainer: Color(4283647513),
+    tertiaryContainer: Color(0xff6B7280), ///
     onTertiaryContainer: Color(4294304167),
     error: Color(0xff699CF4),
     onError: Color(4285071365),
@@ -74,7 +74,7 @@ final class CustomColorScheme {
     surface: Color(4279898383),
     onSurface: Color(4294041562),
     onSurfaceVariant: Color(4292395708),
-    outline: Color(4288711815),
+    outline: Color(0xff374151), ///
     outlineVariant: Color(4283646783),
     shadow: Color(4278190080),
     scrim: Color(4278190080),
@@ -84,8 +84,8 @@ final class CustomColorScheme {
     onPrimaryFixed: Color(4281993985),
     primaryFixedDim: Color(4294948256),
     onPrimaryFixedVariant: Color(4285674787),
-    secondaryFixed: Color(4294958033),
-    onSecondaryFixed: Color(4281079055),
+    secondaryFixed: Color(4294958033), ///
+    onSecondaryFixed: Color(0xffFFFFFF),
     secondaryFixedDim: Color(4293377458),
     onSecondaryFixedVariant: Color(4284301367),
     tertiaryFixed: Color(4294304167),
@@ -97,7 +97,7 @@ final class CustomColorScheme {
     surfaceContainerLowest: Color(4279503882),
     surfaceContainerLow: Color(4280490263),
     surfaceContainer: Color(0xff1F2937), ///
-    surfaceContainerHigh: Color(4281477157),
-    surfaceContainerHighest: Color(4282200623),
+    surfaceContainerHigh: Color(0xffFFFFFF), ///
+    surfaceContainerHighest: Color(0xffFFFFFF),
   );
 }

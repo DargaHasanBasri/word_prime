@@ -29,6 +29,9 @@ final class AppSizes {
   static const double sizedBoxSmallWidth = 8.0;
   static const double sizedBoxSmallHeight = 8.0;
 
+  static const double sizedBoxXSmallWidth = 4.0;
+  static const double sizedBoxXSmallHeight = 4.0;
+
   static const double sizedBoxUserListViewHeight = 100.0;
   static const double sizedBoxUserListItemWidth = 70.0;
 }

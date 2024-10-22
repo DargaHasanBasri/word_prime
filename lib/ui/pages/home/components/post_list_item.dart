@@ -27,19 +27,21 @@ class PostListItem extends StatelessWidget {
       padding: AppPaddings.paddingMediumAll,
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(color: AppColors.softPeach),
+          top: BorderSide(
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
+          ),
         ),
       ),
       child: Column(
         children: [
-          _getUserInfo(),
+          _getUserInfo(context),
           Padding(
             padding: AppPaddings.paddingMediumVertical,
             child: _getPostPicture(),
           ),
           Padding(
             padding: AppPaddings.paddingMediumBottom,
-            child: _getUserSentences(),
+            child: _getUserSentences(context),
           ),
           ValueListenableBuilder(
             valueListenable: isActiveSave,
@@ -57,7 +59,7 @@ class PostListItem extends StatelessWidget {
     );
   }
 
-  Widget _getUserInfo() {
+  Widget _getUserInfo(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -66,28 +68,23 @@ class PostListItem extends StatelessWidget {
           borderPadding: 0,
           profileImgAddress: AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
         ),
-        SizedBox(width: 12),
+        SizedBox(width: AppSizes.sizedBoxMediumWidth),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 AppLocaleConstants.DEFAULT_USER_NAME,
-                style: TextStyle(
-                  color: AppColors.ebonyClay,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                    ),
               ),
               Text(
                 '${LocaleKeys.level.locale}  10',
-                style: TextStyle(
-                  color: AppColors.riverBed,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
             ],
           ),
@@ -102,7 +99,7 @@ class PostListItem extends StatelessWidget {
     );
   }
 
-  Widget _getUserSentences() {
+  Widget _getUserSentences(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: isTranslate,
       builder: (_, __, ___) {
@@ -115,21 +112,24 @@ class PostListItem extends StatelessWidget {
                     padding: AppPaddings.paddingSmallAll,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: AppColors.softPeach, width: 2),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        width: 2,
+                      ),
                     ),
                     child: Text(
                       AppLocaleConstants.DEFAULT_SENTENCES,
-                      style: TextStyle(
-                        color: AppColors.ebonyClay,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .surfaceContainerHigh,
+                            fontWeight: FontWeight.w400,
+                          ),
                       maxLines: 4,
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: AppSizes.sizedBoxSmallWidth),
                 GestureDetector(
                   onTap: () => onTabTranslate.call(),
                   child: Container(
@@ -138,12 +138,12 @@ class PostListItem extends StatelessWidget {
                       border: Border.all(color: AppColors.cornflowerBlue),
                     ),
                     child: Image.asset(
+                      width: AppSizes.appOverallIconWidth,
+                      height: AppSizes.appOverallIconHeight,
+                      color: Theme.of(context).colorScheme.secondary,
                       isTranslate.value
                           ? AppAssets.icArrowUpPath
                           : AppAssets.icArrowDownPath,
-                      width: AppSizes.appOverallIconWidth,
-                      height: AppSizes.appOverallIconHeight,
-                      color: AppColors.cornflowerBlue,
                     ),
                   ),
                 ),
@@ -162,18 +162,21 @@ class PostListItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: AppColors.pastelBlue.withOpacity(0.8),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onPrimaryContainer
+                          .withOpacity(0.4),
                       width: 2,
                     ),
                   ),
                   child: Text(
                     AppLocaleConstants.DEFAULT_SENTENCES,
-                    style: TextStyle(
-                      color: AppColors.ebonyClay,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .surfaceContainerHigh,
+                          fontWeight: FontWeight.w400,
+                        ),
                     maxLines: 4,
                   ),
                 ),

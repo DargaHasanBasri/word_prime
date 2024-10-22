@@ -10,21 +10,18 @@ class UserListItem extends StatelessWidget {
       child: Column(
         children: [
           CustomUserCircleAvatar(
-            borderColor: AppColors.rhino,
+            borderColor: Theme.of(context).colorScheme.outline,
             borderWidth: 2,
+            borderPadding: 2,
             profileImgAddress: AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
           ),
-          SizedBox(height: 4),
+          SizedBox(height: AppSizes.sizedBoxXSmallHeight),
           Expanded(
             child: Text(
               AppLocaleConstants.DEFAULT_USER_NAME,
-              style: TextStyle(
-                color: AppColors.mirage,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                overflow: TextOverflow.ellipsis,
-              ),
-              maxLines: 1,
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    overflow: TextOverflow.ellipsis,
+                  ),
             ),
           ),
         ],

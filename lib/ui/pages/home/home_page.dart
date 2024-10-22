@@ -22,7 +22,6 @@ class _HomePageState extends BaseStatefulState<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       appBar: _buildAppBar(),
       body: _buildBody(),
     );
@@ -52,7 +51,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
               ),
             ),
           ),
-          SizedBox(height: 24),
+          SizedBox(height: AppSizes.sizedBoxOverallHeight),
           ListView.separated(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -94,17 +93,14 @@ class _HomePageState extends BaseStatefulState<HomePage> {
   AppBar _buildAppBar() {
     return AppBar(
       backgroundColor: AppColors.rhino,
-      toolbarHeight: AppSizes.toolbarHeight,
-      scrolledUnderElevation: 0,
       title: Row(
         children: [
           Text(
             '${LocaleKeys.homePage_welcome.locale}, Zephyra ${AppLocaleConstants.EMOJI_WAVING}',
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.white,
+                ),
           ),
           Spacer(),
           CustomUserCircleAvatar(
