@@ -37,43 +37,37 @@ class ActivityItem extends StatelessWidget {
         children: [
           Text(
             titleEmoji,
-            style: TextStyle(
-              fontSize: 24,
-            ),
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
-          SizedBox(height: 4),
+          SizedBox(height: AppSizes.sizedBoxXSmallHeight),
           Container(
             height: AppSizes.activityItemTitleContainerHeight,
             child: Text(
               title,
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                overflow: TextOverflow.ellipsis,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    overflow: TextOverflow.ellipsis,
+                    color: AppColors.white,
+                  ),
               maxLines: 2,
             ),
           ),
-          SizedBox(height: 4),
+          SizedBox(height: AppSizes.sizedBoxXSmallHeight),
           Visibility(
             visible: !isZeroChapterCount,
             child: Text(
               '${chapterCount} ${LocaleKeys.activityPage_chapter.locale}',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    overflow: TextOverflow.ellipsis,
+                    color: AppColors.white,
+                  ),
             ),
           ),
-          SizedBox(height: 24),
+          SizedBox(height: AppSizes.sizedBoxOverallHeight),
           CustomButton(
             title: LocaleKeys.start.locale,
             titleVerticalPadding: 8,
             backgroundColor: Colors.transparent,
             borderColor: AppColors.white,
-            borderRadius: 40,
             onClick: () => onTapStart.call(),
           ),
         ],

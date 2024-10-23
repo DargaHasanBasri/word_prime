@@ -21,7 +21,6 @@ class _TaskListPageState extends BaseStatefulState<TaskListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       appBar: _buildAppBar(),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -39,11 +38,9 @@ class _TaskListPageState extends BaseStatefulState<TaskListPage> {
       children: [
         Text(
           LocaleKeys.tasksPage_activeTasks.locale,
-          style: TextStyle(
-            color: AppColors.mirage,
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-          ),
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
         ),
         SizedBox(height: AppSizes.sizedBoxMediumHeight),
         ListView.separated(
@@ -69,7 +66,6 @@ class _TaskListPageState extends BaseStatefulState<TaskListPage> {
   AppBar _buildAppBar() {
     return AppBar(
       backgroundColor: AppColors.rhino,
-      toolbarHeight: AppSizes.toolbarHeight,
       leading: Row(
         children: [
           IconButton(
@@ -89,15 +85,13 @@ class _TaskListPageState extends BaseStatefulState<TaskListPage> {
             _vm.taskMethod.value == 'Weekly'
                 ? LocaleKeys.tasksPage_tasksWeekly.locale
                 : LocaleKeys.tasksPage_tasksDaily.locale,
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w700,
+                ),
           );
         },
       ),
-      centerTitle: true,
     );
   }
 }

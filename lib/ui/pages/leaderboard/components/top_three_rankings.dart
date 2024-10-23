@@ -50,34 +50,28 @@ class TopThreeRankings extends StatelessWidget {
           padding: AppPaddings.paddingSmallVertical,
           child: Text(
             userName,
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: AppColors.white,
+                ),
+            overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10,
-          ),
+          padding: AppPaddings.paddingSmallHorizontal,
           child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: 4,
-              horizontal: 8,
-            ),
+            padding: AppPaddings.paddingSmallHorizontal +
+                AppPaddings.paddingXSmallVertical,
             decoration: BoxDecoration(
-              color: AppColors.metallicBlue,
+              color: Theme.of(context).colorScheme.onTertiaryContainer,
               borderRadius: BorderRadius.circular(25),
             ),
             child: Text(
               '${userScore} ${LocaleKeys.score.locale}',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.white,
+                  ),
+              overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
             ),
           ),
@@ -86,19 +80,20 @@ class TopThreeRankings extends StatelessWidget {
         Expanded(
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.metallicBlue,
+              color: Theme.of(context).colorScheme.onTertiaryContainer,
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(25),
               ),
-              border: Border.all(color: AppColors.gulGrey),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.surface,
+              ),
             ),
             child: Text(
               '${rankOrder}',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 40,
-                fontWeight: FontWeight.w700,
-              ),
+              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                    color: AppColors.white,
+                    fontSize: 40,
+                  ),
               textAlign: TextAlign.center,
             ),
           ),

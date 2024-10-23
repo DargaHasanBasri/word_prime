@@ -43,7 +43,7 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
                 },
               ),
             ),
-            SizedBox(width: 16),
+            SizedBox(width: AppSizes.sizedBoxMediumWidth),
             Expanded(
               child: ActivityItem(
                 backgroundColor: AppColors.wildBlueYonder,
@@ -69,7 +69,7 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
                 onTapStart: () {},
               ),
             ),
-            SizedBox(width: 16),
+            SizedBox(width: AppSizes.sizedBoxMediumWidth),
             Expanded(
               child: ActivityItem(
                 backgroundColor: AppColors.watermelon,
@@ -96,45 +96,12 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
   AppBar _buildAppBar() {
     return AppBar(
       backgroundColor: AppColors.rhino,
-      toolbarHeight: AppSizes.toolbarHeight,
-      scrolledUnderElevation: 0,
-      title: Row(
-        children: [
-          Row(
-            children: [
-              Image.asset(
-                AppAssets.icScorePath,
-                width: AppSizes.appOverallIconWidth,
-                height: AppSizes.sizedBoxOverallHeight,
-              ),
-              Text(
-                '123',
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: Center(
-              child: Text(
-                '${LocaleKeys.activityPage_myActivity.locale} ${AppLocaleConstants.EMOJI_TARGET}',
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
+      title: Text(
+        '${LocaleKeys.activityPage_myActivity.locale}',
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              color: AppColors.white,
+              fontWeight: FontWeight.w700,
             ),
-          ),
-          CustomUserCircleAvatar(
-            circleRadius: 14,
-            borderPadding: 0,
-            profileImgAddress: AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
-          ),
-        ],
       ),
     );
   }

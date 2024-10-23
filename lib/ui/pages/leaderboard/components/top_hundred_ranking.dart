@@ -18,9 +18,9 @@ class TopHundredRanking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      padding: AppPaddings.paddingSmallAll,
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -36,12 +36,8 @@ class TopHundredRanking extends StatelessWidget {
             flex: 1,
             child: Text(
               '${rankOrder + 4}',
-              style: TextStyle(
-                color: AppColors.mirage,
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                overflow: TextOverflow.ellipsis,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(),
+              overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
             ),
           ),
@@ -49,8 +45,9 @@ class TopHundredRanking extends StatelessWidget {
             padding: AppPaddings.paddingMediumHorizontal,
             child: CustomUserCircleAvatar(
               circleRadius: 20,
-              borderColor: AppColors.rhino,
+              borderColor: Theme.of(context).colorScheme.outline,
               borderWidth: 2,
+              borderPadding: 2,
               profileImgAddress: profileImgAddress,
             ),
           ),
@@ -61,21 +58,16 @@ class TopHundredRanking extends StatelessWidget {
               children: [
                 Text(
                   userName,
-                  style: TextStyle(
-                    color: AppColors.mirage,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(),
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   '${LocaleKeys.score.locale} ${userScore + 1000}',
-                  style: TextStyle(
-                    color: AppColors.paleSky,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

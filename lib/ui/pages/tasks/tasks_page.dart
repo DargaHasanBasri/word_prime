@@ -13,7 +13,6 @@ class _TasksPageState extends BaseStatefulState<TasksPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       appBar: _buildAppBar(),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -61,16 +60,13 @@ class _TasksPageState extends BaseStatefulState<TasksPage> {
   AppBar _buildAppBar() {
     return AppBar(
       backgroundColor: AppColors.rhino,
-      toolbarHeight: AppSizes.toolbarHeight,
       title: Text(
-        '${LocaleKeys.tasksPage_myTasks.locale} ${AppLocaleConstants.EMOJI_HOURGLASS}',
-        style: TextStyle(
-          color: AppColors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
-        ),
+        '${LocaleKeys.tasksPage_myTasks.locale}',
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              color: AppColors.white,
+              fontWeight: FontWeight.w700,
+            ),
       ),
-      centerTitle: true,
     );
   }
 }

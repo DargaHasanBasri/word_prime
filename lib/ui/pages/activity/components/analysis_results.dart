@@ -11,7 +11,7 @@ class AnalysisResults extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: AppColors.white.withOpacity(0.25),
+            color: AppColors.black.withOpacity(0.25),
             offset: Offset(0, 4),
             blurRadius: 4,
           ),
@@ -28,16 +28,15 @@ class AnalysisResults extends StatelessWidget {
                 children: [
                   Text(
                     LocaleKeys.activityPage_quizAnalysis.locale,
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w700,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                     textAlign: TextAlign.center,
                     maxLines: 2,
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: AppSizes.sizedBoxMediumHeight),
                   CustomButton(
                     title: LocaleKeys.activityPage_seeAll.locale,
                     titleVerticalPadding: 8,

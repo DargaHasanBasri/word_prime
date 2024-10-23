@@ -31,28 +31,17 @@ class RankingResults extends StatelessWidget {
                 children: [
                   Text(
                     LocaleKeys.tasksPage_currentResultsMsg.locale,
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                   SizedBox(height: AppSizes.sizedBoxMediumHeight),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          title: LocaleKeys.tasksPage_viewAll.locale,
-                          titleVerticalPadding: 8,
-                          borderRadius: 8,
-                          onClick: () => onTabViewAll.call(),
-                        ),
-                      ),
-                      SizedBox(width: AppSizes.sizedBoxSmallWidth),
-                      Image.asset(
-                        AppAssets.icScorePath,
-                      ),
-                    ],
+                  CustomButton(
+                    title: LocaleKeys.tasksPage_viewAll.locale,
+                    titleVerticalPadding: 8,
+                    borderRadius: 8,
+                    onClick: () => onTabViewAll.call(),
                   )
                 ],
               ),
@@ -81,7 +70,7 @@ class RankingResults extends StatelessWidget {
                       border: Border.all(color: AppColors.white),
                     ),
                     child: Text(
-                      '123000',
+                      '10000. Sıra',
                       style: TextStyle(
                         color: AppColors.white,
                         fontSize: 12,

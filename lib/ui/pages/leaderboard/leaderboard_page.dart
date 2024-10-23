@@ -1,8 +1,7 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/leaderboard/components/leaderboard_tab_bar.dart';
 import 'package:word_prime/ui/pages/leaderboard/components/top_hundred_ranking.dart';
-
-import 'components/top_three_rankings.dart';
+import 'package:word_prime/ui/pages/leaderboard/components/top_three_rankings.dart';
 
 class LeaderboardPage extends StatefulWidget {
   const LeaderboardPage({super.key});
@@ -23,7 +22,7 @@ class _LeaderboardPageState extends BaseStatefulState<LeaderboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.rhino,
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       appBar: _buildAppBar(),
       body: _buildBody(),
     );
@@ -99,7 +98,7 @@ class _LeaderboardPageState extends BaseStatefulState<LeaderboardPage> {
                 width: double.infinity,
                 padding: AppPaddings.appPaddingHorizontal,
                 decoration: BoxDecoration(
-                  color: AppColors.catskillWhite,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(25),
                   ),
@@ -135,9 +134,7 @@ class _LeaderboardPageState extends BaseStatefulState<LeaderboardPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.rhino,
-      toolbarHeight: AppSizes.toolbarHeight,
-      scrolledUnderElevation: 0,
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       leading: Row(
         children: [
           IconButton(
@@ -152,13 +149,11 @@ class _LeaderboardPageState extends BaseStatefulState<LeaderboardPage> {
       ),
       title: Text(
         LocaleKeys.tasksPage_leaderboard.locale,
-        style: TextStyle(
-          color: AppColors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
-        ),
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              color: AppColors.white,
+              fontWeight: FontWeight.w700,
+            ),
       ),
-      centerTitle: true,
     );
   }
 }

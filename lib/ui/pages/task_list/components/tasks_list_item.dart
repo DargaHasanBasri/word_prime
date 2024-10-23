@@ -11,36 +11,31 @@ class TaskListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 16,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: AppColors.softPeach,
-              ),
-            ),
-            child: Text(
-              taskTitle,
-              style: TextStyle(
-                color: AppColors.mirage,
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                overflow: TextOverflow.ellipsis,
-              ),
-              maxLines: 3,
-            ),
-          ),
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 16,
+      ),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
         ),
-        SizedBox(width: 24),
-        Image.asset(AppAssets.icScorePath),
-      ],
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.mirage.withOpacity(0.03),
+            blurRadius: 20,
+            offset: Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Text(
+        taskTitle,
+        style: Theme.of(context).textTheme.titleMedium,
+        overflow: TextOverflow.ellipsis,
+        maxLines: 3,
+      ),
     );
   }
 }

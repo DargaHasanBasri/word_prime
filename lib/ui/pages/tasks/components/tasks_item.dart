@@ -48,22 +48,19 @@ class TasksItem extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            overflow: TextOverflow.ellipsis,
+                            color: AppColors.white,
+                          ),
+                      overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                     ),
                     SizedBox(height: AppSizes.sizedBoxSmallHeight),
                     Text(
                       '${chapterCount} ${LocaleKeys.tasksPage_chapter.locale}',
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: AppColors.white,
+                          ),
                     ),
                   ],
                 ),
