@@ -26,6 +26,8 @@ abstract class  LocaleKeys {
   static const following = 'following';
   static const score = 'score';
   static const word = 'word';
+  static const cancel = 'cancel';
+  static const confirm = 'confirm';
   static const splashPage_title = 'splashPage.title';
   static const splashPage = 'splashPage';
   static const getStartedPage_title = 'getStartedPage.title';
@@ -123,5 +125,10 @@ abstract class  LocaleKeys {
   static const onboardingPage_onboardingSecondTitle = 'onboardingPage.onboardingSecondTitle';
   static const onboardingPage_onboardingSecondSubTitle = 'onboardingPage.onboardingSecondSubTitle';
   static const onboardingPage = 'onboardingPage';
+  static const warningMessages_deleteMsgTitle = 'warningMessages.deleteMsgTitle';
+  static const warningMessages_deleteMsgSubTitle = 'warningMessages.deleteMsgSubTitle';
+  static const warningMessages_quizQuitMsgTitle = 'warningMessages.quizQuitMsgTitle';
+  static const warningMessages_quizQuitMsgSubTitle = 'warningMessages.quizQuitMsgSubTitle';
+  static const warningMessages = 'warningMessages';
 
 }

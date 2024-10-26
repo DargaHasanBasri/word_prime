@@ -24,6 +24,8 @@
   "following": "Takip",
   "score": "Puan",
   "word": "Kelime",
+  "cancel": "İptal Et",
+  "confirm": "Onayla",
   "splashPage": {
     "title": "Kelimelerle dolu bir dünyanın kilidini bizimle açın!"
   },
@@ -83,7 +85,7 @@
     "faqs": "FAQs",
     "helpCenter": "Yardım Merkezi",
     "language": "Dil",
-    "changeLanguageTitle": "Dil Değiştir",
+    "changeLanguageTitle": "Varsayılan dil değiştirilsin mi?",
     "privacy": "Gizlilik",
     "notifications": "Bildirimler"
   },
@@ -133,5 +135,11 @@
     "onboardingFirstSubTitle": "İngilizce öğrenmek hiç bu kadar kolay ve eğlenceli olmamıştı.",
     "onboardingSecondTitle": "İlerlemenizi takip edin ve sözcüklerde kendi hızınızda ustalaşın.",
     "onboardingSecondSubTitle": "En sevdiğiniz kelimeleri ve cümleleri paylaşın ve başkalarının da neler öğrendiğini keşfedin."
+  },
+  "warningMessages": {
+    "deleteMsgTitle": "Gönderiniz silinsin mi?",
+    "deleteMsgSubTitle": "Silmek istediğinizden emin misiniz?",
+    "quizQuitMsgTitle": "Quizden çıkmak üzeresiniz!",
+    "quizQuitMsgSubTitle": "Çıkmak istediğinizden emin misiniz?"
   }
 }

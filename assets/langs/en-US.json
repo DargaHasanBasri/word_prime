@@ -24,6 +24,8 @@
   "following": "Following",
   "score": "Score",
   "word": "Word",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
   "splashPage": {
     "title": "Unlock a world full of words with us!"
   },
@@ -83,7 +85,7 @@
     "faqs": "FAQs",
     "helpCenter": "Help Center",
     "language": "Language",
-    "changeLanguageTitle": "Change Language",
+    "changeLanguageTitle": "Change default language?",
     "privacy": "Privacy",
     "notifications": "Notifications"
   },
@@ -133,5 +135,11 @@
     "onboardingFirstSubTitle": "Learning English has never been this easy and fun.",
     "onboardingSecondTitle": "Track your progress and master words at your own pace.",
     "onboardingSecondSubTitle": "Share your favorite words and sentences, and discover what others are learning too."
+  },
+  "warningMessages": {
+    "deleteMsgTitle": "Delete your post?",
+    "deleteMsgSubTitle": "Are you sure you want to delete?",
+    "quizQuitMsgTitle": "You're about to quit the quiz!",
+    "quizQuitMsgSubTitle": "Are you sure you want to quit?"
   }
 }

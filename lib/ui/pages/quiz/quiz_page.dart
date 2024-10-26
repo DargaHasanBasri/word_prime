@@ -137,8 +137,8 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
             child: Padding(
               padding: AppPaddings.appPaddingHorizontal,
               child: CustomAppPopup(
-                title: 'Gönderiniz silinsin mi?',
-                subTitle: 'Silmek istediğinizden emin misiniz?',
+                title: LocaleKeys.warningMessages_quizQuitMsgTitle.locale,
+                subTitle: LocaleKeys.warningMessages_quizQuitMsgSubTitle.locale,
                 onTapCancelButton: () {
                   appRoutes.popIfBackStackNotEmpty();
                   _vm.startTimer();

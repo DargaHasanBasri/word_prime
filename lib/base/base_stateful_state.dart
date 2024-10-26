@@ -8,7 +8,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
     required Widget child,
   }) {
     showDialog<void>(
-      barrierColor: AppColors.mirage.withOpacity(0.74),
+      barrierColor: AppColors.mirage.withOpacity(0.8),
       barrierDismissible: false,
       context: context,
       builder: (context) {
@@ -16,9 +16,9 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          insetPadding: EdgeInsets.symmetric(horizontal: 24),
+          insetPadding: AppPaddings.appPaddingHorizontal,
           elevation: 0,
-          backgroundColor: AppColors.backgroundColor,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           child: child,
         );
       },

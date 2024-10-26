@@ -22,22 +22,17 @@ class CustomAppPopup extends StatelessWidget {
           padding: AppPaddings.paddingLargeTop,
           child: Text(
             title,
-            style: TextStyle(
-              color: AppColors.mirage,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
+            style: Theme.of(context).textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
         ),
         SizedBox(height: AppSizes.sizedBoxSmallHeight),
         Text(
           subTitle,
-          style: TextStyle(
-            color: AppColors.santaGrey,
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+              ),
           textAlign: TextAlign.center,
         ),
         Padding(
@@ -46,8 +41,8 @@ class CustomAppPopup extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomButton(
-                  title: 'Cancel',
-                  backgroundColor: AppColors.white,
+                  title: LocaleKeys.cancel.locale,
+                  backgroundColor: Colors.transparent,
                   borderRadius: 8,
                   onClick: () => onTapCancelButton.call(),
                   borderColor: AppColors.cornflowerBlue,
@@ -55,10 +50,10 @@ class CustomAppPopup extends StatelessWidget {
                   titleColor: AppColors.cornflowerBlue,
                 ),
               ),
-              SizedBox(width: 24),
+              SizedBox(width: AppSizes.sizedBoxOverallWidth),
               Expanded(
                 child: CustomButton(
-                  title: 'Confirm',
+                  title: LocaleKeys.confirm.locale,
                   borderRadius: 8,
                   onClick: () => onTapConfirmButton.call(),
                   titleVerticalPadding: 8,

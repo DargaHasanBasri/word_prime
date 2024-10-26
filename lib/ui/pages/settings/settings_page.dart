@@ -68,12 +68,17 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
                           onChangedTurkish: (String? value) {
                             _vm.selectedLanguage.value = value!;
                           },
-                          onTabChangeButton: () {
+                          onTapCancelButton: () {
+                            _vm.selectedLanguage.value =
+                                _vm.getStringFromLocale(context.locale);
+                            appRoutes.popIfBackStackNotEmpty();
+                          },
+                          onTapConfirmButton: () {
                             _vm.changeLanguage(
                               _vm.selectedLanguage.value,
                               context,
                             );
-                            appRoutes.navigateRemoveUntil(Routes.MainTab);
+                            appRoutes.popIfBackStackNotEmpty();
                           },
                         );
                       },

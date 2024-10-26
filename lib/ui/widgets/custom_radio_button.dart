@@ -27,11 +27,7 @@ class CustomRadioButton extends StatelessWidget {
         ),
         Text(
           title,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-            color: AppColors.mirage,
-          ),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ],
     );

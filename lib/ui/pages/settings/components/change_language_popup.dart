@@ -4,13 +4,15 @@ class ChangeLanguagePopup extends StatelessWidget {
   final String groupValue;
   final ValueChanged<String?> onChangedEnglish;
   final ValueChanged<String?> onChangedTurkish;
-  final VoidCallback onTabChangeButton;
+  final VoidCallback onTapCancelButton;
+  final VoidCallback onTapConfirmButton;
   const ChangeLanguagePopup({
     super.key,
     required this.groupValue,
     required this.onChangedEnglish,
     required this.onChangedTurkish,
-    required this.onTabChangeButton,
+    required this.onTapCancelButton,
+    required this.onTapConfirmButton,
   });
 
   @override
@@ -20,19 +22,17 @@ class ChangeLanguagePopup extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding: AppPaddings.appPaddingVertical,
           child: Text(
             LocaleKeys.settings_changeLanguageTitle.locale,
-            style: TextStyle(
-              color: AppColors.mirage,
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontSize: 20,
+                ),
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: AppPaddings.appPaddingLargeHorizontal,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -52,12 +52,30 @@ class ChangeLanguagePopup extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(24),
-          child: CustomButton(
-            title: LocaleKeys.change.locale,
-            backgroundColor: AppColors.cornflowerBlue,
-            titleColor: AppColors.white,
-            onClick: () => onTabChangeButton.call(),
+          padding: AppPaddings.appPaddingAll,
+          child: Row(
+            children: [
+              Expanded(
+                child: CustomButton(
+                  title: LocaleKeys.cancel.locale,
+                  backgroundColor: Colors.transparent,
+                  borderRadius: 8,
+                  onClick: () => onTapCancelButton.call(),
+                  borderColor: AppColors.cornflowerBlue,
+                  titleVerticalPadding: 8,
+                  titleColor: AppColors.cornflowerBlue,
+                ),
+              ),
+              SizedBox(width: AppSizes.sizedBoxOverallWidth),
+              Expanded(
+                child: CustomButton(
+                  title: LocaleKeys.confirm.locale,
+                  borderRadius: 8,
+                  onClick: () => onTapConfirmButton.call(),
+                  titleVerticalPadding: 8,
+                ),
+              ),
+            ],
           ),
         ),
       ],
