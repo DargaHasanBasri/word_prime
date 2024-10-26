@@ -8,6 +8,7 @@ final class AppColors {
   static Color catskillWhite = const Color(0xffF2F5F7);
   static Color iron = const Color(0xffD8D5EA);
   static Color black = const Color(0xff000000);
+  static Color blackCow = const Color(0xff4A4545);
   static Color mirage = const Color(0xff111827);
   static Color paleSky = const Color(0xff6B7280);
   static Color santaGrey = const Color(0xff9CA3AF);

@@ -20,7 +20,6 @@ class _FollowerFollowPageState extends BaseStatefulState<FollowerFollowPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       appBar: _buildAppBar(),
       body: Padding(
         padding: AppPaddings.appPaddingHorizontal,
@@ -56,12 +55,8 @@ class _FollowerFollowPageState extends BaseStatefulState<FollowerFollowPage> {
             padding: AppPaddings.paddingSmallLeft,
             child: Text(
               AppLocaleConstants.DEFAULT_USER_NAME,
-              style: TextStyle(
-                color: AppColors.mirage,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                overflow: TextOverflow.ellipsis,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
@@ -82,14 +77,13 @@ class _FollowerFollowPageState extends BaseStatefulState<FollowerFollowPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.white,
-      elevation: 0,
-      forceMaterialTransparency: true,
       leading: IconButton(
         onPressed: () => appRoutes.popIfBackStackNotEmpty(),
-        color: AppColors.mirage,
-        icon: Icon(
-          Icons.arrow_back_ios,
+        icon: Image.asset(
+          AppAssets.icArrowBackLeftPath,
+          color: Theme.of(context).colorScheme.secondary,
+          width: AppSizes.appOverallIconWidth,
+          height: AppSizes.appOverallIconHeight,
         ),
       ),
       title: ValueListenableBuilder(
@@ -99,15 +93,12 @@ class _FollowerFollowPageState extends BaseStatefulState<FollowerFollowPage> {
             _vm.isFollowOrFollower.value
                 ? LocaleKeys.profilePage_follow.locale
                 : LocaleKeys.profilePage_follower.locale,
-            style: TextStyle(
-              color: AppColors.mirage,
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
           );
         },
       ),
-      centerTitle: true,
     );
   }
 }

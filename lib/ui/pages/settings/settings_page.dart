@@ -22,7 +22,6 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       appBar: _buildAppBar(),
       body: Padding(
         padding: AppPaddings.appPaddingAll,
@@ -38,7 +37,9 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
         Container(
           decoration: BoxDecoration(
             color: Colors.transparent,
-            border: Border.all(color: AppColors.softPeach),
+            border: Border.all(
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+            ),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -117,7 +118,7 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
     return Container(
       height: 2,
       decoration: BoxDecoration(
-        color: AppColors.softPeach,
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
         borderRadius: BorderRadius.circular(16),
       ),
     );
@@ -125,24 +126,21 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.white,
-      elevation: 0,
-      forceMaterialTransparency: true,
       leading: IconButton(
-        onPressed: () => appRoutes.navigateRemoveUntil(Routes.MainTab),
-        color: AppColors.mirage,
-        icon: Icon(
-          Icons.arrow_back_ios,
+        onPressed: () => appRoutes.popIfBackStackNotEmpty(),
+        icon: Image.asset(
+          AppAssets.icArrowBackLeftPath,
+          color: Theme.of(context).colorScheme.secondary,
+          width: AppSizes.appOverallIconWidth,
+          height: AppSizes.appOverallIconHeight,
         ),
       ),
       title: Text(
         LocaleKeys.settings_title.locale,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-        ),
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
       ),
-      centerTitle: true,
     );
   }
 }

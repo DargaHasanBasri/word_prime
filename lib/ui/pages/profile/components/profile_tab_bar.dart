@@ -29,11 +29,11 @@ class ProfileTabBar extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: whichIndex.value == 0
                       ? BoxDecoration(
-                          color: AppColors.white,
+                          color: Theme.of(context).colorScheme.primary,
                           borderRadius: BorderRadius.circular(6),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.black.withOpacity(0.12),
+                              color: AppColors.blackCow.withOpacity(0.12),
                               offset: Offset(-4, 4),
                               blurRadius: 20,
                             ),
@@ -75,11 +75,11 @@ class ProfileTabBar extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: whichIndex.value == 1
                       ? BoxDecoration(
-                          color: AppColors.white,
+                          color: Theme.of(context).colorScheme.primary,
                           borderRadius: BorderRadius.circular(6),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.black.withOpacity(0.12),
+                              color: AppColors.blackCow.withOpacity(0.12),
                               offset: Offset(-4, 4),
                               blurRadius: 20,
                             ),
@@ -121,11 +121,11 @@ class ProfileTabBar extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: whichIndex.value == 2
                       ? BoxDecoration(
-                          color: AppColors.white,
+                          color: Theme.of(context).colorScheme.primary,
                           borderRadius: BorderRadius.circular(6),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.black.withOpacity(0.12),
+                              color: AppColors.blackCow.withOpacity(0.12),
                               offset: Offset(-4, 4),
                               blurRadius: 20,
                             ),

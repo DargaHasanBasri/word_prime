@@ -25,7 +25,6 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       resizeToAvoidBottomInset: false,
       appBar: _buildAppBar(),
       body: Padding(
@@ -49,11 +48,9 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
           padding: AppPaddings.paddingLargeBottom,
           child: Text(
             LocaleKeys.profileDetail_changePicture.locale,
-            style: TextStyle(
-              color: AppColors.cornflowerBlue,
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: AppColors.cornflowerBlue,
+                ),
             textAlign: TextAlign.center,
           ),
         ),
@@ -63,7 +60,7 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
             return CustomTextFormField(
               controller: _fullNameController,
               textFieldTitle: LocaleKeys.profileDetail_fullNameTitle.locale,
-              textFieldTitleColor: AppColors.mirage,
+              textFieldTitleColor: Theme.of(context).colorScheme.secondary,
               onChanged: (String text) {
                 _vm.fullNameInput.value = text;
               },
@@ -79,7 +76,7 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
                 controller: _emailController,
                 inputType: TextInputType.emailAddress,
                 textFieldTitle: LocaleKeys.profileDetail_emailTitle.locale,
-                textFieldTitleColor: AppColors.mirage,
+                textFieldTitleColor: Theme.of(context).colorScheme.secondary,
                 onChanged: (String text) {
                   _vm.emailInput.value = text;
                 },
@@ -96,7 +93,7 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
                 return CustomTextFormField(
                   controller: _passwordController,
                   textFieldTitle: LocaleKeys.profileDetail_passwordTitle.locale,
-                  textFieldTitleColor: AppColors.mirage,
+                  textFieldTitleColor: Theme.of(context).colorScheme.secondary,
                   textInputAction: TextInputAction.done,
                   isHaveObscure: _vm.isActive.value,
                   isSuffixIcon: true,
@@ -127,24 +124,22 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.white,
-      elevation: 0,
       forceMaterialTransparency: true,
       leading: IconButton(
         onPressed: () => appRoutes.popIfBackStackNotEmpty(),
-        color: AppColors.mirage,
-        icon: Icon(
-          Icons.arrow_back_ios,
+        icon: Image.asset(
+          AppAssets.icArrowBackLeftPath,
+          color: Theme.of(context).colorScheme.secondary,
+          width: AppSizes.appOverallIconWidth,
+          height: AppSizes.appOverallIconHeight,
         ),
       ),
       title: Text(
         LocaleKeys.profileDetail_title.locale,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-        ),
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
       ),
-      centerTitle: true,
     );
   }
 }

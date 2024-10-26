@@ -22,7 +22,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       appBar: _buildAppBar(),
       body: _buildBody(),
     );
@@ -66,7 +66,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
       padding:
           AppPaddings.paddingMediumVertical + AppPaddings.paddingMediumLeft,
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: Theme.of(context).colorScheme.secondaryContainer,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -140,16 +140,13 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
   AppBar _buildAppBar() {
     return AppBar(
       backgroundColor: AppColors.rhino,
-      toolbarHeight: AppSizes.toolbarHeight,
       title: Text(
         LocaleKeys.profilePage_myProfile.locale,
-        style: TextStyle(
-          color: AppColors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
-        ),
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: AppColors.white,
+            ),
       ),
-      centerTitle: true,
       actions: [
         Padding(
           padding: AppPaddings.paddingMediumRight,

@@ -28,7 +28,7 @@ class ProfileDetailContainer extends StatelessWidget {
             child: Ink(
               padding: AppPaddings.paddingMediumAll,
               decoration: BoxDecoration(
-                color: AppColors.alabaster,
+                color: Theme.of(context).colorScheme.inversePrimary,
                 borderRadius: BorderRadius.circular(50),
               ),
               child: Image.asset(
@@ -55,11 +55,10 @@ class ProfileDetailContainer extends StatelessWidget {
               ),
               Text(
                 detailTitle,
-                style: TextStyle(
-                  color: AppColors.paleSky,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                    ),
               ),
             ],
           ),

@@ -35,24 +35,20 @@ class SettingsItem extends StatelessWidget {
               children: [
                 Image.asset(
                   iconAddress,
-                  width: 24,
-                  height: 24,
+                  width: AppSizes.appOverallIconWidth,
+                  height: AppSizes.appOverallIconHeight,
                 ),
-                SizedBox(width: 16),
+                SizedBox(width: AppSizes.sizedBoxMediumWidth),
                 Text(
                   title,
-                  style: TextStyle(
-                    color: AppColors.mirage,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
                 const Spacer(),
                 Image.asset(
                   AppAssets.icArrowBackRightPath,
-                  color: AppColors.santaGrey,
-                  width: 24,
-                  height: 24,
+                  color: Theme.of(context).colorScheme.onTertiary,
+                  width: AppSizes.appOverallIconWidth,
+                  height: AppSizes.appOverallIconHeight,
                 ),
               ],
             ),

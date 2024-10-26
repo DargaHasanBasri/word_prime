@@ -22,22 +22,19 @@ class CurrentUserProfileInfo extends StatelessWidget {
               padding: AppPaddings.paddingMediumTop,
               child: Text(
                 AppLocaleConstants.DEFAULT_USER_NAME,
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: AppColors.white,
+                    ),
               ),
             ),
             Padding(
               padding: AppPaddings.paddingXSmallVertical,
               child: Text(
                 AppLocaleConstants.DEFAULT_USER_EMAIL,
-                style: TextStyle(
-                  color: AppColors.santaGrey,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
             ),
             Row(
@@ -47,33 +44,30 @@ class CurrentUserProfileInfo extends StatelessWidget {
                   padding: AppPaddings.paddingXXLargeBottom,
                   child: Text(
                     '${AppLocaleConstants.DEFAULT_USER_INFO_1}, ',
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                 ),
                 Padding(
                   padding: AppPaddings.paddingXXLargeBottom,
                   child: Text(
                     '${AppLocaleConstants.DEFAULT_USER_INFO_2}, ',
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                 ),
                 Padding(
                   padding: AppPaddings.paddingXXLargeBottom,
                   child: Text(
                     '${AppLocaleConstants.DEFAULT_USER_INFO_3}',
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                 ),
               ],
