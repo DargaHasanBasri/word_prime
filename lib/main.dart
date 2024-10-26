@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:word_prime/export.dart';
+import 'package:word_prime/providers/app_theme_provider.dart';
 import 'package:word_prime/utils/theme/custom_app_theme.dart';
 
 Future<void> main() async {
@@ -21,7 +22,10 @@ Future<void> main() async {
       path: AppLocaleConstants.LANG_PATH,
       saveLocale: true,
       fallbackLocale: AppLocaleConstants.EN_LOCALE,
-      child: const MyApp(),
+      child: ChangeNotifierProvider(
+        create: (context) => AppThemeProvider(),
+        child: const MyApp(),
+      ),
     ),
   );
 }
@@ -36,7 +40,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      themeMode: ThemeMode.dark,
+      themeMode: Provider.of<AppThemeProvider>(context).themeMode,
       theme: CustomAppTheme.lightTheme,
       darkTheme: CustomAppTheme.darkTheme,
       navigatorKey: locator<AppRoutes>().baseNavigatorKey,

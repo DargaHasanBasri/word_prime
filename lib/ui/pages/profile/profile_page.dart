@@ -22,7 +22,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
+      backgroundColor: Theme.of(context).colorScheme.surfaceBright,
       appBar: _buildAppBar(),
       body: _buildBody(),
     );

@@ -76,6 +76,7 @@ abstract class  LocaleKeys {
   static const settings_profileDetails = 'settings.profileDetails';
   static const settings_darkMode = 'settings.darkMode';
   static const settings_lightMode = 'settings.lightMode';
+  static const settings_systemMode = 'settings.systemMode';
   static const settings_chooseTheme = 'settings.chooseTheme';
   static const settings_faqs = 'settings.faqs';
   static const settings_helpCenter = 'settings.helpCenter';

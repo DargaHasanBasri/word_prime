@@ -89,15 +89,15 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
               ),
               customDivider(),
               SettingsItem(
-                title: LocaleKeys.settings_notifications.locale,
-                onTab: () {},
-                iconAddress: AppAssets.icNotificationPath,
-              ),
-              customDivider(),
-              SettingsItem(
                 title: LocaleKeys.settings_chooseTheme.locale,
                 onTab: () {},
                 iconAddress: AppAssets.icDarkModePath,
+              ),
+              customDivider(),
+              SettingsItem(
+                title: LocaleKeys.settings_notifications.locale,
+                onTab: () {},
+                iconAddress: AppAssets.icNotificationPath,
               ),
               customDivider(),
               SettingsItem(

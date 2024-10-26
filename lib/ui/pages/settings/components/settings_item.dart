@@ -6,6 +6,7 @@ class SettingsItem extends StatelessWidget {
   final String iconAddress;
   final bool? isFirst;
   final bool? isLast;
+  final bool? isSwitchButton;
   const SettingsItem({
     super.key,
     required this.title,
@@ -13,6 +14,7 @@ class SettingsItem extends StatelessWidget {
     required this.iconAddress,
     this.isFirst,
     this.isLast,
+    this.isSwitchButton,
   });
 
   @override
@@ -44,12 +46,14 @@ class SettingsItem extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 const Spacer(),
-                Image.asset(
-                  AppAssets.icArrowBackRightPath,
-                  color: Theme.of(context).colorScheme.onTertiary,
-                  width: AppSizes.appOverallIconWidth,
-                  height: AppSizes.appOverallIconHeight,
-                ),
+                isSwitchButton == true
+                    ? SizedBox()
+                    : Image.asset(
+                        AppAssets.icArrowBackRightPath,
+                        color: Theme.of(context).colorScheme.onTertiary,
+                        width: AppSizes.appOverallIconWidth,
+                        height: AppSizes.appOverallIconHeight,
+                      ),
               ],
             ),
           ),
