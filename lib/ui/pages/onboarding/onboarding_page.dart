@@ -2,6 +2,8 @@ import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/onboarding/components/onboarding_first.dart';
 import 'package:word_prime/ui/pages/onboarding/components/onboarding_second.dart';
 
+import 'components/current_page_indicator.dart';
+
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
@@ -30,7 +32,6 @@ class _OnboardingPageState extends BaseStatefulState<OnboardingPage> {
 
   Widget _buildBody() {
     return Stack(
-      alignment: Alignment.bottomCenter,
       clipBehavior: Clip.none,
       children: [
         PageView(
@@ -53,6 +54,11 @@ class _OnboardingPageState extends BaseStatefulState<OnboardingPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  CurrentPageIndicator(
+                    currentIndex: _vm.currentPage,
+                    countPage: 2,
+                  ),
+                  SizedBox(height: AppSizes.sizedBoxOverallHeight),
                   CustomButton(
                     title: LocaleKeys.continueTitle.locale.toUpperCase(),
                     onClick: () {
@@ -64,8 +70,9 @@ class _OnboardingPageState extends BaseStatefulState<OnboardingPage> {
                   SizedBox(height: AppSizes.sizedBoxSmallHeight),
                   CustomButton(
                     title: LocaleKeys.skip.locale.toUpperCase(),
+                    titleColor: AppColors.cornflowerBlue,
                     backgroundColor: Colors.transparent,
-                    borderColor: AppColors.white,
+                    borderColor: Theme.of(context).colorScheme.secondary,
                     onClick: () {
                       appRoutes.navigateRemoveUntil(Routes.GetStarted);
                     },

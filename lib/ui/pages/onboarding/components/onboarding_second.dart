@@ -5,11 +5,25 @@ class OnboardingSecond extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Stack(
       children: [
+        Center(
+          child: AspectRatio(
+            aspectRatio: 16 / 10,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    AppAssets.imgImgBookPath,
+                  ),
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+            ),
+          ),
+        ),
         Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
               padding: AppPaddings.appPaddingXLargeHorizontal,
@@ -29,19 +43,6 @@ class OnboardingSecond extends StatelessWidget {
               ),
             ),
           ],
-        ),
-        AspectRatio(
-          aspectRatio: 8 / 10,
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  AppAssets.imgImgOnboardingSecondPath,
-                ),
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
         ),
       ],
     );
