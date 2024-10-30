@@ -37,7 +37,6 @@ final class AppAssets {
   static String icScorePath = _imagePath('ic_score');
   static String icTaskDailyPath = _imagePath('ic_task_daily');
   static String icTaskWeeklyPath = _imagePath('ic_task_weekly');
-  static String icScoreFlashPath = _imagePath('ic_score_flash');
   static String icRankFirstPath = _imagePath('ic_rank_first');
   static String icSettingsPath = _imagePath('ic_settings');
   static String icClosePath = _imagePath('ic_close');
@@ -47,7 +46,6 @@ final class AppAssets {
   static String imgQuizAnalysisIllustrationPath = _imagePath('img_quiz_analysis_illustration');
   static String imgImgDeerPath = _imagePath('img_deer');
   static String imgImgBookPath = _imagePath('img_book');
-  static String imgImgOnboardingSecondPath = _imagePath('img_onboarding_second');
   static String imgImgGetStartedPath = _imagePath('img_get_started');
 
   static String _imagePath(String fileName) => '$_basePath$fileName.png';
