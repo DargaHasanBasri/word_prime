@@ -50,9 +50,11 @@ class _TaskListPageState extends BaseStatefulState<TaskListPage> {
           itemBuilder: (context, index) {
             return TaskListItem(
               taskTitle: _vm.taskMethod.value == 'Weekly'
-                  ? 'W Fundamentals of HTML & CSS From Scratch'
-                  : 'D Fundamentals of HTML & CSS From Scratch',
+                  ? 'W Fundamentals of HTML & CSS'
+                  : 'D Fundamentals of HTML & CSS',
               score: 15,
+              completedTask: _vm.completedTask,
+              countTask: _vm.countTask,
             );
           },
           separatorBuilder: (context, index) => SizedBox(

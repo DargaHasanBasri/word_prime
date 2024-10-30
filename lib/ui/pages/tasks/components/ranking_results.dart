@@ -52,9 +52,12 @@ class RankingResults extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: AppPaddings.paddingLargeBottom,
-                  child: Image.asset(
-                    AppAssets.icScoreFlashPath,
+                  padding: AppPaddings.paddingSmallVertical,
+                  child: AspectRatio(
+                    aspectRatio: 2  ,
+                    child: Image.asset(
+                      AppAssets.imgImgDeerPath,
+                    ),
                   ),
                 ),
                 Padding(
