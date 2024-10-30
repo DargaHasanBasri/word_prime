@@ -5,12 +5,24 @@ class OnboardingFirst extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Stack(
       children: [
+        Center(
+          child: AspectRatio(
+            aspectRatio: 16 / 10,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    AppAssets.imgImgDeerPath,
+                  ),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
+          ),
+        ),
         Column(
-          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Padding(
               padding: AppPaddings.appPaddingXLargeHorizontal,
@@ -30,19 +42,6 @@ class OnboardingFirst extends StatelessWidget {
               ),
             ),
           ],
-        ),
-        AspectRatio(
-          aspectRatio: 8 / 10,
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  AppAssets.imgImgOnboardingFirstPath,
-                ),
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
         ),
       ],
     );
