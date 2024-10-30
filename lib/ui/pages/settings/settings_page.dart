@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:word_prime/export.dart';
+import 'package:word_prime/providers/app_theme_provider.dart';
 import 'package:word_prime/ui/pages/settings/components/change_language_popup.dart';
 import 'package:word_prime/ui/pages/settings/components/settings_item.dart';
 
@@ -31,7 +32,8 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    _vm.selectedLanguage.value = _vm.getStringFromLocale(context.locale);
+    _vm.selectedLanguage.value = Locales.getStringFromLocale(context.locale);
+    final themeProvider = Provider.of<AppThemeProvider>(context);
     return Column(
       children: [
         Container(
@@ -70,7 +72,7 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
                           },
                           onTapCancelButton: () {
                             _vm.selectedLanguage.value =
-                                _vm.getStringFromLocale(context.locale);
+                                Locales.getStringFromLocale(context.locale);
                             appRoutes.popIfBackStackNotEmpty();
                           },
                           onTapConfirmButton: () {
@@ -89,9 +91,13 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
               ),
               customDivider(),
               SettingsItem(
-                title: LocaleKeys.settings_chooseTheme.locale,
-                onTab: () {},
-                iconAddress: AppAssets.icDarkModePath,
+                title: themeProvider.isDarkMode
+                    ? LocaleKeys.settings_darkMode.locale
+                    : LocaleKeys.settings_lightMode.locale,
+                isSwitchButton: true,
+                iconAddress: themeProvider.isDarkMode
+                    ? AppAssets.icDarkModePath
+                    : AppAssets.icLightModePath,
               ),
               customDivider(),
               SettingsItem(

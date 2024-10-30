@@ -15,13 +15,9 @@ Future<void> main() async {
   await setupLocator();
   runApp(
     EasyLocalization(
-      supportedLocales: const [
-        AppLocaleConstants.TR_LOCALE,
-        AppLocaleConstants.EN_LOCALE,
-      ],
+      supportedLocales: Locales.supportedLocales,
       path: AppLocaleConstants.LANG_PATH,
-      saveLocale: true,
-      fallbackLocale: AppLocaleConstants.EN_LOCALE,
+      fallbackLocale: Locales.en.locale,
       child: ChangeNotifierProvider(
         create: (context) => AppThemeProvider(),
         child: const MyApp(),
@@ -45,7 +41,7 @@ class MyApp extends StatelessWidget {
       darkTheme: CustomAppTheme.darkTheme,
       navigatorKey: locator<AppRoutes>().baseNavigatorKey,
       onGenerateRoute: Routes.generateRoute,
-      initialRoute: Routes.MainTab,
+      initialRoute: Routes.Splash,
       builder: (context, widget) {
         return widget!;
       },

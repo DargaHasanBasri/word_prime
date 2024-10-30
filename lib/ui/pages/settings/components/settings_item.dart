@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:word_prime/export.dart';
+import 'package:word_prime/providers/app_theme_provider.dart';
 
 class SettingsItem extends StatelessWidget {
   final String title;
-  final VoidCallback onTab;
+  final VoidCallback? onTab;
   final String iconAddress;
   final bool? isFirst;
   final bool? isLast;
@@ -10,8 +12,8 @@ class SettingsItem extends StatelessWidget {
   const SettingsItem({
     super.key,
     required this.title,
-    required this.onTab,
     required this.iconAddress,
+    this.onTab,
     this.isFirst,
     this.isLast,
     this.isSwitchButton,
@@ -19,6 +21,7 @@ class SettingsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<AppThemeProvider>(context);
     return ClipRRect(
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(isFirst == true ? 16 : 0),
@@ -29,10 +32,12 @@ class SettingsItem extends StatelessWidget {
           top: Radius.circular(isFirst == true ? 16 : 0),
           bottom: Radius.circular(isLast == true ? 16 : 0),
         ),
-        onTap: () => onTab.call(),
+        onTap: isSwitchButton == true ? null : () => onTab?.call(),
         child: Ink(
           child: Padding(
-            padding: AppPaddings.paddingMediumAll,
+            padding: isSwitchButton == true
+                ? AppPaddings.paddingMediumHorizontal
+                : AppPaddings.paddingMediumAll,
             child: Row(
               children: [
                 Image.asset(
@@ -47,7 +52,20 @@ class SettingsItem extends StatelessWidget {
                 ),
                 const Spacer(),
                 isSwitchButton == true
-                    ? SizedBox()
+                    ? Padding(
+                        padding: AppPaddings.paddingSmallVertical,
+                        child: Transform.scale(
+                          scale: 0.7,
+                          child: CupertinoSwitch(
+                            activeColor: AppColors.rhino,
+                            trackColor: AppColors.pastelBlue,
+                            value: themeProvider.isDarkMode,
+                            onChanged: (value) {
+                              themeProvider.toggleTheme(value);
+                            },
+                          ),
+                        ),
+                      )
                     : Image.asset(
                         AppAssets.icArrowBackRightPath,
                         color: Theme.of(context).colorScheme.onTertiary,

@@ -16,6 +16,7 @@ final class AppAssets {
   static String icArrowUpPath = _imagePath('ic_arrow_up');
   static String icAddPhotoPath = _imagePath('ic_add_photo');
   static String icDarkModePath = _imagePath('ic_dark_mode');
+  static String icLightModePath = _imagePath('ic_light_mode');
   static String icFaqsPath = _imagePath('ic_faqs');
   static String icHelpPath = _imagePath('ic_help');
   static String icLanguagePath = _imagePath('ic_language');
