@@ -1,9 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:word_prime/base/initialize/app_localization.dart';
-import 'package:word_prime/base/initialize/app_start.dart';
 import 'package:word_prime/export.dart';
-import 'package:word_prime/providers/app_theme_provider.dart';
-import 'package:word_prime/utils/theme/custom_app_theme.dart';
 
 Future<void> main() async {
   await AppStart.init();
@@ -32,7 +28,7 @@ class MyApp extends StatelessWidget {
       darkTheme: CustomAppTheme.darkTheme,
       navigatorKey: locator<AppRoutes>().baseNavigatorKey,
       onGenerateRoute: Routes.generateRoute,
-      initialRoute: Routes.MainTab,
+      initialRoute: Routes.Login,
       builder: (context, widget) {
         return widget!;
       },

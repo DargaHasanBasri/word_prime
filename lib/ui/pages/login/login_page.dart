@@ -108,7 +108,12 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                             ? AppColors.cornflowerBlue.withOpacity(0.4)
                             : AppColors.cornflowerBlue,
                         onClick: () {
-                          appRoutes.navigateRemoveUntil(Routes.MainTab);
+                          _vm.isEmptyInputText()
+                              ? null
+                              : _vm.login(
+                                  () => appRoutes
+                                      .navigateToReplacement(Routes.MainTab),
+                                );
                         },
                       ),
                     );

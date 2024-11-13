@@ -116,7 +116,12 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
                             ? AppColors.cornflowerBlue.withOpacity(0.4)
                             : AppColors.cornflowerBlue,
                         onClick: () {
-                          appRoutes.navigateTo(Routes.Login);
+                          _vm.isEmptyInputText()
+                              ? null
+                              : _vm.register(
+                                  () => appRoutes
+                                      .navigateToReplacement(Routes.Login),
+                                );
                         },
                       ),
                     );
