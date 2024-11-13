@@ -41,48 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAbXoY8RTJgojJCydaN3rBX9dpAhjoVw58',
-    appId: '1:212443500524:web:6013c514e30481018f7ac9',
-    messagingSenderId: '212443500524',
-    projectId: 'word-prime',
-    authDomain: 'word-prime.firebaseapp.com',
-    storageBucket: 'word-prime.firebasestorage.app',
-    measurementId: 'G-D3SG5H3FGP',
+    apiKey: 'AIzaSyAGoNhgJ5lOVZJWRdToQFBh-JECsO6vXO0',
+    appId: '1:363806973749:web:87c7d0bf9c608d0a99767c',
+    messagingSenderId: '363806973749',
+    projectId: 'word-prime-a63df',
+    authDomain: 'word-prime-a63df.firebaseapp.com',
+    storageBucket: 'word-prime-a63df.firebasestorage.app',
+    measurementId: 'G-HT7HQB5Y6K',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAJAHnlEH_RZXxuBAvbVU8tZzQ5ahITsg0',
-    appId: '1:212443500524:android:8b9661baba96edc08f7ac9',
-    messagingSenderId: '212443500524',
-    projectId: 'word-prime',
-    storageBucket: 'word-prime.firebasestorage.app',
+    apiKey: 'AIzaSyAhnpLTm4zERdlnDHqJ6TexPhuL5ViGScI',
+    appId: '1:363806973749:android:e978d51d2a237ba099767c',
+    messagingSenderId: '363806973749',
+    projectId: 'word-prime-a63df',
+    storageBucket: 'word-prime-a63df.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC8VhND6isSpsYbomKP-JIoyqPbP4_FMa4',
-    appId: '1:212443500524:ios:b0d1432d1ce0faf18f7ac9',
-    messagingSenderId: '212443500524',
-    projectId: 'word-prime',
-    storageBucket: 'word-prime.firebasestorage.app',
+    apiKey: 'AIzaSyAiqvaBObfdLBYnd-lxMRYsUluVIfldRjw',
+    appId: '1:363806973749:ios:b57043da184cfcab99767c',
+    messagingSenderId: '363806973749',
+    projectId: 'word-prime-a63df',
+    storageBucket: 'word-prime-a63df.firebasestorage.app',
     iosBundleId: 'com.hbd.wordPrime',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyC8VhND6isSpsYbomKP-JIoyqPbP4_FMa4',
-    appId: '1:212443500524:ios:b0d1432d1ce0faf18f7ac9',
-    messagingSenderId: '212443500524',
-    projectId: 'word-prime',
-    storageBucket: 'word-prime.firebasestorage.app',
+    apiKey: 'AIzaSyAiqvaBObfdLBYnd-lxMRYsUluVIfldRjw',
+    appId: '1:363806973749:ios:b57043da184cfcab99767c',
+    messagingSenderId: '363806973749',
+    projectId: 'word-prime-a63df',
+    storageBucket: 'word-prime-a63df.firebasestorage.app',
     iosBundleId: 'com.hbd.wordPrime',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAbXoY8RTJgojJCydaN3rBX9dpAhjoVw58',
-    appId: '1:212443500524:web:d0522f9aaefe71f18f7ac9',
-    messagingSenderId: '212443500524',
-    projectId: 'word-prime',
-    authDomain: 'word-prime.firebaseapp.com',
-    storageBucket: 'word-prime.firebasestorage.app',
-    measurementId: 'G-XPWXQPGKH0',
+    apiKey: 'AIzaSyAGoNhgJ5lOVZJWRdToQFBh-JECsO6vXO0',
+    appId: '1:363806973749:web:97e9f1c6933eea7b99767c',
+    messagingSenderId: '363806973749',
+    projectId: 'word-prime-a63df',
+    authDomain: 'word-prime-a63df.firebaseapp.com',
+    storageBucket: 'word-prime-a63df.firebasestorage.app',
+    measurementId: 'G-4L54H564C9',
   );
 }
