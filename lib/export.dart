@@ -81,3 +81,5 @@ export 'package:word_prime/ui/pages/quiz/quiz_page.dart';
 export 'package:word_prime/ui/pages/quiz/quiz_view_model.dart';
 export 'package:flutter/gestures.dart';
 export 'package:word_prime/base/enums/locales.dart';
+export 'package:word_prime/firebase_options.dart';
+export 'package:firebase_core/firebase_core.dart';

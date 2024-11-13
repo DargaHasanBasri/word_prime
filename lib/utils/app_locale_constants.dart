@@ -8,7 +8,6 @@ final class AppLocaleConstants {
 
   static const TR_LOCALE = Locale('tr', 'TR');
   static const EN_LOCALE = Locale('en', 'US');
-  static const LANG_PATH = 'assets/langs';
 
   static const TR_RADIO_BTN_VALUE = 'Turkish';
   static const EN_RADIO_BTN_VALUE = 'English';

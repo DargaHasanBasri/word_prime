@@ -1,23 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:word_prime/base/initialize/app_localization.dart';
+import 'package:word_prime/base/initialize/app_start.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/providers/app_theme_provider.dart';
 import 'package:word_prime/utils/theme/custom_app_theme.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    ),
-  );
-  await setupLocator();
+  await AppStart.init();
   runApp(
-    EasyLocalization(
-      supportedLocales: Locales.supportedLocales,
-      path: AppLocaleConstants.LANG_PATH,
-      fallbackLocale: Locales.en.locale,
+    AppLocalization(
       child: ChangeNotifierProvider(
         create: (context) => AppThemeProvider(),
         child: const MyApp(),

@@ -7,11 +7,6 @@ enum Locales {
   final Locale locale;
   const Locales(this.locale);
 
-  static final List<Locale> supportedLocales = [
-    Locales.tr.locale,
-    Locales.en.locale,
-  ];
-
   /// Tracks the language change status in string type for the
   /// custom radio button created within the scope of the project.
   static Locale getLocaleFromString(String language) {
