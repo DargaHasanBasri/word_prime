@@ -28,6 +28,7 @@ abstract class  LocaleKeys {
   static const word = 'word';
   static const cancel = 'cancel';
   static const confirm = 'confirm';
+  static const logout = 'logout';
   static const splashPage_title = 'splashPage.title';
   static const splashPage = 'splashPage';
   static const getStartedPage_title = 'getStartedPage.title';

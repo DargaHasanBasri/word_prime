@@ -139,6 +139,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
 
   AppBar _buildAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: AppColors.rhino,
       title: Text(
         LocaleKeys.profilePage_myProfile.locale,

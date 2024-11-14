@@ -59,6 +59,7 @@ class _TasksPageState extends BaseStatefulState<TasksPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: AppColors.rhino,
       title: Text(
         '${LocaleKeys.tasksPage_myTasks.locale}',

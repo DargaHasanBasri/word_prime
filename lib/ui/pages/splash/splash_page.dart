@@ -8,8 +8,12 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends BaseStatefulState<SplashPage> {
+  late final SplashViewModel _vm;
+
   @override
   void initState() {
+    _vm = Provider.of<SplashViewModel>(context, listen: false);
+    serviceLocalStorage.getInstance();
     waitAndNavigate(context);
     super.initState();
   }
@@ -40,7 +44,9 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
             child: Text(
               LocaleKeys.appTitle.locale,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: AppColors.white, fontWeight: FontWeight.w700),
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
             ),
           ),
           Text(
@@ -59,7 +65,9 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
     await Future.delayed(
       const Duration(seconds: 4),
       () {
-        appRoutes.navigateToReplacement(Routes.Onboarding);
+        _vm.isLoggedIn()
+            ? appRoutes.navigateToReplacement(Routes.MainTab)
+            : appRoutes.navigateToReplacement(Routes.Onboarding);
       },
     );
   }

@@ -92,3 +92,4 @@ export 'package:word_prime/providers/app_theme_provider.dart';
 export 'package:word_prime/utils/theme/custom_app_theme.dart';
 export 'package:word_prime/base/initialize/app_localization.dart';
 export 'package:word_prime/base/initialize/app_start.dart';
+export 'package:word_prime/services/service_local_storage.dart';

@@ -95,6 +95,7 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: AppColors.rhino,
       title: Text(
         '${LocaleKeys.activityPage_myActivity.locale}',

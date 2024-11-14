@@ -2,6 +2,8 @@ import 'package:word_prime/export.dart';
 
 abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
   final AppRoutes appRoutes = locator<AppRoutes>();
+  final ServiceLocalStorage serviceLocalStorage =
+      locator<ServiceLocalStorage>();
 
   void showPopupDialog({
     required BuildContext context,

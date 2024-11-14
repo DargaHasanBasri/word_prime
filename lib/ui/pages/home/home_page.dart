@@ -92,6 +92,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
 
   AppBar _buildAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: AppColors.rhino,
       title: Row(
         children: [

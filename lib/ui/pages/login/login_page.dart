@@ -111,8 +111,11 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                           _vm.isEmptyInputText()
                               ? null
                               : _vm.login(
-                                  () => appRoutes
-                                      .navigateToReplacement(Routes.MainTab),
+                                  onLoginSuccess: () async {
+                                    appRoutes.navigateToReplacement(
+                                      Routes.MainTab,
+                                    );
+                                  },
                                 );
                         },
                       ),

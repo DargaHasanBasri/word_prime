@@ -40,6 +40,7 @@ final class AppAssets {
   static String icRankFirstPath = _imagePath('ic_rank_first');
   static String icSettingsPath = _imagePath('ic_settings');
   static String icClosePath = _imagePath('ic_close');
+  static String icLogoutPath = _imagePath('ic_logout');
   static String imgSuccessfulPath = _imagePath('img_successful');
   static String imgExampPostPath = _imagePath('img_examp_post');
   static String imgQuizAnalysisPath = _imagePath('img_quiz_analysis');
