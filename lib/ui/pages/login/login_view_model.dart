@@ -25,7 +25,7 @@ class LoginViewModel extends BaseViewModel {
   /// - [onLoginSuccess]: Callback to be executed when login is successful.
   /// If the login is successful, the user ID is assigned to the `userId` variable
   String? userId;
-  Future<void> login(VoidCallback? onLoginSuccess) async {
+  Future<void> login({VoidCallback? onLoginSuccess}) async {
     String? uid = await ServiceAuthentication().login(
       email: emailInput.value,
       password: passwordInput.value,
@@ -35,6 +35,11 @@ class LoginViewModel extends BaseViewModel {
       userId = uid;
       onLoginSuccess?.call();
       log("$userId");
+      /// Stores the user's email and user ID in local storage when they log in.
+      /// The `setString` method is used to save these values with the specified keys.
+      await serviceLocalStorage.setString('email', emailInput.value);
+      await serviceLocalStorage.setString('userId', userId!);
+      log("email saved");
     } else {
       log("Login failed.");
     }

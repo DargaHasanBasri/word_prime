@@ -83,6 +83,7 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

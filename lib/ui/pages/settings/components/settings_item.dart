@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:word_prime/export.dart';
-import 'package:word_prime/providers/app_theme_provider.dart';
 
 class SettingsItem extends StatelessWidget {
   final String title;
@@ -42,6 +41,7 @@ class SettingsItem extends StatelessWidget {
               children: [
                 Image.asset(
                   iconAddress,
+                  color: AppColors.paleSky,
                   width: AppSizes.appOverallIconWidth,
                   height: AppSizes.appOverallIconHeight,
                 ),

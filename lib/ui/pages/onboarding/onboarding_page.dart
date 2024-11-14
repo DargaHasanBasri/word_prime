@@ -88,6 +88,7 @@ class _OnboardingPageState extends BaseStatefulState<OnboardingPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

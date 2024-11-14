@@ -1,6 +1,6 @@
+import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:word_prime/export.dart';
-import 'package:word_prime/providers/app_theme_provider.dart';
 import 'package:word_prime/ui/pages/settings/components/change_language_popup.dart';
 import 'package:word_prime/ui/pages/settings/components/settings_item.dart';
 
@@ -116,6 +116,16 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
                 title: LocaleKeys.settings_helpCenter.locale,
                 onTab: () {},
                 iconAddress: AppAssets.icHelpPath,
+              ),
+              customDivider(),
+              SettingsItem(
+                title: LocaleKeys.logout.locale,
+                onTab: () {
+                  serviceLocalStorage.logout('email');
+                  log("email deleted and log out");
+                  appRoutes.navigateRemoveUntil(Routes.Login);
+                },
+                iconAddress: AppAssets.icLogoutPath,
                 isLast: true,
               ),
             ],
@@ -137,6 +147,7 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       leading: IconButton(
         onPressed: () => appRoutes.popIfBackStackNotEmpty(),
         icon: Image.asset(
