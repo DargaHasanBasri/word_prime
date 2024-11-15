@@ -35,6 +35,7 @@ class LoginViewModel extends BaseViewModel {
       userId = uid;
       onLoginSuccess?.call();
       log("$userId");
+
       /// Stores the user's email and user ID in local storage when they log in.
       /// The `setString` method is used to save these values with the specified keys.
       await serviceLocalStorage.setString('email', emailInput.value);
@@ -42,6 +43,30 @@ class LoginViewModel extends BaseViewModel {
       log("email saved");
     } else {
       log("Login failed.");
+    }
+  }
+
+  /// Complete login process with Google.
+  /// If the login is successful, `onLoginSuccess` is called.
+  String? googleUserId;
+  String? googleEmail;
+  Future<void> loginWithGoogle({VoidCallback? onLoginSuccess}) async {
+    /// Log in with Google and get the user ID.
+    final userCredential = await ServiceAuthentication().loginWithGoogle();
+
+    if (userCredential != null) {
+      googleUserId = userCredential.user?.uid;
+      googleEmail = userCredential.user?.email;
+      onLoginSuccess?.call();
+      log("Google User ID: $googleUserId");
+      log("Google User ID: $googleEmail");
+
+      /// Storing user information in local storage.
+      await serviceLocalStorage.setString('googleUserId', googleUserId!);
+      await serviceLocalStorage.setString('googleEmail', googleEmail!);
+      log("Google user information has been saved.");
+    } else {
+      log("Login with Google failed.");
     }
   }
 }

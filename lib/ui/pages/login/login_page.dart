@@ -111,7 +111,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                           _vm.isEmptyInputText()
                               ? null
                               : _vm.login(
-                                  onLoginSuccess: () async {
+                                  onLoginSuccess: () {
                                     appRoutes.navigateToReplacement(
                                       Routes.MainTab,
                                     );
@@ -128,24 +128,32 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
             Padding(
               padding: AppPaddings.paddingMediumVertical,
               child: CustomButton(
-                title: LocaleKeys.loginPage_withApple.locale.toUpperCase(),
+                title: LocaleKeys.loginPage_withGoogle.locale.toUpperCase(),
                 titleColor: Theme.of(context).colorScheme.secondary,
                 backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
                 borderColor: Theme.of(context).colorScheme.onPrimaryContainer,
                 borderRadius: 12,
                 isIcon: true,
-                iconLogoAddress: AppAssets.icApplePath,
-                onClick: () {},
+                iconLogoAddress: AppAssets.icGooglePath,
+                onClick: () {
+                  _vm.loginWithGoogle(
+                    onLoginSuccess: () {
+                      appRoutes.navigateToReplacement(
+                        Routes.MainTab,
+                      );
+                    },
+                  );
+                },
               ),
             ),
             CustomButton(
-              title: LocaleKeys.loginPage_withGoogle.locale.toUpperCase(),
+              title: LocaleKeys.loginPage_withApple.locale.toUpperCase(),
               titleColor: Theme.of(context).colorScheme.secondary,
               backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
               borderColor: Theme.of(context).colorScheme.onPrimaryContainer,
               borderRadius: 12,
               isIcon: true,
-              iconLogoAddress: AppAssets.icGooglePath,
+              iconLogoAddress: AppAssets.icApplePath,
               onClick: () {},
             ),
             const Spacer(),

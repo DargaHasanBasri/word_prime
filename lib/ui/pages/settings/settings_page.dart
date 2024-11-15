@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/settings/components/change_language_popup.dart';
@@ -120,9 +119,8 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
               customDivider(),
               SettingsItem(
                 title: LocaleKeys.logout.locale,
-                onTab: () {
-                  serviceLocalStorage.logout('email');
-                  log("email deleted and log out");
+                onTab: () async {
+                  await _vm.logOut();
                   appRoutes.navigateRemoveUntil(Routes.Login);
                 },
                 iconAddress: AppAssets.icLogoutPath,
