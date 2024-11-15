@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:word_prime/export.dart';
 
 /// Authentication manager service
@@ -98,8 +99,72 @@ class ServiceAuthentication {
     return null;
   }
 
-  /// Logs the user out of the session.
-  Future<void> signOut() async {
+  /// Logs out the user who is logged in with their email and password.
+  Future<void> signOutWithEmailPassword() async {
     await _firebaseAuth.signOut();
+    log("Firebase session terminated.");
+  }
+
+  Future<UserCredential?> loginWithGoogle() async {
+    try {
+      /// Opens the user login screen.
+      final googleUser = await GoogleSignIn().signIn();
+
+      /// If user cancels login
+      if (googleUser == null) {
+        log("User canceled Google login.");
+        return null;
+      }
+
+      final googleAuth = await googleUser.authentication;
+
+      /// Google credentials are created for Firebase.
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken,
+      );
+
+      /// Login with Firebase.
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      final firebaseUser = userCredential.user;
+
+      if (firebaseUser == null) {
+        log("Failed to create Firebase user.");
+        return null;
+      }
+
+      /// Saving user information to Firestore.
+      await FirebaseCollections.users.reference.doc(firebaseUser.uid).set(
+            UserModel(
+              email: firebaseUser.email ?? googleUser.email,
+              profileImageAddress: firebaseUser.photoURL ?? googleUser.photoUrl,
+              userId: firebaseUser.uid,
+              userName: firebaseUser.displayName ?? googleUser.displayName,
+            ).toJson(),
+          );
+
+      log("User logged in successfully: ${firebaseUser.uid}");
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      /// Firebase authentication errors.
+      log("Firebase error: ${e.message}", error: e);
+    } on Exception catch (e) {
+      /// It catches all other errors and logs the general error message.
+      log("An error occurred", error: e);
+    }
+
+    return null;
+  }
+
+  /// Logs out the user who is logged in with their google.
+  Future<void> signOutWithGoogle() async {
+    /// Creates an instance of [GoogleSignIn] to manage the user's Google sign-in session.
+    /// and handle signing out of Google.
+    final googleSignIn = GoogleSignIn();
+
+    /// Sign out of Google Sign-In
+    await googleSignIn.signOut();
+    log("Google session terminated.");
   }
 }
