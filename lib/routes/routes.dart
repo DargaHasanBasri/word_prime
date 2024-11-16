@@ -22,6 +22,7 @@ final class Routes {
   static const String Profile = 'profileProvider';
   static const String FollowerFollow = 'followerFollowProvider';
   static const String Quiz = 'quizProvider';
+  static const String EmailVerification = 'emailVerificationProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -113,6 +114,10 @@ final class Routes {
       case Routes.Quiz:
         return MaterialPageRoute(
           builder: (context) => const QuizProvider(),
+        );
+      case Routes.EmailVerification:
+        return MaterialPageRoute(
+          builder: (context) => const EmailVerificationProvider(),
         );
       default:
         return MaterialPageRoute(

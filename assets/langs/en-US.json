@@ -143,5 +143,11 @@
     "deleteMsgSubTitle": "Are you sure you want to delete?",
     "quizQuitMsgTitle": "You're about to quit the quiz!",
     "quizQuitMsgSubTitle": "Are you sure you want to quit?"
+  },
+  "emailVerificationPage": {
+    "title": "Verify Your Email Address",
+    "titleMsg": "We have just send email verification link on your email. Please check email and click on that link to verify your email address.",
+    "resendEmail": "Resend Email Link",
+    "backLogin": "Back to Login"
   }
 }
