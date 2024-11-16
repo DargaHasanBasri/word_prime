@@ -93,3 +93,6 @@ export 'package:word_prime/utils/theme/custom_app_theme.dart';
 export 'package:word_prime/base/initialize/app_localization.dart';
 export 'package:word_prime/base/initialize/app_start.dart';
 export 'package:word_prime/services/service_local_storage.dart';
+export 'package:word_prime/ui/pages/email_verification/email_verification_page.dart';
+export 'package:word_prime/ui/pages/email_verification/email_verification_view_model.dart';
+export 'package:word_prime/ui/pages/email_verification/email_verification_provider.dart';

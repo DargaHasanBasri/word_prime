@@ -143,5 +143,11 @@
     "deleteMsgSubTitle": "Silmek istediğinizden emin misiniz?",
     "quizQuitMsgTitle": "Quizden çıkmak üzeresiniz!",
     "quizQuitMsgSubTitle": "Çıkmak istediğinizden emin misiniz?"
+  },
+  "emailVerificationPage": {
+    "title": "E-posta Adresinizi Doğrulayın ",
+    "titleMsg": "Az önce e-postanıza e-posta doğrulama bağlantısı gönderdik. Lütfen e-postanızı kontrol edin ve e-posta adresinizi doğrulamak için bu bağlantıya tıklayın.",
+    "resendEmail": "Tekrar Emaile Link Gönder",
+    "backLogin": "Giriş Ekranına Dön"
   }
 }
