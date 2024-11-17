@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:word_prime/export.dart';
 
 class EmailVerificationViewModel extends BaseViewModel {
@@ -6,6 +7,19 @@ class EmailVerificationViewModel extends BaseViewModel {
   EmailVerificationViewModel(this.userId, this.userEmail);
 
   Future<bool> checkEmailVerification() async {
-    return await ServiceAuthentication().checkEmailVerification();
+    bool isSuccess = await ServiceAuthentication().checkEmailVerification();
+    if (isSuccess) {
+      try {
+        await FirebaseCollections.users.reference
+            .doc(userId)
+            .update({'email_verification': true});
+        log('Email verification updated successfully');
+      } catch (e) {
+        log('Failed to update email verification: $e');
+      }
+      return true;
+    } else {
+      return false;
+    }
   }
 }

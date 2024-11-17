@@ -42,10 +42,12 @@ final class AppAssets {
   static String icClosePath = _imagePath('ic_close');
   static String icLogoutPath = _imagePath('ic_logout');
   static String icEmailVerificationPath = _imagePath('ic_email_verification');
+  static String icResetPasswordPath = _imagePath('ic_reset_password');
   static String imgSuccessfulPath = _imagePath('img_successful');
   static String imgExampPostPath = _imagePath('img_examp_post');
   static String imgQuizAnalysisPath = _imagePath('img_quiz_analysis');
-  static String imgQuizAnalysisIllustrationPath = _imagePath('img_quiz_analysis_illustration');
+  static String imgQuizAnalysisIllustrationPath =
+      _imagePath('img_quiz_analysis_illustration');
   static String imgImgDeerPath = _imagePath('img_deer');
   static String imgImgBookPath = _imagePath('img_book');
   static String imgImgGetStartedPath = _imagePath('img_get_started');

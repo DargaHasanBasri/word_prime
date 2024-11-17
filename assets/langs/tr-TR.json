@@ -150,5 +150,11 @@
     "titleInfo": "Doğrulamadan sonra otomatik olarak yönlendirilmezse Giriş Ekranına Dön butonuna tıklayın",
     "resendEmail": "Tekrar Emaile Link Gönder",
     "backLogin": "Giriş Ekranına Dön"
+  },
+  "resetPassword": {
+    "title": "Parola Sıfırlama E-postası Gönderildi",
+    "titleInfo": "E-posta adresinizi yanlış girdiğinizi düşünüyorsanız lütfen kayıt ekranına dönün.",
+    "titleSubInfo": "Hesabınızın güvenliği önceliğimizdir şifrenizi güvenle değiştirmeniz ve hesabınızı korumada tutmanız için size güvenli bir bağlantı gönderdik.",
+    "done": "Tamamlandı"
   }
 }

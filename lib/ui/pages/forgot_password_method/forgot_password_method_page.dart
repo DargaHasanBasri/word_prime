@@ -1,7 +1,7 @@
+import 'dart:developer';
+
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/forgot_password_method/components/method_email.dart';
-import 'package:word_prime/ui/pages/forgot_password_method/components/method_name.dart';
-import 'package:word_prime/ui/pages/forgot_password_method/components/method_tab_bar.dart';
 
 class ForgotPasswordMethodPage extends StatefulWidget {
   const ForgotPasswordMethodPage({super.key});
@@ -15,12 +15,10 @@ class _ForgotPasswordMethodPageState
     extends BaseStatefulState<ForgotPasswordMethodPage> {
   late final ForgotPasswordMethodViewModel _vm;
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
 
   @override
   void initState() {
     _vm = Provider.of<ForgotPasswordMethodViewModel>(context, listen: false);
-    _vm.whichTabBar.value = _vm.whichMethod;
     super.initState();
   }
 
@@ -41,46 +39,19 @@ class _ForgotPasswordMethodPageState
       children: [
         Padding(
           padding: AppPaddings.appPaddingVertical,
-          child: ValueListenableBuilder(
-            valueListenable: _vm.whichTabBar,
-            builder: (_, __, ___) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  MethodTabBar(
-                    whichMethod: _vm.whichTabBar.value,
-                    onTapEmailBar: () {
-                      _vm.whichTabBar.value =
-                          AppLocaleConstants.FORGOT_METHOD_EMAIL;
-                    },
-                    onTapNameBar: () {
-                      _vm.whichTabBar.value =
-                          AppLocaleConstants.FORGOT_METHOD_NAME;
-                    },
-                  ),
-                  _vm.whichTabBar.value ==
-                          AppLocaleConstants.FORGOT_METHOD_EMAIL
-                      ? Padding(
-                          padding: AppPaddings.paddingXLargeTop,
-                          child: MethodEmail(
-                            emailController: _emailController,
-                          ),
-                        )
-                      : Padding(
-                          padding: AppPaddings.paddingXLargeTop,
-                          child: MethodName(
-                            nameController: _nameController,
-                          ),
-                        ),
-                ],
-              );
-            },
+          child: MethodEmail(
+            emailController: _emailController,
           ),
         ),
         CustomButton(
           title: LocaleKeys.forgotPassword_sendLink.locale.toUpperCase(),
-          onClick: () {
-            appRoutes.navigateTo(Routes.Login);
+          onClick: () async {
+            await _vm.isEmptyUserEmail(_emailController.text.trim())
+                ? appRoutes.navigateTo(
+                    Routes.ResetPassword,
+                    arguments: _emailController.text,
+                  )
+                : log('Email cannot be left blank.');
           },
         ),
         const Spacer(),

@@ -187,4 +187,20 @@ class ServiceAuthentication {
       return false;
     }
   }
+
+  Future<void> sendResetPasswordLink(String email) async
+  {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      log('Parola sıfırlama bağlantısı gönderildi.');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        log('Bu e-posta adresiyle kayıtlı bir kullanıcı bulunamadı.');
+      } else {
+        log('Bir hata oluştu: ${e.message}');
+      }
+    } catch (e) {
+      log('Bir hata oluştu: $e');
+    }
+  }
 }

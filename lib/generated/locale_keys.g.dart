@@ -138,5 +138,10 @@ abstract class  LocaleKeys {
   static const emailVerificationPage_resendEmail = 'emailVerificationPage.resendEmail';
   static const emailVerificationPage_backLogin = 'emailVerificationPage.backLogin';
   static const emailVerificationPage = 'emailVerificationPage';
+  static const resetPassword_title = 'resetPassword.title';
+  static const resetPassword_titleInfo = 'resetPassword.titleInfo';
+  static const resetPassword_titleSubInfo = 'resetPassword.titleSubInfo';
+  static const resetPassword_done = 'resetPassword.done';
+  static const resetPassword = 'resetPassword';
 
 }

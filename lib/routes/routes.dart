@@ -1,4 +1,5 @@
 import 'package:word_prime/export.dart';
+import 'package:word_prime/ui/pages/reset_password/reset_password_provider.dart';
 
 final class Routes {
   const Routes._();
@@ -23,6 +24,7 @@ final class Routes {
   static const String FollowerFollow = 'followerFollowProvider';
   static const String Quiz = 'quizProvider';
   static const String EmailVerification = 'emailVerificationProvider';
+  static const String ResetPassword = 'resetPasswordProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -51,11 +53,8 @@ final class Routes {
           builder: (context) => const ForgotPasswordProvider(),
         );
       case Routes.ForgotPasswordMethod:
-        final String methodType = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => ForgotPasswordMethodProvider(
-            whichMethod: methodType,
-          ),
+          builder: (context) => ForgotPasswordMethodProvider(),
         );
       case Routes.AddPost:
         return MaterialPageRoute(
@@ -122,6 +121,13 @@ final class Routes {
         return MaterialPageRoute(
           builder: (context) => EmailVerificationProvider(
             userId: userId,
+            userEmail: userEmail,
+          ),
+        );
+      case Routes.ResetPassword:
+        final String userEmail = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => ResetPasswordProvider(
             userEmail: userEmail,
           ),
         );
