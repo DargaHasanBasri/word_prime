@@ -6,6 +6,7 @@ class UserModel with EquatableMixin {
   String? profileImageAddress;
   String? userId;
   String? userName;
+  bool? emailVerification;
 
   UserModel({
     this.email,
@@ -13,11 +14,18 @@ class UserModel with EquatableMixin {
     this.profileImageAddress,
     this.userId,
     this.userName,
+    this.emailVerification,
   });
 
   @override
-  List<Object?> get props =>
-      [email, password, profileImageAddress, userId, userName];
+  List<Object?> get props => [
+        email,
+        password,
+        profileImageAddress,
+        userId,
+        userName,
+        emailVerification
+      ];
 
   UserModel copyWith({
     String? email,
@@ -25,6 +33,7 @@ class UserModel with EquatableMixin {
     String? profileImageAddress,
     String? userId,
     String? userName,
+    bool? emailVerification,
   }) {
     return UserModel(
       email: email ?? this.email,
@@ -32,6 +41,7 @@ class UserModel with EquatableMixin {
       profileImageAddress: profileImageAddress ?? this.profileImageAddress,
       userId: userId ?? this.userId,
       userName: userName ?? this.userName,
+      emailVerification: emailVerification ?? this.emailVerification,
     );
   }
 
@@ -42,6 +52,7 @@ class UserModel with EquatableMixin {
       'profile_image_address': profileImageAddress,
       'user_id': userId,
       'user_name': userName,
+      'email_verification': emailVerification,
     };
   }
 
@@ -52,6 +63,7 @@ class UserModel with EquatableMixin {
       profileImageAddress: json['profile_image_address'] as String?,
       userId: json['user_id'] as String?,
       userName: json['user_name'] as String?,
+      emailVerification: json['email_verification'] as bool?,
     );
   }
 }

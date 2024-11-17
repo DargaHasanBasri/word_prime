@@ -146,7 +146,8 @@
   },
   "emailVerificationPage": {
     "title": "Verify Your Email Address",
-    "titleMsg": "We have just send email verification link on your email. Please check email and click on that link to verify your email address.",
+    "titleMsg": "If you think you entered your email address incorrectly, please return to the registration screen. We have just send email verification link on your email. Please check email and click on that link to verify your email address.",
+    "titleInfo": "If not auto redirected after verification, click on the Back to Login button",
     "resendEmail": "Resend Email Link",
     "backLogin": "Back to Login"
   }

@@ -146,7 +146,8 @@
   },
   "emailVerificationPage": {
     "title": "E-posta Adresinizi Doğrulayın ",
-    "titleMsg": "Az önce e-postanıza e-posta doğrulama bağlantısı gönderdik. Lütfen e-postanızı kontrol edin ve e-posta adresinizi doğrulamak için bu bağlantıya tıklayın.",
+    "titleMsg": "E-posta adresinizi yanlış girdiğinizi düşünüyorsanız lütfen kayıt ekranına dönün. Az önce e-postanıza e-posta doğrulama bağlantısı gönderdik. Lütfen e-postanızı kontrol edin ve e-posta adresinizi doğrulamak için bu bağlantıya tıklayın.",
+    "titleInfo": "Doğrulamadan sonra otomatik olarak yönlendirilmezse Giriş Ekranına Dön butonuna tıklayın",
     "resendEmail": "Tekrar Emaile Link Gönder",
     "backLogin": "Giriş Ekranına Dön"
   }

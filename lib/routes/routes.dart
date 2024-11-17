@@ -116,8 +116,14 @@ final class Routes {
           builder: (context) => const QuizProvider(),
         );
       case Routes.EmailVerification:
+        List<dynamic> arguments = settings.arguments as List;
+        final String userId = arguments[0] as String;
+        final String userEmail = arguments[1] as String;
         return MaterialPageRoute(
-          builder: (context) => const EmailVerificationProvider(),
+          builder: (context) => EmailVerificationProvider(
+            userId: userId,
+            userEmail: userEmail,
+          ),
         );
       default:
         return MaterialPageRoute(
