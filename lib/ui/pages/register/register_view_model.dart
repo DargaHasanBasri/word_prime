@@ -27,17 +27,20 @@ class RegisterViewModel extends BaseViewModel {
   ///
   /// Parameters:
   /// - [onRegistrationSuccess]: Callback to run when registration is successful.
+  String? userId;
   Future<void> register(VoidCallback? onRegistrationSuccess) async {
-    bool isSuccess = await ServiceAuthentication().register(
+    UserCredential? userCredential = await ServiceAuthentication().register(
       userModel: UserModel(
         email: emailInput.value,
         password: passwordInput.value,
         userName: nameInput.value,
         profileImageAddress: AppLocaleConstants.DEFAULT_PROFILE_PICTURE,
+        emailVerification: false,
       ),
     );
 
-    if (isSuccess) {
+    if (userCredential?.user != null) {
+      userId = userCredential?.user?.uid;
       log("Success");
       onRegistrationSuccess?.call();
     } else {

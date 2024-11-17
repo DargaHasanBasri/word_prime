@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:word_prime/export.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -119,8 +121,16 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
                           _vm.isEmptyInputText()
                               ? null
                               : _vm.register(
-                                  () => appRoutes
-                                      .navigateToReplacement(Routes.Login),
+                                  () {
+                                    appRoutes.navigateTo(
+                                      Routes.EmailVerification,
+                                      arguments: [
+                                        _vm.userId,
+                                        _vm.emailInput.value,
+                                      ],
+                                    );
+                                    log(_vm.userId.toString());
+                                  },
                                 );
                         },
                       ),

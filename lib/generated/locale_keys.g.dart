@@ -134,6 +134,7 @@ abstract class  LocaleKeys {
   static const warningMessages = 'warningMessages';
   static const emailVerificationPage_title = 'emailVerificationPage.title';
   static const emailVerificationPage_titleMsg = 'emailVerificationPage.titleMsg';
+  static const emailVerificationPage_titleInfo = 'emailVerificationPage.titleInfo';
   static const emailVerificationPage_resendEmail = 'emailVerificationPage.resendEmail';
   static const emailVerificationPage_backLogin = 'emailVerificationPage.backLogin';
   static const emailVerificationPage = 'emailVerificationPage';

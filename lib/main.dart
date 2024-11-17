@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       darkTheme: CustomAppTheme.darkTheme,
       navigatorKey: locator<AppRoutes>().baseNavigatorKey,
       onGenerateRoute: Routes.generateRoute,
-      initialRoute: Routes.EmailVerification,
+      initialRoute: Routes.Register,
       builder: (context, widget) {
         return widget!;
       },

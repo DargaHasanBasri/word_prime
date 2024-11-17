@@ -22,7 +22,7 @@ class ServiceAuthentication {
   /// Return:
   /// - Returns `true` if the registration is successful, `false`
   /// if the registration is unsuccessful.
-  Future<bool> register({
+  Future<UserCredential?> register({
     required UserModel userModel,
   }) async {
     try {
@@ -33,16 +33,21 @@ class ServiceAuthentication {
         email: userModel.email!,
         password: userModel.password!,
       );
+
       if (userCredential.user != null) {
+        await userCredential.user?.sendEmailVerification();
+        log('Verification email sent!');
+
         /// Assigns the user's identity (UID) to the `userId` field
         String uid = userCredential.user!.uid;
         userModel.userId = uid;
 
         /// Saves user data to Firestore
-        FirebaseCollections.users.reference.doc(userModel.userId).set(
+        await FirebaseCollections.users.reference.doc(userModel.userId).set(
               userModel.toJson(),
             );
-        return true;
+
+        return userCredential;
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -56,7 +61,7 @@ class ServiceAuthentication {
       /// Catches all other errors and logs the general error message.
       log("An error occurred", error: e);
     }
-    return false;
+    return null;
   }
 
   /// Performs user login.
@@ -141,6 +146,7 @@ class ServiceAuthentication {
               profileImageAddress: firebaseUser.photoURL ?? googleUser.photoUrl,
               userId: firebaseUser.uid,
               userName: firebaseUser.displayName ?? googleUser.displayName,
+              emailVerification: true,
             ).toJson(),
           );
 
@@ -153,7 +159,6 @@ class ServiceAuthentication {
       /// It catches all other errors and logs the general error message.
       log("An error occurred", error: e);
     }
-
     return null;
   }
 
@@ -166,5 +171,20 @@ class ServiceAuthentication {
     /// Sign out of Google Sign-In
     await googleSignIn.signOut();
     log("Google session terminated.");
+  }
+
+  Future<bool> checkEmailVerification() async {
+    User? user = _firebaseAuth.currentUser;
+
+    await user?.reload();
+    user = _firebaseAuth.currentUser;
+
+    if (user != null && user.emailVerified) {
+      log('E-posta doğrulandı, Login sayfasına yönlendiriliyor.');
+      return true;
+    } else {
+      log('E-posta henüz doğrulanmadı.');
+      return false;
+    }
   }
 }
