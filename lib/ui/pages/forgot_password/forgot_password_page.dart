@@ -39,26 +39,11 @@ class _ForgotPasswordPageState extends BaseStatefulState<ForgotPasswordPage> {
           ),
           PasswordResetMethod(
             onClick: () {
-              appRoutes.navigateTo(
-                Routes.ForgotPasswordMethod,
-                arguments: AppLocaleConstants.FORGOT_METHOD_EMAIL,
-              );
+              appRoutes.navigateTo(Routes.ForgotPasswordMethod);
             },
             title: LocaleKeys.emailHintText.locale,
             subTitle: LocaleKeys.forgotPassword_enterMailHintText.locale,
             iconAddress: AppAssets.icSmsPath,
-          ),
-          SizedBox(height: 12),
-          PasswordResetMethod(
-            onClick: () {
-              appRoutes.navigateTo(
-                Routes.ForgotPasswordMethod,
-                arguments: AppLocaleConstants.FORGOT_METHOD_NAME,
-              );
-            },
-            title: LocaleKeys.nameHintText.locale,
-            subTitle: LocaleKeys.forgotPassword_enterNameHintText.locale,
-            iconAddress: AppAssets.icUserPath,
           ),
         ],
       ),

@@ -1,8 +1,11 @@
 import 'package:word_prime/export.dart';
 
 class ForgotPasswordMethodViewModel extends BaseViewModel {
-  final String whichMethod;
-  ForgotPasswordMethodViewModel(this.whichMethod);
-
-  ValueNotifier<String> whichTabBar = ValueNotifier('');
+  Future<bool> isEmptyUserEmail(String emailText) async {
+    if (emailText.isNotEmpty) {
+      await ServiceAuthentication().sendResetPasswordLink(emailText);
+      return true;
+    }
+    return false;
+  }
 }

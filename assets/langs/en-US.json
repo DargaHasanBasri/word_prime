@@ -150,5 +150,11 @@
     "titleInfo": "If not auto redirected after verification, click on the Back to Login button",
     "resendEmail": "Resend Email Link",
     "backLogin": "Back to Login"
+  },
+  "resetPassword": {
+    "title": "Password Reset Email Sent",
+    "titleInfo": "If you think you entered your email address incorrectly, please return to the registration screen.",
+    "titleSubInfo": "Your account security is our priority we've sent you a secure link to safely change your password and keep your account protected.",
+    "done": "Done"
   }
 }

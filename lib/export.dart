@@ -96,3 +96,5 @@ export 'package:word_prime/services/service_local_storage.dart';
 export 'package:word_prime/ui/pages/email_verification/email_verification_page.dart';
 export 'package:word_prime/ui/pages/email_verification/email_verification_view_model.dart';
 export 'package:word_prime/ui/pages/email_verification/email_verification_provider.dart';
+export 'package:word_prime/ui/pages/reset_password/reset_password_view_model.dart';
+export 'package:word_prime/ui/pages/reset_password/reset_password_page.dart';
