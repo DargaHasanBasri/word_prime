@@ -46,12 +46,18 @@ class _ForgotPasswordMethodPageState
         CustomButton(
           title: LocaleKeys.forgotPassword_sendLink.locale.toUpperCase(),
           onClick: () async {
-            await _vm.isEmptyUserEmail(_emailController.text.trim())
+            bool result = await _vm.processPasswordReset(
+              email: _emailController.text.trim(),
+              showProgress: () => showProgress(context),
+              hideProgress: () => hideProgress(),
+            );
+
+            result
                 ? appRoutes.navigateTo(
                     Routes.ResetPassword,
                     arguments: _emailController.text,
                   )
-                : log('Email cannot be left blank.');
+                : log('Failed to process password reset.');
           },
         ),
         const Spacer(),
