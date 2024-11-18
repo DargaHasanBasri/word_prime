@@ -188,8 +188,7 @@ class ServiceAuthentication {
     }
   }
 
-  Future<void> sendResetPasswordLink(String email) async
-  {
+  Future<void> sendResetPasswordLink(String email) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
       log('Parola sıfırlama bağlantısı gönderildi.');
@@ -199,8 +198,10 @@ class ServiceAuthentication {
       } else {
         log('Bir hata oluştu: ${e.message}');
       }
+      rethrow;
     } catch (e) {
       log('Bir hata oluştu: $e');
+      rethrow;
     }
   }
 }

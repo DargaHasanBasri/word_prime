@@ -1,9 +1,122 @@
+import 'dart:async';
+
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:word_prime/export.dart';
 
 abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
   final AppRoutes appRoutes = locator<AppRoutes>();
   final ServiceLocalStorage serviceLocalStorage =
       locator<ServiceLocalStorage>();
+
+  /// OverlayEntry object used for the loading animation
+  /// to be displayed on the screen
+  /// Defines the appearance and behavior of the loading screen
+  /// that will be displayed
+  OverlayEntry? _progressOverlayEntry;
+
+  /// A timer to automatically close the loading screen
+  Timer? _timeoutTimer;
+
+  /// Maximum time for the loading screen to appear (in seconds)
+  static const int TIMEOUT = 10;
+
+  /// Variable used to track remaining time during countdown
+  int _remainingTime = TIMEOUT;
+
+  @override
+  void initState() {
+    /// First, it is assumed that there is no OverlayEntry
+    _progressOverlayEntry = null;
+    super.initState();
+  }
+
+  /// Use to show a loading animation to the user during
+  /// long running operations
+  void showProgress(BuildContext context) {
+    /// If a progress overlay is already displayed, it is not added again
+    if (_progressOverlayEntry != null) return;
+
+    /// Create a new OverlayEntry
+    _progressOverlayEntry = _createProgressOverlay();
+
+    /// Add the newly created entry to the overlay
+    Overlay.of(context).insert(_progressOverlayEntry!);
+
+    ///Start the countdown to timeout
+    _startTimer();
+  }
+
+  /// Use when an action is completed or the loading animation
+  /// is no longer necessary
+  void hideProgress() {
+    try {
+      /// If a progress overlay has been added and is still on the screen, remove it.
+      if (_progressOverlayEntry != null && _progressOverlayEntry!.mounted) {
+        /// Removes the overlay
+        _progressOverlayEntry!.remove();
+
+        /// Resets the reference
+        _progressOverlayEntry = null;
+
+        /// Stops the timer
+        _timeoutTimer?.cancel();
+
+        /// Resets the timer to the initial value
+        _remainingTime = TIMEOUT;
+      }
+    } catch (e) {
+      /// In case of any error, the error is caught
+      debugPrint('Hide progress error: $e');
+    }
+  }
+
+  /// When `showProgress` is called it automatically starts the countdown.
+  /// If `hideProgress` is not called within a certain time (TIMEOUT),
+  /// it will automatically close the loading animation.
+  void _startTimer() {
+    /// If there is already a timer, cancel it
+    _timeoutTimer?.cancel();
+    _remainingTime = TIMEOUT;
+
+    /// Start a new timer
+    _timeoutTimer = Timer.periodic(
+      /// It runs every second
+      const Duration(seconds: 1),
+      (Timer timer) {
+        if (_remainingTime == 0) {
+          /// Hide progress overlay and stop timer if time is up
+          hideProgress();
+          timer.cancel();
+        } else {
+          /// Decrease the countdown by one
+          _remainingTime--;
+        }
+      },
+    );
+  }
+
+  /// Used to create a loading screen.
+  /// It is called by `showProgress` and added to the screen.
+  OverlayEntry _createProgressOverlay() => OverlayEntry(
+        builder: (BuildContext context) => Stack(
+          children: [
+            /// Creates a translucent background
+            ModalBarrier(
+              /// User cannot touch other places
+              dismissible: false,
+
+              /// Opacity of the background
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+            ),
+            Center(
+              child: SpinKitFadingCircle(
+                color: Theme.of(context).colorScheme.secondary,
+                size: 50.0,
+              ),
+            ),
+          ],
+        ),
+      );
 
   void showPopupDialog({
     required BuildContext context,
