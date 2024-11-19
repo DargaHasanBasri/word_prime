@@ -115,13 +115,12 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
                       child: CustomButton(
                         title: LocaleKeys.signUp.locale.toUpperCase(),
                         backgroundColor: _vm.isEmptyInputText()
-                            ? AppColors.cornflowerBlue.withOpacity(0.4)
-                            : AppColors.cornflowerBlue,
+                            ? AppColors.cornflowerBlue
+                            : AppColors.cornflowerBlue.withOpacity(0.4),
                         onClick: () {
                           _vm.isEmptyInputText()
-                              ? null
-                              : _vm.register(
-                                  () {
+                              ? _vm.register(
+                                  onRegistrationSuccess: () {
                                     appRoutes.navigateTo(
                                       Routes.EmailVerification,
                                       arguments: [
@@ -131,7 +130,10 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
                                     );
                                     log(_vm.userId.toString());
                                   },
-                                );
+                                  showProgress: () => showProgress(context),
+                                  hideProgress: () => hideProgress(),
+                                )
+                              : log('boş bırakılamaz');
                         },
                       ),
                     );

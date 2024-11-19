@@ -8,13 +8,12 @@ class ForgotPasswordMethodViewModel extends BaseViewModel {
     required Function hideProgress,
   }) async {
     try {
-      showProgress();
-
       if (email.isEmpty) {
         log('Email cannot be left blank.');
         return false;
       }
 
+      showProgress();
       await ServiceAuthentication().sendResetPasswordLink(email);
 
       return true;

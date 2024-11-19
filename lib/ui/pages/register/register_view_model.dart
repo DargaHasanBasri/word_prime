@@ -14,10 +14,9 @@ class RegisterViewModel extends BaseViewModel {
 
   /// Check whether the contents of the email-password-name variables are empty
   bool isEmptyInputText() {
-    if (emailInput.value.isEmpty ||
-        passwordInput.value.isEmpty ||
-        nameInput.value.isEmpty) return true;
-    return false;
+    return emailInput.value.isNotEmpty &&
+        passwordInput.value.isNotEmpty &&
+        nameInput.value.isNotEmpty;
   }
 
   /// It allows the user to register using their e-mail, password and other information.
@@ -28,23 +27,33 @@ class RegisterViewModel extends BaseViewModel {
   /// Parameters:
   /// - [onRegistrationSuccess]: Callback to run when registration is successful.
   String? userId;
-  Future<void> register(VoidCallback? onRegistrationSuccess) async {
-    UserCredential? userCredential = await ServiceAuthentication().register(
-      userModel: UserModel(
-        email: emailInput.value,
-        password: passwordInput.value,
-        userName: nameInput.value,
-        profileImageAddress: AppLocaleConstants.DEFAULT_PROFILE_PICTURE,
-        emailVerification: false,
-      ),
-    );
+  Future<void> register({
+    VoidCallback? onRegistrationSuccess,
+    required Function showProgress,
+    required Function hideProgress,
+  }) async {
+    try {
+      showProgress();
 
-    if (userCredential?.user != null) {
-      userId = userCredential?.user?.uid;
-      log("Success");
-      onRegistrationSuccess?.call();
-    } else {
-      log("Registration failed.");
+      UserCredential? userCredential = await ServiceAuthentication().register(
+        userModel: UserModel(
+          email: emailInput.value,
+          password: passwordInput.value,
+          userName: nameInput.value,
+          profileImageAddress: AppLocaleConstants.DEFAULT_PROFILE_PICTURE,
+          emailVerification: false,
+        ),
+      );
+
+      if (userCredential != null) {
+        userId = userCredential.user!.uid;
+        log("Success");
+        onRegistrationSuccess?.call();
+      }
+    } catch (e) {
+      log('An error occurred: $e');
+    } finally {
+      hideProgress();
     }
   }
 }

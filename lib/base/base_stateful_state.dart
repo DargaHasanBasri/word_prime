@@ -157,4 +157,46 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
       },
     );
   }
+
+  void showSnackBar({
+    required BuildContext context,
+    required String text,
+  }) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      new SnackBar(
+        backgroundColor: Colors.transparent,
+        margin: const EdgeInsets.all(10),
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+        duration: const Duration(seconds: 2),
+        content: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.blue, width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Row(
+            children: [
+              const Icon(Icons.info, color: Colors.blue),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  text,
+                  style: const TextStyle(color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
