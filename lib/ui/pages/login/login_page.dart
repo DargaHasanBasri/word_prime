@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:word_prime/export.dart';
 
 class LoginPage extends StatefulWidget {
@@ -105,18 +107,20 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                       child: CustomButton(
                         title: LocaleKeys.signIn.locale.toUpperCase(),
                         backgroundColor: _vm.isEmptyInputText()
-                            ? AppColors.cornflowerBlue.withOpacity(0.4)
-                            : AppColors.cornflowerBlue,
+                            ? AppColors.cornflowerBlue
+                            : AppColors.cornflowerBlue.withOpacity(0.4),
                         onClick: () {
                           _vm.isEmptyInputText()
-                              ? null
-                              : _vm.login(
+                              ? _vm.login(
                                   onLoginSuccess: () {
                                     appRoutes.navigateToReplacement(
                                       Routes.MainTab,
                                     );
                                   },
-                                );
+                                  showProgress: () => showProgress(context),
+                                  hideProgress: () => hideProgress(),
+                                )
+                              : log('Boş bırakılamaz');
                         },
                       ),
                     );
@@ -142,6 +146,8 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                         Routes.MainTab,
                       );
                     },
+                    showProgress: () => showProgress(context),
+                    hideProgress: () => hideProgress(),
                   );
                 },
               ),

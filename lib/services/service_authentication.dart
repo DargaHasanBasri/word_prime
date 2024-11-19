@@ -20,7 +20,7 @@ class ServiceAuthentication {
   /// user to be registered.
   ///
   /// Return:
-  /// - Returns `true` if the registration is successful, `false`
+  /// - Returns `UserCredential` if the registration is successful, `null`
   /// if the registration is unsuccessful.
   Future<UserCredential?> register({
     required UserModel userModel,
@@ -53,13 +53,16 @@ class ServiceAuthentication {
       if (e.code == 'weak-password') {
         /// If the password is too weak, it logs the error.
         log("The password provided is too weak.", error: e);
+        rethrow;
       } else if (e.code == 'email-already-in-use') {
         /// If email is already in use, it logs the error.
         log("The account already exists for that email.", error: e);
+        rethrow;
       }
     } catch (e) {
       /// Catches all other errors and logs the general error message.
       log("An error occurred", error: e);
+      rethrow;
     }
     return null;
   }
@@ -75,7 +78,7 @@ class ServiceAuthentication {
   ///
   /// Return:
   /// - User's UID on successful login, `null` on unsuccessful login.
-  Future<String?> login({
+  Future<UserCredential?> login({
     required String email,
     required String password,
   }) async {
@@ -85,10 +88,7 @@ class ServiceAuthentication {
         email: email,
         password: password,
       );
-
-      /// The user ID (UID) is retrieved and returned.
-      String? userId = userCredential.user?.uid;
-      return userId;
+      return userCredential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         /// If the user cannot be found via email, an error is logged.
@@ -155,11 +155,12 @@ class ServiceAuthentication {
     } on FirebaseAuthException catch (e) {
       /// Firebase authentication errors.
       log("Firebase error: ${e.message}", error: e);
+      rethrow;
     } on Exception catch (e) {
       /// It catches all other errors and logs the general error message.
       log("An error occurred", error: e);
+      rethrow;
     }
-    return null;
   }
 
   /// Logs out the user who is logged in with their google.
@@ -171,6 +172,33 @@ class ServiceAuthentication {
     /// Sign out of Google Sign-In
     await googleSignIn.signOut();
     log("Google session terminated.");
+  }
+
+  Future<void> resendEmailVerificationLink(User? user) async {
+    try {
+      if (user == null) {
+        log('User is null. The verification email could not be sent');
+        return;
+      }
+
+      if (user.emailVerified) {
+        log('Email is already verified');
+        return;
+      }
+
+      await user.sendEmailVerification();
+      log('Verification email sent!');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        log('Bu e-posta adresiyle kayıtlı bir kullanıcı bulunamadı.');
+      } else {
+        log('Bir hata oluştu: ${e.message}');
+      }
+      rethrow;
+    } catch (e) {
+      log('Bir hata oluştu: $e');
+      rethrow;
+    }
   }
 
   Future<bool> checkEmailVerification() async {

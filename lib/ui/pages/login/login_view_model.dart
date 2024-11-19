@@ -13,8 +13,7 @@ class LoginViewModel extends BaseViewModel {
 
   /// Check whether the contents of the email and password variables are empty
   bool isEmptyInputText() {
-    if (emailInput.value.isEmpty || passwordInput.value.isEmpty) return true;
-    return false;
+    return emailInput.value.isNotEmpty && passwordInput.value.isNotEmpty;
   }
 
   /// Allows the user to log in using their e-mail and password information.
@@ -25,24 +24,34 @@ class LoginViewModel extends BaseViewModel {
   /// - [onLoginSuccess]: Callback to be executed when login is successful.
   /// If the login is successful, the user ID is assigned to the `userId` variable
   String? userId;
-  Future<void> login({VoidCallback? onLoginSuccess}) async {
-    String? uid = await ServiceAuthentication().login(
-      email: emailInput.value,
-      password: passwordInput.value,
-    );
+  Future<void> login({
+    VoidCallback? onLoginSuccess,
+    required Function showProgress,
+    required Function hideProgress,
+  }) async {
+    try {
+      showProgress();
 
-    if (uid != null) {
-      userId = uid;
-      onLoginSuccess?.call();
-      log("$userId");
+      UserCredential? userCredential = await ServiceAuthentication().login(
+        email: emailInput.value,
+        password: passwordInput.value,
+      );
 
-      /// Stores the user's email and user ID in local storage when they log in.
-      /// The `setString` method is used to save these values with the specified keys.
-      await serviceLocalStorage.setString('email', emailInput.value);
-      await serviceLocalStorage.setString('userId', userId!);
-      log("email saved");
-    } else {
-      log("Login failed.");
+      if (userCredential != null) {
+        userId = userCredential.user!.uid;
+        onLoginSuccess?.call();
+        log("$userId");
+
+        /// Stores the user's email and user ID in local storage when they log in.
+        /// The `setString` method is used to save these values with the specified keys.
+        await serviceLocalStorage.setString('email', emailInput.value);
+        await serviceLocalStorage.setString('userId', userId!);
+        log("email saved");
+      }
+    } catch (e) {
+      log('An error occurred: $e');
+    } finally {
+      hideProgress();
     }
   }
 
@@ -50,7 +59,11 @@ class LoginViewModel extends BaseViewModel {
   /// If the login is successful, `onLoginSuccess` is called.
   String? googleUserId;
   String? googleEmail;
-  Future<void> loginWithGoogle({VoidCallback? onLoginSuccess}) async {
+  Future<void> loginWithGoogle({
+    VoidCallback? onLoginSuccess,
+    required Function showProgress,
+    required Function hideProgress,
+  }) async {
     /// Log in with Google and get the user ID.
     final userCredential = await ServiceAuthentication().loginWithGoogle();
 

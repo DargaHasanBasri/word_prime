@@ -34,7 +34,10 @@ class _EmailVerificationPageState
       log('Back to the application, checking email verification status.');
       await _vm.checkEmailVerification()
           ? appRoutes.navigateRemoveUntil(Routes.Login)
-          : log('E-posta henüz doğrulanmadı.');
+          : showSnackBar(
+              context: context,
+              text: 'E-posta henüz doğrulanmadı',
+            );
       ;
     }
   }
@@ -58,7 +61,7 @@ class _EmailVerificationPageState
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: AppPaddings.paddingXLargeBottom,
+          padding: AppPaddings.paddingLargeBottom,
           child: Image.asset(
             AppAssets.icEmailVerificationPath,
             height: AppSizes.firstHundredContainerWidth,
@@ -66,25 +69,29 @@ class _EmailVerificationPageState
           ),
         ),
         Text(
-          _vm.userEmail,
-          style: Theme.of(context).textTheme.headlineMedium,
+          LocaleKeys.emailVerificationPage_title.locale,
+          style: Theme.of(context).textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
         Text(
-          LocaleKeys.emailVerificationPage_title.locale,
-          style: Theme.of(context).textTheme.headlineMedium,
+          _vm.userEmail,
+          style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
         SizedBox(height: AppSizes.sizedBoxOverallHeight),
         Text(
           LocaleKeys.emailVerificationPage_titleMsg.locale,
-          style: Theme.of(context).textTheme.titleSmall,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).colorScheme.onTertiary,
+              ),
           textAlign: TextAlign.center,
         ),
         SizedBox(height: AppSizes.sizedBoxMediumHeight),
         Text(
           LocaleKeys.emailVerificationPage_titleInfo.locale,
-          style: Theme.of(context).textTheme.titleSmall,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).colorScheme.onTertiary,
+              ),
           textAlign: TextAlign.center,
         ),
         Padding(
@@ -92,18 +99,27 @@ class _EmailVerificationPageState
           child: CustomButton(
             title: LocaleKeys.emailVerificationPage_resendEmail.locale
                 .toUpperCase(),
-            onClick: () {},
+            onClick: () async {
+              await _vm.checkEmailVerification()
+                  ? log('E-posta doğrulanmış')
+                  : _vm.resendEmailVerification(
+                      showProgress: () => showProgress(context),
+                      hideProgress: () => hideProgress(),
+                    );
+            },
           ),
         ),
         Padding(
-          padding: AppPaddings.paddingLargeTop,
+          padding: AppPaddings.paddingMediumTop,
           child: CustomButton(
-            title:
-                LocaleKeys.emailVerificationPage_backLogin.locale.toUpperCase(),
+            title: LocaleKeys.resetPassword_done.locale.toUpperCase(),
             onClick: () async {
               await _vm.checkEmailVerification()
                   ? appRoutes.navigateRemoveUntil(Routes.Login)
-                  : log('E-posta henüz doğrulanmadı.');
+                  : showSnackBar(
+                      context: context,
+                      text: 'E-posta henüz doğrulanmadı',
+                    );
             },
           ),
         ),
