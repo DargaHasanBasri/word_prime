@@ -2,26 +2,37 @@ import 'dart:developer';
 import 'package:word_prime/export.dart';
 
 class ForgotPasswordMethodViewModel extends BaseViewModel {
-  Future<bool> processPasswordReset({
-    required String email,
-    required Function showProgress,
-    required Function hideProgress,
+  ///  Variable in which I store the changes of email values in the text form field
+  ValueNotifier<String> emailInput = ValueNotifier('');
+
+  Future<void> processPasswordReset({
+    /// Function to call when send link is successful
+    required VoidCallback onSendLinkSuccess,
+
+    /// Function to initialize the loading indicator
+    required VoidCallback showProgress,
+
+    /// Function to stop the loading indicator
+    required VoidCallback hideProgress,
+
+    /// Function to display the error message. Returns the error message
+    required VoidCallback showErrorSnackBar,
   }) async {
     try {
-      if (email.isEmpty) {
-        log('Email cannot be left blank.');
-        return false;
-      }
+      /// Call to start loading indicator
+      showProgress.call();
+      /// Sends a password reset link to the email address provided in 'emailInput.value'
+      ///
+      await ServiceAuthentication().sendResetPasswordLink(emailInput.value);
 
-      showProgress();
-      await ServiceAuthentication().sendResetPasswordLink(email);
-
-      return true;
+      /// Send link runs successful callback function
+      onSendLinkSuccess.call();
     } catch (e) {
       log('An error occurred: $e');
-      return false;
+      showErrorSnackBar.call();
     } finally {
-      hideProgress();
+      /// Runs to turn off the loading indicator in all cases
+      hideProgress.call();
     }
   }
 }

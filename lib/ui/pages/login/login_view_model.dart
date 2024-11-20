@@ -16,42 +16,58 @@ class LoginViewModel extends BaseViewModel {
     return emailInput.value.isNotEmpty && passwordInput.value.isNotEmpty;
   }
 
-  /// Allows the user to log in using their e-mail and password information.
-  /// the `onLoginSuccess` callback is invoked. If login fails,
-  /// an error message is logged.
-  ///
-  /// Parameters:
-  /// - [onLoginSuccess]: Callback to be executed when login is successful.
-  /// If the login is successful, the user ID is assigned to the `userId` variable
+  /// Holds the user ID after successful login
   String? userId;
   Future<void> login({
-    VoidCallback? onLoginSuccess,
-    required Function showProgress,
-    required Function hideProgress,
+    /// Callback when login is successful
+    required VoidCallback onLoginSuccess,
+
+    /// Callback to show progress indicator
+    required VoidCallback showProgress,
+
+    /// Callback to hide progress indicator
+    required VoidCallback hideProgress,
+
+    /// Callback to show error message
+    required void Function(String message) showErrorSnackBar,
   }) async {
     try {
-      showProgress();
+      /// Show progress indicator at the start of the login process
+      showProgress.call();
 
+      /// Firebase user login with provided email and password
       UserCredential? userCredential = await ServiceAuthentication().login(
         email: emailInput.value,
         password: passwordInput.value,
       );
 
       if (userCredential != null) {
+        /// Retrieve the user ID from the UserCredential object
         userId = userCredential.user!.uid;
-        onLoginSuccess?.call();
-        log("$userId");
 
-        /// Stores the user's email and user ID in local storage when they log in.
-        /// The `setString` method is used to save these values with the specified keys.
+        /// Save the email and userId locally for future use
         await serviceLocalStorage.setString('email', emailInput.value);
         await serviceLocalStorage.setString('userId', userId!);
         log("email saved");
+
+        /// Call the success callback after successful login
+        onLoginSuccess.call();
+        log("$userId");
+      }
+    } on FirebaseAuthException catch (e) {
+      /// Handle specific FirebaseAuthExceptions
+      if (e.code == 'user-not-found') {
+        showErrorSnackBar(LocaleKeys.warningMessages_userNotFound.locale);
+        log('An error occurred in ViewModel: $e');
+      } else if (e.code == 'wrong-password') {
+        showErrorSnackBar(LocaleKeys.warningMessages_wrongPassword.locale);
       }
     } catch (e) {
-      log('An error occurred: $e');
+      log('An error occurred in ViewModel: $e');
+      showErrorSnackBar(LocaleKeys.warningMessages_errorOccurred.locale);
     } finally {
-      hideProgress();
+      /// Ensure the progress indicator is hidden regardless of the outcome
+      hideProgress.call();
     }
   }
 

@@ -142,7 +142,17 @@
     "deleteMsgTitle": "Delete your post?",
     "deleteMsgSubTitle": "Are you sure you want to delete?",
     "quizQuitMsgTitle": "You're about to quit the quiz!",
-    "quizQuitMsgSubTitle": "Are you sure you want to quit?"
+    "quizQuitMsgSubTitle": "Are you sure you want to quit?",
+    "emptySpace": "No empty space can be left!",
+    "weakPassword": "Password too weak. Enter a stronger password!",
+    "emailAlreadyUse": "This email address is already in use!",
+    "invalidEmail": "Email address is spelled incorrectly. Check it out!",
+    "unexpectedError": "An unexpected error occurred. Try again!",
+    "errorOccurred": "An error has occurred. Please try again!",
+    "emailNotYetVerified": "Email not yet verified!",
+    "emailAlreadyVerified": "Email is already verified!",
+    "userNotFound": "No users found for this email!",
+    "wrongPassword": "User information is incorrect. Try Again!"
   },
   "emailVerificationPage": {
     "title": "Verify Your Email Address",

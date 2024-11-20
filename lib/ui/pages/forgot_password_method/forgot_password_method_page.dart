@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:word_prime/export.dart';
-import 'package:word_prime/ui/pages/forgot_password_method/components/method_email.dart';
 
 class ForgotPasswordMethodPage extends StatefulWidget {
   const ForgotPasswordMethodPage({super.key});
@@ -23,8 +20,15 @@ class _ForgotPasswordMethodPageState
   }
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: _buildAppBar(),
       body: Padding(
         padding: AppPaddings.appPaddingHorizontal,
@@ -39,27 +43,48 @@ class _ForgotPasswordMethodPageState
       children: [
         Padding(
           padding: AppPaddings.appPaddingVertical,
-          child: MethodEmail(
-            emailController: _emailController,
-          ),
+          child: emailMethod(),
         ),
-        CustomButton(
-          title: LocaleKeys.forgotPassword_sendLink.locale.toUpperCase(),
-          onClick: () async {
-            bool result = await _vm.processPasswordReset(
-              email: _emailController.text.trim(),
-              showProgress: () => showProgress(context),
-              hideProgress: () => hideProgress(),
-            );
-
-            result
-                ? appRoutes.navigateTo(
-                    Routes.ResetPassword,
-                    arguments: _emailController.text,
-                  )
-                : log('Failed to process password reset.');
-          },
-        ),
+        ValueListenableBuilder(
+            valueListenable: _vm.emailInput,
+            builder: (_, __, ___) {
+              return CustomButton(
+                title: LocaleKeys.forgotPassword_sendLink.locale.toUpperCase(),
+                backgroundColor: _vm.emailInput.value.isNotEmpty
+                    ? AppColors.cornflowerBlue
+                    : AppColors.cornflowerBlue.withOpacity(0.4),
+                onClick: () async {
+                  _vm.emailInput.value.isNotEmpty
+                      ? _vm.processPasswordReset(
+                          showProgress: () => showProgress(context),
+                          hideProgress: () => hideProgress(),
+                          onSendLinkSuccess: () {
+                            appRoutes.navigateTo(
+                              Routes.ResetPassword,
+                              arguments: _emailController.text,
+                            );
+                          },
+                          showErrorSnackBar: () {
+                            showSnackBar(
+                              context: context,
+                              content: CustomSnackBarContent(
+                                text: LocaleKeys
+                                    .warningMessages_unexpectedError.locale,
+                                iconType: CustomSnackBarType.error,
+                              ),
+                            );
+                          },
+                        )
+                      : showSnackBar(
+                          context: context,
+                          content: CustomSnackBarContent(
+                            text: LocaleKeys.warningMessages_emptySpace.locale,
+                            iconType: CustomSnackBarType.info,
+                          ),
+                        );
+                },
+              );
+            }),
         const Spacer(),
         Center(
           child: _richTextSignUp(),
@@ -83,11 +108,39 @@ class _ForgotPasswordMethodPageState
                 ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                appRoutes.navigateTo(Routes.Register);
+                appRoutes.navigateRemoveUntil(Routes.Register);
               },
           ),
         ],
       ),
+    );
+  }
+
+  Widget emailMethod() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          LocaleKeys.forgotPassword_enterMailHintText.locale,
+          style:
+              Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize: 24),
+        ),
+        SizedBox(height: AppSizes.sizedBoxSmallHeight),
+        Text(
+          LocaleKeys.forgotPassword_forgotMethodEmailMsg.locale,
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        SizedBox(height: AppSizes.sizedBoxLargeHeight),
+        CustomTextFormField(
+          controller: _emailController,
+          hintText: LocaleKeys.emailHintText.locale,
+          isPrefixIcon: true,
+          prefixIconAddress: AppAssets.icSmsPath,
+          onChanged: (String text) {
+            _vm.emailInput.value = text;
+          },
+        ),
+      ],
     );
   }
 

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:word_prime/export.dart';
 
 class ResetPasswordViewModel extends BaseViewModel {
