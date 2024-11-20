@@ -28,4 +28,5 @@ final class AppColors {
   static Color goldenDream = const Color(0xffFDC83D);
   static Color greenishTeal = const Color(0xff25D076);
   static Color ruddyPink = const Color(0xffE88B8C);
+  static Color fadedOrange = const Color(0xffE89148);
 }

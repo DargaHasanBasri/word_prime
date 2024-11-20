@@ -1,6 +1,6 @@
 import 'dart:developer';
-
 import 'package:word_prime/export.dart';
+import 'package:word_prime/ui/widgets/custom_snack_bar_content.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -132,8 +132,24 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
                                   },
                                   showProgress: () => showProgress(context),
                                   hideProgress: () => hideProgress(),
+                                  showErrorSnackBar: (String message) {
+                                    showSnackBar(
+                                      context: context,
+                                      content: CustomSnackBarContent(
+                                        text: message,
+                                        iconType: CustomSnackBarType.error,
+                                      ),
+                                    );
+                                  },
                                 )
-                              : log('boş bırakılamaz');
+                              : showSnackBar(
+                                  context: context,
+                                  content: CustomSnackBarContent(
+                                    text: LocaleKeys
+                                        .warningMessages_emptySpace.locale,
+                                    iconType: CustomSnackBarType.info,
+                                  ),
+                                );
                         },
                       ),
                     );

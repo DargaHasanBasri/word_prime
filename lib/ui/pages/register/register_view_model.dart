@@ -19,41 +19,71 @@ class RegisterViewModel extends BaseViewModel {
         nameInput.value.isNotEmpty;
   }
 
-  /// It allows the user to register using their e-mail, password and other information.
-  /// User information is sent to the 'register' method of the 'ServiceAuthentication' class as 'UserModel'.
-  /// If the registration process is successful, the `onRegistrationSuccess` callback is invoked.
-  /// If it fails, an error message is logged.
-  ///
-  /// Parameters:
-  /// - [onRegistrationSuccess]: Callback to run when registration is successful.
+  /// A variable is defined for the user ID
   String? userId;
+
+  /// An async method is defined for user registration. This method invokes
+  /// appropriate callback functions on success of registration or on error
   Future<void> register({
-    VoidCallback? onRegistrationSuccess,
-    required Function showProgress,
-    required Function hideProgress,
+    /// Function to call when registration is successful
+    required VoidCallback onRegistrationSuccess,
+
+    /// Function to initialize the loading indicator
+    required VoidCallback showProgress,
+
+    /// Function to stop the loading indicator
+    required VoidCallback hideProgress,
+
+    /// Function to display the error message. Returns the error message
+    required void Function(String message) showErrorSnackBar,
   }) async {
     try {
-      showProgress();
+      /// Call to start loading indicator
+      showProgress.call();
 
+      /// Call `register` method from `ServiceAuthentication`
+      /// class for user registration
+      /// The necessary information for the user model is provided with UserModel
       UserCredential? userCredential = await ServiceAuthentication().register(
         userModel: UserModel(
           email: emailInput.value,
           password: passwordInput.value,
           userName: nameInput.value,
+
+          /// Default profile photo
           profileImageAddress: AppLocaleConstants.DEFAULT_PROFILE_PICTURE,
+
+          /// Email verification status (initially marked as unverified)
           emailVerification: false,
         ),
       );
 
+      /// If user registration is successful, get user ID
       if (userCredential != null) {
+        /// Get the user ID returned via Firebase
         userId = userCredential.user!.uid;
-        log("Success");
-        onRegistrationSuccess?.call();
+        log("Registration Successful");
+
+        /// Register runs successful callback function
+        onRegistrationSuccess.call();
+      }
+    } on FirebaseAuthException catch (e) {
+      /// Special exceptions that may occur during
+      /// Firebase authentication are caught.
+
+      if (e.code == 'weak-password') {
+        showErrorSnackBar(LocaleKeys.warningMessages_weakPassword.locale);
+      } else if (e.code == 'email-already-in-use') {
+        showErrorSnackBar(LocaleKeys.warningMessages_emailAlreadyUse.locale);
+      } else if (e.code == 'invalid-email') {
+        showErrorSnackBar(LocaleKeys.warningMessages_invalidEmail.locale);
       }
     } catch (e) {
-      log('An error occurred: $e');
+      log('An error occurred in ViewModel: $e');
+      showErrorSnackBar(LocaleKeys.warningMessages_errorOccurred.locale);
     } finally {
-      hideProgress();
+      /// Runs to turn off the loading indicator in all cases
+      hideProgress.call();
     }
   }
 }

@@ -98,3 +98,5 @@ export 'package:word_prime/ui/pages/email_verification/email_verification_view_m
 export 'package:word_prime/ui/pages/email_verification/email_verification_provider.dart';
 export 'package:word_prime/ui/pages/reset_password/reset_password_view_model.dart';
 export 'package:word_prime/ui/pages/reset_password/reset_password_page.dart';
+export 'package:word_prime/base/enums/custom_snack_bar_type.dart';
+export 'package:word_prime/ui/widgets/custom_snack_bar_content.dart';

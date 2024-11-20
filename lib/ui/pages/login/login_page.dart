@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:word_prime/export.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,157 +19,189 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
   }
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: _buildBody(),
+      body: SafeArea(
+        child: Padding(
+          padding: AppPaddings.appPaddingHorizontal,
+          child: _buildBody(),
+        ),
+      ),
     );
   }
 
   Widget _buildBody() {
-    return SafeArea(
-      child: Padding(
-        padding: AppPaddings.appPaddingHorizontal,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: AppPaddings.paddingXXLargeTop,
-              child: _titleSubtitleText(),
-            ),
-            ValueListenableBuilder(
-                valueListenable: _vm.emailInput,
-                builder: (_, __, ___) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 36, bottom: 16),
-                    child: CustomTextFormField(
-                      controller: _emailController,
-                      isPrefixIcon: true,
-                      prefixIconAddress: AppAssets.icSmsPath,
-                      hintText: LocaleKeys.emailHintText.locale,
-                      inputType: TextInputType.emailAddress,
-                      onChanged: (String text) {
-                        _vm.emailInput.value = text;
-                      },
-                    ),
-                  );
-                }),
-            ValueListenableBuilder(
-              valueListenable: _vm.passwordInput,
-              builder: (_, __, ___) {
-                return ValueListenableBuilder(
-                  valueListenable: _vm.isActive,
-                  builder: (_, __, ___) {
-                    return CustomTextFormField(
-                      controller: _passwordController,
-                      isPrefixIcon: true,
-                      isSuffixIcon: true,
-                      isHaveObscure: _vm.isActive.value,
-                      prefixIconAddress: AppAssets.icLockPath,
-                      suffixIconAddress: _vm.isActive.value == true
-                          ? AppAssets.icCloseEyePath
-                          : AppAssets.icOpenEyePath,
-                      hintText: LocaleKeys.passwordHintText.locale,
-                      textInputAction: TextInputAction.done,
-                      onPressSuffixIcon: () {
-                        _vm.isActive.value = !_vm.isActive.value;
-                      },
-                      onChanged: (String text) {
-                        _vm.passwordInput.value = text;
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            GestureDetector(
-              onTap: () => appRoutes.navigateTo(Routes.ForgotPassword),
-              child: Text(
-                LocaleKeys.loginPage_forgotPassword.locale,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: AppColors.cornflowerBlue,
-                      fontWeight: FontWeight.w700,
-                    ),
-                textAlign: TextAlign.end,
-              ),
-            ),
-            ValueListenableBuilder(
-              valueListenable: _vm.emailInput,
-              builder: (_, __, ___) {
-                return ValueListenableBuilder(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: AppPaddings.paddingXXLargeTop,
+                  child: _titleSubtitleText(),
+                ),
+                ValueListenableBuilder(
+                    valueListenable: _vm.emailInput,
+                    builder: (_, __, ___) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 36, bottom: 16),
+                        child: CustomTextFormField(
+                          controller: _emailController,
+                          isPrefixIcon: true,
+                          prefixIconAddress: AppAssets.icSmsPath,
+                          hintText: LocaleKeys.emailHintText.locale,
+                          inputType: TextInputType.emailAddress,
+                          onChanged: (String text) {
+                            _vm.emailInput.value = text;
+                          },
+                        ),
+                      );
+                    }),
+                ValueListenableBuilder(
                   valueListenable: _vm.passwordInput,
                   builder: (_, __, ___) {
-                    return Padding(
-                      padding: AppPaddings.appPaddingVertical,
-                      child: CustomButton(
-                        title: LocaleKeys.signIn.locale.toUpperCase(),
-                        backgroundColor: _vm.isEmptyInputText()
-                            ? AppColors.cornflowerBlue
-                            : AppColors.cornflowerBlue.withOpacity(0.4),
-                        onClick: () {
-                          _vm.isEmptyInputText()
-                              ? _vm.login(
-                                  onLoginSuccess: () {
-                                    appRoutes.navigateToReplacement(
-                                      Routes.MainTab,
-                                    );
-                                  },
-                                  showProgress: () => showProgress(context),
-                                  hideProgress: () => hideProgress(),
-                                )
-                              : log('Boş bırakılamaz');
-                        },
-                      ),
+                    return ValueListenableBuilder(
+                      valueListenable: _vm.isActive,
+                      builder: (_, __, ___) {
+                        return CustomTextFormField(
+                          controller: _passwordController,
+                          isPrefixIcon: true,
+                          isSuffixIcon: true,
+                          isHaveObscure: _vm.isActive.value,
+                          prefixIconAddress: AppAssets.icLockPath,
+                          suffixIconAddress: _vm.isActive.value == true
+                              ? AppAssets.icCloseEyePath
+                              : AppAssets.icOpenEyePath,
+                          hintText: LocaleKeys.passwordHintText.locale,
+                          textInputAction: TextInputAction.done,
+                          onPressSuffixIcon: () {
+                            _vm.isActive.value = !_vm.isActive.value;
+                          },
+                          onChanged: (String text) {
+                            _vm.passwordInput.value = text;
+                          },
+                        );
+                      },
                     );
                   },
-                );
-              },
-            ),
-            const OrTextContainer(),
-            Padding(
-              padding: AppPaddings.paddingMediumVertical,
-              child: CustomButton(
-                title: LocaleKeys.loginPage_withGoogle.locale.toUpperCase(),
-                titleColor: Theme.of(context).colorScheme.secondary,
-                backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
-                borderColor: Theme.of(context).colorScheme.onPrimaryContainer,
-                borderRadius: 12,
-                isIcon: true,
-                iconLogoAddress: AppAssets.icGooglePath,
-                onClick: () {
-                  _vm.loginWithGoogle(
-                    onLoginSuccess: () {
-                      appRoutes.navigateToReplacement(
-                        Routes.MainTab,
+                ),
+                const SizedBox(height: 16),
+                GestureDetector(
+                  onTap: () => appRoutes.navigateTo(Routes.ForgotPassword),
+                  child: Text(
+                    LocaleKeys.loginPage_forgotPassword.locale,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: AppColors.cornflowerBlue,
+                          fontWeight: FontWeight.w700,
+                        ),
+                    textAlign: TextAlign.end,
+                  ),
+                ),
+                ValueListenableBuilder(
+                  valueListenable: _vm.emailInput,
+                  builder: (_, __, ___) {
+                    return ValueListenableBuilder(
+                      valueListenable: _vm.passwordInput,
+                      builder: (_, __, ___) {
+                        return Padding(
+                          padding: AppPaddings.appPaddingVertical,
+                          child: CustomButton(
+                            title: LocaleKeys.signIn.locale.toUpperCase(),
+                            backgroundColor: _vm.isEmptyInputText()
+                                ? AppColors.cornflowerBlue
+                                : AppColors.cornflowerBlue.withOpacity(0.4),
+                            onClick: () {
+                              _vm.isEmptyInputText()
+                                  ? _vm.login(
+                                      onLoginSuccess: () {
+                                        appRoutes.navigateToReplacement(
+                                          Routes.MainTab,
+                                        );
+                                      },
+                                      showProgress: () => showProgress(context),
+                                      hideProgress: () => hideProgress(),
+                                      showErrorSnackBar: (String message) {
+                                        showSnackBar(
+                                          context: context,
+                                          content: CustomSnackBarContent(
+                                            text: message,
+                                            iconType: CustomSnackBarType.error,
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : showSnackBar(
+                                      context: context,
+                                      content: CustomSnackBarContent(
+                                        text: LocaleKeys
+                                            .warningMessages_emptySpace.locale,
+                                        iconType: CustomSnackBarType.info,
+                                      ),
+                                    );
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+                const OrTextContainer(),
+                Padding(
+                  padding: AppPaddings.paddingMediumVertical,
+                  child: CustomButton(
+                    title: LocaleKeys.loginPage_withGoogle.locale.toUpperCase(),
+                    titleColor: Theme.of(context).colorScheme.secondary,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.surfaceContainer,
+                    borderColor:
+                        Theme.of(context).colorScheme.onPrimaryContainer,
+                    borderRadius: 12,
+                    isIcon: true,
+                    iconLogoAddress: AppAssets.icGooglePath,
+                    onClick: () {
+                      _vm.loginWithGoogle(
+                        onLoginSuccess: () {
+                          appRoutes.navigateToReplacement(
+                            Routes.MainTab,
+                          );
+                        },
+                        showProgress: () => showProgress(context),
+                        hideProgress: () => hideProgress(),
                       );
                     },
-                    showProgress: () => showProgress(context),
-                    hideProgress: () => hideProgress(),
-                  );
-                },
-              ),
+                  ),
+                ),
+                CustomButton(
+                  title: LocaleKeys.loginPage_withApple.locale.toUpperCase(),
+                  titleColor: Theme.of(context).colorScheme.secondary,
+                  backgroundColor:
+                      Theme.of(context).colorScheme.surfaceContainer,
+                  borderColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  borderRadius: 12,
+                  isIcon: true,
+                  iconLogoAddress: AppAssets.icApplePath,
+                  onClick: () {},
+                ),
+              ],
             ),
-            CustomButton(
-              title: LocaleKeys.loginPage_withApple.locale.toUpperCase(),
-              titleColor: Theme.of(context).colorScheme.secondary,
-              backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
-              borderColor: Theme.of(context).colorScheme.onPrimaryContainer,
-              borderRadius: 12,
-              isIcon: true,
-              iconLogoAddress: AppAssets.icApplePath,
-              onClick: () {},
-            ),
-            const Spacer(),
-            Padding(
-              padding: AppPaddings.paddingLargeBottom,
-              child: Center(
-                child: _richTextSignUp(),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+        Padding(
+          padding: AppPaddings.paddingLargeBottom,
+          child: _richTextSignUp(),
+        ),
+      ],
     );
   }
 
@@ -196,6 +226,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
 
   Widget _richTextSignUp() {
     return RichText(
+      textAlign: TextAlign.center,
       text: TextSpan(
         text: LocaleKeys.loginPage_isSignUpMsg.locale,
         style: Theme.of(context).textTheme.titleMedium,

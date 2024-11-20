@@ -131,6 +131,16 @@ abstract class  LocaleKeys {
   static const warningMessages_deleteMsgSubTitle = 'warningMessages.deleteMsgSubTitle';
   static const warningMessages_quizQuitMsgTitle = 'warningMessages.quizQuitMsgTitle';
   static const warningMessages_quizQuitMsgSubTitle = 'warningMessages.quizQuitMsgSubTitle';
+  static const warningMessages_emptySpace = 'warningMessages.emptySpace';
+  static const warningMessages_weakPassword = 'warningMessages.weakPassword';
+  static const warningMessages_emailAlreadyUse = 'warningMessages.emailAlreadyUse';
+  static const warningMessages_invalidEmail = 'warningMessages.invalidEmail';
+  static const warningMessages_unexpectedError = 'warningMessages.unexpectedError';
+  static const warningMessages_errorOccurred = 'warningMessages.errorOccurred';
+  static const warningMessages_emailNotYetVerified = 'warningMessages.emailNotYetVerified';
+  static const warningMessages_emailAlreadyVerified = 'warningMessages.emailAlreadyVerified';
+  static const warningMessages_userNotFound = 'warningMessages.userNotFound';
+  static const warningMessages_wrongPassword = 'warningMessages.wrongPassword';
   static const warningMessages = 'warningMessages';
   static const emailVerificationPage_title = 'emailVerificationPage.title';
   static const emailVerificationPage_titleMsg = 'emailVerificationPage.titleMsg';

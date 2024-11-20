@@ -142,7 +142,17 @@
     "deleteMsgTitle": "Gönderiniz silinsin mi?",
     "deleteMsgSubTitle": "Silmek istediğinizden emin misiniz?",
     "quizQuitMsgTitle": "Quizden çıkmak üzeresiniz!",
-    "quizQuitMsgSubTitle": "Çıkmak istediğinizden emin misiniz?"
+    "quizQuitMsgSubTitle": "Çıkmak istediğinizden emin misiniz?",
+    "emptySpace": "Boş alan bırakılamaz!",
+    "weakPassword": "Parola çok zayıf. Daha güçlü bir parola girin!",
+    "emailAlreadyUse": "Bu e-posta adresi zaten kullanılıyor!",
+    "invalidEmail": "E-posta adresi hatalı bir biçimde yazılmış. Kontrol edin!",
+    "unexpectedError": "Beklenmeyen bir hata oluştu. Tekrar deneyin!",
+    "errorOccurred ": "Bir hata oluştu. Lütfen tekrar deneyin!",
+    "emailNotYetVerified": "E-posta henüz doğrulanmadı!",
+    "emailAlreadyVerified": "E-posta zaten doğrulanmış!",
+    "userNotFound": "No users found for this email!",
+    "wrongPassword": "Kullanıcı bilgileri yanlış. Tekrar Deneyin!"
   },
   "emailVerificationPage": {
     "title": "E-posta Adresinizi Doğrulayın ",

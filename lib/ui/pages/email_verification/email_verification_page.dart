@@ -1,5 +1,5 @@
-import 'dart:developer';
 import 'package:word_prime/export.dart';
+import 'package:word_prime/ui/widgets/custom_snack_bar_content.dart';
 
 class EmailVerificationPage extends StatefulWidget {
   const EmailVerificationPage({super.key});
@@ -17,26 +17,37 @@ class _EmailVerificationPageState
   void initState() {
     _vm = Provider.of<EmailVerificationViewModel>(context, listen: false);
 
-    /// Observer is added to listen to lifecycle events
+    /// Registers this widget as an observer in the `WidgetsBinding`
+    /// system to observe the widget's lifecycle changes
     WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
 
   @override
   void dispose() {
+    /// It prevents unnecessary use of system resources by removing the observer
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
+    /// Captures the change of application lifecycle states
     if (state == AppLifecycleState.resumed) {
-      log('Back to the application, checking email verification status.');
+      /// When the app comes back to the foreground (resumed)
+      /// it checks the user's email verification status
+      /// If the email is verified, the user is redirected to the `Login`
+      /// page with all history routes cleared.
+      /// SnackBar is displayed informing the user that the email has
+      /// not yet been verified
       await _vm.checkEmailVerification()
           ? appRoutes.navigateRemoveUntil(Routes.Login)
           : showSnackBar(
               context: context,
-              text: 'E-posta henüz doğrulanmadı',
+              content: CustomSnackBarContent(
+                text: LocaleKeys.warningMessages_emailNotYetVerified.locale,
+                iconType: CustomSnackBarType.info,
+              ),
             );
       ;
     }
@@ -101,10 +112,27 @@ class _EmailVerificationPageState
                 .toUpperCase(),
             onClick: () async {
               await _vm.checkEmailVerification()
-                  ? log('E-posta doğrulanmış')
+                  ? showSnackBar(
+                      context: context,
+                      content: CustomSnackBarContent(
+                        text: LocaleKeys
+                            .warningMessages_emailAlreadyVerified.locale,
+                        iconType: CustomSnackBarType.info,
+                      ),
+                    )
                   : _vm.resendEmailVerification(
                       showProgress: () => showProgress(context),
                       hideProgress: () => hideProgress(),
+                      showErrorSnackBar: () {
+                        showSnackBar(
+                          context: context,
+                          content: CustomSnackBarContent(
+                            text: LocaleKeys
+                                .warningMessages_unexpectedError.locale,
+                            iconType: CustomSnackBarType.info,
+                          ),
+                        );
+                      },
                     );
             },
           ),
@@ -118,7 +146,11 @@ class _EmailVerificationPageState
                   ? appRoutes.navigateRemoveUntil(Routes.Login)
                   : showSnackBar(
                       context: context,
-                      text: 'E-posta henüz doğrulanmadı',
+                      content: CustomSnackBarContent(
+                        text: LocaleKeys
+                            .warningMessages_emailNotYetVerified.locale,
+                        iconType: CustomSnackBarType.info,
+                      ),
                     );
             },
           ),

@@ -58,6 +58,9 @@ class ServiceAuthentication {
         /// If email is already in use, it logs the error.
         log("The account already exists for that email.", error: e);
         rethrow;
+      } else if (e.code == 'invalid-email') {
+        log("E-posta adresi hatalı bir biçimde yazılmış.", error: e);
+        rethrow;
       }
     } catch (e) {
       /// Catches all other errors and logs the general error message.
@@ -93,13 +96,16 @@ class ServiceAuthentication {
       if (e.code == 'user-not-found') {
         /// If the user cannot be found via email, an error is logged.
         log("No user found for that email.", error: e);
+        rethrow;
       } else if (e.code == 'wrong-password') {
         /// If the password is incorrect, the error is logged.
         log("Wrong password provided for that user.", error: e);
+        rethrow;
       }
     } catch (e) {
       /// It catches all other errors and logs the general error message.
       log("An error occurred", error: e);
+      rethrow;
     }
     return null;
   }
@@ -191,6 +197,7 @@ class ServiceAuthentication {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         log('Bu e-posta adresiyle kayıtlı bir kullanıcı bulunamadı.');
+        rethrow;
       } else {
         log('Bir hata oluştu: ${e.message}');
       }
@@ -223,6 +230,7 @@ class ServiceAuthentication {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         log('Bu e-posta adresiyle kayıtlı bir kullanıcı bulunamadı.');
+        rethrow;
       } else {
         log('Bir hata oluştu: ${e.message}');
       }
