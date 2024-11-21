@@ -77,8 +77,12 @@ final class Routes {
           builder: (context) => const MainTabProvider(),
         );
       case Routes.Home:
+        final ValueNotifier<UserModel?> userModelNotifier =
+            settings.arguments as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
-          builder: (context) => const HomeProvider(),
+          builder: (context) => HomeProvider(
+            userNotifier: userModelNotifier,
+          ),
         );
       case Routes.Activity:
         return MaterialPageRoute(
@@ -100,8 +104,10 @@ final class Routes {
           builder: (context) => const LeaderboardProvider(),
         );
       case Routes.Profile:
+        final ValueNotifier<UserModel?> userModelNotifier =
+        settings.arguments as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
-          builder: (context) => const ProfileProvider(),
+          builder: (context) => ProfileProvider(userNotifier: userModelNotifier),
         );
       case Routes.FollowerFollow:
         final bool isFollow = settings.arguments as bool;

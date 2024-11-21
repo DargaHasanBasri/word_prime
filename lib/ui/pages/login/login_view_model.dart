@@ -91,7 +91,7 @@ class LoginViewModel extends BaseViewModel {
       log("Google User ID: $googleEmail");
 
       /// Storing user information in local storage.
-      await serviceLocalStorage.setString('googleUserId', googleUserId!);
+      await serviceLocalStorage.setString('userId', googleUserId!);
       await serviceLocalStorage.setString('googleEmail', googleEmail!);
       log("Google user information has been saved.");
     } else {

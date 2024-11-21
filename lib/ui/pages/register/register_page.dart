@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:word_prime/export.dart';
-import 'package:word_prime/ui/widgets/custom_snack_bar_content.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

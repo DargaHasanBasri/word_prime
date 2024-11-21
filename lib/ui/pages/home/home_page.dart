@@ -94,29 +94,42 @@ class _HomePageState extends BaseStatefulState<HomePage> {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.rhino,
-      title: Row(
-        children: [
-          Text(
-            '${LocaleKeys.homePage_welcome.locale}, Zephyra ${AppLocaleConstants.EMOJI_WAVING}',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.white,
+      title: ValueListenableBuilder(
+          valueListenable: _vm.userNotifier,
+          builder: (_, __, ___) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    '${LocaleKeys.homePage_welcome.locale}, '
+                    '${_vm.userNotifier.value?.userName ?? ''}',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.white,
+                        ),
+                    overflow: TextOverflow.fade,
+                  ),
                 ),
-          ),
-          Spacer(),
-          CustomUserCircleAvatar(
-            circleRadius: 14,
-            borderPadding: 0,
-            profileImgAddress: AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
-          ),
-          SizedBox(width: AppSizes.sizedBoxSmallWidth),
-          Image.asset(
-            AppAssets.icNotificationPath,
-            width: AppSizes.appOverallIconWidth,
-            height: AppSizes.appOverallIconWidth,
-          ),
-        ],
-      ),
+                Row(
+                  children: [
+                    CustomUserCircleAvatar(
+                      circleRadius: 14,
+                      borderPadding: 0,
+                      profileImgAddress:
+                          _vm.userNotifier.value?.profileImageAddress,
+                    ),
+                    SizedBox(width: AppSizes.sizedBoxSmallWidth),
+                    Image.asset(
+                      AppAssets.icNotificationPath,
+                      width: AppSizes.appOverallIconWidth,
+                      height: AppSizes.appOverallIconWidth,
+                    ),
+                  ],
+                )
+              ],
+            );
+          }),
     );
   }
 }

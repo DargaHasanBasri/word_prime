@@ -34,29 +34,44 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
       children: [
         Column(
           children: [
-            Padding(
-              padding: AppPaddings.paddingXXLargeBottom * 2,
-              child: CurrentUserProfileInfo(),
-            ),
-            Padding(
-              padding: AppPaddings.appPaddingLargeHorizontal,
-              child: ValueListenableBuilder(
-                valueListenable: _vm.tabIndex,
-                builder: (_, __, ___) {
-                  return ProfileTabBar(
-                    whichIndex: _vm.tabIndex,
-                  );
-                },
-              ),
+            ValueListenableBuilder(
+              valueListenable: _vm.userNotifier,
+              builder: (_, __, ___) {
+                return Padding(
+                  padding: AppPaddings.paddingXXLargeBottom * 2,
+                  child: CurrentUserProfileInfo(
+                    userName: _vm.userNotifier.value?.userName,
+                    userEmail: _vm.userNotifier.value?.email,
+                    profileImageAddress:
+                        _vm.userNotifier.value?.profileImageAddress,
+                  ),
+                );
+              },
             ),
           ],
         ),
         Positioned(
           left: 24,
-          top: 170,
+          top: 180,
           right: 24,
-          child: _currentProfileDetail(),
+          child: Column(
+            children: [
+              _currentProfileDetail(),
+              Padding(
+                padding: AppPaddings.paddingLargeTop,
+                child: ValueListenableBuilder(
+                  valueListenable: _vm.tabIndex,
+                  builder: (_, __, ___) {
+                    return ProfileTabBar(
+                      whichIndex: _vm.tabIndex,
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
+
       ],
     );
   }
