@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:word_prime/export.dart';
 
@@ -37,13 +37,15 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
     if (_progressOverlayEntry != null) return;
 
     /// Create a new OverlayEntry
-    _progressOverlayEntry = _createProgressOverlay();
+    _progressOverlayEntry = _createProgressOverlay(context);
 
     /// Add the newly created entry to the overlay
-    Overlay.of(context).insert(_progressOverlayEntry!);
-
-    ///Start the countdown to timeout
-    _startTimer();
+    if (_progressOverlayEntry != null) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Overlay.of(context).insert(_progressOverlayEntry!);
+        _startTimer();
+      });
+    }
   }
 
   /// Use when an action is completed or the loading animation
@@ -51,9 +53,11 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
   void hideProgress() {
     try {
       /// If a progress overlay has been added and is still on the screen, remove it.
-      if (_progressOverlayEntry != null && _progressOverlayEntry!.mounted) {
-        /// Removes the overlay
-        _progressOverlayEntry!.remove();
+      if (_progressOverlayEntry != null) {
+        if (_progressOverlayEntry!.mounted) {
+          /// Removes the overlay
+          _progressOverlayEntry!.remove();
+        }
 
         /// Resets the reference
         _progressOverlayEntry = null;
@@ -97,7 +101,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
 
   /// Used to create a loading screen.
   /// It is called by `showProgress` and added to the screen.
-  OverlayEntry _createProgressOverlay() => OverlayEntry(
+  OverlayEntry _createProgressOverlay(BuildContext context) => OverlayEntry(
         builder: (BuildContext context) => Stack(
           children: [
             /// Creates a translucent background

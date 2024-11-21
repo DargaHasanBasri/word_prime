@@ -100,3 +100,4 @@ export 'package:word_prime/ui/pages/reset_password/reset_password_view_model.dar
 export 'package:word_prime/ui/pages/reset_password/reset_password_page.dart';
 export 'package:word_prime/base/enums/custom_snack_bar_type.dart';
 export 'package:word_prime/ui/widgets/custom_snack_bar_content.dart';
+export 'package:word_prime/base/repository/user_repository.dart';

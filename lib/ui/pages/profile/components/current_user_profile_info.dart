@@ -1,7 +1,15 @@
 import 'package:word_prime/export.dart';
 
 class CurrentUserProfileInfo extends StatelessWidget {
-  const CurrentUserProfileInfo({super.key});
+  final String? userName;
+  final String? userEmail;
+  final String? profileImageAddress;
+  const CurrentUserProfileInfo({
+    super.key,
+    required this.userName,
+    required this.userEmail,
+    required this.profileImageAddress,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +22,15 @@ class CurrentUserProfileInfo extends StatelessWidget {
           children: [
             Center(
               child: CustomUserCircleAvatar(
-                profileImgAddress: AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
+                profileImgAddress: profileImageAddress,
+                circleRadius: 40,
                 borderPadding: 0,
               ),
             ),
             Padding(
               padding: AppPaddings.paddingMediumTop,
               child: Text(
-                AppLocaleConstants.DEFAULT_USER_NAME,
+                userName ?? '',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: AppColors.white,
                     ),
@@ -30,7 +39,7 @@ class CurrentUserProfileInfo extends StatelessWidget {
             Padding(
               padding: AppPaddings.paddingXSmallVertical,
               child: Text(
-                AppLocaleConstants.DEFAULT_USER_EMAIL,
+                userEmail ?? '',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,

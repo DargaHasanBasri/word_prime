@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:word_prime/models/base_model.dart';
 
-class UserModel with EquatableMixin {
+class UserModel extends BaseModel<UserModel> with EquatableMixin {
   String? email;
   String? password;
   String? profileImageAddress;
@@ -56,7 +57,8 @@ class UserModel with EquatableMixin {
     };
   }
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
+  @override
+  UserModel fromJson(Map<String, dynamic> json) {
     return UserModel(
       email: json['email'] as String?,
       password: json['password'] as String?,

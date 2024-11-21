@@ -10,10 +10,20 @@ class MainTabPage extends StatefulWidget {
 
 class _MainTabPageState extends BaseStatefulState<MainTabPage> {
   late final MainTabViewModel _vm;
+  late final String? _userId;
 
   @override
   void initState() {
     _vm = Provider.of<MainTabViewModel>(context, listen: false);
+    serviceLocalStorage.getInstance();
+    _userId = serviceLocalStorage.getString('userId');
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _vm.getUserData(
+        userId: _userId,
+        showProgress: () => showProgress(context),
+        hideProgress: () => hideProgress(),
+      );
+    });
     super.initState();
   }
 
@@ -41,17 +51,25 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
   Widget _buildBody(int whichIndex) {
     switch (whichIndex) {
       case 0:
-        return HomeProvider();
+        return HomeProvider(
+          userNotifier: _vm.userNotifier,
+        );
       case 1:
         return ActivityProvider();
       case 2:
-        return HomeProvider();
+        return HomeProvider(
+          userNotifier: _vm.userNotifier,
+        );
       case 3:
         return TasksProvider();
       case 4:
-        return ProfileProvider();
+        return ProfileProvider(
+          userNotifier: _vm.userNotifier,
+        );
       default:
-        return HomeProvider();
+        return HomeProvider(
+          userNotifier: _vm.userNotifier,
+        );
     }
   }
 }

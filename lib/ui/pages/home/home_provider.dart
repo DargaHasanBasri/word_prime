@@ -1,12 +1,16 @@
 import 'package:word_prime/export.dart';
 
 class HomeProvider extends StatelessWidget {
-  const HomeProvider({super.key});
+  final ValueNotifier<UserModel?> userNotifier;
+  const HomeProvider({
+    super.key,
+    required this.userNotifier,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => HomeViewModel(),
+      create: (context) => HomeViewModel(userNotifier),
       child: HomePage(),
     );
   }
