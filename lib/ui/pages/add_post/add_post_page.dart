@@ -25,7 +25,6 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       appBar: _buildAppBar(),
       body: Padding(
         padding: AppPaddings.appPaddingHorizontal,
@@ -46,7 +45,6 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
               return CustomTextFormField(
                 controller: _turkishWordController,
                 textFieldTitle: LocaleKeys.addPost_turkishWordTitle.locale,
-                textFieldTitleColor: AppColors.paleSky,
                 isRequired: true,
                 hintText: LocaleKeys.addPost_exampleTurkishWord.locale,
                 hintTextColor: AppColors.paleSky,
@@ -64,7 +62,6 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
                 child: CustomTextFormField(
                   controller: _englishWordController,
                   textFieldTitle: LocaleKeys.addPost_englishWordTitle.locale,
-                  textFieldTitleColor: AppColors.paleSky,
                   isRequired: true,
                   hintText: LocaleKeys.addPost_exampleEnglishWord.locale,
                   hintTextColor: AppColors.paleSky,
@@ -81,7 +78,6 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
               return CustomTextFormField(
                 controller: _turkishSentencesController,
                 textFieldTitle: LocaleKeys.addPost_turkishSentencesTitle.locale,
-                textFieldTitleColor: AppColors.paleSky,
                 hintText: LocaleKeys.addPost_exampleTurkishSentences.locale,
                 hintTextColor: AppColors.paleSky,
                 onChanged: (String text) {
@@ -100,7 +96,6 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
                   textInputAction: TextInputAction.done,
                   textFieldTitle:
                       LocaleKeys.addPost_englishSentencesTitle.locale,
-                  textFieldTitleColor: AppColors.paleSky,
                   hintText: LocaleKeys.addPost_exampleEnglishSentences.locale,
                   hintTextColor: AppColors.paleSky,
                   onChanged: (String text) {
@@ -122,7 +117,8 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
                   return Padding(
                     padding: AppPaddings.appPaddingVertical,
                     child: CustomButton(
-                      title: LocaleKeys.addPost_buttonTitle.locale,
+                      title:
+                          LocaleKeys.addPost_buttonTitle.locale.toUpperCase(),
                       backgroundColor: _vm.isEmptyInputText()
                           ? AppColors.cornflowerBlue.withOpacity(0.4)
                           : AppColors.cornflowerBlue,
@@ -146,24 +142,22 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: AppColors.white,
-      elevation: 0,
-      forceMaterialTransparency: true,
+      automaticallyImplyLeading: false,
       leading: IconButton(
         onPressed: () => appRoutes.popIfBackStackNotEmpty(),
-        color: AppColors.mirage,
-        icon: Icon(
-          Icons.arrow_back_ios,
+        icon: Image.asset(
+          AppAssets.icArrowBackLeftPath,
+          color: Theme.of(context).colorScheme.secondary,
+          width: AppSizes.appOverallIconWidth,
+          height: AppSizes.appOverallIconHeight,
         ),
       ),
       title: Text(
         LocaleKeys.addPost_title.locale,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-        ),
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
       ),
-      centerTitle: true,
     );
   }
 }

@@ -125,7 +125,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                               _vm.isEmptyInputText()
                                   ? _vm.login(
                                       onLoginSuccess: () {
-                                        appRoutes.navigateToReplacement(
+                                        appRoutes.navigateRemoveUntil(
                                           Routes.MainTab,
                                         );
                                       },
@@ -172,7 +172,7 @@ class _LoginPageState extends BaseStatefulState<LoginPage> {
                     onClick: () {
                       _vm.loginWithGoogle(
                         onLoginSuccess: () {
-                          appRoutes.navigateToReplacement(
+                          appRoutes.navigateRemoveUntil(
                             Routes.MainTab,
                           );
                         },

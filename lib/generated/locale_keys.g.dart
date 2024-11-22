@@ -29,6 +29,7 @@ abstract class  LocaleKeys {
   static const cancel = 'cancel';
   static const confirm = 'confirm';
   static const logout = 'logout';
+  static const optional = 'optional';
   static const splashPage_title = 'splashPage.title';
   static const splashPage = 'splashPage';
   static const getStartedPage_title = 'getStartedPage.title';
@@ -153,5 +154,10 @@ abstract class  LocaleKeys {
   static const resetPassword_titleSubInfo = 'resetPassword.titleSubInfo';
   static const resetPassword_done = 'resetPassword.done';
   static const resetPassword = 'resetPassword';
+  static const myWordList_appBarTitle = 'myWordList.appBarTitle';
+  static const myWordList_title = 'myWordList.title';
+  static const myWordList_subTitle = 'myWordList.subTitle';
+  static const myWordList_newWord = 'myWordList.newWord';
+  static const myWordList = 'myWordList';
 
 }

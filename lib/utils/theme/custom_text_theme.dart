@@ -8,16 +8,19 @@ final class CustomTextTheme {
     /// headline light
     headlineLarge: TextStyle().copyWith(
       fontSize: 28,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w700,
       color: AppColors.mirage,
     ),
     headlineMedium: TextStyle().copyWith(
       fontSize: 24,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w600,
       color: AppColors.mirage,
     ),
     headlineSmall: TextStyle().copyWith(
       fontSize: 18,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w500,
       color: AppColors.mirage,
     ),
@@ -25,16 +28,19 @@ final class CustomTextTheme {
     /// title light
     titleLarge: TextStyle().copyWith(
       fontSize: 16,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w600,
       color: AppColors.mirage,
     ),
     titleMedium: TextStyle().copyWith(
       fontSize: 16,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w500,
       color: AppColors.mirage,
     ),
     titleSmall: TextStyle().copyWith(
       fontSize: 16,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w400,
       color: AppColors.paleSky,
     ),
@@ -42,16 +48,19 @@ final class CustomTextTheme {
     /// body light
     bodyLarge: TextStyle().copyWith(
       fontSize: 14,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w700,
       color: AppColors.mirage,
     ),
     bodyMedium: TextStyle().copyWith(
       fontSize: 14,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w600,
       color: AppColors.mirage,
     ),
     bodySmall: TextStyle().copyWith(
       fontSize: 14,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w500,
       color: AppColors.mirage,
     ),
@@ -59,16 +68,19 @@ final class CustomTextTheme {
     /// label light
     labelLarge: TextStyle().copyWith(
       fontSize: 12,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w600,
       color: AppColors.mirage,
     ),
     labelMedium: TextStyle().copyWith(
       fontSize: 12,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w500,
       color: AppColors.mirage,
     ),
     labelSmall: TextStyle().copyWith(
       fontSize: 12,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w400,
       color: AppColors.mirage,
     ),
@@ -78,16 +90,19 @@ final class CustomTextTheme {
     /// headline dark
     headlineLarge: TextStyle().copyWith(
       fontSize: 28,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w700,
       color: AppColors.white,
     ),
     headlineMedium: TextStyle().copyWith(
       fontSize: 24,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w600,
       color: AppColors.white,
     ),
     headlineSmall: TextStyle().copyWith(
       fontSize: 18,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w600,
       color: AppColors.white,
     ),
@@ -95,16 +110,19 @@ final class CustomTextTheme {
     /// title dark
     titleLarge: TextStyle().copyWith(
       fontSize: 16,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w600,
       color: AppColors.white,
     ),
     titleMedium: TextStyle().copyWith(
       fontSize: 16,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w500,
       color: AppColors.white,
     ),
     titleSmall: TextStyle().copyWith(
       fontSize: 16,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w400,
       color: AppColors.santaGrey,
     ),
@@ -112,16 +130,19 @@ final class CustomTextTheme {
     /// body dark
     bodyLarge: TextStyle().copyWith(
       fontSize: 14,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w700,
       color: AppColors.white,
     ),
     bodyMedium: TextStyle().copyWith(
       fontSize: 14,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w600,
       color: AppColors.white,
     ),
     bodySmall: TextStyle().copyWith(
       fontSize: 14,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w500,
       color: AppColors.white,
     ),
@@ -129,16 +150,19 @@ final class CustomTextTheme {
     /// label dark
     labelLarge: TextStyle().copyWith(
       fontSize: 12,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w600,
       color: AppColors.white,
     ),
     labelMedium: TextStyle().copyWith(
       fontSize: 12,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w500,
       color: AppColors.white,
     ),
     labelSmall: TextStyle().copyWith(
       fontSize: 12,
+      fontFamily: 'PlusJakartaSans',
       fontWeight: FontWeight.w400,
       color: AppColors.white,
     ),

@@ -48,3 +48,11 @@ flutter:
   assets:
     - assets/images/
     - assets/langs/
+
+  fonts:
+    - family: PlusJakartaSans
+      fonts:
+        - asset: assets/fonts/PlusJakartaSans-Bold.ttf
+        - asset: assets/fonts/PlusJakartaSans-Medium.ttf
+        - asset: assets/fonts/PlusJakartaSans-Regular.ttf
+        - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
