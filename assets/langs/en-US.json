@@ -27,6 +27,7 @@
   "cancel": "Cancel",
   "confirm": "Confirm",
   "logout": "Log Out",
+  "optional": "Optional",
   "splashPage": {
     "title": "Unlock a world full of words with us!"
   },
@@ -166,5 +167,11 @@
     "titleInfo": "If you think you entered your email address incorrectly, please return to the registration screen.",
     "titleSubInfo": "Your account security is our priority we've sent you a secure link to safely change your password and keep your account protected.",
     "done": "Done"
+  },
+  "myWordList": {
+    "appBarTitle": "My Word List",
+    "title": "Add Your Daily Word Now",
+    "subTitle": "Add your own words in your own style to learn and teach more",
+    "newWord": "New Word"
   }
 }

@@ -55,7 +55,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        getTextFieldTitle(),
+        getTextFieldTitle(context),
         TextFormField(
           cursorColor: Theme.of(context).colorScheme.secondary,
           controller: controller,
@@ -125,7 +125,7 @@ class CustomTextFormField extends StatelessWidget {
     );
   }
 
-  Widget getTextFieldTitle() {
+  Widget getTextFieldTitle(BuildContext context) {
     if (textFieldTitle.isNotEmpty) {
       return Padding(
         padding: const EdgeInsets.only(bottom: 8),
@@ -135,7 +135,7 @@ class CustomTextFormField extends StatelessWidget {
               textFieldTitle,
               style: TextStyle(
                 fontSize: 14,
-                color: textFieldTitleColor ?? AppColors.white,
+                color: textFieldTitleColor ?? Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.w700,
               ),
             ),

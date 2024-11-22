@@ -8,6 +8,7 @@ final class CustomAppTheme {
 
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
+    fontFamily: 'PlusJakartaSans',
     colorScheme: CustomColorScheme.lightColorScheme,
     textTheme: CustomTextTheme.lightTextTheme,
     scaffoldBackgroundColor: CustomColorScheme.lightColorScheme.primary,
@@ -16,6 +17,7 @@ final class CustomAppTheme {
 
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
+    fontFamily: 'PlusJakartaSans',
     textTheme: CustomTextTheme.darkTextTheme,
     colorScheme: CustomColorScheme.darkColorScheme,
     scaffoldBackgroundColor: CustomColorScheme.darkColorScheme.primary,

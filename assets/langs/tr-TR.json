@@ -27,6 +27,7 @@
   "cancel": "İptal Et",
   "confirm": "Onayla",
   "logout": "Çıkış Yap",
+  "optional": "İsteğe Bağlı",
   "splashPage": {
     "title": "Kelimelerle dolu bir dünyanın kilidini bizimle açın!"
   },
@@ -166,5 +167,11 @@
     "titleInfo": "E-posta adresinizi yanlış girdiğinizi düşünüyorsanız lütfen kayıt ekranına dönün.",
     "titleSubInfo": "Hesabınızın güvenliği önceliğimizdir şifrenizi güvenle değiştirmeniz ve hesabınızı korumada tutmanız için size güvenli bir bağlantı gönderdik.",
     "done": "Tamamlandı"
+  },
+  "myWordList": {
+    "appBarTitle": "Kelime Listem",
+    "title": "Günlük Kelimeni Hemen Ekle",
+    "subTitle": "Daha fazla öğrenmek ve öğretmek için kendi kelimelerini kendi tarzınla ekle",
+    "newWord": "Yeni Kelime"
   }
 }

@@ -51,6 +51,7 @@ final class AppAssets {
   static String imgImgDeerPath = _imagePath('img_deer');
   static String imgImgBookPath = _imagePath('img_book');
   static String imgImgGetStartedPath = _imagePath('img_get_started');
+  static String imgImgEmptyWordListPath = _imagePath('img_empty_word_list');
 
   static String _imagePath(String fileName) => '$_basePath$fileName.png';
 }

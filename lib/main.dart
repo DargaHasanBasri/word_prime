@@ -3,10 +3,12 @@ import 'package:word_prime/export.dart';
 
 Future<void> main() async {
   await AppStart.init();
+  final appThemeProvider = AppThemeProvider();
+  await appThemeProvider.loadThemeFromPreferences();
   runApp(
     AppLocalization(
       child: ChangeNotifierProvider(
-        create: (context) => AppThemeProvider(),
+        create: (context) => appThemeProvider,
         child: const MyApp(),
       ),
     ),

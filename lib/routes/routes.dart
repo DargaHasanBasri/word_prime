@@ -1,5 +1,4 @@
 import 'package:word_prime/export.dart';
-import 'package:word_prime/ui/pages/reset_password/reset_password_provider.dart';
 
 final class Routes {
   const Routes._();
@@ -25,6 +24,8 @@ final class Routes {
   static const String Quiz = 'quizProvider';
   static const String EmailVerification = 'emailVerificationProvider';
   static const String ResetPassword = 'resetPasswordProvider';
+  static const String AddWord = 'addWordProvider';
+  static const String MyWordList = 'myWordLisProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -105,9 +106,10 @@ final class Routes {
         );
       case Routes.Profile:
         final ValueNotifier<UserModel?> userModelNotifier =
-        settings.arguments as ValueNotifier<UserModel?>;
+            settings.arguments as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
-          builder: (context) => ProfileProvider(userNotifier: userModelNotifier),
+          builder: (context) =>
+              ProfileProvider(userNotifier: userModelNotifier),
         );
       case Routes.FollowerFollow:
         final bool isFollow = settings.arguments as bool;
@@ -136,6 +138,14 @@ final class Routes {
           builder: (context) => ResetPasswordProvider(
             userEmail: userEmail,
           ),
+        );
+      case Routes.AddWord:
+        return MaterialPageRoute(
+          builder: (context) => const AddWordProvider(),
+        );
+      case Routes.MyWordList:
+        return MaterialPageRoute(
+          builder: (context) => const MyWordListProvider(),
         );
       default:
         return MaterialPageRoute(

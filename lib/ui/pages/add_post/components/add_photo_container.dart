@@ -16,7 +16,7 @@ class AddPhotoContainer extends StatelessWidget {
         borderType: BorderType.RRect,
         radius: Radius.circular(16),
         dashPattern: [6, 6],
-        color: AppColors.santaGrey,
+        color: Theme.of(context).colorScheme.secondary,
         strokeWidth: 2,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
@@ -36,11 +36,11 @@ class AddPhotoContainer extends StatelessWidget {
                     SizedBox(height: 16),
                     Text(
                       LocaleKeys.addPost_selectImage.locale,
-                      style: TextStyle(
-                        color: AppColors.mirage,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    Text(
+                      '(${LocaleKeys.optional.locale})',
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ],
                 ),
