@@ -19,9 +19,6 @@ class RegisterViewModel extends BaseViewModel {
         nameInput.value.isNotEmpty;
   }
 
-  /// A variable is defined for the user ID
-  String? userId;
-
   /// An async method is defined for user registration. This method invokes
   /// appropriate callback functions on success of registration or on error
   Future<void> register({
@@ -60,8 +57,6 @@ class RegisterViewModel extends BaseViewModel {
 
       /// If user registration is successful, get user ID
       if (userCredential != null) {
-        /// Get the user ID returned via Firebase
-        userId = userCredential.user!.uid;
         log("Registration Successful");
 
         /// Register runs successful callback function

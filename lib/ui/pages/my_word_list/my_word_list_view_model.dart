@@ -1,3 +1,6 @@
 import 'package:word_prime/export.dart';
 
-class MyWordListViewModel extends BaseViewModel {}
+class MyWordListViewModel extends BaseViewModel {
+  final String englishLevel;
+  MyWordListViewModel(this.englishLevel);
+}

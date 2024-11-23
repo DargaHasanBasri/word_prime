@@ -9,6 +9,14 @@ class AddPostSuccessfulPage extends StatefulWidget {
 
 class _AddPostSuccessfulPageState
     extends BaseStatefulState<AddPostSuccessfulPage> {
+  late final AddPostSuccessfulViewModel _vm;
+
+  @override
+  void initState() {
+    _vm = Provider.of<AddPostSuccessfulViewModel>(context, listen: false);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +81,7 @@ class _AddPostSuccessfulPageState
         CustomButton(
           title: LocaleKeys.addPost_buttonTitle.locale,
           onClick: () {
-            appRoutes.navigateToReplacement(Routes.AddPost);
+            appRoutes.navigateRemoveUntil(Routes.MainTab);
           },
         ),
         Padding(
@@ -84,7 +92,7 @@ class _AddPostSuccessfulPageState
             backgroundColor: Colors.transparent,
             borderColor: AppColors.mirage,
             onClick: () {
-              appRoutes.navigateTo(Routes.Login);
+              appRoutes.navigateTo(Routes.MainTab);
             },
           ),
         ),

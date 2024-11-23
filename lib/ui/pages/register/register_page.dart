@@ -122,12 +122,8 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
                                   onRegistrationSuccess: () {
                                     appRoutes.navigateTo(
                                       Routes.EmailVerification,
-                                      arguments: [
-                                        _vm.userId,
-                                        _vm.emailInput.value,
-                                      ],
+                                      arguments: _vm.emailInput.value,
                                     );
-                                    log(_vm.userId.toString());
                                   },
                                   showProgress: () => showProgress(context),
                                   hideProgress: () => hideProgress(),

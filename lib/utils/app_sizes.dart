@@ -34,4 +34,6 @@ final class AppSizes {
 
   static const double sizedBoxUserListViewHeight = 100.0;
   static const double sizedBoxUserListItemWidth = 70.0;
+
+  static const double englishLevelContainerHeight = 150;
 }

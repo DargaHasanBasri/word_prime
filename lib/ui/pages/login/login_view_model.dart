@@ -16,8 +16,6 @@ class LoginViewModel extends BaseViewModel {
     return emailInput.value.isNotEmpty && passwordInput.value.isNotEmpty;
   }
 
-  /// Holds the user ID after successful login
-  String? userId;
   Future<void> login({
     /// Callback when login is successful
     required VoidCallback onLoginSuccess,
@@ -36,24 +34,17 @@ class LoginViewModel extends BaseViewModel {
       showProgress.call();
 
       /// Firebase user login with provided email and password
-      UserCredential? userCredential = await ServiceAuthentication().login(
+      await ServiceAuthentication().login(
         email: emailInput.value,
         password: passwordInput.value,
       );
 
-      if (userCredential != null) {
-        /// Retrieve the user ID from the UserCredential object
-        userId = userCredential.user!.uid;
+      /// Save the email locally for future use
+      await serviceLocalStorage.setString('email', emailInput.value);
+      log("email saved");
 
-        /// Save the email and userId locally for future use
-        await serviceLocalStorage.setString('email', emailInput.value);
-        await serviceLocalStorage.setString('userId', userId!);
-        log("email saved");
-
-        /// Call the success callback after successful login
-        onLoginSuccess.call();
-        log("$userId");
-      }
+      /// Call the success callback after successful login
+      onLoginSuccess.call();
     } on FirebaseAuthException catch (e) {
       /// Handle specific FirebaseAuthExceptions
       if (e.code == 'user-not-found') {
@@ -73,7 +64,6 @@ class LoginViewModel extends BaseViewModel {
 
   /// Complete login process with Google.
   /// If the login is successful, `onLoginSuccess` is called.
-  String? googleUserId;
   String? googleEmail;
   Future<void> loginWithGoogle({
     VoidCallback? onLoginSuccess,
@@ -84,14 +74,11 @@ class LoginViewModel extends BaseViewModel {
     final userCredential = await ServiceAuthentication().loginWithGoogle();
 
     if (userCredential != null) {
-      googleUserId = userCredential.user?.uid;
       googleEmail = userCredential.user?.email;
       onLoginSuccess?.call();
-      log("Google User ID: $googleUserId");
       log("Google User ID: $googleEmail");
 
       /// Storing user information in local storage.
-      await serviceLocalStorage.setString('userId', googleUserId!);
       await serviceLocalStorage.setString('googleEmail', googleEmail!);
       log("Google user information has been saved.");
     } else {

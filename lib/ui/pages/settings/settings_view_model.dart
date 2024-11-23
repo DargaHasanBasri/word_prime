@@ -12,14 +12,12 @@ class SettingsViewModel extends BaseViewModel {
   Future<void> logOutWithEmailPassword() async {
     await ServiceAuthentication().signOutWithEmailPassword();
     serviceLocalStorage.logout('email');
-    serviceLocalStorage.logout('userId');
     log("email deleted and log out");
   }
 
   Future<void> logOutWithGoogle() async {
     await ServiceAuthentication().signOutWithGoogle();
     serviceLocalStorage.logout('googleEmail');
-    serviceLocalStorage.logout('googleUserId');
     log("googleEmail deleted and log out");
   }
 

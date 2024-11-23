@@ -1,6 +1,6 @@
 import 'dart:developer';
+import 'package:word_prime/base/enums/english_word_level.dart';
 import 'package:word_prime/export.dart';
-import 'package:word_prime/ui/pages/add_word/components/word_english_level.dart';
 
 class AddWordPage extends StatefulWidget {
   const AddWordPage({super.key});
@@ -35,7 +35,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
                 englishLevelTitle: 'A1',
                 onTapLevel: () {
                   log('A1 click');
-                  appRoutes.navigateTo(Routes.MyWordList);
+                  appRoutes.navigateTo(
+                    Routes.MyWordList,
+                    arguments: EnglishWordLevel.A1.level,
+                  );
                 },
               ),
             ),
@@ -45,7 +48,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
                 englishLevelTitle: 'A2',
                 onTapLevel: () {
                   log('A2 click');
-                  appRoutes.navigateTo(Routes.MyWordList);
+                  appRoutes.navigateTo(
+                    Routes.MyWordList,
+                    arguments: EnglishWordLevel.A2.level,
+                  );
                 },
               ),
             ),
@@ -60,7 +66,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
                   englishLevelTitle: 'B1',
                   onTapLevel: () {
                     log('B1 click');
-                    appRoutes.navigateTo(Routes.MyWordList);
+                    appRoutes.navigateTo(
+                      Routes.MyWordList,
+                      arguments: EnglishWordLevel.B1.level,
+                    );
                   },
                 ),
               ),
@@ -70,35 +79,47 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
                   englishLevelTitle: 'B2',
                   onTapLevel: () {
                     log('B2 click');
-                    appRoutes.navigateTo(Routes.MyWordList);
+                    appRoutes.navigateTo(
+                      Routes.MyWordList,
+                      arguments: EnglishWordLevel.B2.level,
+                    );
                   },
                 ),
               ),
             ],
           ),
         ),
-        Row(
-          children: [
-            Expanded(
-              child: WordEnglishLevel(
-                englishLevelTitle: 'C1',
-                onTapLevel: () {
-                  log('C1 click');
-                  appRoutes.navigateTo(Routes.MyWordList);
-                },
+        Padding(
+          padding: AppPaddings.appPaddingMainTabBottom,
+          child: Row(
+            children: [
+              Expanded(
+                child: WordEnglishLevel(
+                  englishLevelTitle: 'C1',
+                  onTapLevel: () {
+                    log('C1 click');
+                    appRoutes.navigateTo(
+                      Routes.MyWordList,
+                      arguments: EnglishWordLevel.C1.level,
+                    );
+                  },
+                ),
               ),
-            ),
-            SizedBox(width: AppSizes.sizedBoxOverallHeight),
-            Expanded(
-              child: WordEnglishLevel(
-                englishLevelTitle: 'C2',
-                onTapLevel: () {
-                  log('C2 click');
-                  appRoutes.navigateTo(Routes.MyWordList);
-                },
+              SizedBox(width: AppSizes.sizedBoxOverallHeight),
+              Expanded(
+                child: WordEnglishLevel(
+                  englishLevelTitle: 'C2',
+                  onTapLevel: () {
+                    log('C2 click');
+                    appRoutes.navigateTo(
+                      Routes.MyWordList,
+                      arguments: EnglishWordLevel.C2.level,
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );

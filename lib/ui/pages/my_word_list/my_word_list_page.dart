@@ -8,6 +8,15 @@ class MyWordListPage extends StatefulWidget {
 }
 
 class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
+  late final MyWordListViewModel _vm;
+
+  @override
+  void initState() {
+    _vm = Provider.of<MyWordListViewModel>(context, listen: false);
+    serviceLocalStorage.getInstance();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +65,10 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
         CustomButton(
           title: LocaleKeys.myWordList_newWord.locale.toUpperCase(),
           onClick: () {
-            appRoutes.navigateTo(Routes.AddPost);
+            appRoutes.navigateTo(
+              Routes.AddPost,
+              arguments: _vm.englishLevel,
+            );
           },
         ),
       ],
@@ -76,7 +88,7 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
         ),
       ),
       title: Text(
-        LocaleKeys.myWordList_appBarTitle.locale,
+        '${LocaleKeys.myWordList_appBarTitle.locale} ${_vm.englishLevel}',
         style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w700,
             ),

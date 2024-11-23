@@ -124,9 +124,22 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
                           : AppColors.cornflowerBlue,
                       onClick: () {
                         _vm.isEmptyInputText()
-                            ? debugPrint(LocaleKeys.addPost_buttonTitle.locale)
-                            : appRoutes.navigateToReplacement(
-                                Routes.AddPostSuccessful,
+                            ? showSnackBar(
+                                context: context,
+                                content: CustomSnackBarContent(
+                                  text: LocaleKeys.warningMessages_emptySpace,
+                                  iconType: CustomSnackBarType.info,
+                                ),
+                              )
+                            : _vm.addNewPost(
+                                showProgress: () => showProgress(context),
+                                hideProgress: () => hideProgress(),
+                                successAdded: () {
+                                  appRoutes.navigateToReplacement(
+                                    Routes.AddPostSuccessful,
+                                    arguments: _vm.wordLevel,
+                                  );
+                                },
                               );
                       },
                     ),

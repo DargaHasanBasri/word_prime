@@ -8,6 +8,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
   String? userId;
   String? userName;
   bool? emailVerification;
+  int? totalPost;
+  int? totalScore;
 
   UserModel({
     this.email,
@@ -16,6 +18,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
     this.userId,
     this.userName,
     this.emailVerification,
+    this.totalPost,
+    this.totalScore,
   });
 
   @override
@@ -25,7 +29,9 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
         profileImageAddress,
         userId,
         userName,
-        emailVerification
+        emailVerification,
+        totalPost,
+        totalScore
       ];
 
   UserModel copyWith({
@@ -35,6 +41,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
     String? userId,
     String? userName,
     bool? emailVerification,
+    int? totalPost,
+    int? totalScore,
   }) {
     return UserModel(
       email: email ?? this.email,
@@ -43,6 +51,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
       userId: userId ?? this.userId,
       userName: userName ?? this.userName,
       emailVerification: emailVerification ?? this.emailVerification,
+      totalPost: totalPost ?? this.totalPost,
+      totalScore: totalScore ?? this.totalScore,
     );
   }
 
@@ -54,6 +64,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
       'user_id': userId,
       'user_name': userName,
       'email_verification': emailVerification,
+      'total_post': totalPost,
+      'total_score': totalScore,
     };
   }
 
@@ -66,6 +78,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
       userId: json['user_id'] as String?,
       userName: json['user_name'] as String?,
       emailVerification: json['email_verification'] as bool?,
+      totalPost: json['total_post'] as int?,
+      totalScore: json['total_score'] as int?,
     );
   }
 }
