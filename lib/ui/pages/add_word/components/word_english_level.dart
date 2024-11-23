@@ -15,7 +15,7 @@ class WordEnglishLevel extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTapLevel.call(),
       child: Container(
-        height: 200,
+        height: AppSizes.englishLevelContainerHeight,
         padding: AppPaddings.paddingSmallVertical +
             AppPaddings.paddingMediumHorizontal,
         decoration: BoxDecoration(

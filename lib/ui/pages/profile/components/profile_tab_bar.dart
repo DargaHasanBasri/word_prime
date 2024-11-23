@@ -34,8 +34,8 @@ class ProfileTabBar extends StatelessWidget {
                           boxShadow: [
                             BoxShadow(
                               color: AppColors.blackCow.withOpacity(0.12),
-                              offset: Offset(-4, 4),
-                              blurRadius: 20,
+                              offset: Offset(0, 4),
+                              blurRadius: 6,
                             ),
                           ],
                         )
@@ -80,8 +80,8 @@ class ProfileTabBar extends StatelessWidget {
                           boxShadow: [
                             BoxShadow(
                               color: AppColors.blackCow.withOpacity(0.12),
-                              offset: Offset(-4, 4),
-                              blurRadius: 20,
+                              offset: Offset(0, 4),
+                              blurRadius: 6,
                             ),
                           ],
                         )
@@ -126,8 +126,8 @@ class ProfileTabBar extends StatelessWidget {
                           boxShadow: [
                             BoxShadow(
                               color: AppColors.blackCow.withOpacity(0.12),
-                              offset: Offset(-4, 4),
-                              blurRadius: 20,
+                              offset: Offset(0, 4),
+                              blurRadius: 6,
                             ),
                           ],
                         )

@@ -10,16 +10,12 @@ class MainTabPage extends StatefulWidget {
 
 class _MainTabPageState extends BaseStatefulState<MainTabPage> {
   late final MainTabViewModel _vm;
-  late final String? _userId;
 
   @override
   void initState() {
     _vm = Provider.of<MainTabViewModel>(context, listen: false);
-    serviceLocalStorage.getInstance();
-    _userId = serviceLocalStorage.getString('userId');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _vm.getUserData(
-        userId: _userId,
         showProgress: () => showProgress(context),
         hideProgress: () => hideProgress(),
       );

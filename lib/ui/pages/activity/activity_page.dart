@@ -84,9 +84,7 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
         ),
         SizedBox(height: AppSizes.sizedBoxOverallHeight),
         Padding(
-          padding: const EdgeInsets.only(
-            bottom: AppSizes.bottomNavigationBarHeight,
-          ),
+          padding: AppPaddings.appPaddingMainTabBottom,
           child: AnalysisResults(),
         ),
       ],

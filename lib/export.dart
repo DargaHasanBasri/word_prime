@@ -108,3 +108,6 @@ export 'package:word_prime/ui/pages/reset_password/reset_password_provider.dart'
 export 'package:word_prime/ui/pages/my_word_list/my_word_list_page.dart';
 export 'package:word_prime/ui/pages/my_word_list/my_word_list_view_model.dart';
 export 'package:word_prime/ui/pages/my_word_list/my_word_list_provider.dart';
+export 'package:word_prime/ui/pages/add_word/components/word_english_level.dart';
+export 'package:word_prime/base/repository/post_repository.dart';
+export 'package:word_prime/models/post_model.dart';

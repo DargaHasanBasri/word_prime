@@ -58,12 +58,18 @@ final class Routes {
           builder: (context) => ForgotPasswordMethodProvider(),
         );
       case Routes.AddPost:
+        final String englishWordLevel = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => const AddPostProvider(),
+          builder: (context) => AddPostProvider(
+            wordLevel: englishWordLevel,
+          ),
         );
       case Routes.AddPostSuccessful:
+        final String englishWordLevel = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => const AddPostSuccessfulProvider(),
+          builder: (context) => AddPostSuccessfulProvider(
+            wordLevel: englishWordLevel,
+          ),
         );
       case Routes.Settings:
         return MaterialPageRoute(
@@ -123,12 +129,9 @@ final class Routes {
           builder: (context) => const QuizProvider(),
         );
       case Routes.EmailVerification:
-        List<dynamic> arguments = settings.arguments as List;
-        final String userId = arguments[0] as String;
-        final String userEmail = arguments[1] as String;
+        final String userEmail = settings.arguments as String;
         return MaterialPageRoute(
           builder: (context) => EmailVerificationProvider(
-            userId: userId,
             userEmail: userEmail,
           ),
         );
@@ -144,8 +147,11 @@ final class Routes {
           builder: (context) => const AddWordProvider(),
         );
       case Routes.MyWordList:
+        final String englishLevel = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => const MyWordListProvider(),
+          builder: (context) => MyWordListProvider(
+            englishLevel: englishLevel,
+          ),
         );
       default:
         return MaterialPageRoute(
