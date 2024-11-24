@@ -1,7 +1,7 @@
 import 'package:word_prime/export.dart';
-import 'package:word_prime/ui/pages/home/components/icon_interact_item.dart';
+import 'package:word_prime/ui/pages/my_word_list/components/interact_item.dart';
 
-class PostListItem extends StatelessWidget {
+class ItemMyWordList extends StatelessWidget {
   final ValueNotifier<bool> isActiveLike;
   final ValueNotifier<bool> isActiveSave;
   final ValueNotifier<bool> isTranslate;
@@ -9,15 +9,14 @@ class PostListItem extends StatelessWidget {
   final VoidCallback onTabComment;
   final VoidCallback onTabSave;
   final VoidCallback onTabTranslate;
-
-  const PostListItem({
+  const ItemMyWordList({
     super.key,
     required this.isActiveLike,
     required this.isActiveSave,
+    required this.isTranslate,
     required this.onTabLike,
     required this.onTabComment,
     required this.onTabSave,
-    required this.isTranslate,
     required this.onTabTranslate,
   });
 
@@ -29,23 +28,37 @@ class PostListItem extends StatelessWidget {
         children: [
           _getUserInfo(context),
           Padding(
-            padding: AppPaddings.paddingMediumVertical,
-            child: _getPostPicture(),
-          ),
-          Padding(
-            padding: AppPaddings.paddingMediumBottom,
-            child: _getUserSentences(context),
-          ),
-          ValueListenableBuilder(
-            valueListenable: isActiveSave,
-            builder: (_, __, ___) {
-              return ValueListenableBuilder(
-                valueListenable: isActiveLike,
-                builder: (_, __, ___) {
-                  return _getInteractItems();
-                },
-              );
-            },
+            padding: AppPaddings.paddingMediumTop,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: AppPaddings.paddingLargeRight,
+                  child: ValueListenableBuilder(
+                    valueListenable: isActiveSave,
+                    builder: (_, __, ___) {
+                      return ValueListenableBuilder(
+                        valueListenable: isActiveLike,
+                        builder: (_, __, ___) {
+                          return _getInteractItems();
+                        },
+                      );
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: AppPaddings.paddingMediumBottom,
+                        child: _getUserSentences(context),
+                      ),
+                      _getPostPicture(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -186,10 +199,10 @@ class PostListItem extends StatelessWidget {
       aspectRatio: 16 / 10,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
           child: Image.asset(
             AppAssets.imgExampPostPath,
             fit: BoxFit.fill,
@@ -200,9 +213,10 @@ class PostListItem extends StatelessWidget {
   }
 
   Widget _getInteractItems() {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        IconInteractItem(
+        InteractItem(
           onTap: () => onTabLike.call(),
           iconAddress: isActiveLike.value
               ? AppAssets.icActiveLikePath
@@ -210,14 +224,14 @@ class PostListItem extends StatelessWidget {
           interactCount: '12',
         ),
         Padding(
-          padding: AppPaddings.appPaddingHorizontal,
-          child: IconInteractItem(
+          padding: AppPaddings.paddingMediumVertical,
+          child: InteractItem(
             onTap: () => onTabComment.call(),
             iconAddress: AppAssets.icCommentPath,
             interactCount: '12',
           ),
         ),
-        IconInteractItem(
+        InteractItem(
           onTap: () => onTabSave.call(),
           iconAddress: isActiveSave.value
               ? AppAssets.icActiveSavePath
