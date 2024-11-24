@@ -30,6 +30,8 @@ abstract class  LocaleKeys {
   static const confirm = 'confirm';
   static const logout = 'logout';
   static const optional = 'optional';
+  static const added = 'added';
+  static const saved = 'saved';
   static const splashPage_title = 'splashPage.title';
   static const splashPage = 'splashPage';
   static const getStartedPage_title = 'getStartedPage.title';

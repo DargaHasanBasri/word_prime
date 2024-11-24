@@ -28,6 +28,8 @@
   "confirm": "Onayla",
   "logout": "Çıkış Yap",
   "optional": "İsteğe Bağlı",
+  "added": "Eklenenler",
+  "saved": "Kaydedilenler",
   "splashPage": {
     "title": "Kelimelerle dolu bir dünyanın kilidini bizimle açın!"
   },

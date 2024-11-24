@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:word_prime/export.dart';
 
 class RegisterPage extends StatefulWidget {

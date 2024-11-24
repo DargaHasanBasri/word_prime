@@ -51,7 +51,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
               ),
             ),
           ),
-          SizedBox(height: AppSizes.sizedBoxOverallHeight),
+          SizedBox(height: AppSizes.sizedBoxMediumHeight),
           ListView.separated(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -82,7 +82,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
               );
             },
             separatorBuilder: (context, index) => SizedBox(
-              width: AppSizes.sizedBoxSmallWidth,
+              height: AppSizes.sizedBoxSmallHeight,
             ),
           ),
         ],
