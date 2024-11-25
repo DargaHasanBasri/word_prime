@@ -9,6 +9,19 @@ class ServiceAuthentication {
   /// is an object.
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  Future<void> updateAuthUserDetails({
+    required String userName,
+    required String profileImageAddress,
+  }) async {
+    User? user = _firebaseAuth.currentUser;
+
+    if (user != null) {
+      await user.updateDisplayName(userName);
+      await user.updatePhotoURL(profileImageAddress);
+      await user.reload();
+    }
+  }
+
   /// Creates a new user record.
   /// A new user is registered on Firebase Authentication using the email and
   /// password information in the given 'UserModel' object. If successful,
@@ -47,6 +60,11 @@ class ServiceAuthentication {
               userModel.toJson(),
             );
 
+        await updateAuthUserDetails(
+          userName: userModel.userName!,
+          profileImageAddress: userModel.profileImageAddress!,
+        );
+        log("Firebase Authentication bilgileri güncellendi.");
         return userCredential;
       }
     } on FirebaseAuthException catch (e) {

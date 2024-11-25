@@ -12,6 +12,8 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
   String? wordTurkish;
   String? wordEnglish;
   String? postImageAddress;
+  String? userName;
+  String? userProfileImage;
   Timestamp? createdDate;
   Timestamp? updatedDate;
   List<String>? sentenceTurkish;
@@ -27,6 +29,8 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
     this.wordTurkish,
     this.wordEnglish,
     this.postImageAddress,
+    this.userName,
+    this.userProfileImage,
     this.createdDate,
     this.updatedDate,
     this.sentenceTurkish,
@@ -44,6 +48,8 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
         wordTurkish,
         wordEnglish,
         postImageAddress,
+        userName,
+        userProfileImage,
         createdDate,
         updatedDate,
         sentenceTurkish,
@@ -60,6 +66,8 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
     String? wordTurkish,
     String? wordEnglish,
     String? postImageAddress,
+    String? userName,
+    String? userProfileImage,
     Timestamp? createdDate,
     Timestamp? updatedDate,
     List<String>? sentenceTurkish,
@@ -75,6 +83,8 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
       wordTurkish: wordTurkish ?? this.wordTurkish,
       wordEnglish: wordEnglish ?? this.wordEnglish,
       postImageAddress: postImageAddress ?? this.postImageAddress,
+      userName: userName ?? this.userName,
+      userProfileImage: userProfileImage ?? this.userProfileImage,
       createdDate: createdDate ?? this.createdDate,
       updatedDate: updatedDate ?? this.updatedDate,
       sentenceTurkish: sentenceTurkish ?? this.sentenceTurkish,
@@ -93,6 +103,8 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
       'word_turkish': wordTurkish,
       'word_english': wordEnglish,
       'post_image_address': postImageAddress,
+      'user_name': userName,
+      'user_profile_image': userProfileImage,
       'created_date': createdDate,
       'updated_date': updatedDate,
       'sentence_turkish': sentenceTurkish,
@@ -112,6 +124,8 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
       wordTurkish: json['word_turkish'] as String?,
       wordEnglish: json['word_english'] as String?,
       postImageAddress: json['post_image_address'] as String?,
+      userName: json['user_name'] as String?,
+      userProfileImage: json['user_profile_image'] as String?,
       createdDate: json['created_date'] as Timestamp?,
       updatedDate: json['updated_date'] as Timestamp?,
       sentenceTurkish: (json['sentence_turkish'] as List<dynamic>?)
