@@ -32,7 +32,7 @@ class CustomUserCircleAvatar extends StatelessWidget {
         backgroundColor: Colors.transparent,
         radius: circleRadius ?? 30,
         backgroundImage: CachedNetworkImageProvider(
-          profileImgAddress ?? AppLocaleConstants.DEFAULT_PROFILE_PICTURE,
+          profileImgAddress ?? AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/interact_item.dart';
 
@@ -61,7 +62,7 @@ class SavedPostsListItem extends StatelessWidget {
         CustomUserCircleAvatar(
           circleRadius: 20,
           borderPadding: 0,
-          profileImgAddress: AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
+          profileImgAddress: postModel?.userProfileImage,
         ),
         SizedBox(width: AppSizes.sizedBoxMediumWidth),
         Expanded(
@@ -69,10 +70,12 @@ class SavedPostsListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppLocaleConstants.DEFAULT_USER_NAME,
+                postModel?.userName ?? '',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: Theme.of(context).colorScheme.surfaceContainerHigh,
                     ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               Text(
                 '${AppUtility().timeAgo(dateTime)}',
@@ -80,11 +83,12 @@ class SavedPostsListItem extends StatelessWidget {
                       color: Theme.of(context).colorScheme.surfaceContainerHigh,
                       fontWeight: FontWeight.w400,
                     ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
         ),
-        Spacer(),
         GestureDetector(
           onTap: () => onTabChoice.call(),
           child: Image.asset(
@@ -118,7 +122,7 @@ class SavedPostsListItem extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      postModel?.wordEnglish ?? '',
+                      postModel?.sentenceEnglish?[0] ?? '',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
@@ -172,7 +176,7 @@ class SavedPostsListItem extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    postModel?.wordTurkish ?? '',
+                    postModel?.sentenceTurkish?[0] ?? '',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context)
                               .colorScheme
@@ -196,11 +200,11 @@ class SavedPostsListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Image.asset(
-            AppAssets.imgExampPostPath,
+          image: DecorationImage(
+            image: CachedNetworkImageProvider(
+              postModel?.postImageAddress ??
+                  AppLocaleConstants.DEFAULT_PROFILE_PICTURE,
+            ),
             fit: BoxFit.fill,
           ),
         ),

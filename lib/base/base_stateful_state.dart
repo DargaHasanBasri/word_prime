@@ -25,9 +25,14 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
 
   @override
   void initState() {
-    /// First, it is assumed that there is no OverlayEntry
-    _progressOverlayEntry = null;
     super.initState();
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
   }
 
   /// Use to show a loading animation to the user during
@@ -40,12 +45,10 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
     _progressOverlayEntry = _createProgressOverlay(context);
 
     /// Add the newly created entry to the overlay
-    if (_progressOverlayEntry != null) {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        Overlay.of(context).insert(_progressOverlayEntry!);
-        _startTimer();
-      });
-    }
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Overlay.of(context).insert(_progressOverlayEntry!);
+      _startTimer();
+    });
   }
 
   /// Use when an action is completed or the loading animation
@@ -54,10 +57,8 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
     try {
       /// If a progress overlay has been added and is still on the screen, remove it.
       if (_progressOverlayEntry != null) {
-        if (_progressOverlayEntry!.mounted) {
-          /// Removes the overlay
-          _progressOverlayEntry!.remove();
-        }
+        /// Removes the overlay
+        _progressOverlayEntry!.remove();
 
         /// Resets the reference
         _progressOverlayEntry = null;
@@ -80,7 +81,6 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
   void _startTimer() {
     /// If there is already a timer, cancel it
     _timeoutTimer?.cancel();
-    _remainingTime = TIMEOUT;
 
     /// Start a new timer
     _timeoutTimer = Timer.periodic(
@@ -88,6 +88,8 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
       const Duration(seconds: 1),
       (Timer timer) {
         if (_remainingTime == 0) {
+          _remainingTime = TIMEOUT;
+
           /// Hide progress overlay and stop timer if time is up
           hideProgress();
           timer.cancel();
@@ -102,7 +104,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
   /// Used to create a loading screen.
   /// It is called by `showProgress` and added to the screen.
   OverlayEntry _createProgressOverlay(BuildContext context) => OverlayEntry(
-        builder: (BuildContext context) => Stack(
+        builder: (_) => Stack(
           children: [
             /// Creates a translucent background
             ModalBarrier(

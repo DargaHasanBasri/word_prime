@@ -14,12 +14,12 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
   @override
   void initState() {
     _vm = Provider.of<MainTabViewModel>(context, listen: false);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _vm.getUserData(
-        showProgress: () => showProgress(context),
-        hideProgress: () => hideProgress(),
-      );
-    });
+
+    _vm.getUserData(
+      showProgress: () => showProgress(context),
+      hideProgress: () => hideProgress(),
+    );
+
     super.initState();
   }
 

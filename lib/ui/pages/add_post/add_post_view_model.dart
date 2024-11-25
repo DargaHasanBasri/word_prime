@@ -46,6 +46,8 @@ class AddPostViewModel extends BaseViewModel {
             totalLikes: 0,
             totalSaves: 0,
             wordLevel: wordLevel,
+            userName: _currentUser.displayName,
+            userProfileImage: _currentUser.photoURL,
             createdDate: Timestamp.now(),
             updatedDate: Timestamp.now(),
             wordEnglish: englishWordInput.value,

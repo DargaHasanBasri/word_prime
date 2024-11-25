@@ -20,12 +20,12 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
   @override
   void initState() {
     _vm = Provider.of<MyWordListViewModel>(context, listen: false);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _vm.getAddedPosts(
-        showProgress: () => showProgress(context),
-        hideProgress: () => hideProgress(),
-      );
-    });
+
+    _vm.getAddedAndSavedPosts(
+      showProgress: () => showProgress(context),
+      hideProgress: () => hideProgress(),
+    );
+
     _addedScrollController = ScrollController();
     _savedScrollController = ScrollController();
     super.initState();
@@ -73,21 +73,11 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                 onTapAdded: () {
                   if (_vm.isSaved.value) {
                     _vm.isSaved.value = false;
-                    _savedScrollController.animateTo(
-                      0,
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.easeOut,
-                    );
                   }
                 },
                 onTapSaved: () {
                   if (!_vm.isSaved.value) {
                     _vm.isSaved.value = true;
-                    _addedScrollController.animateTo(
-                      0,
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.easeOut,
-                    );
                   }
                 },
                 isSaved: _vm.isSaved.value,
@@ -98,21 +88,16 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
               builder: (_, __, ___) {
                 return Expanded(
                   child: _vm.isSaved.value
-                      ? ListView(
-                          controller: _savedScrollController,
-                          physics: BouncingScrollPhysics(),
-                          children: [
-                            savedList(),
-                          ],
+                      ? ValueListenableBuilder(
+                          valueListenable: _vm.isSavedItem,
+                          builder: (_, __, ___) {
+                            return _vm.isSavedItem.value
+                                ? savedList()
+                                : SizedBox();
+                          },
                         )
                       : _vm.isAddedItem.value
-                          ? ListView(
-                              controller: _addedScrollController,
-                              physics: BouncingScrollPhysics(),
-                              children: [
-                                addedList(),
-                              ],
-                            )
+                          ? addedList()
                           : Center(
                               child: _emptyAddedItem(),
                             ),
@@ -177,7 +162,7 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
       builder: (_, __, ___) {
         return ListView.separated(
           controller: _addedScrollController,
-          physics: NeverScrollableScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           padding:
               AppPaddings.appPaddingMainTabBottom + AppPaddings.paddingSmallTop,
           shrinkWrap: true,
@@ -216,22 +201,22 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
   Widget savedList() {
     return ListView.separated(
       controller: _savedScrollController,
-      physics: NeverScrollableScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       padding:
           AppPaddings.appPaddingMainTabBottom + AppPaddings.paddingSmallTop,
       shrinkWrap: true,
-      itemCount: 5,
+      itemCount: _vm.savedPostsNotifier.value?.length ?? 0,
       itemBuilder: (context, index) {
         return SavedPostsListItem(
-          postModel: null,
+          postModel: _vm.savedPostsNotifier.value?[index],
           onTabLike: () {
-            log('${_vm.addedPostsNotifier.value?[index]?.postId}');
+            log('${_vm.savedPostsNotifier.value?[index]?.postId}');
           },
           onTabSave: () {
-            log('${_vm.addedPostsNotifier.value?[index]?.postId}');
+            log('${_vm.savedPostsNotifier.value?[index]?.postId}');
           },
           onTabComment: () {
-            log('${_vm.addedPostsNotifier.value?[index]?.postId}');
+            log('${_vm.savedPostsNotifier.value?[index]?.postId}');
             showCustomBottomSheet(
               context: context,
               child: CustomCommentBottomSheet(
