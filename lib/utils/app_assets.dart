@@ -32,7 +32,6 @@ final class AppAssets {
   static String icCommentPath = _imagePath('ic_comment');
   static String icActiveSavePath = _imagePath('ic_active_save');
   static String icInactiveSavePath = _imagePath('ic_inactive_save');
-  static String icSharePath = _imagePath('ic_share');
   static String icSendPath = _imagePath('ic_send');
   static String icScorePath = _imagePath('ic_score');
   static String icTaskDailyPath = _imagePath('ic_task_daily');
@@ -43,6 +42,7 @@ final class AppAssets {
   static String icLogoutPath = _imagePath('ic_logout');
   static String icEmailVerificationPath = _imagePath('ic_email_verification');
   static String icResetPasswordPath = _imagePath('ic_reset_password');
+  static String icChoicePath = _imagePath('ic_choice');
   static String imgSuccessfulPath = _imagePath('img_successful');
   static String imgExampPostPath = _imagePath('img_examp_post');
   static String imgQuizAnalysisPath = _imagePath('img_quiz_analysis');

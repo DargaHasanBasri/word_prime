@@ -40,7 +40,7 @@ class AddPostViewModel extends BaseViewModel {
       User? _currentUser = FirebaseAuth.instance.currentUser;
       if (_currentUser != null) {
         await PostRepository().addPost(
-          PostModel(
+          postModel: PostModel(
             userId: _currentUser.uid,
             totalComments: 0,
             totalLikes: 0,

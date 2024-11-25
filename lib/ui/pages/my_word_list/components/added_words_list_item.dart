@@ -1,115 +1,73 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/interact_item.dart';
 
-class ItemMyWordList extends StatelessWidget {
-  final ValueNotifier<bool> isActiveLike;
-  final ValueNotifier<bool> isActiveSave;
-  final ValueNotifier<bool> isTranslate;
+class AddedWordsListItem extends StatelessWidget {
   final VoidCallback onTabLike;
   final VoidCallback onTabComment;
   final VoidCallback onTabSave;
+  final VoidCallback onTabChoice;
   final VoidCallback onTabTranslate;
-  const ItemMyWordList({
+  final PostModel? postModel;
+  const AddedWordsListItem({
     super.key,
-    required this.isActiveLike,
-    required this.isActiveSave,
-    required this.isTranslate,
     required this.onTabLike,
     required this.onTabComment,
     required this.onTabSave,
     required this.onTabTranslate,
+    required this.postModel,
+    required this.onTabChoice,
   });
 
   @override
   Widget build(BuildContext context) {
+    final DateTime? dateTime = postModel?.createdDate?.toDateTime();
     return Container(
-      padding: AppPaddings.paddingMediumAll,
+      padding: AppPaddings.appPaddingHorizontal,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _getUserInfo(context),
           Padding(
-            padding: AppPaddings.paddingMediumTop,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: AppPaddings.paddingLargeRight,
-                  child: ValueListenableBuilder(
-                    valueListenable: isActiveSave,
-                    builder: (_, __, ___) {
-                      return ValueListenableBuilder(
-                        valueListenable: isActiveLike,
-                        builder: (_, __, ___) {
-                          return _getInteractItems();
-                        },
-                      );
-                    },
+            padding: AppPaddings.paddingMediumVertical,
+            child: Text(
+              AppUtility().timeAgo(dateTime),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                    fontWeight: FontWeight.w400,
                   ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: AppPaddings.paddingMediumBottom,
-                        child: _getUserSentences(context),
-                      ),
-                      _getPostPicture(),
-                    ],
-                  ),
-                ),
-              ],
             ),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: AppPaddings.paddingLargeRight,
+                child: _getInteractItems(),
+              ),
+              Expanded(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: AppPaddings.paddingMediumBottom,
+                      child: _getPostPicture(),
+                    ),
+                    _getUserSentences(context),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Widget _getUserInfo(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomUserCircleAvatar(
-          circleRadius: 20,
-          borderPadding: 0,
-          profileImgAddress: AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
-        ),
-        SizedBox(width: AppSizes.sizedBoxMediumWidth),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                AppLocaleConstants.DEFAULT_USER_NAME,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.surfaceContainerHigh,
-                    ),
-              ),
-              Text(
-                '${LocaleKeys.level.locale}  10',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.surfaceContainerHigh,
-                      fontWeight: FontWeight.w400,
-                    ),
-              ),
-            ],
-          ),
-        ),
-        Spacer(),
-        Image.asset(
-          AppAssets.icSharePath,
-          width: AppSizes.appOverallIconWidth,
-          height: AppSizes.appOverallIconHeight,
-        ),
-      ],
-    );
-  }
-
   Widget _getUserSentences(BuildContext context) {
+    final ValueNotifier<bool> isTranslate = ValueNotifier(false);
     return ValueListenableBuilder(
       valueListenable: isTranslate,
       builder: (_, __, ___) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
               children: [
@@ -124,7 +82,7 @@ class ItemMyWordList extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      AppLocaleConstants.DEFAULT_SENTENCES,
+                      postModel?.wordEnglish ?? '',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
@@ -137,7 +95,9 @@ class ItemMyWordList extends StatelessWidget {
                 ),
                 SizedBox(width: AppSizes.sizedBoxSmallWidth),
                 GestureDetector(
-                  onTap: () => onTabTranslate.call(),
+                  onTap: () {
+                    isTranslate.value = !isTranslate.value;
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
@@ -166,7 +126,7 @@ class ItemMyWordList extends StatelessWidget {
                 child: Container(
                   padding: AppPaddings.paddingSmallAll,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: Theme.of(context)
                           .colorScheme
@@ -176,7 +136,7 @@ class ItemMyWordList extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    AppLocaleConstants.DEFAULT_SENTENCES,
+                    postModel?.wordTurkish ?? '',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context)
                               .colorScheme
@@ -213,30 +173,61 @@ class ItemMyWordList extends StatelessWidget {
   }
 
   Widget _getInteractItems() {
+    final ValueNotifier<bool> isActiveLike = ValueNotifier(false);
+    final ValueNotifier<bool> isActiveSave = ValueNotifier(false);
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        InteractItem(
-          onTap: () => onTabLike.call(),
-          iconAddress: isActiveLike.value
-              ? AppAssets.icActiveLikePath
-              : AppAssets.icInactiveLikePath,
-          interactCount: '12',
+        Column(
+          children: [
+            ValueListenableBuilder(
+                valueListenable: isActiveLike,
+                builder: (_, __, ___) {
+                  return InteractItem(
+                    onTap: () {
+                      isActiveLike.value = !isActiveLike.value;
+                      onTabLike.call();
+                    },
+                    iconAddress: isActiveLike.value
+                        ? AppAssets.icActiveLikePath
+                        : AppAssets.icInactiveLikePath,
+                    interactCount: postModel?.totalLikes ?? 0,
+                  );
+                }),
+            Padding(
+              padding: AppPaddings.paddingMediumVertical,
+              child: InteractItem(
+                onTap: () => onTabComment.call(),
+                iconAddress: AppAssets.icCommentPath,
+                interactCount: postModel?.totalComments ?? 0,
+              ),
+            ),
+            ValueListenableBuilder(
+                valueListenable: isActiveSave,
+                builder: (_, __, ___) {
+                  return InteractItem(
+                    onTap: () {
+                      isActiveSave.value = !isActiveSave.value;
+                      onTabSave..call();
+                    },
+                    iconAddress: isActiveSave.value
+                        ? AppAssets.icActiveSavePath
+                        : AppAssets.icInactiveSavePath,
+                    interactCount: postModel?.totalSaves ?? 0,
+                  );
+                }),
+          ],
         ),
         Padding(
-          padding: AppPaddings.paddingMediumVertical,
-          child: InteractItem(
-            onTap: () => onTabComment.call(),
-            iconAddress: AppAssets.icCommentPath,
-            interactCount: '12',
+          padding: AppPaddings.paddingMediumTop,
+          child: GestureDetector(
+            onTap: () => onTabChoice.call(),
+            child: Image.asset(
+              AppAssets.icChoicePath,
+              width: AppSizes.appOverallIconWidth,
+              height: AppSizes.appOverallIconHeight,
+            ),
           ),
-        ),
-        InteractItem(
-          onTap: () => onTabSave.call(),
-          iconAddress: isActiveSave.value
-              ? AppAssets.icActiveSavePath
-              : AppAssets.icInactiveSavePath,
-          interactCount: '12',
         ),
       ],
     );
