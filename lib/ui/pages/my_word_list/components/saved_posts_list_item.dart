@@ -1,51 +1,52 @@
 import 'package:word_prime/export.dart';
-import 'package:word_prime/ui/pages/home/components/icon_interact_item.dart';
+import 'package:word_prime/ui/pages/my_word_list/components/interact_item.dart';
 
-class PostListItem extends StatelessWidget {
-  final ValueNotifier<bool> isActiveLike;
-  final ValueNotifier<bool> isActiveSave;
-  final ValueNotifier<bool> isTranslate;
+class SavedPostsListItem extends StatelessWidget {
   final VoidCallback onTabLike;
   final VoidCallback onTabComment;
   final VoidCallback onTabSave;
+  final VoidCallback onTabChoice;
   final VoidCallback onTabTranslate;
-
-  const PostListItem({
+  final PostModel? postModel;
+  const SavedPostsListItem({
     super.key,
-    required this.isActiveLike,
-    required this.isActiveSave,
     required this.onTabLike,
     required this.onTabComment,
     required this.onTabSave,
-    required this.isTranslate,
     required this.onTabTranslate,
+    required this.postModel,
+    required this.onTabChoice,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: AppPaddings.paddingMediumAll,
+      padding: AppPaddings.appPaddingHorizontal,
       child: Column(
         children: [
-          _getUserInfo(context),
           Padding(
             padding: AppPaddings.paddingMediumVertical,
-            child: _getPostPicture(),
+            child: _getUserInfo(context),
           ),
-          Padding(
-            padding: AppPaddings.paddingMediumBottom,
-            child: _getUserSentences(context),
-          ),
-          ValueListenableBuilder(
-            valueListenable: isActiveSave,
-            builder: (_, __, ___) {
-              return ValueListenableBuilder(
-                valueListenable: isActiveLike,
-                builder: (_, __, ___) {
-                  return _getInteractItems();
-                },
-              );
-            },
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: AppPaddings.paddingLargeRight,
+                child: _getInteractItems(),
+              ),
+              Expanded(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: AppPaddings.paddingMediumBottom,
+                      child: _getPostPicture(),
+                    ),
+                    _getUserSentences(context),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -53,6 +54,7 @@ class PostListItem extends StatelessWidget {
   }
 
   Widget _getUserInfo(BuildContext context) {
+    final DateTime? dateTime = postModel?.createdDate?.toDateTime();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -73,7 +75,7 @@ class PostListItem extends StatelessWidget {
                     ),
               ),
               Text(
-                '${LocaleKeys.level.locale}  10',
+                '${AppUtility().timeAgo(dateTime)}',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Theme.of(context).colorScheme.surfaceContainerHigh,
                       fontWeight: FontWeight.w400,
@@ -83,20 +85,25 @@ class PostListItem extends StatelessWidget {
           ),
         ),
         Spacer(),
-        Image.asset(
-          AppAssets.icChoicePath,
-          width: AppSizes.appOverallIconWidth,
-          height: AppSizes.appOverallIconHeight,
+        GestureDetector(
+          onTap: () => onTabChoice.call(),
+          child: Image.asset(
+            AppAssets.icChoicePath,
+            width: AppSizes.appOverallIconWidth,
+            height: AppSizes.appOverallIconHeight,
+          ),
         ),
       ],
     );
   }
 
   Widget _getUserSentences(BuildContext context) {
+    final ValueNotifier<bool> isTranslate = ValueNotifier(false);
     return ValueListenableBuilder(
       valueListenable: isTranslate,
       builder: (_, __, ___) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
               children: [
@@ -111,7 +118,7 @@ class PostListItem extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      AppLocaleConstants.DEFAULT_SENTENCES,
+                      postModel?.wordEnglish ?? '',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
@@ -124,7 +131,9 @@ class PostListItem extends StatelessWidget {
                 ),
                 SizedBox(width: AppSizes.sizedBoxSmallWidth),
                 GestureDetector(
-                  onTap: () => onTabTranslate.call(),
+                  onTap: () {
+                    isTranslate.value = !isTranslate.value;
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
@@ -163,7 +172,7 @@ class PostListItem extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    AppLocaleConstants.DEFAULT_SENTENCES,
+                    postModel?.wordTurkish ?? '',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context)
                               .colorScheme
@@ -186,10 +195,10 @@ class PostListItem extends StatelessWidget {
       aspectRatio: 16 / 10,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
           child: Image.asset(
             AppAssets.imgExampPostPath,
             fit: BoxFit.fill,
@@ -200,30 +209,47 @@ class PostListItem extends StatelessWidget {
   }
 
   Widget _getInteractItems() {
-    return Row(
+    final ValueNotifier<bool> isActiveLike = ValueNotifier(false);
+    final ValueNotifier<bool> isActiveSave = ValueNotifier(false);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        IconInteractItem(
-          onTap: () => onTabLike.call(),
-          iconAddress: isActiveLike.value
-              ? AppAssets.icActiveLikePath
-              : AppAssets.icInactiveLikePath,
-          interactCount: '12',
-        ),
+        ValueListenableBuilder(
+            valueListenable: isActiveLike,
+            builder: (_, __, ___) {
+              return InteractItem(
+                onTap: () {
+                  isActiveLike.value = !isActiveLike.value;
+                  onTabLike.call();
+                },
+                iconAddress: isActiveLike.value
+                    ? AppAssets.icActiveLikePath
+                    : AppAssets.icInactiveLikePath,
+                interactCount: postModel?.totalLikes ?? 0,
+              );
+            }),
         Padding(
-          padding: AppPaddings.appPaddingHorizontal,
-          child: IconInteractItem(
+          padding: AppPaddings.paddingMediumVertical,
+          child: InteractItem(
             onTap: () => onTabComment.call(),
             iconAddress: AppAssets.icCommentPath,
-            interactCount: '12',
+            interactCount: postModel?.totalComments ?? 0,
           ),
         ),
-        IconInteractItem(
-          onTap: () => onTabSave.call(),
-          iconAddress: isActiveSave.value
-              ? AppAssets.icActiveSavePath
-              : AppAssets.icInactiveSavePath,
-          interactCount: '12',
-        ),
+        ValueListenableBuilder(
+            valueListenable: isActiveSave,
+            builder: (_, __, ___) {
+              return InteractItem(
+                onTap: () {
+                  isActiveSave.value = !isActiveSave.value;
+                  onTabSave..call();
+                },
+                iconAddress: isActiveSave.value
+                    ? AppAssets.icActiveSavePath
+                    : AppAssets.icInactiveSavePath,
+                interactCount: postModel?.totalSaves ?? 0,
+              );
+            }),
       ],
     );
   }
