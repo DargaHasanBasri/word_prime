@@ -3,6 +3,7 @@ import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/added_words_list_item.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/my_word_list_tab_bar.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/saved_posts_list_item.dart';
+import 'package:word_prime/ui/widgets/custom_app_popup.dart';
 
 class MyWordListPage extends StatefulWidget {
   const MyWordListPage({super.key});
@@ -186,7 +187,37 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                   ),
                 );
               },
-              onTabChoice: () {},
+              onTabChoice: () {
+                showCustomBottomSheet(
+                  context: context,
+                  child: CustomChoicesBottomSheet(
+                    onTapUpdate: () {},
+                    onTapDelete: () {
+                      showPopupDialog(
+                        context: context,
+                        child: Padding(
+                          padding: AppPaddings.appPaddingHorizontal,
+                          child: CustomAppPopup(
+                            title: 'Gönderiniz silinsin mi?',
+                            subTitle: 'Silmek istediğinizden emin misiniz?',
+                            onTapConfirmButton: () {
+                              appRoutes.popPages(2);
+                              _vm.getAddedAndSavedPosts(
+                                showProgress: () => showProgress(context),
+                                hideProgress: () => hideProgress(),
+                              );
+                            },
+                            onTapCancelButton: () {
+                              appRoutes.popIfBackStackNotEmpty();
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                    onTapShare: () {},
+                  ),
+                );
+              },
               onTabTranslate: () {},
             );
           },

@@ -138,7 +138,6 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
             borderRadius: BorderRadius.circular(8),
           ),
           insetPadding: AppPaddings.appPaddingHorizontal,
-          elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.primary,
           child: child,
         );
@@ -152,7 +151,9 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
   }) {
     showModalBottomSheet<void>(
       context: context,
+      useSafeArea: true,
       isScrollControlled: true,
+      barrierColor: AppColors.mirage.withOpacity(0.3),
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(
