@@ -70,4 +70,14 @@ class MyWordListViewModel extends BaseViewModel {
     ]);
     hideProgress.call();
   }
+
+  Future<void> deleteUserPost({
+    required String userPostId,
+    required VoidCallback showProgress,
+    required VoidCallback hideProgress,
+  }) async {
+    showProgress.call();
+    await PostRepository().deletePost(postId: userPostId);
+    hideProgress.call();
+  }
 }

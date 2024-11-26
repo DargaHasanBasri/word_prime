@@ -3,8 +3,10 @@ import 'package:word_prime/export.dart';
 
 class AddPhotoContainer extends StatelessWidget {
   final VoidCallback onTap;
+  final Uint8List? selectedImageBytes;
   const AddPhotoContainer({
     super.key,
+    this.selectedImageBytes,
     required this.onTap,
   });
 
@@ -28,23 +30,32 @@ class AddPhotoContainer extends StatelessWidget {
                 color: Colors.transparent,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(AppAssets.icAddPhotoPath),
-                    SizedBox(height: 16),
-                    Text(
-                      LocaleKeys.addPost_selectImage.locale,
-                      style: Theme.of(context).textTheme.titleSmall,
+              child: selectedImageBytes != null
+                  ? Center(
+                      child: Image.memory(
+                        selectedImageBytes!,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
+                    )
+                  : Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(AppAssets.icAddPhotoPath),
+                          SizedBox(height: 16),
+                          Text(
+                            LocaleKeys.addPost_selectImage.locale,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                          Text(
+                            '(${LocaleKeys.optional.locale})',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ],
+                      ),
                     ),
-                    Text(
-                      '(${LocaleKeys.optional.locale})',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ],
-                ),
-              ),
             ),
           ),
         ),

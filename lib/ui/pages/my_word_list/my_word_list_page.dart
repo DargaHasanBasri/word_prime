@@ -69,7 +69,8 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: AppPaddings.appPaddingHorizontal,
+              padding: AppPaddings.appPaddingHorizontal +
+                  AppPaddings.paddingLargeTop,
               child: MyWordListTabBar(
                 onTapAdded: () {
                   if (_vm.isSaved.value) {
@@ -114,19 +115,21 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
   AppBar _buildAppBar() {
     return AppBar(
       automaticallyImplyLeading: false,
+      backgroundColor: AppColors.rhino,
       leading: IconButton(
         onPressed: () => appRoutes.popIfBackStackNotEmpty(),
         icon: Image.asset(
           AppAssets.icArrowBackLeftPath,
-          color: Theme.of(context).colorScheme.secondary,
+          color: AppColors.white,
           width: AppSizes.appOverallIconWidth,
           height: AppSizes.appOverallIconHeight,
         ),
       ),
       title: Text(
         '${LocaleKeys.myWordList_appBarTitle.locale} ${_vm.englishLevel}',
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.w700,
+              color: AppColors.white,
             ),
       ),
     );
@@ -200,7 +203,13 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                           child: CustomAppPopup(
                             title: 'Gönderiniz silinsin mi?',
                             subTitle: 'Silmek istediğinizden emin misiniz?',
-                            onTapConfirmButton: () {
+                            onTapConfirmButton: () async {
+                              await _vm.deleteUserPost(
+                                userPostId:
+                                    '${_vm.addedPostsNotifier.value?[index]?.postId}',
+                                showProgress: () => showProgress(context),
+                                hideProgress: () => hideProgress(),
+                              );
                               appRoutes.popPages(2);
                               _vm.getAddedAndSavedPosts(
                                 showProgress: () => showProgress(context),
@@ -209,6 +218,10 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                             },
                             onTapCancelButton: () {
                               appRoutes.popIfBackStackNotEmpty();
+                              _vm.getAddedAndSavedPosts(
+                                showProgress: () => showProgress(context),
+                                hideProgress: () => hideProgress(),
+                              );
                             },
                           ),
                         ),
