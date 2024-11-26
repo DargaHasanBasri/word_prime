@@ -105,8 +105,16 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
               );
             },
           ),
-          AddPhotoContainer(
-            onTap: () {},
+          ValueListenableBuilder(
+            valueListenable: _vm.selectedImageBytesNotifier,
+            builder: (_, __, ___) {
+              return AddPhotoContainer(
+                onTap: () {
+                  _vm.pickedWordImage();
+                },
+                selectedImageBytes: _vm.selectedImageBytesNotifier.value,
+              );
+            },
           ),
           ValueListenableBuilder(
             valueListenable: _vm.englishWordInput,
@@ -156,19 +164,21 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
   AppBar _buildAppBar() {
     return AppBar(
       automaticallyImplyLeading: false,
+      backgroundColor: AppColors.rhino,
       leading: IconButton(
         onPressed: () => appRoutes.popIfBackStackNotEmpty(),
         icon: Image.asset(
           AppAssets.icArrowBackLeftPath,
-          color: Theme.of(context).colorScheme.secondary,
+          color: AppColors.white,
           width: AppSizes.appOverallIconWidth,
           height: AppSizes.appOverallIconHeight,
         ),
       ),
       title: Text(
         LocaleKeys.addPost_title.locale,
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.w700,
+              color: AppColors.white,
             ),
       ),
     );

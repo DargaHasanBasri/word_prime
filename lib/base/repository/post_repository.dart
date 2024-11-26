@@ -44,6 +44,24 @@ class PostRepository {
     }
   }
 
+  Future<void> deletePost({required String postId}) async {
+    try {
+      /// Retrieves the document with the specified postId from firestore
+      DocumentReference _documentReference =
+          _postCollectionReference.doc(postId);
+
+      /// Deletes the document
+      await _documentReference.delete();
+
+      /// Suppresses operation success log
+      log('Post silme işlemi başarılı! Silinen Post ID: $postId');
+    } catch (e) {
+      /// suppresses transaction failure log
+      log('Post silme başarısız! Hata: $e');
+      rethrow;
+    }
+  }
+
   Future<void> savePost({
     required String userId,
     required String postId,

@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'dart:typed_data';
+import 'package:image_picker/image_picker.dart';
 
 final class AppUtility {
   String timeAgo(DateTime? dateTime) {
@@ -17,5 +19,19 @@ final class AppUtility {
       log('Datetime null');
       return 'az önce';
     }
+  }
+
+  Future<XFile?> pickImageFromGallery({
+    required ImageSource imageSource,
+  }) async {
+    XFile? pickedImage;
+    final _picker = ImagePicker();
+    try {
+      pickedImage = await _picker.pickImage(source: imageSource);
+      if (pickedImage != null) return pickedImage;
+    } catch (e) {
+      log(e.toString());
+    }
+    return null;
   }
 }
