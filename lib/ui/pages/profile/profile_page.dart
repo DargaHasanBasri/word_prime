@@ -29,15 +29,15 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
   }
 
   Widget _buildBody() {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Column(
+    return ValueListenableBuilder(
+      valueListenable: _vm.userNotifier,
+      builder: (_, __, ___) {
+        return Stack(
+          alignment: Alignment.center,
           children: [
-            ValueListenableBuilder(
-              valueListenable: _vm.userNotifier,
-              builder: (_, __, ___) {
-                return Padding(
+            Column(
+              children: [
+                Padding(
                   padding: AppPaddings.paddingXXLargeBottom * 2,
                   child: CurrentUserProfileInfo(
                     userName: _vm.userNotifier.value?.userName,
@@ -45,38 +45,47 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                     profileImageAddress:
                         _vm.userNotifier.value?.profileImageAddress,
                   ),
-                );
-              },
+                ),
+              ],
+            ),
+            Positioned(
+              left: 24,
+              top: 180,
+              right: 24,
+              child: Column(
+                children: [
+                  _currentProfileDetail(
+                    totalPost: _vm.userNotifier.value?.totalPost,
+                    score: _vm.userNotifier.value?.totalScore,
+                    followCount: 0,
+                    followerCount: 0,
+                  ),
+                  Padding(
+                    padding: AppPaddings.paddingLargeTop,
+                    child: ValueListenableBuilder(
+                      valueListenable: _vm.tabIndex,
+                      builder: (_, __, ___) {
+                        return ProfileTabBar(
+                          whichIndex: _vm.tabIndex,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
-        ),
-        Positioned(
-          left: 24,
-          top: 180,
-          right: 24,
-          child: Column(
-            children: [
-              _currentProfileDetail(),
-              Padding(
-                padding: AppPaddings.paddingLargeTop,
-                child: ValueListenableBuilder(
-                  valueListenable: _vm.tabIndex,
-                  builder: (_, __, ___) {
-                    return ProfileTabBar(
-                      whichIndex: _vm.tabIndex,
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-
-      ],
+        );
+      },
     );
   }
 
-  Widget _currentProfileDetail() {
+  Widget _currentProfileDetail({
+    int? totalPost,
+    int? score,
+    int? followCount,
+    int? followerCount,
+  }) {
     return Container(
       padding:
           AppPaddings.paddingMediumVertical + AppPaddings.paddingMediumLeft,
@@ -99,7 +108,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
               children: [
                 ProfileDetailContainer(
                   detailTitle: LocaleKeys.word.locale,
-                  detailCount: 12,
+                  detailCount: totalPost ?? 0,
                   detailIcon: AppAssets.appLogoPath,
                   detailColor: AppColors.cornflowerBlue,
                   onTap: () {},
@@ -107,7 +116,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                 SizedBox(height: AppSizes.sizedBoxMediumHeight),
                 ProfileDetailContainer(
                   detailTitle: LocaleKeys.level.locale,
-                  detailCount: 50,
+                  detailCount: score ?? 0,
                   detailIcon: AppAssets.appLogoPath,
                   detailColor: AppColors.goldenDream,
                   onTap: () {},
@@ -121,7 +130,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
               children: [
                 ProfileDetailContainer(
                   detailTitle: LocaleKeys.profilePage_follow.locale,
-                  detailCount: 98,
+                  detailCount: followCount ?? 0,
                   detailIcon: AppAssets.appLogoPath,
                   detailColor: AppColors.greenishTeal,
                   onTap: () {
@@ -134,7 +143,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                 SizedBox(height: AppSizes.sizedBoxMediumHeight),
                 ProfileDetailContainer(
                   detailTitle: LocaleKeys.profilePage_follower.locale,
-                  detailCount: 5,
+                  detailCount: followerCount ?? 0,
                   detailIcon: AppAssets.appLogoPath,
                   detailColor: AppColors.metallicBlue,
                   onTap: () {
