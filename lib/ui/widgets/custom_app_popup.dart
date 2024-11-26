@@ -22,7 +22,10 @@ class CustomAppPopup extends StatelessWidget {
           padding: AppPaddings.paddingLargeTop,
           child: Text(
             title,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                ),
             textAlign: TextAlign.center,
           ),
         ),
