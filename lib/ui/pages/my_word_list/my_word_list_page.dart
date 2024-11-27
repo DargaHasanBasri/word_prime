@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:word_prime/base/events/refresh_user_info_event.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/added_words_list_item.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/my_word_list_tab_bar.dart';
@@ -116,15 +117,24 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.rhino,
-      leading: IconButton(
-        onPressed: () => appRoutes.popIfBackStackNotEmpty(),
-        icon: Image.asset(
-          AppAssets.icArrowBackLeftPath,
-          color: AppColors.white,
-          width: AppSizes.appOverallIconWidth,
-          height: AppSizes.appOverallIconHeight,
-        ),
-      ),
+      leading: ValueListenableBuilder(
+          valueListenable: _vm.isDeletedItem,
+          builder: (_, __, ___) {
+            return IconButton(
+              onPressed: () {
+                if (_vm.isDeletedItem.value) {
+                  eventBus.fire(new RefreshUserInfoEvent());
+                }
+                appRoutes.popIfBackStackNotEmpty();
+              },
+              icon: Image.asset(
+                AppAssets.icArrowBackLeftPath,
+                color: AppColors.white,
+                width: AppSizes.appOverallIconWidth,
+                height: AppSizes.appOverallIconHeight,
+              ),
+            );
+          }),
       title: Text(
         '${LocaleKeys.myWordList_appBarTitle.locale} ${_vm.englishLevel}',
         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -200,30 +210,32 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                         context: context,
                         child: Padding(
                           padding: AppPaddings.appPaddingHorizontal,
-                          child: CustomAppPopup(
-                            title: 'Gönderiniz silinsin mi?',
-                            subTitle: 'Silmek istediğinizden emin misiniz?',
-                            onTapConfirmButton: () async {
-                              await _vm.deleteUserPost(
-                                userPostId:
-                                    '${_vm.addedPostsNotifier.value?[index]?.postId}',
-                                showProgress: () => showProgress(context),
-                                hideProgress: () => hideProgress(),
-                              );
-                              appRoutes.popPages(2);
-                              _vm.getAddedAndSavedPosts(
-                                showProgress: () => showProgress(context),
-                                hideProgress: () => hideProgress(),
-                              );
-                            },
-                            onTapCancelButton: () {
-                              appRoutes.popIfBackStackNotEmpty();
-                              _vm.getAddedAndSavedPosts(
-                                showProgress: () => showProgress(context),
-                                hideProgress: () => hideProgress(),
-                              );
-                            },
-                          ),
+                          child: ValueListenableBuilder(
+                              valueListenable: _vm.isDeletedItem,
+                              builder: (_, __, ___) {
+                                return CustomAppPopup(
+                                  title: 'Gönderiniz silinsin mi?',
+                                  subTitle:
+                                      'Silmek istediğinizden emin misiniz?',
+                                  onTapConfirmButton: () async {
+                                    await _vm.deleteUserPost(
+                                      userPostId:
+                                          '${_vm.addedPostsNotifier.value?[index]?.postId}',
+                                      showProgress: () => showProgress(context),
+                                      hideProgress: () => hideProgress(),
+                                    );
+                                    appRoutes.popPages(2);
+                                    _vm.isDeletedItem.value = true;
+                                    _vm.getAddedAndSavedPosts(
+                                      showProgress: () => showProgress(context),
+                                      hideProgress: () => hideProgress(),
+                                    );
+                                  },
+                                  onTapCancelButton: () {
+                                    appRoutes.popIfBackStackNotEmpty();
+                                  },
+                                );
+                              }),
                         ),
                       );
                     },

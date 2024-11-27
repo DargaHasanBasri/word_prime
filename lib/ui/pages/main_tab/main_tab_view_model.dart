@@ -6,12 +6,8 @@ class MainTabViewModel extends BaseViewModel {
   ValueNotifier<int> currentIndex = ValueNotifier(0);
   ValueNotifier<UserModel?> userNotifier = ValueNotifier(null);
 
-  Future<void> getUserData({
-    required VoidCallback showProgress,
-    required VoidCallback hideProgress,
-  }) async {
+  Future<void> getUserData() async {
     try {
-      showProgress.call();
       User? _currentUser = FirebaseAuth.instance.currentUser;
       if (_currentUser != null) {
         userNotifier.value = await UserRepository().fetchUser(_currentUser.uid);
@@ -19,8 +15,6 @@ class MainTabViewModel extends BaseViewModel {
       }
     } catch (e) {
       log('ViewModel An error occurred while retrieving user data: $e');
-    } finally {
-      hideProgress.call();
     }
   }
 }

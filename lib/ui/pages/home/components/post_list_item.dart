@@ -59,8 +59,9 @@ class PostListItem extends StatelessWidget {
               ),
               Text(
                 '${LocaleKeys.level.locale}  10',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: AppColors.santaGrey,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
                     ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -184,7 +185,7 @@ class PostListItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           child: Image.asset(
             AppAssets.imgExampPostPath,
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
           ),
         ),
       ),

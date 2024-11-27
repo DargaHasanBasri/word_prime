@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:word_prime/export.dart';
@@ -7,6 +8,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
   final AppRoutes appRoutes = locator<AppRoutes>();
   final ServiceLocalStorage serviceLocalStorage =
       locator<ServiceLocalStorage>();
+  final EventBus eventBus = locator<EventBus>();
 
   /// OverlayEntry object used for the loading animation
   /// to be displayed on the screen
@@ -153,7 +155,7 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
       context: context,
       useSafeArea: true,
       isScrollControlled: true,
-      barrierColor: AppColors.mirage.withOpacity(0.3),
+      barrierColor: AppColors.mirage.withOpacity(0.5),
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(

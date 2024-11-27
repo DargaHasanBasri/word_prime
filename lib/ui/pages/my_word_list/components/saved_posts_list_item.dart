@@ -31,9 +31,11 @@ class SavedPostsListItem extends StatelessWidget {
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: AppPaddings.paddingLargeRight,
+                padding: AppPaddings.paddingSmallHorizontal +
+                    AppPaddings.paddingLargeRight,
                 child: _getInteractItems(),
               ),
               Expanded(
@@ -41,7 +43,7 @@ class SavedPostsListItem extends StatelessWidget {
                   children: [
                     Padding(
                       padding: AppPaddings.paddingMediumBottom,
-                      child: _getPostPicture(),
+                      child: _getPostPicture(context),
                     ),
                     _getUserSentences(context),
                   ],
@@ -57,7 +59,6 @@ class SavedPostsListItem extends StatelessWidget {
   Widget _getUserInfo(BuildContext context) {
     final DateTime? dateTime = postModel?.createdDate?.toDateTime();
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomUserCircleAvatar(
           circleRadius: 20,
@@ -79,9 +80,9 @@ class SavedPostsListItem extends StatelessWidget {
               ),
               Text(
                 '${AppUtility().timeAgo(dateTime)}',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.surfaceContainerHigh,
-                      fontWeight: FontWeight.w400,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
                     ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -122,7 +123,7 @@ class SavedPostsListItem extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      postModel?.sentenceEnglish?[0] ?? '',
+                      '${postModel?.wordEnglish?.toUpperCase() ?? ''}:\n${postModel?.sentenceEnglish?[0] ?? ''}',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
@@ -176,7 +177,7 @@ class SavedPostsListItem extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    postModel?.sentenceTurkish?[0] ?? '',
+                    '${postModel?.wordTurkish?.toUpperCase() ?? ''}:\n${postModel?.sentenceTurkish?[0] ?? ''}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context)
                               .colorScheme
@@ -194,7 +195,7 @@ class SavedPostsListItem extends StatelessWidget {
     );
   }
 
-  Widget _getPostPicture() {
+  Widget _getPostPicture(BuildContext context) {
     return AspectRatio(
       aspectRatio: 16 / 10,
       child: Container(
@@ -205,7 +206,7 @@ class SavedPostsListItem extends StatelessWidget {
               postModel?.postImageAddress ??
                   AppLocaleConstants.DEFAULT_PROFILE_PICTURE,
             ),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
         ),
       ),
@@ -216,7 +217,6 @@ class SavedPostsListItem extends StatelessWidget {
     final ValueNotifier<bool> isActiveLike = ValueNotifier(false);
     final ValueNotifier<bool> isActiveSave = ValueNotifier(false);
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ValueListenableBuilder(
             valueListenable: isActiveLike,

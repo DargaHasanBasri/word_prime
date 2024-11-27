@@ -1,3 +1,4 @@
+import 'package:word_prime/base/events/refresh_user_info_event.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/main_tab/components/custom_bottom_navigation_bar.dart';
 
@@ -15,10 +16,10 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
   void initState() {
     _vm = Provider.of<MainTabViewModel>(context, listen: false);
 
-    _vm.getUserData(
-      showProgress: () => showProgress(context),
-      hideProgress: () => hideProgress(),
-    );
+    _vm.getUserData();
+    eventBus.on<RefreshUserInfoEvent>().listen((event) {
+      _vm.getUserData();
+    });
 
     super.initState();
   }
