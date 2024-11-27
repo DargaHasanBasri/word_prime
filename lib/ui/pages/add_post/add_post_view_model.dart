@@ -36,15 +36,18 @@ class AddPostViewModel extends BaseViewModel {
   }) async {
     try {
       showProgress.call();
+
+      String? postUrlPath;
       turkishSentences.value?.add(turkishSentencesInput.value);
       englishSentences.value?.add(englishSentencesInput.value);
       final imageReference =
           FirebaseStorageRepository().createImageReference(_selectedFile);
-      if (imageReference == null) return;
+      if (imageReference != null && selectedImageBytesNotifier.value != null) {
+        await imageReference.putData(selectedImageBytesNotifier.value!);
+        postUrlPath = await imageReference.getDownloadURL();
+      }
 
-      if (selectedImageBytesNotifier.value == null) return;
-      await imageReference.putData(selectedImageBytesNotifier.value!);
-      final postUrlPath = await imageReference.getDownloadURL();
+      String? postImageAddress = postUrlPath;
 
       User? _currentUser = FirebaseAuth.instance.currentUser;
       if (_currentUser != null) {
@@ -55,7 +58,7 @@ class AddPostViewModel extends BaseViewModel {
             totalLikes: 0,
             totalSaves: 0,
             wordLevel: wordLevel,
-            postImageAddress: postUrlPath,
+            postImageAddress: postImageAddress,
             userName: _currentUser.displayName,
             userProfileImage: _currentUser.photoURL,
             createdDate: Timestamp.now(),

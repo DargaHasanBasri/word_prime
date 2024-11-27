@@ -12,6 +12,7 @@ class MyWordListViewModel extends BaseViewModel {
   final ValueNotifier<bool> isSaved = ValueNotifier(false);
   final ValueNotifier<bool> isAddedItem = ValueNotifier(false);
   final ValueNotifier<bool> isSavedItem = ValueNotifier(false);
+  final ValueNotifier<bool> isDeletedItem = ValueNotifier(false);
 
   final ValueNotifier<List<PostModel?>?> addedPostsNotifier =
       ValueNotifier(null);

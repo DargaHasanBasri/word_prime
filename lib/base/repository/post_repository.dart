@@ -4,6 +4,7 @@ import 'package:word_prime/export.dart';
 class PostRepository {
   final _postCollectionReference = FirebaseCollections.posts.reference;
   final _userCollectionReference = FirebaseCollections.users.reference;
+  User? _currentUser = FirebaseAuth.instance.currentUser;
 
   Future<void> addPost({PostModel? postModel}) async {
     try {
@@ -12,7 +13,18 @@ class PostRepository {
       );
       String postId = _documentReference.id;
       await _documentReference.update({'post_id': postId});
+
       log('Post yükleme işlemi başarılı! Added data: ${postModel?.toJson()}');
+
+      try {
+        await _userCollectionReference.doc(_currentUser!.uid).update({
+          'total_post': FieldValue.increment(1),
+        });
+        log("total post success increment");
+      } catch (e) {
+        log("total post error increment");
+        rethrow;
+      }
     } catch (e) {
       log('Post yükleme başarısız!');
       rethrow;
@@ -27,6 +39,7 @@ class PostRepository {
       final querySnapshot = await _postCollectionReference
           .where('user_id', isEqualTo: userId)
           .where('word_level', isEqualTo: wordLevel)
+          .orderBy('created_date', descending: true)
           .withConverter(
         fromFirestore: (snapshot, _) {
           return PostModel().fromFirebase(snapshot);
@@ -55,6 +68,16 @@ class PostRepository {
 
       /// Suppresses operation success log
       log('Post silme işlemi başarılı! Silinen Post ID: $postId');
+
+      try {
+        await _userCollectionReference.doc(_currentUser!.uid).update({
+          'total_post': FieldValue.increment(-1),
+        });
+        log("total post success decrease");
+      } catch (e) {
+        log("total post error decrease");
+        rethrow;
+      }
     } catch (e) {
       /// suppresses transaction failure log
       log('Post silme başarısız! Hata: $e');
@@ -111,6 +134,7 @@ class PostRepository {
 
       final querySnapshot = await FirebaseCollections.posts.reference
           .where(FieldPath.documentId, whereIn: postIds)
+          .orderBy('created_date', descending: true)
           .withConverter(
         fromFirestore: (snapshot, _) {
           return PostModel().fromFirebase(snapshot);
