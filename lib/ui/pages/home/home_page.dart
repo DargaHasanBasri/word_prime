@@ -31,58 +31,72 @@ class _HomePageState extends BaseStatefulState<HomePage> {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: AppPaddings.paddingLargeTop,
-            child: SizedBox(
-              height: AppSizes.sizedBoxUserListViewHeight,
-              child: ListView.separated(
-                padding: AppPaddings.paddingMediumHorizontal,
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: 20,
-                itemBuilder: (context, index) {
-                  return UserListItem();
-                },
-                separatorBuilder: (context, index) => SizedBox(
-                  width: AppSizes.sizedBoxMediumWidth,
+            padding: AppPaddings.appPaddingAll,
+            child: Container(
+              padding: AppPaddings.paddingSmallHorizontal,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  width: 1,
                 ),
+              ),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: Image.asset(
+                      AppAssets.icSearchPath,
+                      color: AppColors.santaGrey,
+                      width: 24,
+                      height: 24,
+                    ),
+                  ),
+                  Text(
+                    'Search for words or users...',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.w400,
+                        ),
+                  ),
+                ],
               ),
             ),
           ),
-          SizedBox(height: AppSizes.sizedBoxMediumHeight),
           ListView.separated(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 20,
+            itemCount: 5,
             itemBuilder: (context, index) {
-              return PostListItem(
-                isActiveLike: _vm.isActiveLike,
-                isActiveSave: _vm.isActiveSave,
-                isTranslate: _vm.isActiveTranslate,
-                onTabLike: () {
-                  _vm.isActiveLike.value = !_vm.isActiveLike.value;
-                },
-                onTabSave: () {
-                  _vm.isActiveSave.value = !_vm.isActiveSave.value;
-                },
-                onTabComment: () {
-                  showCustomBottomSheet(
-                    context: context,
-                    child: CustomCommentBottomSheet(
-                      commentController: _commentController,
-                      onPressSuffixIcon: () {},
-                    ),
-                  );
-                },
-                onTabTranslate: () {
-                  _vm.isActiveTranslate.value = !_vm.isActiveTranslate.value;
-                },
+              return Padding(
+                padding: AppPaddings.appPaddingHorizontal,
+                child: PostListItem(
+                  onTabLike: () {},
+                  onTabSave: () {},
+                  onTabComment: () {
+                    showCustomBottomSheet(
+                      context: context,
+                      child: CustomCommentBottomSheet(
+                        commentController: _commentController,
+                        onPressSuffixIcon: () {},
+                      ),
+                    );
+                  },
+                  onTabShare: () {},
+                  onTabTranslate: () {},
+                  onTabChoice: () {},
+                ),
               );
             },
-            separatorBuilder: (context, index) => SizedBox(
-              height: AppSizes.sizedBoxSmallHeight,
+            separatorBuilder: (context, index) => Padding(
+              padding: AppPaddings.appPaddingAll,
+              child: Container(
+                height: 1,
+                color: AppColors.platinum.withOpacity(0.3),
+              ),
             ),
           ),
         ],
