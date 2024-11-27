@@ -2,53 +2,38 @@ import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/home/components/icon_interact_item.dart';
 
 class PostListItem extends StatelessWidget {
-  final ValueNotifier<bool> isActiveLike;
-  final ValueNotifier<bool> isActiveSave;
-  final ValueNotifier<bool> isTranslate;
   final VoidCallback onTabLike;
   final VoidCallback onTabComment;
   final VoidCallback onTabSave;
+  final VoidCallback onTabShare;
   final VoidCallback onTabTranslate;
+  final VoidCallback onTabChoice;
 
   const PostListItem({
     super.key,
-    required this.isActiveLike,
-    required this.isActiveSave,
     required this.onTabLike,
     required this.onTabComment,
     required this.onTabSave,
-    required this.isTranslate,
+    required this.onTabShare,
     required this.onTabTranslate,
+    required this.onTabChoice,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: AppPaddings.paddingMediumAll,
-      child: Column(
-        children: [
-          _getUserInfo(context),
-          Padding(
-            padding: AppPaddings.paddingMediumVertical,
-            child: _getPostPicture(),
-          ),
-          Padding(
-            padding: AppPaddings.paddingMediumBottom,
-            child: _getUserSentences(context),
-          ),
-          ValueListenableBuilder(
-            valueListenable: isActiveSave,
-            builder: (_, __, ___) {
-              return ValueListenableBuilder(
-                valueListenable: isActiveLike,
-                builder: (_, __, ___) {
-                  return _getInteractItems();
-                },
-              );
-            },
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        _getUserInfo(context),
+        Padding(
+          padding: AppPaddings.paddingMediumVertical,
+          child: _getPostPicture(),
+        ),
+        Padding(
+          padding: AppPaddings.paddingMediumBottom,
+          child: _getUserSentences(context),
+        ),
+        _getInteractItems(),
+      ],
     );
   }
 
@@ -68,31 +53,35 @@ class PostListItem extends StatelessWidget {
             children: [
               Text(
                 AppLocaleConstants.DEFAULT_USER_NAME,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.surfaceContainerHigh,
-                    ),
+                style: Theme.of(context).textTheme.bodyLarge,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               Text(
                 '${LocaleKeys.level.locale}  10',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.surfaceContainerHigh,
-                      fontWeight: FontWeight.w400,
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: AppColors.santaGrey,
                     ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
         ),
-        Spacer(),
-        Image.asset(
-          AppAssets.icChoicePath,
-          width: AppSizes.appOverallIconWidth,
-          height: AppSizes.appOverallIconHeight,
+        GestureDetector(
+          onTap: () => onTabChoice.call(),
+          child: Image.asset(
+            AppAssets.icChoicePath,
+            width: AppSizes.appOverallIconWidth,
+            height: AppSizes.appOverallIconHeight,
+          ),
         ),
       ],
     );
   }
 
   Widget _getUserSentences(BuildContext context) {
+    final ValueNotifier<bool> isTranslate = ValueNotifier(false);
     return ValueListenableBuilder(
       valueListenable: isTranslate,
       builder: (_, __, ___) {
@@ -124,7 +113,10 @@ class PostListItem extends StatelessWidget {
                 ),
                 SizedBox(width: AppSizes.sizedBoxSmallWidth),
                 GestureDetector(
-                  onTap: () => onTabTranslate.call(),
+                  onTap: () {
+                    isTranslate.value = !isTranslate.value;
+                    onTabTranslate.call();
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
@@ -183,7 +175,7 @@ class PostListItem extends StatelessWidget {
 
   Widget _getPostPicture() {
     return AspectRatio(
-      aspectRatio: 16 / 10,
+      aspectRatio: 16 / 9,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
@@ -192,7 +184,7 @@ class PostListItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           child: Image.asset(
             AppAssets.imgExampPostPath,
-            fit: BoxFit.fill,
+            fit: BoxFit.contain,
           ),
         ),
       ),
@@ -200,14 +192,24 @@ class PostListItem extends StatelessWidget {
   }
 
   Widget _getInteractItems() {
+    final ValueNotifier<bool> isActiveLike = ValueNotifier(false);
+    final ValueNotifier<bool> isActiveSave = ValueNotifier(false);
     return Row(
       children: [
-        IconInteractItem(
-          onTap: () => onTabLike.call(),
-          iconAddress: isActiveLike.value
-              ? AppAssets.icActiveLikePath
-              : AppAssets.icInactiveLikePath,
-          interactCount: '12',
+        ValueListenableBuilder(
+          valueListenable: isActiveLike,
+          builder: (_, __, ___) {
+            return IconInteractItem(
+              onTap: () {
+                isActiveLike.value = !isActiveLike.value;
+                onTabLike.call();
+              },
+              iconAddress: isActiveLike.value
+                  ? AppAssets.icActiveLikePath
+                  : AppAssets.icInactiveLikePath,
+              interactCount: '12',
+            );
+          },
         ),
         Padding(
           padding: AppPaddings.appPaddingHorizontal,
@@ -217,12 +219,29 @@ class PostListItem extends StatelessWidget {
             interactCount: '12',
           ),
         ),
-        IconInteractItem(
-          onTap: () => onTabSave.call(),
-          iconAddress: isActiveSave.value
-              ? AppAssets.icActiveSavePath
-              : AppAssets.icInactiveSavePath,
-          interactCount: '12',
+        ValueListenableBuilder(
+          valueListenable: isActiveSave,
+          builder: (_, __, ___) {
+            return IconInteractItem(
+              onTap: () {
+                isActiveSave.value = !isActiveSave.value;
+                onTabSave..call();
+              },
+              iconAddress: isActiveSave.value
+                  ? AppAssets.icActiveSavePath
+                  : AppAssets.icInactiveSavePath,
+              interactCount: '12',
+            );
+          },
+        ),
+        Spacer(),
+        GestureDetector(
+          onTap: () => onTabShare.call(),
+          child: Image.asset(
+            AppAssets.icSharePath,
+            width: AppSizes.appOverallIconWidth,
+            height: AppSizes.appOverallIconHeight,
+          ),
         ),
       ],
     );

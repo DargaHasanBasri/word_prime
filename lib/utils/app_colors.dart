@@ -6,6 +6,7 @@ final class AppColors {
   static Color cornflowerBlue = const Color(0xff699CF4);
   static Color white = const Color(0xffffffff);
   static Color catskillWhite = const Color(0xffF2F5F7);
+  static Color platinum = const Color(0xffE4E4E4);
   static Color iron = const Color(0xffD8D5EA);
   static Color black = const Color(0xff000000);
   static Color blackCow = const Color(0xff4A4545);

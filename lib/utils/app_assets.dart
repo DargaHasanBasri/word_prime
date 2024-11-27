@@ -43,6 +43,8 @@ final class AppAssets {
   static String icEmailVerificationPath = _imagePath('ic_email_verification');
   static String icResetPasswordPath = _imagePath('ic_reset_password');
   static String icChoicePath = _imagePath('ic_choice');
+  static String icSharePath = _imagePath('ic_share');
+  static String icSearchPath = _imagePath('ic_search');
   static String imgSuccessfulPath = _imagePath('img_successful');
   static String imgExampPostPath = _imagePath('img_examp_post');
   static String imgQuizAnalysisPath = _imagePath('img_quiz_analysis');
