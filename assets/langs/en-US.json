@@ -103,7 +103,8 @@
     "update": "Update"
   },
   "homePage": {
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "searchText": "Search for words or users..."
   },
   "activityPage": {
     "myActivity": "My Activity",
@@ -175,5 +176,13 @@
     "title": "Add Your Daily Word Now",
     "subTitle": "Add your own words in your own style to learn and teach more",
     "newWord": "New Word"
+  },
+  "timeAgoMsg": {
+    "weekAgo": "Week ago",
+    "daysAgo": "Days ago",
+    "hoursAgo": "Hours ago",
+    "minutesAgo": "Minutes ago",
+    "justNow": "Just now",
+    "added": "Added"
   }
 }

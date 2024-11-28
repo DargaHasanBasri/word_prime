@@ -103,7 +103,8 @@
     "update": "Güncelle"
   },
   "homePage": {
-    "welcome": "Hoşgeldin"
+    "welcome": "Hoşgeldin",
+    "searchText": "Kelimeleri veya kullanıcıları arayın..."
   },
   "activityPage": {
     "myActivity": "Aktiviteler",
@@ -175,5 +176,13 @@
     "title": "Günlük Kelimeni Hemen Ekle",
     "subTitle": "Daha fazla öğrenmek ve öğretmek için kendi kelimelerini kendi tarzınla ekle",
     "newWord": "Yeni Kelime"
+  },
+  "timeAgoMsg": {
+    "weekAgo": "Hafta önce",
+    "daysAgo": "Gün önce",
+    "hoursAgo": "Saat önce",
+    "minutesAgo": "Dakika önce",
+    "justNow": "Az önce",
+    "added": "Eklediniz"
   }
 }

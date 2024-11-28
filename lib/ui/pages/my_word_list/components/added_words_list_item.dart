@@ -83,7 +83,7 @@ class AddedWordsListItem extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            '${AppUtility().timeAgo(dateTime)} eklediniz',
+            '${AppUtility().timeAgo(dateTime)} ${LocaleKeys.timeAgoMsg_added.locale}',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,

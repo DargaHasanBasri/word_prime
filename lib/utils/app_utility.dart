@@ -1,23 +1,25 @@
 import 'dart:developer';
-import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
+import 'package:word_prime/export.dart';
 
 final class AppUtility {
   String timeAgo(DateTime? dateTime) {
     if (dateTime != null) {
       final Duration difference = DateTime.now().difference(dateTime);
-      if (difference.inDays > 0) {
-        return '${difference.inDays} gün önce';
+      if (difference.inDays >= 7) {
+        return '${difference.inDays ~/ 7} ${LocaleKeys.timeAgoMsg_weekAgo.locale}';
+      } else if (difference.inDays > 0) {
+        return '${difference.inDays} ${LocaleKeys.timeAgoMsg_daysAgo.locale}';
       } else if (difference.inHours > 0) {
-        return '${difference.inHours} saat önce';
+        return '${difference.inHours} ${LocaleKeys.timeAgoMsg_hoursAgo.locale}';
       } else if (difference.inMinutes > 0) {
-        return '${difference.inMinutes} dakika önce';
+        return '${difference.inMinutes} ${LocaleKeys.timeAgoMsg_minutesAgo.locale}';
       } else {
-        return 'az önce';
+        return '${LocaleKeys.timeAgoMsg_justNow.locale}';
       }
     } else {
       log('Datetime null');
-      return 'az önce';
+      return '${LocaleKeys.timeAgoMsg_justNow.locale}';
     }
   }
 

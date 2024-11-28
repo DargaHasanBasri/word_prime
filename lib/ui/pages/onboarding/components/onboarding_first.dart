@@ -6,8 +6,28 @@ class OnboardingFirst extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
-        Center(
+        Padding(
+          padding: AppPaddings.appPaddingHorizontal,
+          child: Column(
+            children: [
+              Text(
+                LocaleKeys.onboardingPage_onboardingFirstTitle.locale,
+                style: Theme.of(context).textTheme.headlineLarge,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: AppSizes.sizedBoxMediumHeight),
+              Text(
+                LocaleKeys.onboardingPage_onboardingFirstSubTitle.locale,
+                style: Theme.of(context).textTheme.titleSmall,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: AppPaddings.paddingXLargeTop,
           child: AspectRatio(
             aspectRatio: 16 / 10,
             child: Container(
@@ -21,27 +41,6 @@ class OnboardingFirst extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        Column(
-          children: [
-            Padding(
-              padding: AppPaddings.appPaddingXLargeHorizontal,
-              child: Text(
-                LocaleKeys.onboardingPage_onboardingFirstTitle.locale,
-                style: Theme.of(context).textTheme.headlineLarge,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Padding(
-              padding: AppPaddings.appPaddingLargeHorizontal +
-                  AppPaddings.paddingLargeTop,
-              child: Text(
-                LocaleKeys.onboardingPage_onboardingFirstSubTitle.locale,
-                style: Theme.of(context).textTheme.titleSmall,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ],
         ),
       ],
     );

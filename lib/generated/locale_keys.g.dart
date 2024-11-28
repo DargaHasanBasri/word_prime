@@ -97,6 +97,7 @@ abstract class  LocaleKeys {
   static const profileDetail_update = 'profileDetail.update';
   static const profileDetail = 'profileDetail';
   static const homePage_welcome = 'homePage.welcome';
+  static const homePage_searchText = 'homePage.searchText';
   static const homePage = 'homePage';
   static const activityPage_myActivity = 'activityPage.myActivity';
   static const activityPage_popularQuiz = 'activityPage.popularQuiz';
@@ -161,5 +162,12 @@ abstract class  LocaleKeys {
   static const myWordList_subTitle = 'myWordList.subTitle';
   static const myWordList_newWord = 'myWordList.newWord';
   static const myWordList = 'myWordList';
+  static const timeAgoMsg_weekAgo = 'timeAgoMsg.weekAgo';
+  static const timeAgoMsg_daysAgo = 'timeAgoMsg.daysAgo';
+  static const timeAgoMsg_hoursAgo = 'timeAgoMsg.hoursAgo';
+  static const timeAgoMsg_minutesAgo = 'timeAgoMsg.minutesAgo';
+  static const timeAgoMsg_justNow = 'timeAgoMsg.justNow';
+  static const timeAgoMsg_added = 'timeAgoMsg.added';
+  static const timeAgoMsg = 'timeAgoMsg';
 
 }

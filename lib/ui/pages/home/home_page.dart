@@ -15,7 +15,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
   @override
   void initState() {
     _vm = Provider.of<HomeViewModel>(context, listen: false);
-    _vm.getAddedPosts(
+    _vm.getFetchPosts(
       showProgress: () => showProgress(context),
       hideProgress: () => hideProgress(),
     );
@@ -59,11 +59,15 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                       height: 24,
                     ),
                   ),
-                  Text(
-                    'Search for words or users...',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontWeight: FontWeight.w400,
-                        ),
+                  Expanded(
+                    child: Text(
+                      LocaleKeys.homePage_searchText.locale,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w400,
+                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
@@ -75,7 +79,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                 return ListView.separated(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 5,
+                  itemCount: _vm.postsNotifier.value?.length ?? 0,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: AppPaddings.appPaddingHorizontal,

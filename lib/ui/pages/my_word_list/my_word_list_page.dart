@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/added_words_list_item.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/my_word_list_tab_bar.dart';
@@ -42,10 +41,10 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
         child: Icon(
           Icons.add,
-          color: AppColors.cornflowerBlue,
+          color: AppColors.white,
           size: 30,
         ),
         onPressed: () {
@@ -218,9 +217,11 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                                 valueListenable: _vm.isDeletedItem,
                                 builder: (_, __, ___) {
                                   return CustomAppPopup(
-                                    title: 'Gönderiniz silinsin mi?',
-                                    subTitle:
-                                        'Silmek istediğinizden emin misiniz?',
+                                    title: LocaleKeys
+                                        .warningMessages_deleteMsgTitle.locale,
+                                    subTitle: LocaleKeys
+                                        .warningMessages_deleteMsgSubTitle
+                                        .locale,
                                     onTapConfirmButton: () async {
                                       await _vm.deleteUserPost(
                                         userPostId:

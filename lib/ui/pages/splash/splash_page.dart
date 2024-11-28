@@ -39,22 +39,24 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
             ),
           ),
           Padding(
-            padding:
-                AppPaddings.paddingLargeTop + AppPaddings.paddingSmallBottom,
+            padding: AppPaddings.paddingLargeTop,
             child: Text(
               LocaleKeys.appTitle.locale,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     color: AppColors.white,
-                    fontWeight: FontWeight.w700,
                   ),
             ),
           ),
-          Text(
-            LocaleKeys.splashPage_title.locale,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall
-                ?.copyWith(color: AppColors.white),
+          Padding(
+            padding:
+                AppPaddings.appPaddingHorizontal + AppPaddings.paddingXSmallTop,
+            child: Text(
+              LocaleKeys.splashPage_title.locale,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: AppColors.white,
+                  ),
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),

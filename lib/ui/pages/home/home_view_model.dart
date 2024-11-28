@@ -13,7 +13,7 @@ class HomeViewModel extends BaseViewModel {
 
   final ValueNotifier<List<PostModel?>?> postsNotifier = ValueNotifier(null);
 
-  Future<void> getAddedPosts({
+  Future<void> getFetchPosts({
     required VoidCallback showProgress,
     required VoidCallback hideProgress,
   }) async {

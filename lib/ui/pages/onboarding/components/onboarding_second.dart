@@ -6,8 +6,29 @@ class OnboardingSecond extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
-        Center(
+        Padding(
+          padding: AppPaddings.appPaddingHorizontal,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                LocaleKeys.onboardingPage_onboardingSecondTitle.locale,
+                style: Theme.of(context).textTheme.headlineLarge,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: AppSizes.sizedBoxMediumHeight),
+              Text(
+                LocaleKeys.onboardingPage_onboardingSecondSubTitle.locale,
+                style: Theme.of(context).textTheme.titleSmall,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: AppPaddings.paddingXLargeTop,
           child: AspectRatio(
             aspectRatio: 16 / 10,
             child: Container(
@@ -21,28 +42,6 @@ class OnboardingSecond extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: AppPaddings.appPaddingXLargeHorizontal,
-              child: Text(
-                LocaleKeys.onboardingPage_onboardingSecondTitle.locale,
-                style: Theme.of(context).textTheme.headlineLarge,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Padding(
-              padding: AppPaddings.appPaddingLargeHorizontal +
-                  AppPaddings.paddingLargeTop,
-              child: Text(
-                LocaleKeys.onboardingPage_onboardingSecondSubTitle.locale,
-                style: Theme.of(context).textTheme.titleSmall,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ],
         ),
       ],
     );

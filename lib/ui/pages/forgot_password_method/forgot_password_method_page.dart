@@ -133,6 +133,7 @@ class _ForgotPasswordMethodPageState
         SizedBox(height: AppSizes.sizedBoxLargeHeight),
         CustomTextFormField(
           controller: _emailController,
+          inputType: TextInputType.emailAddress,
           hintText: LocaleKeys.emailHintText.locale,
           isPrefixIcon: true,
           prefixIconAddress: AppAssets.icSmsPath,

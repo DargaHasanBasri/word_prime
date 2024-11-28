@@ -11,6 +11,7 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: _buildAppBar(),
       body: _buildBody(),
     );
@@ -24,28 +25,36 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
           alignment: Alignment.topRight,
           child: Image.asset(AppAssets.imgImgGetStartedPath),
         ),
-        Text(
-          LocaleKeys.getStartedPage_titleMsg.locale,
-          style: Theme.of(context).textTheme.headlineLarge,
-          textAlign: TextAlign.center,
-        ),
         Padding(
-          padding: AppPaddings.paddingSmallTop +
-              AppPaddings.appPaddingLargeHorizontal,
-          child: Text(
-            LocaleKeys.getStartedPage_subTitleMsg.locale,
-            style: Theme.of(context).textTheme.titleSmall,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Padding(
-          padding: AppPaddings.appPaddingHorizontal +
-              AppPaddings.appPaddingLargeVertical,
-          child: CustomButton(
-            title: LocaleKeys.getStartedPage_title.locale.toUpperCase(),
-            onClick: () {
-              appRoutes.navigateTo(Routes.Login);
-            },
+          padding: AppPaddings.appPaddingHorizontal,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                LocaleKeys.getStartedPage_titleMsg.locale,
+                style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.center,
+              ),
+              Padding(
+                padding: AppPaddings.paddingSmallTop,
+                child: Text(
+                  LocaleKeys.getStartedPage_subTitleMsg.locale,
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontSize: 16,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Padding(
+                padding: AppPaddings.appPaddingLargeVertical,
+                child: CustomButton(
+                  title: LocaleKeys.getStartedPage_title.locale.toUpperCase(),
+                  onClick: () {
+                    appRoutes.navigateTo(Routes.Register);
+                  },
+                ),
+              ),
+            ],
           ),
         ),
         Spacer(),
@@ -73,7 +82,7 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
                 ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                appRoutes.navigateTo(Routes.Login);
+                appRoutes.navigateRemoveUntil(Routes.Login);
               },
           ),
         ],

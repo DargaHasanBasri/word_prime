@@ -20,6 +20,14 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
   }
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -33,139 +41,152 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
 
   Widget _buildBody() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Padding(
-          padding:
-              AppPaddings.paddingMediumTop + AppPaddings.paddingLargeBottom,
-          child: _titleSubtitleText(),
-        ),
-        ValueListenableBuilder(
-          valueListenable: _vm.nameInput,
-          builder: (_, __, ___) {
-            return CustomTextFormField(
-              controller: _nameController,
-              hintText: LocaleKeys.nameHintText.locale,
-              isPrefixIcon: true,
-              prefixIconAddress: AppAssets.icUserPath,
-              onChanged: (String text) {
-                _vm.nameInput.value = text;
-              },
-            );
-          },
-        ),
-        ValueListenableBuilder(
-          valueListenable: _vm.emailInput,
-          builder: (_, __, ___) {
-            return Padding(
-              padding: AppPaddings.paddingMediumVertical,
-              child: CustomTextFormField(
-                controller: _emailController,
-                hintText: LocaleKeys.emailHintText.locale,
-                isPrefixIcon: true,
-                prefixIconAddress: AppAssets.icSmsPath,
-                onChanged: (String text) {
-                  _vm.emailInput.value = text;
-                },
-              ),
-            );
-          },
-        ),
-        ValueListenableBuilder(
-          valueListenable: _vm.passwordInput,
-          builder: (_, __, ___) {
-            return ValueListenableBuilder(
-              valueListenable: _vm.isActive,
-              builder: (_, __, ___) {
-                return CustomTextFormField(
-                  controller: _passwordController,
-                  hintText: LocaleKeys.registerPage_passwordHintText.locale,
-                  isPrefixIcon: true,
-                  prefixIconAddress: AppAssets.icLockPath,
-                  isHaveObscure: _vm.isActive.value,
-                  isSuffixIcon: true,
-                  suffixIconAddress: _vm.isActive.value == true
-                      ? AppAssets.icCloseEyePath
-                      : AppAssets.icOpenEyePath,
-                  textInputAction: TextInputAction.done,
-                  onPressSuffixIcon: () {
-                    _vm.isActive.value = !_vm.isActive.value;
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: AppPaddings.paddingMediumTop +
+                      AppPaddings.paddingLargeBottom,
+                  child: _titleSubtitleText(),
+                ),
+                ValueListenableBuilder(
+                  valueListenable: _vm.nameInput,
+                  builder: (_, __, ___) {
+                    return CustomTextFormField(
+                      controller: _nameController,
+                      hintText: LocaleKeys.nameHintText.locale,
+                      isPrefixIcon: true,
+                      prefixIconAddress: AppAssets.icUserPath,
+                      onChanged: (String text) {
+                        _vm.nameInput.value = text;
+                      },
+                    );
                   },
-                  onChanged: (String text) {
-                    _vm.passwordInput.value = text;
-                  },
-                );
-              },
-            );
-          },
-        ),
-        ValueListenableBuilder(
-          valueListenable: _vm.nameInput,
-          builder: (_, __, ___) {
-            return ValueListenableBuilder(
-              valueListenable: _vm.emailInput,
-              builder: (_, __, ___) {
-                return ValueListenableBuilder(
-                  valueListenable: _vm.passwordInput,
+                ),
+                ValueListenableBuilder(
+                  valueListenable: _vm.emailInput,
                   builder: (_, __, ___) {
                     return Padding(
-                      padding: AppPaddings.appPaddingVertical,
-                      child: CustomButton(
-                        title: LocaleKeys.signUp.locale.toUpperCase(),
-                        backgroundColor: _vm.isEmptyInputText()
-                            ? AppColors.cornflowerBlue
-                            : AppColors.cornflowerBlue.withOpacity(0.4),
-                        onClick: () {
-                          _vm.isEmptyInputText()
-                              ? _vm.register(
-                                  onRegistrationSuccess: () {
-                                    appRoutes.navigateTo(
-                                      Routes.EmailVerification,
-                                      arguments: _vm.emailInput.value,
-                                    );
-                                  },
-                                  showProgress: () => showProgress(context),
-                                  hideProgress: () => hideProgress(),
-                                  showErrorSnackBar: (String message) {
-                                    showSnackBar(
-                                      context: context,
-                                      content: CustomSnackBarContent(
-                                        text: message,
-                                        iconType: CustomSnackBarType.error,
-                                      ),
-                                    );
-                                  },
-                                )
-                              : showSnackBar(
-                                  context: context,
-                                  content: CustomSnackBarContent(
-                                    text: LocaleKeys
-                                        .warningMessages_emptySpace.locale,
-                                    iconType: CustomSnackBarType.info,
-                                  ),
-                                );
+                      padding: AppPaddings.paddingMediumVertical,
+                      child: CustomTextFormField(
+                        controller: _emailController,
+                        inputType: TextInputType.emailAddress,
+                        hintText: LocaleKeys.emailHintText.locale,
+                        isPrefixIcon: true,
+                        prefixIconAddress: AppAssets.icSmsPath,
+                        onChanged: (String text) {
+                          _vm.emailInput.value = text;
                         },
                       ),
                     );
                   },
-                );
-              },
-            );
-          },
+                ),
+                ValueListenableBuilder(
+                  valueListenable: _vm.passwordInput,
+                  builder: (_, __, ___) {
+                    return ValueListenableBuilder(
+                      valueListenable: _vm.isActive,
+                      builder: (_, __, ___) {
+                        return CustomTextFormField(
+                          controller: _passwordController,
+                          inputType: TextInputType.visiblePassword,
+                          hintText:
+                              LocaleKeys.registerPage_passwordHintText.locale,
+                          isPrefixIcon: true,
+                          prefixIconAddress: AppAssets.icLockPath,
+                          isHaveObscure: _vm.isActive.value,
+                          isSuffixIcon: true,
+                          suffixIconAddress: _vm.isActive.value == true
+                              ? AppAssets.icCloseEyePath
+                              : AppAssets.icOpenEyePath,
+                          textInputAction: TextInputAction.done,
+                          onPressSuffixIcon: () {
+                            _vm.isActive.value = !_vm.isActive.value;
+                          },
+                          onChanged: (String text) {
+                            _vm.passwordInput.value = text;
+                          },
+                        );
+                      },
+                    );
+                  },
+                ),
+                ValueListenableBuilder(
+                  valueListenable: _vm.nameInput,
+                  builder: (_, __, ___) {
+                    return ValueListenableBuilder(
+                      valueListenable: _vm.emailInput,
+                      builder: (_, __, ___) {
+                        return ValueListenableBuilder(
+                          valueListenable: _vm.passwordInput,
+                          builder: (_, __, ___) {
+                            return Padding(
+                              padding: AppPaddings.appPaddingVertical,
+                              child: CustomButton(
+                                title: LocaleKeys.signUp.locale.toUpperCase(),
+                                backgroundColor: _vm.isEmptyInputText()
+                                    ? AppColors.cornflowerBlue
+                                    : AppColors.cornflowerBlue.withOpacity(0.4),
+                                onClick: () {
+                                  _vm.isEmptyInputText()
+                                      ? _vm.register(
+                                          onRegistrationSuccess: () {
+                                            appRoutes.navigateTo(
+                                              Routes.EmailVerification,
+                                              arguments: _vm.emailInput.value,
+                                            );
+                                          },
+                                          showProgress: () =>
+                                              showProgress(context),
+                                          hideProgress: () => hideProgress(),
+                                          showErrorSnackBar: (String message) {
+                                            showSnackBar(
+                                              context: context,
+                                              content: CustomSnackBarContent(
+                                                text: message,
+                                                iconType:
+                                                    CustomSnackBarType.error,
+                                              ),
+                                            );
+                                          },
+                                        )
+                                      : showSnackBar(
+                                          context: context,
+                                          content: CustomSnackBarContent(
+                                            text: LocaleKeys
+                                                .warningMessages_emptySpace
+                                                .locale,
+                                            iconType: CustomSnackBarType.info,
+                                          ),
+                                        );
+                                },
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
+                ),
+                Text(
+                  LocaleKeys.registerPage_privacyMsg.locale,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w400,
+                      ),
+                ),
+              ],
+            ),
+          ),
         ),
-        Text(
-          LocaleKeys.registerPage_privacyMsg.locale,
-          textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall
-              ?.copyWith(fontWeight: FontWeight.w400),
-        ),
-        const Spacer(),
         Padding(
           padding: AppPaddings.paddingLargeBottom,
           child: Center(
-            child: _richTextSignUp(),
+            child: _richTextSignIn(),
           ),
         ),
       ],
@@ -191,7 +212,7 @@ class _RegisterPageState extends BaseStatefulState<RegisterPage> {
     );
   }
 
-  Widget _richTextSignUp() {
+  Widget _richTextSignIn() {
     return RichText(
       text: TextSpan(
         text: LocaleKeys.registerPage_isSignInMsg.locale,
