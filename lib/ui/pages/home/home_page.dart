@@ -1,6 +1,5 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/home/components/post_list_item.dart';
-import 'package:word_prime/ui/pages/home/components/user_list_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,6 +15,10 @@ class _HomePageState extends BaseStatefulState<HomePage> {
   @override
   void initState() {
     _vm = Provider.of<HomeViewModel>(context, listen: false);
+    _vm.getAddedPosts(
+      showProgress: () => showProgress(context),
+      hideProgress: () => hideProgress(),
+    );
     super.initState();
   }
 
@@ -66,39 +69,44 @@ class _HomePageState extends BaseStatefulState<HomePage> {
               ),
             ),
           ),
-          ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: AppPaddings.appPaddingHorizontal,
-                child: PostListItem(
-                  onTabLike: () {},
-                  onTabSave: () {},
-                  onTabComment: () {
-                    showCustomBottomSheet(
-                      context: context,
-                      child: CustomCommentBottomSheet(
-                        commentController: _commentController,
-                        onPressSuffixIcon: () {},
+          ValueListenableBuilder(
+              valueListenable: _vm.postsNotifier,
+              builder: (_, __, ___) {
+                return ListView.separated(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: AppPaddings.appPaddingHorizontal,
+                      child: PostListItem(
+                        postModel: _vm.postsNotifier.value?[index],
+                        onTabLike: () {},
+                        onTabSave: () {},
+                        onTabShare: () {},
+                        onTabTranslate: () {},
+                        onTabChoice: () {},
+                        onTabComment: () {
+                          showCustomBottomSheet(
+                            context: context,
+                            child: CustomCommentBottomSheet(
+                              commentController: _commentController,
+                              onPressSuffixIcon: () {},
+                            ),
+                          );
+                        },
                       ),
                     );
                   },
-                  onTabShare: () {},
-                  onTabTranslate: () {},
-                  onTabChoice: () {},
-                ),
-              );
-            },
-            separatorBuilder: (context, index) => Padding(
-              padding: AppPaddings.appPaddingAll,
-              child: Container(
-                height: 1,
-                color: AppColors.platinum.withOpacity(0.3),
-              ),
-            ),
-          ),
+                  separatorBuilder: (context, index) => Padding(
+                    padding: AppPaddings.appPaddingAll,
+                    child: Container(
+                      height: 1,
+                      color: AppColors.platinum.withOpacity(0.3),
+                    ),
+                  ),
+                );
+              }),
         ],
       ),
     );

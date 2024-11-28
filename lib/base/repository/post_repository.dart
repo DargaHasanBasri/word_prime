@@ -6,6 +6,28 @@ class PostRepository {
   final _userCollectionReference = FirebaseCollections.users.reference;
   User? _currentUser = FirebaseAuth.instance.currentUser;
 
+  Future<List<PostModel?>?> fetchPost() async {
+    try {
+      final response = await _postCollectionReference
+          .orderBy('created_date', descending: true)
+          .withConverter(
+        fromFirestore: (snapshot, _) {
+          return PostModel().fromFirebase(snapshot);
+        },
+        toFirestore: (value, _) {
+          return {};
+        },
+      ).get();
+
+      final postData = response.docs.map((doc) => doc.data()).toList();
+
+      return postData;
+    } catch (e) {
+      log('An error occurred while retrieving user data: $e');
+      return null;
+    }
+  }
+
   Future<void> addPost({PostModel? postModel}) async {
     try {
       DocumentReference _documentReference = await _postCollectionReference.add(
@@ -86,9 +108,9 @@ class PostRepository {
   }
 
   Future<void> savePost({
-    required String userId,
-    required String postId,
-    required String wordLevel,
+    required String? userId,
+    required String? postId,
+    required String? wordLevel,
   }) async {
     try {
       final savedPostsReference =

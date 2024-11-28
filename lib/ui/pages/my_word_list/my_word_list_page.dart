@@ -1,10 +1,8 @@
 import 'dart:developer';
-import 'package:word_prime/base/events/refresh_user_info_event.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/added_words_list_item.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/my_word_list_tab_bar.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/saved_posts_list_item.dart';
-import 'package:word_prime/ui/widgets/custom_app_popup.dart';
 
 class MyWordListPage extends StatefulWidget {
   const MyWordListPage({super.key});
@@ -178,76 +176,90 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
           controller: _addedScrollController,
           physics: BouncingScrollPhysics(),
           padding:
-              AppPaddings.appPaddingMainTabBottom + AppPaddings.paddingSmallTop,
+              AppPaddings.appPaddingMainTabBottom + AppPaddings.paddingLargeTop,
           shrinkWrap: true,
           itemCount: _vm.addedPostsNotifier.value?.length ?? 0,
           itemBuilder: (context, index) {
-            return AddedWordsListItem(
-              postModel: _vm.addedPostsNotifier.value?[index],
-              onTabLike: () {
-                log('${_vm.addedPostsNotifier.value?[index]?.postId}');
-              },
-              onTabSave: () {
-                log('${_vm.addedPostsNotifier.value?[index]?.postId}');
-              },
-              onTabComment: () {
-                log('${_vm.addedPostsNotifier.value?[index]?.postId}');
-                showCustomBottomSheet(
-                  context: context,
-                  child: CustomCommentBottomSheet(
-                    commentController: _commentController,
-                    onPressSuffixIcon: () {},
-                  ),
-                );
-              },
-              onTabChoice: () {
-                showCustomBottomSheet(
-                  context: context,
-                  child: CustomChoicesBottomSheet(
-                    onTapUpdate: () {},
-                    onTapDelete: () {
-                      showPopupDialog(
-                        context: context,
-                        child: Padding(
-                          padding: AppPaddings.appPaddingHorizontal,
-                          child: ValueListenableBuilder(
-                              valueListenable: _vm.isDeletedItem,
-                              builder: (_, __, ___) {
-                                return CustomAppPopup(
-                                  title: 'Gönderiniz silinsin mi?',
-                                  subTitle:
-                                      'Silmek istediğinizden emin misiniz?',
-                                  onTapConfirmButton: () async {
-                                    await _vm.deleteUserPost(
-                                      userPostId:
-                                          '${_vm.addedPostsNotifier.value?[index]?.postId}',
-                                      showProgress: () => showProgress(context),
-                                      hideProgress: () => hideProgress(),
-                                    );
-                                    appRoutes.popPages(2);
-                                    _vm.isDeletedItem.value = true;
-                                    _vm.getAddedAndSavedPosts(
-                                      showProgress: () => showProgress(context),
-                                      hideProgress: () => hideProgress(),
-                                    );
-                                  },
-                                  onTapCancelButton: () {
-                                    appRoutes.popIfBackStackNotEmpty();
-                                  },
-                                );
-                              }),
-                        ),
-                      );
-                    },
-                    onTapShare: () {},
-                  ),
-                );
-              },
-              onTabTranslate: () {},
+            final postModelData = _vm.addedPostsNotifier.value?[index];
+            return Padding(
+              padding: AppPaddings.appPaddingHorizontal,
+              child: AddedWordsListItem(
+                postModel: postModelData,
+                onTabLike: () {},
+                onTabSave: () async {
+                  showProgress(context);
+                  await PostRepository().savePost(
+                    userId: postModelData?.userId,
+                    postId: postModelData?.postId,
+                    wordLevel: postModelData?.wordLevel,
+                  );
+                  hideProgress();
+                },
+                onTabComment: () {
+                  showCustomBottomSheet(
+                    context: context,
+                    child: CustomCommentBottomSheet(
+                      commentController: _commentController,
+                      onPressSuffixIcon: () {},
+                    ),
+                  );
+                },
+                onTabChoice: () {
+                  showCustomBottomSheet(
+                    context: context,
+                    child: CustomChoicesBottomSheet(
+                      onTapUpdate: () {},
+                      onTapDelete: () {
+                        showPopupDialog(
+                          context: context,
+                          child: Padding(
+                            padding: AppPaddings.appPaddingHorizontal,
+                            child: ValueListenableBuilder(
+                                valueListenable: _vm.isDeletedItem,
+                                builder: (_, __, ___) {
+                                  return CustomAppPopup(
+                                    title: 'Gönderiniz silinsin mi?',
+                                    subTitle:
+                                        'Silmek istediğinizden emin misiniz?',
+                                    onTapConfirmButton: () async {
+                                      await _vm.deleteUserPost(
+                                        userPostId:
+                                            '${_vm.addedPostsNotifier.value?[index]?.postId}',
+                                        showProgress: () =>
+                                            showProgress(context),
+                                        hideProgress: () => hideProgress(),
+                                      );
+                                      appRoutes.popPages(2);
+                                      _vm.isDeletedItem.value = true;
+                                      _vm.getAddedAndSavedPosts(
+                                        showProgress: () =>
+                                            showProgress(context),
+                                        hideProgress: () => hideProgress(),
+                                      );
+                                    },
+                                    onTapCancelButton: () {
+                                      appRoutes.popIfBackStackNotEmpty();
+                                    },
+                                  );
+                                }),
+                          ),
+                        );
+                      },
+                      onTapShare: () {},
+                    ),
+                  );
+                },
+                onTabTranslate: () {},
+                onTabShare: () {},
+              ),
             );
           },
-          separatorBuilder: (context, index) => SizedBox(
-            height: AppSizes.sizedBoxSmallHeight,
+          separatorBuilder: (context, index) => Padding(
+            padding: AppPaddings.appPaddingAll,
+            child: Container(
+              height: 1,
+              color: AppColors.platinum.withOpacity(0.3),
+            ),
           ),
         );
       },
@@ -259,34 +271,37 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
       controller: _savedScrollController,
       physics: BouncingScrollPhysics(),
       padding:
-          AppPaddings.appPaddingMainTabBottom + AppPaddings.paddingSmallTop,
+          AppPaddings.appPaddingMainTabBottom + AppPaddings.paddingLargeTop,
       shrinkWrap: true,
       itemCount: _vm.savedPostsNotifier.value?.length ?? 0,
       itemBuilder: (context, index) {
-        return SavedPostsListItem(
-          postModel: _vm.savedPostsNotifier.value?[index],
-          onTabLike: () {
-            log('${_vm.savedPostsNotifier.value?[index]?.postId}');
-          },
-          onTabSave: () {
-            log('${_vm.savedPostsNotifier.value?[index]?.postId}');
-          },
-          onTabComment: () {
-            log('${_vm.savedPostsNotifier.value?[index]?.postId}');
-            showCustomBottomSheet(
-              context: context,
-              child: CustomCommentBottomSheet(
-                commentController: _commentController,
-                onPressSuffixIcon: () {},
-              ),
-            );
-          },
-          onTabTranslate: () {},
-          onTabChoice: () {},
+        return Padding(
+          padding: AppPaddings.appPaddingHorizontal,
+          child: SavedPostsListItem(
+            postModel: _vm.savedPostsNotifier.value?[index],
+            onTabLike: () {},
+            onTabSave: () {},
+            onTabComment: () {
+              showCustomBottomSheet(
+                context: context,
+                child: CustomCommentBottomSheet(
+                  commentController: _commentController,
+                  onPressSuffixIcon: () {},
+                ),
+              );
+            },
+            onTabTranslate: () {},
+            onTabChoice: () {},
+            onTabShare: () {},
+          ),
         );
       },
-      separatorBuilder: (context, index) => SizedBox(
-        height: AppSizes.sizedBoxSmallHeight,
+      separatorBuilder: (context, index) => Padding(
+        padding: AppPaddings.appPaddingAll,
+        child: Container(
+          height: 1,
+          color: AppColors.platinum.withOpacity(0.3),
+        ),
       ),
     );
   }
