@@ -3,124 +3,40 @@ import 'package:word_prime/export.dart';
 class CustomCommentBottomSheet extends StatelessWidget {
   final TextEditingController commentController;
   final VoidCallback onPressSuffixIcon;
+  final String? currentUserProfileImage;
+  final List<CommentModel?>? comments;
   const CustomCommentBottomSheet({
     super.key,
     required this.commentController,
     required this.onPressSuffixIcon,
+    required this.currentUserProfileImage,
+    required this.comments,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 1.5,
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(16),
         ),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
-            padding: AppPaddings.paddingSmallVertical,
-            child: Container(
-              height: AppSizes.bottomSheetDragHandleHeight,
-              width: AppSizes.bottomSheetDragHandleWidth,
-              decoration: BoxDecoration(
-                color: AppColors.mirage,
-                borderRadius: BorderRadius.circular(6),
-              ),
-            ),
-          ),
-          Text(
-            LocaleKeys.comments.locale,
-            style: TextStyle(
-              color: AppColors.mirage,
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
+          _buildDragHandle(context),
           Expanded(
             child: ListView.separated(
               padding: AppPaddings.paddingMediumAll,
-              itemCount: 20,
+              itemCount: comments?.length ?? 0,
               itemBuilder: (context, index) {
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CustomUserCircleAvatar(
-                      circleRadius: 16,
-                      borderWidth: 0,
-                      profileImgAddress:
-                          AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
-                    ),
-                    SizedBox(width: AppSizes.sizedBoxSmallWidth),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 1.5,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                AppLocaleConstants.DEFAULT_USER_NAME,
-                                style: TextStyle(
-                                  color: AppColors.mirage,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                maxLines: 1,
-                              ),
-                              SizedBox(width: AppSizes.sizedBoxSmallWidth),
-                              Text(
-                                '1s',
-                                style: TextStyle(
-                                  color: AppColors.mirage.withOpacity(0.25),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                maxLines: 1,
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: AppSizes.sizedBoxSmallHeight),
-                          Text(
-                            'Examp Comment  abc',
-                            style: TextStyle(
-                              color: AppColors.ebonyClay,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            maxLines: 3,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            AppAssets.icInactiveLikePath,
-                            width: 16,
-                            height: 16,
-                          ),
-                          Text(
-                            '12',
-                            style: TextStyle(
-                              color: AppColors.mirage,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                final commentModel = comments?[index];
+                return _buildUserCommentDetails(
+                  context,
+                  commentModel: commentModel,
+                  dateTime: commentModel?.createdDate?.toDateTime(),
                 );
               },
               separatorBuilder: (context, index) => SizedBox(
@@ -133,7 +49,7 @@ class CustomCommentBottomSheet extends StatelessWidget {
             child: Row(
               children: [
                 CustomUserCircleAvatar(
-                  profileImgAddress: AppLocaleConstants.EXAMPLE_PROFILE_PICTURE,
+                  profileImgAddress: currentUserProfileImage,
                   borderWidth: 0,
                   circleRadius: 20,
                 ),
@@ -142,8 +58,8 @@ class CustomCommentBottomSheet extends StatelessWidget {
                   child: CustomTextFormField(
                     controller: commentController,
                     borderRadius: 60,
+                    isAutoTrue: true,
                     hintText: LocaleKeys.commentsHintText.locale,
-                    hintTextColor: AppColors.riverBed,
                     textInputAction: TextInputAction.done,
                     isSuffixIcon: true,
                     suffixIconAddress: AppAssets.icSendPath,
@@ -156,6 +72,120 @@ class CustomCommentBottomSheet extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildDragHandle(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: AppPaddings.paddingMediumVertical,
+          child: Container(
+            height: AppSizes.bottomSheetDragHandleHeight,
+            width: AppSizes.bottomSheetDragHandleWidth,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadius.circular(6),
+            ),
+          ),
+        ),
+        Padding(
+          padding: AppPaddings.paddingSmallBottom,
+          child: Text(
+            LocaleKeys.comments.locale,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+          ),
+        ),
+        Padding(
+          padding: AppPaddings.paddingSmallTop,
+          child: Container(
+            height: 1,
+            color: AppColors.platinum.withOpacity(0.3),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildUserCommentDetails(
+    BuildContext context, {
+    CommentModel? commentModel,
+    DateTime? dateTime,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomUserCircleAvatar(
+                circleRadius: 16,
+                borderWidth: 0,
+                profileImgAddress: commentModel?.userProfileImage,
+              ),
+              SizedBox(width: AppSizes.sizedBoxSmallWidth),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            '${commentModel?.userName ?? ''}',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
+                        SizedBox(width: AppSizes.sizedBoxXSmallWidth),
+                        Text(
+                          AppUtility().timeAgo(dateTime),
+                          style:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppSizes.sizedBoxSmallHeight),
+                    Text(
+                      '${commentModel?.commentText ?? ''}',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w300,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: AppPaddings.paddingMediumHorizontal,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                AppAssets.icInactiveLikePath,
+                width: 16,
+                height: 16,
+              ),
+              SizedBox(height: AppSizes.sizedBoxSmallHeight),
+              Text(
+                '${commentModel?.totalLikes ?? 0}',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
