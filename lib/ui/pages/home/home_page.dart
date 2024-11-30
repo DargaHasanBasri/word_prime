@@ -1,4 +1,5 @@
 import 'package:word_prime/export.dart';
+import 'package:word_prime/models/comment_model.dart';
 import 'package:word_prime/ui/pages/home/components/post_list_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -81,21 +82,48 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                   shrinkWrap: true,
                   itemCount: _vm.postsNotifier.value?.length ?? 0,
                   itemBuilder: (context, index) {
+                    final postModel = _vm.postsNotifier.value?[index];
                     return Padding(
                       padding: AppPaddings.appPaddingHorizontal,
                       child: PostListItem(
-                        postModel: _vm.postsNotifier.value?[index],
+                        postModel: postModel,
                         onTabLike: () {},
                         onTabSave: () {},
                         onTabShare: () {},
                         onTabTranslate: () {},
                         onTabChoice: () {},
                         onTabComment: () {
+                          _vm.fetchPostComments(
+                            showProgress: () => showProgress(context),
+                            hideProgress: () => hideProgress(),
+                            postId: postModel?.postId,
+                          );
                           showCustomBottomSheet(
                             context: context,
-                            child: CustomCommentBottomSheet(
-                              commentController: _commentController,
-                              onPressSuffixIcon: () {},
+                            child: ValueListenableBuilder(
+                              valueListenable: _vm.commentsNotifier,
+                              builder: (_, __, ___) {
+                                return CustomCommentBottomSheet(
+                                  commentController: _commentController,
+                                  currentUserProfileImage: _vm
+                                      .userNotifier.value?.profileImageAddress,
+                                  comments: _vm.commentsNotifier.value,
+                                  onPressSuffixIcon: () async {
+                                    await _vm.addNewComments(
+                                      showProgress: () => showProgress(context),
+                                      hideProgress: () => hideProgress(),
+                                      postId: postModel?.postId,
+                                      comment: _commentController.text,
+                                    );
+                                    _commentController.clear();
+                                    _vm.fetchPostComments(
+                                      showProgress: () => showProgress(context),
+                                      hideProgress: () => hideProgress(),
+                                      postId: postModel?.postId,
+                                    );
+                                  },
+                                );
+                              },
                             ),
                           );
                         },

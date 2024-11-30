@@ -192,4 +192,66 @@ class PostRepository {
       rethrow;
     }
   }
+
+  Future<void> addComment({
+    required String? postId,
+    required CommentModel? commentModel,
+  }) async {
+    try {
+      final commentsReference =
+          _postCollectionReference.doc(postId).collection('comments');
+
+      if (commentModel != null) {
+        DocumentReference _documentReference = await commentsReference.add(
+          commentModel.toJson(),
+        );
+        String commentId = _documentReference.id;
+        await _documentReference.update({'comment_id': commentId});
+      }
+
+      log('Yorum ekleme başarısız!');
+
+      try {
+        await _postCollectionReference.doc(postId).update({
+          'total_comments': FieldValue.increment(1),
+        });
+        log("total comments success decrease");
+      } catch (e) {
+        log("total comments error decrease");
+        rethrow;
+      }
+
+      log('Yorum başarıyla eklendi! Post ID: $postId, Comment: ${commentModel?.toJson()}');
+    } catch (e) {
+      log('Yorum ekleme başarısız! Hata: $e');
+      rethrow;
+    }
+  }
+
+  Future<List<CommentModel?>?> fetchPostComments({
+    String? postId,
+  }) async {
+    try {
+      final response = await _postCollectionReference
+          .doc(postId)
+          .collection('comments')
+          .orderBy('created_date', descending: true)
+          .withConverter(
+        fromFirestore: (snapshot, _) {
+          return CommentModel().fromFirebase(snapshot);
+        },
+        toFirestore: (value, _) {
+          return {};
+        },
+      ).get();
+
+      final commentData = response.docs.map((doc) => doc.data()).toList();
+
+      log('fetch post comments success comments: $commentData');
+      return commentData;
+    } catch (e) {
+      log('An error occurred: $e');
+      return null;
+    }
+  }
 }

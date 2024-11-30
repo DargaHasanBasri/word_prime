@@ -3,7 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:word_prime/export.dart';
 
 final class AppUtility {
-  String timeAgo(DateTime? dateTime) {
+  String timeAgo(DateTime? dateTime, {bool isAbbreviation = false}) {
     if (dateTime != null) {
       final Duration difference = DateTime.now().difference(dateTime);
       if (difference.inDays >= 7) {

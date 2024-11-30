@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:word_prime/export.dart';
 
 class HomeViewModel extends BaseViewModel {
@@ -12,6 +11,8 @@ class HomeViewModel extends BaseViewModel {
   final ValueNotifier<bool> isActiveTranslate = ValueNotifier(false);
 
   final ValueNotifier<List<PostModel?>?> postsNotifier = ValueNotifier(null);
+  final ValueNotifier<List<CommentModel?>?> commentsNotifier =
+      ValueNotifier(null);
 
   Future<void> getFetchPosts({
     required VoidCallback showProgress,
@@ -21,6 +22,47 @@ class HomeViewModel extends BaseViewModel {
       showProgress.call();
       postsNotifier.value = await PostRepository().fetchPost();
       log('data fetched: ${postsNotifier.value}');
+      hideProgress.call();
+    } catch (e) {
+      log('ViewModel An error occurred: $e');
+    }
+  }
+
+  Future<void> addNewComments({
+    required String? postId,
+    required String? comment,
+    required VoidCallback showProgress,
+    required VoidCallback hideProgress,
+  }) async {
+    try {
+      showProgress.call();
+      await PostRepository().addComment(
+        postId: postId,
+        commentModel: CommentModel(
+          commentText: comment,
+          userId: userNotifier.value?.userId,
+          userName: userNotifier.value?.userName,
+          userProfileImage: userNotifier.value?.profileImageAddress,
+          totalLikes: 0,
+          createdDate: Timestamp.now(),
+        ),
+      );
+      hideProgress.call();
+    } catch (e) {
+      log('ViewModel An error occurred: $e');
+    }
+  }
+
+  Future<void> fetchPostComments({
+    required String? postId,
+    required VoidCallback showProgress,
+    required VoidCallback hideProgress,
+  }) async {
+    try {
+      showProgress.call();
+      commentsNotifier.value = await PostRepository().fetchPostComments(
+        postId: postId,
+      );
       hideProgress.call();
     } catch (e) {
       log('ViewModel An error occurred: $e');

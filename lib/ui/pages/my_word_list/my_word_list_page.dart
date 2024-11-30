@@ -200,6 +200,8 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                     child: CustomCommentBottomSheet(
                       commentController: _commentController,
                       onPressSuffixIcon: () {},
+                      currentUserProfileImage: '',
+                      comments: [],
                     ),
                   );
                 },
@@ -288,6 +290,8 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                 child: CustomCommentBottomSheet(
                   commentController: _commentController,
                   onPressSuffixIcon: () {},
+                  currentUserProfileImage: '',
+                  comments: [],
                 ),
               );
             },
