@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:word_prime/export.dart';
-import 'package:word_prime/models/base_model.dart';
+import 'package:word_prime/base/base_model.dart';
 
 class PostModel extends BaseModel<PostModel> with EquatableMixin {
   String? postId;
