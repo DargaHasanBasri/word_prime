@@ -3,6 +3,7 @@ import 'package:word_prime/export.dart';
 
 class UserRepository {
   final _userCollectionReference = FirebaseCollections.users.reference;
+  User? _currentUser = FirebaseAuth.instance.currentUser;
 
   /// Pulls the user with a specific userId from Firestore
   Future<UserModel?> fetchUser(String? userId) async {
@@ -34,6 +35,37 @@ class UserRepository {
       /// In case of error, logging is done and null is executed
       log('An error occurred while retrieving user data: $e');
       return null;
+    }
+  }
+
+  Future<void> updateProfileDetails({
+    required String? userName,
+    required String? email,
+  }) async {
+    try {
+      final Map<String, dynamic> updatedData = {};
+
+      if (userName != null) {
+        updatedData['user_name'] = userName;
+        await _currentUser?.updateProfile(
+            displayName: userName, photoURL: _currentUser?.photoURL);
+        log('Display name updated in Authentication');
+      }
+      if (email != null) {
+        updatedData['email'] = email;
+        updatedData['email_verification'] = false;
+        await _currentUser?.verifyBeforeUpdateEmail(email);
+        log('Email update request sent in Authentication');
+      }
+
+      if (updatedData.isNotEmpty) {
+        await _userCollectionReference
+            .doc(_currentUser?.uid)
+            .update(updatedData);
+        log('Update success');
+      }
+    } catch (e) {
+      log('Update error: $e');
     }
   }
 }

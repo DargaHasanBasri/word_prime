@@ -11,14 +11,11 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
   late final ProfileDetailsViewModel _vm;
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
     _vm = Provider.of<ProfileDetailsViewModel>(context, listen: false);
-    _fullNameController.text = 'Test User';
-    _emailController.text = 'test@gmail.com';
-    _passwordController.text = 'testUser?123';
+    _vm.getUserDetails();
     super.initState();
   }
 
@@ -57,6 +54,7 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
         ValueListenableBuilder(
           valueListenable: _vm.fullNameInput,
           builder: (_, __, ___) {
+            _fullNameController.text = _vm.fullNameInput.value;
             return CustomTextFormField(
               controller: _fullNameController,
               textFieldTitle: LocaleKeys.profileDetail_fullNameTitle.locale,
@@ -70,6 +68,7 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
         ValueListenableBuilder(
           valueListenable: _vm.emailInput,
           builder: (_, __, ___) {
+            _emailController.text = _vm.emailInput.value;
             return Padding(
               padding: AppPaddings.paddingMediumVertical,
               child: CustomTextFormField(
@@ -84,38 +83,52 @@ class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
             );
           },
         ),
+        const Spacer(),
         ValueListenableBuilder(
-          valueListenable: _vm.passwordInput,
+          valueListenable: _vm.emailInput,
           builder: (_, __, ___) {
-            return ValueListenableBuilder(
-              valueListenable: _vm.isActive,
-              builder: (_, __, ___) {
-                return CustomTextFormField(
-                  controller: _passwordController,
-                  textFieldTitle: LocaleKeys.profileDetail_passwordTitle.locale,
-                  textFieldTitleColor: Theme.of(context).colorScheme.secondary,
-                  textInputAction: TextInputAction.done,
-                  isHaveObscure: _vm.isActive.value,
-                  isSuffixIcon: true,
-                  suffixIconAddress: _vm.isActive.value == true
-                      ? AppAssets.icCloseEyePath
-                      : AppAssets.icOpenEyePath,
-                  onPressSuffixIcon: () {
-                    _vm.isActive.value = !_vm.isActive.value;
-                  },
-                  onChanged: (String text) {
-                    _vm.passwordInput.value = text;
-                  },
-                );
+            return CustomButton(
+              title: 'PAROLA SIFIRLA',
+              onClick: () {
+                _vm.emailInput.value.isNotEmpty
+                    ? _vm.processPasswordReset(
+                        showProgress: () => showProgress(context),
+                        hideProgress: () => hideProgress(),
+                        onSendLinkSuccess: () {
+                          appRoutes.navigateTo(
+                            Routes.ResetPassword,
+                            arguments: _vm.emailInput.value,
+                          );
+                        },
+                        showErrorSnackBar: () {
+                          showSnackBar(
+                            context: context,
+                            content: CustomSnackBarContent(
+                              text: LocaleKeys
+                                  .warningMessages_unexpectedError.locale,
+                              iconType: CustomSnackBarType.error,
+                            ),
+                          );
+                        },
+                      )
+                    : showSnackBar(
+                        context: context,
+                        content: CustomSnackBarContent(
+                          text: LocaleKeys.warningMessages_emptySpace.locale,
+                          iconType: CustomSnackBarType.info,
+                        ),
+                      );
               },
             );
           },
         ),
-        const Spacer(),
         Padding(
           padding: AppPaddings.appPaddingVertical,
           child: CustomButton(
             title: LocaleKeys.profileDetail_update.locale.toUpperCase(),
+            onClick: () {
+              _vm.profileDetailsUpdate();
+            },
           ),
         ),
       ],

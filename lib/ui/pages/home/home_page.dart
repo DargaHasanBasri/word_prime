@@ -1,5 +1,4 @@
 import 'package:word_prime/export.dart';
-import 'package:word_prime/models/comment_model.dart';
 import 'package:word_prime/ui/pages/home/components/post_list_item.dart';
 
 class HomePage extends StatefulWidget {

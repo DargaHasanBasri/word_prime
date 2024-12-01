@@ -163,16 +163,26 @@ class ServiceAuthentication {
         return null;
       }
 
-      /// Saving user information to Firestore.
-      await FirebaseCollections.users.reference.doc(firebaseUser.uid).set(
-            UserModel(
-              email: firebaseUser.email ?? googleUser.email,
-              profileImageAddress: firebaseUser.photoURL ?? googleUser.photoUrl,
-              userId: firebaseUser.uid,
-              userName: firebaseUser.displayName ?? googleUser.displayName,
-              emailVerification: true,
-            ).toJson(),
-          );
+      final userDocRef =
+      FirebaseCollections.users.reference.doc(firebaseUser.uid);
+
+      /// Check if the user document already exists.
+      final userDocSnapshot = await userDocRef.get();
+      if (!userDocSnapshot.exists) {
+        /// Saving user information to Firestore if the user is new.
+        await userDocRef.set(
+          UserModel(
+            email: firebaseUser.email ?? googleUser.email,
+            profileImageAddress: firebaseUser.photoURL ?? googleUser.photoUrl,
+            userId: firebaseUser.uid,
+            userName: firebaseUser.displayName ?? googleUser.displayName,
+            emailVerification: true,
+          ).toJson(),
+        );
+        log("New user created: ${firebaseUser.uid}");
+      } else {
+        log("User already exists: ${firebaseUser.uid}");
+      }
 
       log("User logged in successfully: ${firebaseUser.uid}");
       return userCredential;
