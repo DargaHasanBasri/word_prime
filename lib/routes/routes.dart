@@ -25,7 +25,8 @@ final class Routes {
   static const String EmailVerification = 'emailVerificationProvider';
   static const String ResetPassword = 'resetPasswordProvider';
   static const String AddWord = 'addWordProvider';
-  static const String MyWordList = 'myWordLisProvider';
+  static const String MyWordList = 'myWordListProvider';
+  static const String ProfileUser = 'ProfileUserProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -152,6 +153,10 @@ final class Routes {
           builder: (context) => MyWordListProvider(
             englishLevel: englishLevel,
           ),
+        );
+      case Routes.ProfileUser:
+        return MaterialPageRoute(
+          builder: (context) => const ProfileUserProvider(),
         );
       default:
         return MaterialPageRoute(

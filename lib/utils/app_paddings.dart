@@ -33,7 +33,7 @@ final class AppPaddings {
   static const paddingXSmallTop = EdgeInsets.only(top: 4);
 
   static const appPaddingMainTabBottom =
-      EdgeInsets.only(bottom: 24 + AppSizes.bottomNavigationBarHeight);
+      EdgeInsets.only(bottom: 48 + AppSizes.bottomNavigationBarHeight);
   static const paddingXXLargeBottom = EdgeInsets.only(bottom: 60);
   static const paddingXLargeBottom = EdgeInsets.only(bottom: 32);
   static const paddingLargeBottom = EdgeInsets.only(bottom: 24);
