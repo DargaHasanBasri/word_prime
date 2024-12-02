@@ -123,3 +123,6 @@ export 'package:word_prime/base/events/refresh_user_info_event.dart';
 export 'package:word_prime/ui/widgets/custom_app_popup.dart';
 export 'package:word_prime/ui/widgets/post_widgets/post_user_info.dart';
 export 'package:word_prime/models/comment_model.dart';
+export 'package:word_prime/ui/pages/profile_user/profile_user_page.dart';
+export 'package:word_prime/ui/pages/profile_user/profile_user_view_model.dart';
+export 'package:word_prime/ui/pages/profile_user/profile_user_provider.dart';

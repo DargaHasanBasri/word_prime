@@ -20,6 +20,9 @@ final class AppSizes {
   static const double sizedBoxLargeWidth = 40.0;
   static const double sizedBoxLargeHeight = 40.0;
 
+  static const double sizedBoxXLargeWidth = 100.0;
+  static const double sizedBoxXLargeHeight = 100.0;
+
   static const double sizedBoxOverallWidth = 24.0;
   static const double sizedBoxOverallHeight = 24.0;
 
@@ -31,9 +34,6 @@ final class AppSizes {
 
   static const double sizedBoxXSmallWidth = 4.0;
   static const double sizedBoxXSmallHeight = 4.0;
-
-  static const double sizedBoxUserListViewHeight = 100.0;
-  static const double sizedBoxUserListItemWidth = 70.0;
 
   static const double englishLevelContainerHeight = 150;
 }

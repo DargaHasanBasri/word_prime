@@ -32,36 +32,42 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
     return ValueListenableBuilder(
       valueListenable: _vm.userNotifier,
       builder: (_, __, ___) {
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            Column(
-              children: [
-                Padding(
-                  padding: AppPaddings.paddingXXLargeBottom * 2,
-                  child: CurrentUserProfileInfo(
-                    userName: _vm.userNotifier.value?.userName,
-                    userEmail: _vm.userNotifier.value?.email,
-                    profileImageAddress:
-                        _vm.userNotifier.value?.profileImageAddress,
-                  ),
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.3,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    CurrentUserProfileInfo(
+                      userName: _vm.userNotifier.value?.userName,
+                      userEmail: _vm.userNotifier.value?.email,
+                      profileImageAddress:
+                          _vm.userNotifier.value?.profileImageAddress,
+                    ),
+                    Positioned(
+                      left: 0,
+                      top: 140,
+                      right: 0,
+                      child: Padding(
+                        padding: AppPaddings.appPaddingHorizontal,
+                        child: _currentProfileDetail(
+                          totalPost: _vm.userNotifier.value?.totalPost,
+                          score: _vm.userNotifier.value?.totalScore,
+                          followCount: 0,
+                          followerCount: 0,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            Positioned(
-              left: 24,
-              top: 180,
-              right: 24,
-              child: Column(
+              ),
+              SizedBox(height: 50),
+              Column(
                 children: [
-                  _currentProfileDetail(
-                    totalPost: _vm.userNotifier.value?.totalPost,
-                    score: _vm.userNotifier.value?.totalScore,
-                    followCount: 0,
-                    followerCount: 0,
-                  ),
                   Padding(
-                    padding: AppPaddings.paddingLargeTop,
+                    padding: AppPaddings.appPaddingAll,
                     child: ValueListenableBuilder(
                       valueListenable: _vm.tabIndex,
                       builder: (_, __, ___) {
@@ -71,10 +77,40 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                       },
                     ),
                   ),
+                  Padding(
+                    padding: AppPaddings.appPaddingMainTabBottom,
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      child: GridView.builder(
+                        padding: AppPaddings.appPaddingHorizontal,
+                        scrollDirection: Axis.horizontal,
+                        physics: BouncingScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                        ),
+                        itemCount: 20,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  AppAssets.imgExampPostPath,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ],
-              ),
-            ),
-          ],
+              )
+            ],
+          ),
         );
       },
     );
