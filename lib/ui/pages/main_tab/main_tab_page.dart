@@ -1,4 +1,3 @@
-import 'package:word_prime/base/events/refresh_user_info_event.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/main_tab/components/custom_bottom_navigation_bar.dart';
 

@@ -1,10 +1,13 @@
 import 'dart:developer';
+import 'package:word_prime/base/base_firestore.dart';
 import 'package:word_prime/export.dart';
 
 class PostRepository {
   final _postCollectionReference = FirebaseCollections.posts.reference;
   final _userCollectionReference = FirebaseCollections.users.reference;
   User? _currentUser = FirebaseAuth.instance.currentUser;
+
+  final _postsHandler = BaseFirestore<PostModel>();
 
   Future<List<PostModel?>?> fetchPost() async {
     try {
@@ -36,6 +39,17 @@ class PostRepository {
       String postId = _documentReference.id;
       await _documentReference.update({'post_id': postId});
 
+      await _userCollectionReference
+          .doc(postModel?.userId)
+          .collection('added_posts')
+          .doc(postId)
+          .set(
+        {
+          'post_id': postId,
+          'word_level': postModel?.wordLevel,
+        },
+      );
+
       log('Post yükleme işlemi başarılı! Added data: ${postModel?.toJson()}');
 
       try {
@@ -53,30 +67,29 @@ class PostRepository {
     }
   }
 
-  Future<List<PostModel?>?> fetchAddedPosts({
+  Future<List<PostModel?>?> fetchAddedPostsByQuery({
     required String userId,
     required String wordLevel,
   }) async {
-    try {
-      final querySnapshot = await _postCollectionReference
-          .where('user_id', isEqualTo: userId)
-          .where('word_level', isEqualTo: wordLevel)
-          .orderBy('created_date', descending: true)
-          .withConverter(
-        fromFirestore: (snapshot, _) {
-          return PostModel().fromFirebase(snapshot);
-        },
-        toFirestore: (value, _) {
-          return {};
-        },
-      ).get();
+    final addedPosts = _postsHandler.fetchItemsByQuery(
+      userId: userId,
+      subCollectionName: 'added_posts',
+      field: 'word_level',
+      filterValue: wordLevel,
+      model: PostModel(),
+    );
+    return addedPosts;
+  }
 
-      final posts = querySnapshot.docs.map((doc) => doc.data()).toList();
-      return posts;
-    } catch (e) {
-      log('An error occurred data: $e');
-      return null;
-    }
+  Future<List<PostModel?>?> fetchAllAddedPosts({
+    required String userId,
+  }) async {
+    final allAddedPosts = _postsHandler.fetchItemsFromSubCollection(
+      userId: userId,
+      subCollectionName: 'added_posts',
+      model: PostModel(),
+    );
+    return allAddedPosts;
   }
 
   Future<void> deletePost({required String postId}) async {
@@ -87,6 +100,13 @@ class PostRepository {
 
       /// Deletes the document
       await _documentReference.delete();
+
+      DocumentReference _userAddedPostsReference = _userCollectionReference
+          .doc(_currentUser?.uid)
+          .collection('added_posts')
+          .doc(postId);
+
+      await _userAddedPostsReference.delete();
 
       /// Suppresses operation success log
       log('Post silme işlemi başarılı! Silinen Post ID: $postId');
@@ -128,69 +148,29 @@ class PostRepository {
     }
   }
 
-  Future<List<String>> fetchSavedPostIds({
-    required String userId,
-    required String wordLevel,
-  }) async {
-    try {
-      final savedPostsRef =
-          _userCollectionReference.doc(userId).collection('saved_posts');
-
-      final querySnapshot =
-          await savedPostsRef.where('word_level', isEqualTo: wordLevel).get();
-
-      final postIds = querySnapshot.docs
-          .map((doc) => doc.data()['post_id'] as String)
-          .toList();
-
-      return postIds;
-    } catch (e) {
-      log('Saved Post Ids fetch error: $e');
-      rethrow;
-    }
-  }
-
-  Future<List<PostModel?>?> fetchPostsByIds(List<String> postIds) async {
-    try {
-      if (postIds.isEmpty) return [];
-
-      final querySnapshot = await FirebaseCollections.posts.reference
-          .where(FieldPath.documentId, whereIn: postIds)
-          .orderBy('created_date', descending: true)
-          .withConverter(
-        fromFirestore: (snapshot, _) {
-          return PostModel().fromFirebase(snapshot);
-        },
-        toFirestore: (value, _) {
-          return {};
-        },
-      ).get();
-
-      final posts = querySnapshot.docs.map((doc) => doc.data()).toList();
-      return posts;
-    } catch (e) {
-      log('Fetch posts by ids error: $e');
-      rethrow;
-    }
-  }
-
   Future<List<PostModel?>?> fetchSavedPosts({
     required String userId,
     required String wordLevel,
   }) async {
-    try {
-      final postIds = await fetchSavedPostIds(
-        userId: userId,
-        wordLevel: wordLevel,
-      );
+    final savedPosts = _postsHandler.fetchItemsByQuery(
+      userId: userId,
+      subCollectionName: 'saved_posts',
+      field: 'word_level',
+      filterValue: wordLevel,
+      model: PostModel(),
+    );
+    return savedPosts;
+  }
 
-      final posts = await fetchPostsByIds(postIds);
-
-      return posts;
-    } catch (e) {
-      log('Fetch saved posts error: $e');
-      rethrow;
-    }
+  Future<List<PostModel?>?> fetchAllSavedPosts({
+    required String userId,
+  }) async {
+    final allAddedPosts = _postsHandler.fetchItemsFromSubCollection(
+      userId: userId,
+      subCollectionName: 'saved_posts',
+      model: PostModel(),
+    );
+    return allAddedPosts;
   }
 
   Future<void> addComment({
