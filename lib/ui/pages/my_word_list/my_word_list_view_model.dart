@@ -21,22 +21,20 @@ class MyWordListViewModel extends BaseViewModel {
       ValueNotifier(null);
 
   Future<void> getAddedPosts() async {
-    try {
-      User? _currentUser = FirebaseAuth.instance.currentUser;
-      if (_currentUser != null) {
-        addedPostsNotifier.value = await PostRepository().fetchAddedPosts(
-          userId: _currentUser.uid,
-          wordLevel: englishLevel,
-        );
-        log('data fetched: ${addedPostsNotifier.value}');
+    User? _currentUser = FirebaseAuth.instance.currentUser;
+    if (_currentUser != null) {
+      addedPostsNotifier.value = await PostRepository().fetchAddedPostsByQuery(
+        userId: _currentUser.uid,
+        wordLevel: englishLevel,
+      );
+      log('data fetched: ${addedPostsNotifier.value}');
 
-        final List<PostModel?>? addPostList = addedPostsNotifier.value;
+      final List<PostModel?>? addPostList = addedPostsNotifier.value;
 
-        if (addPostList != null && addPostList.length > 0)
-          isAddedItem.value = true;
-      }
-    } catch (e) {
-      log('ViewModel An error occurred: $e');
+      if (addPostList != null && addPostList.length > 0)
+        isAddedItem.value = true;
+    } else {
+      log('currentUser : null');
     }
   }
 

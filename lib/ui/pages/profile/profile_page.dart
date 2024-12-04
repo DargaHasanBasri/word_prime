@@ -1,6 +1,7 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/profile/components/profile_detail_container.dart';
 import 'package:word_prime/ui/pages/profile/components/current_user_profile_info.dart';
+import 'package:word_prime/ui/pages/profile/components/profile_post_item.dart';
 import 'package:word_prime/ui/pages/profile/components/profile_tab_bar.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -16,6 +17,10 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
   @override
   void initState() {
     _vm = Provider.of<ProfileViewModel>(context, listen: false);
+    _vm.getAddedAndSavedPosts(
+      showProgress: () => showProgress(context),
+      hideProgress: () => hideProgress(),
+    );
     super.initState();
   }
 
@@ -52,11 +57,22 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                       right: 0,
                       child: Padding(
                         padding: AppPaddings.appPaddingHorizontal,
-                        child: _currentProfileDetail(
-                          totalPost: _vm.userNotifier.value?.totalPost,
-                          score: _vm.userNotifier.value?.totalScore,
-                          followCount: 0,
-                          followerCount: 0,
+                        child: ProfileDetailContainer(
+                          userModel: _vm.userNotifier.value,
+                          onTapScoreButton: () {},
+                          onTapWordButton: () {},
+                          onTapFollowButton: () {
+                            appRoutes.navigateTo(
+                              Routes.FollowerFollow,
+                              arguments: true,
+                            );
+                          },
+                          onTapFollowerButton: () {
+                            appRoutes.navigateTo(
+                              Routes.FollowerFollow,
+                              arguments: false,
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -64,51 +80,38 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                 ),
               ),
               SizedBox(height: 50),
-              Column(
-                children: [
-                  Padding(
-                    padding: AppPaddings.appPaddingAll,
-                    child: ValueListenableBuilder(
-                      valueListenable: _vm.tabIndex,
-                      builder: (_, __, ___) {
-                        return ProfileTabBar(
-                          whichIndex: _vm.tabIndex,
-                        );
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: AppPaddings.appPaddingMainTabBottom,
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      child: GridView.builder(
-                        padding: AppPaddings.appPaddingHorizontal,
-                        scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
+              ValueListenableBuilder(
+                  valueListenable: _vm.tabIndex,
+                  builder: (_, __, ___) {
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: AppPaddings.appPaddingAll,
+                          child: ProfileTabBar(
+                            whichIndex: _vm.tabIndex,
+                          ),
                         ),
-                        itemCount: 20,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  AppAssets.imgExampPostPath,
-                                ),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              )
+                        Padding(
+                          padding: AppPaddings.appPaddingMainTabBottom,
+                          child: ValueListenableBuilder(
+                              valueListenable: _vm.savedPostsNotifier,
+                              builder: (_, __, ___) {
+                                return ValueListenableBuilder(
+                                    valueListenable: _vm.addedPostsNotifier,
+                                    builder: (_, __, ___) {
+                                      return _buildGridView(
+                                        postModel: _vm.tabIndex.value == 0
+                                            ? _vm.addedPostsNotifier.value
+                                            : _vm.tabIndex.value == 1
+                                                ? _vm.savedPostsNotifier.value
+                                                : _vm.addedPostsNotifier.value,
+                                      );
+                                    });
+                              }),
+                        ),
+                      ],
+                    );
+                  })
             ],
           ),
         );
@@ -116,84 +119,23 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
     );
   }
 
-  Widget _currentProfileDetail({
-    int? totalPost,
-    int? score,
-    int? followCount,
-    int? followerCount,
-  }) {
-    return Container(
-      padding:
-          AppPaddings.paddingMediumVertical + AppPaddings.paddingMediumLeft,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondaryContainer,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black.withOpacity(0.08),
-            offset: Offset(0, 8),
-            blurRadius: 28,
-          ),
-        ],
+  Widget _buildGridView({required List<PostModel?>? postModel}) {
+    return GridView.builder(
+      padding: AppPaddings.appPaddingHorizontal,
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
       ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ProfileDetailContainer(
-                  detailTitle: LocaleKeys.word.locale,
-                  detailCount: totalPost ?? 0,
-                  detailIcon: AppAssets.appLogoPath,
-                  detailColor: AppColors.cornflowerBlue,
-                  onTap: () {},
-                ),
-                SizedBox(height: AppSizes.sizedBoxMediumHeight),
-                ProfileDetailContainer(
-                  detailTitle: LocaleKeys.level.locale,
-                  detailCount: score ?? 0,
-                  detailIcon: AppAssets.appLogoPath,
-                  detailColor: AppColors.goldenDream,
-                  onTap: () {},
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ProfileDetailContainer(
-                  detailTitle: LocaleKeys.profilePage_follow.locale,
-                  detailCount: followCount ?? 0,
-                  detailIcon: AppAssets.appLogoPath,
-                  detailColor: AppColors.greenishTeal,
-                  onTap: () {
-                    appRoutes.navigateTo(
-                      Routes.FollowerFollow,
-                      arguments: true,
-                    );
-                  },
-                ),
-                SizedBox(height: AppSizes.sizedBoxMediumHeight),
-                ProfileDetailContainer(
-                  detailTitle: LocaleKeys.profilePage_follower.locale,
-                  detailCount: followerCount ?? 0,
-                  detailIcon: AppAssets.appLogoPath,
-                  detailColor: AppColors.metallicBlue,
-                  onTap: () {
-                    appRoutes.navigateTo(
-                      Routes.FollowerFollow,
-                      arguments: false,
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+      itemCount: postModel?.length ?? 0,
+      itemBuilder: (context, index) {
+        final post = postModel?[index];
+        return ProfilePostItem(
+          postModel: post,
+        );
+      },
     );
   }
 

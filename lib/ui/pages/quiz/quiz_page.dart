@@ -1,6 +1,5 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/quiz/components/answer_options.dart';
-import 'package:word_prime/ui/widgets/custom_app_popup.dart';
 import 'package:word_prime/ui/widgets/custom_timer_progress_indicator.dart';
 
 class QuizPage extends StatefulWidget {
