@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:word_prime/export.dart';
 
@@ -20,6 +21,29 @@ final class AppUtility {
     } else {
       log('Datetime null');
       return '${LocaleKeys.timeAgoMsg_justNow.locale}';
+    }
+  }
+
+  String formatDate(DateTime? dateTime, BuildContext context) {
+    if (dateTime != null) {
+      final DateTime now = DateTime.now();
+      final DateFormat timeFormat = DateFormat(
+        'hh:mm a',
+        context.locale.toString(),
+      );
+      final DateFormat fullDateFormat = DateFormat(
+        'dd MMM yyyy',
+        context.locale.toString(),
+      );
+
+      if (DateUtils.isSameDay(now, dateTime)) {
+        return 'Bugün, ${timeFormat.format(dateTime)}';
+      } else {
+        return fullDateFormat.format(dateTime);
+      }
+    } else {
+      log('Datetime null');
+      return 'Geçersiz tarih';
     }
   }
 

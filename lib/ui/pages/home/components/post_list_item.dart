@@ -7,6 +7,7 @@ class PostListItem extends StatelessWidget {
   final VoidCallback onTabShare;
   final VoidCallback onTabTranslate;
   final VoidCallback onTabChoice;
+  final VoidCallback onTabUserProfile;
   final PostModel? postModel;
 
   const PostListItem({
@@ -18,6 +19,7 @@ class PostListItem extends StatelessWidget {
     required this.onTabTranslate,
     required this.onTabChoice,
     required this.postModel,
+    required this.onTabUserProfile,
   });
 
   @override
@@ -27,6 +29,7 @@ class PostListItem extends StatelessWidget {
         PostUserInfo(
           postModel: postModel,
           onTabChoice: () => onTabChoice.call(),
+          onTabUserProfile: () => onTabUserProfile.call(),
         ),
         Padding(
           padding: AppPaddings.paddingMediumVertical,

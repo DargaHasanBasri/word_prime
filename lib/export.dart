@@ -9,7 +9,7 @@ export 'package:word_prime/ui/widgets/custom_text_form_field.dart';
 export 'package:word_prime/utils/app_assets.dart';
 export 'package:word_prime/utils/app_colors.dart';
 export 'package:word_prime/utils/app_paddings.dart';
-export 'package:word_prime/utils/string_localizations_ext.dart';
+export 'package:word_prime/utils/extensions/ext_string_localizations.dart';
 export 'package:word_prime/ui/pages/login/login_page.dart';
 export 'package:word_prime/base/base_view_model.dart';
 export 'package:flutter/services.dart';

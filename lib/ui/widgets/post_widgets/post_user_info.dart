@@ -3,10 +3,12 @@ import 'package:word_prime/export.dart';
 class PostUserInfo extends StatelessWidget {
   final PostModel? postModel;
   final VoidCallback onTabChoice;
+  final VoidCallback onTabUserProfile;
   const PostUserInfo({
     super.key,
     required this.postModel,
     required this.onTabChoice,
+    required this.onTabUserProfile,
   });
 
   @override
@@ -14,10 +16,13 @@ class PostUserInfo extends StatelessWidget {
     final DateTime? dateTime = postModel?.createdDate?.toDateTime();
     return Row(
       children: [
-        CustomUserCircleAvatar(
-          circleRadius: 20,
-          borderPadding: 0,
-          profileImgAddress: postModel?.userProfileImage,
+        GestureDetector(
+          onTap: () => onTabUserProfile.call(),
+          child: CustomUserCircleAvatar(
+            circleRadius: 20,
+            borderPadding: 0,
+            profileImgAddress: postModel?.userProfileImage,
+          ),
         ),
         SizedBox(width: AppSizes.sizedBoxMediumWidth),
         Expanded(

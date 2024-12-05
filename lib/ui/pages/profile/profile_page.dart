@@ -1,7 +1,7 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/profile/components/profile_detail_container.dart';
 import 'package:word_prime/ui/pages/profile/components/current_user_profile_info.dart';
-import 'package:word_prime/ui/pages/profile/components/profile_post_item.dart';
+import 'package:word_prime/ui/widgets/profile_post_item.dart';
 import 'package:word_prime/ui/pages/profile/components/profile_tab_bar.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -81,37 +81,40 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
               ),
               SizedBox(height: 50),
               ValueListenableBuilder(
-                  valueListenable: _vm.tabIndex,
-                  builder: (_, __, ___) {
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: AppPaddings.appPaddingAll,
-                          child: ProfileTabBar(
-                            whichIndex: _vm.tabIndex,
-                          ),
+                valueListenable: _vm.tabIndex,
+                builder: (_, __, ___) {
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: AppPaddings.appPaddingAll,
+                        child: ProfileTabBar(
+                          whichIndex: _vm.tabIndex,
                         ),
-                        Padding(
-                          padding: AppPaddings.appPaddingMainTabBottom,
-                          child: ValueListenableBuilder(
-                              valueListenable: _vm.savedPostsNotifier,
+                      ),
+                      Padding(
+                        padding: AppPaddings.appPaddingMainTabBottom,
+                        child: ValueListenableBuilder(
+                          valueListenable: _vm.savedPostsNotifier,
+                          builder: (_, __, ___) {
+                            return ValueListenableBuilder(
+                              valueListenable: _vm.addedPostsNotifier,
                               builder: (_, __, ___) {
-                                return ValueListenableBuilder(
-                                    valueListenable: _vm.addedPostsNotifier,
-                                    builder: (_, __, ___) {
-                                      return _buildGridView(
-                                        postModel: _vm.tabIndex.value == 0
-                                            ? _vm.addedPostsNotifier.value
-                                            : _vm.tabIndex.value == 1
-                                                ? _vm.savedPostsNotifier.value
-                                                : _vm.addedPostsNotifier.value,
-                                      );
-                                    });
-                              }),
+                                return _buildGridView(
+                                  postModel: _vm.tabIndex.value == 0
+                                      ? _vm.addedPostsNotifier.value
+                                      : _vm.tabIndex.value == 1
+                                          ? _vm.savedPostsNotifier.value
+                                          : _vm.addedPostsNotifier.value,
+                                );
+                              },
+                            );
+                          },
                         ),
-                      ],
-                    );
-                  })
+                      ),
+                    ],
+                  );
+                },
+              ),
             ],
           ),
         );
