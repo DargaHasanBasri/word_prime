@@ -1,4 +1,6 @@
 import 'package:word_prime/export.dart';
+import 'package:word_prime/ui/pages/profile_user/components/profile_user_tab_bar.dart';
+import 'package:word_prime/ui/widgets/profile_post_item.dart';
 
 class ProfileUserPage extends StatefulWidget {
   const ProfileUserPage({super.key});
@@ -13,6 +15,10 @@ class _ProfileUserPageState extends BaseStatefulState<ProfileUserPage> {
   @override
   void initState() {
     _vm = Provider.of<ProfileUserViewModel>(context, listen: false);
+    _vm.getAddedAndSavedPosts(
+      showProgress: () => showProgress(context),
+      hideProgress: () => hideProgress(),
+    );
     super.initState();
   }
 
@@ -32,41 +38,81 @@ class _ProfileUserPageState extends BaseStatefulState<ProfileUserPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: AppPaddings.paddingMediumTop,
-              child: _userInfo(),
-            ),
-            Padding(
-              padding: AppPaddings.paddingLargeTop,
-              child: _userProfileMetric(),
-            ),
-            GridView.builder(
-              padding: AppPaddings.appPaddingVertical,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 24,
-                mainAxisSpacing: 16,
-              ),
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                      image: AssetImage(
-                        AppAssets.imgExampPostPath,
-                      ),
-                      fit: BoxFit.cover,
+            ValueListenableBuilder(
+              valueListenable: _vm.userNotifier,
+              builder: (_, __, ___) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: AppPaddings.paddingMediumTop,
+                      child: _userInfo(),
                     ),
-                  ),
+                    Padding(
+                      padding: AppPaddings.paddingLargeTop,
+                      child: _userProfileMetric(),
+                    ),
+                  ],
+                );
+              },
+            ),
+            ValueListenableBuilder(
+              valueListenable: _vm.tabIndex,
+              builder: (_, __, ___) {
+                return Column(
+                  children: [
+                    Padding(
+                      padding: AppPaddings.paddingMediumVertical,
+                      child: ProfileUserTabBar(
+                        whichIndex: _vm.tabIndex,
+                      ),
+                    ),
+                    Padding(
+                      padding: AppPaddings.appPaddingMainTabBottom,
+                      child: ValueListenableBuilder(
+                        valueListenable: _vm.savedPostsNotifier,
+                        builder: (_, __, ___) {
+                          return ValueListenableBuilder(
+                            valueListenable: _vm.addedPostsNotifier,
+                            builder: (_, __, ___) {
+                              return _buildGridView(
+                                postModel: _vm.tabIndex.value == 0
+                                    ? _vm.addedPostsNotifier.value
+                                    : _vm.tabIndex.value == 1
+                                        ? _vm.savedPostsNotifier.value
+                                        : _vm.addedPostsNotifier.value,
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 );
               },
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildGridView({required List<PostModel?>? postModel}) {
+    return GridView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+      ),
+      itemCount: postModel?.length ?? 0,
+      itemBuilder: (context, index) {
+        final post = postModel?[index];
+        return ProfilePostItem(
+          postModel: post,
+        );
+      },
     );
   }
 
@@ -88,7 +134,7 @@ class _ProfileUserPageState extends BaseStatefulState<ProfileUserPage> {
               Row(
                 children: [
                   Text(
-                    '0',
+                    '${_vm.userNotifier.value?.totalPost ?? 0}',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   SizedBox(width: AppSizes.sizedBoxSmallWidth),
@@ -172,6 +218,7 @@ class _ProfileUserPageState extends BaseStatefulState<ProfileUserPage> {
             CustomUserCircleAvatar(
               circleRadius: 40,
               borderPadding: 0,
+              profileImgAddress: _vm.userNotifier.value?.profileImageAddress,
             ),
             SizedBox(width: AppSizes.sizedBoxMediumWidth),
             Expanded(
@@ -179,7 +226,7 @@ class _ProfileUserPageState extends BaseStatefulState<ProfileUserPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hüseyin Darga',
+                    '${_vm.userNotifier.value?.userName ?? ''}',
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   SizedBox(height: AppSizes.sizedBoxXSmallWidth),
@@ -214,9 +261,14 @@ class _ProfileUserPageState extends BaseStatefulState<ProfileUserPage> {
           height: AppSizes.appOverallIconHeight,
         ),
       ),
-      title: Text(
-        'User Name',
-        style: Theme.of(context).textTheme.headlineSmall,
+      title: ValueListenableBuilder(
+        valueListenable: _vm.userNotifier,
+        builder: (_, __, ___) {
+          return Text(
+            '${_vm.userNotifier.value?.userName ?? ''}',
+            style: Theme.of(context).textTheme.headlineSmall,
+          );
+        },
       ),
     );
   }

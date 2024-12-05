@@ -126,6 +126,10 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                             ),
                           );
                         },
+                        onTabUserProfile: () => appRoutes.navigateTo(
+                          Routes.ProfileUser,
+                          arguments: postModel?.userId,
+                        ),
                       ),
                     );
                   },

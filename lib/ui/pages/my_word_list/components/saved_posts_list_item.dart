@@ -7,6 +7,7 @@ class SavedPostsListItem extends StatelessWidget {
   final VoidCallback onTabChoice;
   final VoidCallback onTabShare;
   final VoidCallback onTabTranslate;
+  final VoidCallback onTabUserProfile;
   final PostModel? postModel;
   const SavedPostsListItem({
     super.key,
@@ -17,6 +18,7 @@ class SavedPostsListItem extends StatelessWidget {
     required this.postModel,
     required this.onTabChoice,
     required this.onTabShare,
+    required this.onTabUserProfile,
   });
 
   @override
@@ -26,6 +28,7 @@ class SavedPostsListItem extends StatelessWidget {
         PostUserInfo(
           postModel: postModel,
           onTabChoice: () => onTabChoice.call(),
+          onTabUserProfile: () => onTabUserProfile.call(),
         ),
         postModel?.postImageAddress == null
             ? Padding(

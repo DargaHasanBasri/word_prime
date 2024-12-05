@@ -155,8 +155,11 @@ final class Routes {
           ),
         );
       case Routes.ProfileUser:
+        final String? userId = settings.arguments as String?;
         return MaterialPageRoute(
-          builder: (context) => const ProfileUserProvider(),
+          builder: (context) => ProfileUserProvider(
+            userId: userId,
+          ),
         );
       default:
         return MaterialPageRoute(

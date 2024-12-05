@@ -278,10 +278,11 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
       shrinkWrap: true,
       itemCount: _vm.savedPostsNotifier.value?.length ?? 0,
       itemBuilder: (context, index) {
+        final postModel = _vm.savedPostsNotifier.value?[index];
         return Padding(
           padding: AppPaddings.appPaddingHorizontal,
           child: SavedPostsListItem(
-            postModel: _vm.savedPostsNotifier.value?[index],
+            postModel: postModel,
             onTabLike: () {},
             onTabSave: () {},
             onTabComment: () {
@@ -298,6 +299,10 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
             onTabTranslate: () {},
             onTabChoice: () {},
             onTabShare: () {},
+            onTabUserProfile: () => appRoutes.navigateTo(
+              Routes.ProfileUser,
+              arguments: postModel?.userId,
+            ),
           ),
         );
       },
