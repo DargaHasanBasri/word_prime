@@ -124,7 +124,7 @@ class ProfilePostItem extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: AppColors.white,
                     ),
-                maxLines: 5,
+                maxLines: 4,
                 overflow: TextOverflow.ellipsis,
               ),
             ),

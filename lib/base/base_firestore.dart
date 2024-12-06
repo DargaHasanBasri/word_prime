@@ -75,7 +75,7 @@ class BaseFirestore<T extends BaseModel<T>> {
     try {
       /// Reference to the specified sub-collection under the user's document
       final reference =
-      _userCollectionReference.doc(userId).collection(subCollectionName);
+          _userCollectionReference.doc(userId).collection(subCollectionName);
 
       /// Query the sub-collection to retrieve all documents without filters
       final querySnapshotIds = await reference.get();
@@ -94,9 +94,9 @@ class BaseFirestore<T extends BaseModel<T>> {
           .where(FieldPath.documentId, whereIn: postIds)
           .orderBy('created_date', descending: true)
           .withConverter<T>(
-        fromFirestore: (snapshot, _) => model.fromFirebase(snapshot)!,
-        toFirestore: (_, __) => {},
-      )
+            fromFirestore: (snapshot, _) => model.fromFirebase(snapshot)!,
+            toFirestore: (_, __) => {},
+          )
           .get();
 
       /// Map the queried documents to their corresponding model instances

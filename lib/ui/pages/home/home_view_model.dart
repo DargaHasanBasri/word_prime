@@ -34,23 +34,19 @@ class HomeViewModel extends BaseViewModel {
     required VoidCallback showProgress,
     required VoidCallback hideProgress,
   }) async {
-    try {
-      showProgress.call();
-      await PostRepository().addComment(
-        postId: postId,
-        commentModel: CommentModel(
-          commentText: comment,
-          userId: currentUserNotifier.value?.userId,
-          userName: currentUserNotifier.value?.userName,
-          userProfileImage: currentUserNotifier.value?.profileImageAddress,
-          totalLikes: 0,
-          createdDate: Timestamp.now(),
-        ),
-      );
-      hideProgress.call();
-    } catch (e) {
-      log('ViewModel An error occurred: $e');
-    }
+    showProgress.call();
+    await PostRepository().addComment(
+      postId: postId,
+      commentModel: CommentModel(
+        commentText: comment,
+        userId: currentUserNotifier.value?.userId,
+        userName: currentUserNotifier.value?.userName,
+        userProfileImage: currentUserNotifier.value?.profileImageAddress,
+        totalLikes: 0,
+        createdDate: Timestamp.now(),
+      ),
+    );
+    hideProgress.call();
   }
 
   Future<void> fetchPostComments({
@@ -58,14 +54,32 @@ class HomeViewModel extends BaseViewModel {
     required VoidCallback showProgress,
     required VoidCallback hideProgress,
   }) async {
-    try {
-      showProgress.call();
-      commentsNotifier.value = await PostRepository().fetchPostComments(
-        postId: postId,
-      );
-      hideProgress.call();
-    } catch (e) {
-      log('ViewModel An error occurred: $e');
-    }
+    showProgress.call();
+    commentsNotifier.value = await PostRepository().fetchPostComments(
+      postId: postId,
+    );
+    hideProgress.call();
+  }
+
+  Future<void> likedPost({
+    required String? postId,
+    required String? wordLevel,
+  }) async {
+    await PostRepository().likePost(
+      userId: currentUserNotifier.value?.userId,
+      postId: postId,
+      wordLevel: wordLevel,
+    );
+  }
+
+  Future<void> savedPost({
+    required String? postId,
+    required String? wordLevel,
+  }) async {
+    await PostRepository().savePost(
+      userId: currentUserNotifier.value?.userId,
+      postId: postId,
+      wordLevel: wordLevel,
+    );
   }
 }
