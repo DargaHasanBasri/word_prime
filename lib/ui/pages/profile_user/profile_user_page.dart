@@ -1,3 +1,4 @@
+import 'package:word_prime/base/events/refresh_posts_event.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/profile_user/components/profile_user_tab_bar.dart';
 import 'package:word_prime/ui/widgets/profile_post_item.dart';
@@ -108,9 +109,18 @@ class _ProfileUserPageState extends BaseStatefulState<ProfileUserPage> {
       ),
       itemCount: postModel?.length ?? 0,
       itemBuilder: (context, index) {
-        final post = postModel?[index];
+        final currentPost = postModel?[index];
         return ProfilePostItem(
-          postModel: post,
+          postModel: currentPost,
+          onTapPost: () {
+            appRoutes.navigateTo(
+              Routes.PostDetail,
+              arguments: [
+                currentPost,
+                _vm.currentUserNotifier,
+              ],
+            );
+          },
         );
       },
     );
@@ -252,6 +262,7 @@ class _ProfileUserPageState extends BaseStatefulState<ProfileUserPage> {
       automaticallyImplyLeading: false,
       leading: IconButton(
         onPressed: () {
+          eventBus.fire(new RefreshPostsEvent());
           appRoutes.popIfBackStackNotEmpty();
         },
         icon: Image.asset(

@@ -125,6 +125,7 @@ abstract class  LocaleKeys {
   static const profilePage_myWords = 'profilePage.myWords';
   static const profilePage_saved = 'profilePage.saved';
   static const profilePage_favorites = 'profilePage.favorites';
+  static const profilePage_posts = 'profilePage.posts';
   static const profilePage = 'profilePage';
   static const onboardingPage_onboardingFirstTitle = 'onboardingPage.onboardingFirstTitle';
   static const onboardingPage_onboardingFirstSubTitle = 'onboardingPage.onboardingFirstSubTitle';
@@ -168,6 +169,10 @@ abstract class  LocaleKeys {
   static const timeAgoMsg_minutesAgo = 'timeAgoMsg.minutesAgo';
   static const timeAgoMsg_justNow = 'timeAgoMsg.justNow';
   static const timeAgoMsg_added = 'timeAgoMsg.added';
+  static const timeAgoMsg_weekAbbreviation = 'timeAgoMsg.weekAbbreviation';
+  static const timeAgoMsg_daysAbbreviation = 'timeAgoMsg.daysAbbreviation';
+  static const timeAgoMsg_hoursAbbreviation = 'timeAgoMsg.hoursAbbreviation';
+  static const timeAgoMsg_minutesAbbreviation = 'timeAgoMsg.minutesAbbreviation';
   static const timeAgoMsg = 'timeAgoMsg';
 
 }

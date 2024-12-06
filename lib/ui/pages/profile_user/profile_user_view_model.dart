@@ -3,7 +3,8 @@ import 'package:word_prime/export.dart';
 
 class ProfileUserViewModel extends BaseViewModel {
   final String? userId;
-  ProfileUserViewModel(this.userId);
+  final ValueNotifier<UserModel?> currentUserNotifier;
+  ProfileUserViewModel(this.userId, this.currentUserNotifier);
 
   ValueNotifier<int> tabIndex = ValueNotifier(0);
   ValueNotifier<UserModel?> userNotifier = ValueNotifier(null);

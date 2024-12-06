@@ -141,9 +141,9 @@ class CustomCommentBottomSheet extends StatelessWidget {
                             maxLines: 2,
                           ),
                         ),
-                        SizedBox(width: AppSizes.sizedBoxXSmallWidth),
+                        SizedBox(width: AppSizes.sizedBoxSmallWidth),
                         Text(
-                          AppUtility().timeAgo(dateTime),
+                          AppUtility().timeAgo(dateTime,isAbbreviation: true),
                           style:
                               Theme.of(context).textTheme.titleSmall?.copyWith(
                                     fontSize: 14,
