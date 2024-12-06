@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:word_prime/export.dart';
 
 final class AppUtility {
@@ -8,15 +7,19 @@ final class AppUtility {
     if (dateTime != null) {
       final Duration difference = DateTime.now().difference(dateTime);
       if (difference.inDays >= 7) {
-        return '${difference.inDays ~/ 7} ${LocaleKeys.timeAgoMsg_weekAgo.locale}';
+        return '${difference.inDays ~/ 7} '
+            '${isAbbreviation ? TimeAgoKeys.weekAbbreviation.localizedText : TimeAgoKeys.weekAgo.localizedText}';
       } else if (difference.inDays > 0) {
-        return '${difference.inDays} ${LocaleKeys.timeAgoMsg_daysAgo.locale}';
+        return '${difference.inDays} '
+            '${isAbbreviation ? TimeAgoKeys.daysAbbreviation.localizedText : TimeAgoKeys.daysAgo.localizedText}';
       } else if (difference.inHours > 0) {
-        return '${difference.inHours} ${LocaleKeys.timeAgoMsg_hoursAgo.locale}';
+        return '${difference.inHours} '
+            '${isAbbreviation ? TimeAgoKeys.hoursAbbreviation.localizedText : TimeAgoKeys.hoursAgo.localizedText}';
       } else if (difference.inMinutes > 0) {
-        return '${difference.inMinutes} ${LocaleKeys.timeAgoMsg_minutesAgo.locale}';
+        return '${difference.inMinutes} '
+            '${isAbbreviation ? TimeAgoKeys.minutesAbbreviation.localizedText : TimeAgoKeys.minutesAgo.localizedText}';
       } else {
-        return '${LocaleKeys.timeAgoMsg_justNow.locale}';
+        return '${TimeAgoKeys.justNow.localizedText}';
       }
     } else {
       log('Datetime null');

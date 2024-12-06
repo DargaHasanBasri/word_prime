@@ -35,7 +35,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
 
   Widget _buildBody() {
     return ValueListenableBuilder(
-      valueListenable: _vm.userNotifier,
+      valueListenable: _vm.currentUserNotifier,
       builder: (_, __, ___) {
         return SingleChildScrollView(
           child: Column(
@@ -46,10 +46,10 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                   clipBehavior: Clip.none,
                   children: [
                     CurrentUserProfileInfo(
-                      userName: _vm.userNotifier.value?.userName,
-                      userEmail: _vm.userNotifier.value?.email,
+                      userName: _vm.currentUserNotifier.value?.userName,
+                      userEmail: _vm.currentUserNotifier.value?.email,
                       profileImageAddress:
-                          _vm.userNotifier.value?.profileImageAddress,
+                          _vm.currentUserNotifier.value?.profileImageAddress,
                     ),
                     Positioned(
                       left: 0,
@@ -58,7 +58,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                       child: Padding(
                         padding: AppPaddings.appPaddingHorizontal,
                         child: ProfileDetailContainer(
-                          userModel: _vm.userNotifier.value,
+                          userModel: _vm.currentUserNotifier.value,
                           onTapScoreButton: () {},
                           onTapWordButton: () {},
                           onTapFollowButton: () {
@@ -134,9 +134,18 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
       ),
       itemCount: postModel?.length ?? 0,
       itemBuilder: (context, index) {
-        final post = postModel?[index];
+        final currentPost = postModel?[index];
         return ProfilePostItem(
-          postModel: post,
+          postModel: currentPost,
+          onTapPost: () {
+            appRoutes.navigateTo(
+              Routes.PostDetail,
+              arguments: [
+                currentPost,
+                _vm.currentUserNotifier,
+              ],
+            );
+          },
         );
       },
     );

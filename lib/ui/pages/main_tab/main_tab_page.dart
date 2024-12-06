@@ -48,7 +48,7 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
     switch (whichIndex) {
       case 0:
         return HomeProvider(
-          userNotifier: _vm.userNotifier,
+          currentUserNotifier: _vm.userNotifier,
         );
       case 1:
         return ActivityProvider();
@@ -58,11 +58,11 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
         return TasksProvider();
       case 4:
         return ProfileProvider(
-          userNotifier: _vm.userNotifier,
+          currentUserNotifier: _vm.userNotifier,
         );
       default:
         return HomeProvider(
-          userNotifier: _vm.userNotifier,
+          currentUserNotifier: _vm.userNotifier,
         );
     }
   }

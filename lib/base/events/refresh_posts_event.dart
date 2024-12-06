@@ -1,0 +1,3 @@
+final class RefreshPostsEvent {
+  RefreshPostsEvent();
+}

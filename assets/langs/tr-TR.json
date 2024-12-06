@@ -134,7 +134,8 @@
     "follow": "Takip",
     "myWords": "Kelimelerim",
     "saved": "Kaydedilenler",
-    "favorites": "Beğenilenler"
+    "favorites": "Beğenilenler",
+    "posts": "Gönderiler"
   },
   "onboardingPage": {
     "onboardingFirstTitle": "Her gün yeni kelimeler keşfedin ve kelime dağarcığınızı genişletin!",
@@ -183,6 +184,10 @@
     "hoursAgo": "Saat önce",
     "minutesAgo": "Dakika önce",
     "justNow": "Az önce",
-    "added": "Eklediniz"
+    "added": "Eklediniz",
+    "weekAbbreviation": "hf önce",
+    "daysAbbreviation": "g önce",
+    "hoursAbbreviation": "sa önce",
+    "minutesAbbreviation": "dk önce"
   }
 }

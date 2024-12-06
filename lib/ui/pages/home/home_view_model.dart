@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'package:word_prime/export.dart';
 
 class HomeViewModel extends BaseViewModel {
-  final ValueNotifier<UserModel?> userNotifier;
-  HomeViewModel(this.userNotifier);
+  final ValueNotifier<UserModel?> currentUserNotifier;
+  HomeViewModel(this.currentUserNotifier);
 
   final ValueNotifier<bool> isActiveLike = ValueNotifier(false);
   final ValueNotifier<bool> isActiveSave = ValueNotifier(false);
@@ -40,9 +40,9 @@ class HomeViewModel extends BaseViewModel {
         postId: postId,
         commentModel: CommentModel(
           commentText: comment,
-          userId: userNotifier.value?.userId,
-          userName: userNotifier.value?.userName,
-          userProfileImage: userNotifier.value?.profileImageAddress,
+          userId: currentUserNotifier.value?.userId,
+          userName: currentUserNotifier.value?.userName,
+          userProfileImage: currentUserNotifier.value?.profileImageAddress,
           totalLikes: 0,
           createdDate: Timestamp.now(),
         ),

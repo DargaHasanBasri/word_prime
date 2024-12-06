@@ -1,3 +1,4 @@
+import 'package:word_prime/base/events/refresh_posts_event.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/home/components/post_list_item.dart';
 
@@ -19,6 +20,12 @@ class _HomePageState extends BaseStatefulState<HomePage> {
       showProgress: () => showProgress(context),
       hideProgress: () => hideProgress(),
     );
+    eventBus.on<RefreshPostsEvent>().listen((event) {
+      _vm.getFetchPosts(
+        showProgress: () => showProgress(context),
+        hideProgress: () => hideProgress(),
+      );
+    });
     super.initState();
   }
 
@@ -105,7 +112,9 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                                 return CustomCommentBottomSheet(
                                   commentController: _commentController,
                                   currentUserProfileImage: _vm
-                                      .userNotifier.value?.profileImageAddress,
+                                      .currentUserNotifier
+                                      .value
+                                      ?.profileImageAddress,
                                   comments: _vm.commentsNotifier.value,
                                   onPressSuffixIcon: () async {
                                     await _vm.addNewComments(
@@ -128,7 +137,10 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                         },
                         onTabUserProfile: () => appRoutes.navigateTo(
                           Routes.ProfileUser,
-                          arguments: postModel?.userId,
+                          arguments: [
+                            postModel?.userId,
+                            _vm.currentUserNotifier,
+                          ],
                         ),
                       ),
                     );
@@ -152,7 +164,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.rhino,
       title: ValueListenableBuilder(
-          valueListenable: _vm.userNotifier,
+          valueListenable: _vm.currentUserNotifier,
           builder: (_, __, ___) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,7 +172,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                 Expanded(
                   child: Text(
                     '${LocaleKeys.homePage_welcome.locale}, '
-                    '${_vm.userNotifier.value?.userName ?? ''}',
+                    '${_vm.currentUserNotifier.value?.userName ?? ''}',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: AppColors.white,
@@ -174,7 +186,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                       circleRadius: 14,
                       borderPadding: 0,
                       profileImgAddress:
-                          _vm.userNotifier.value?.profileImageAddress,
+                          _vm.currentUserNotifier.value?.profileImageAddress,
                     ),
                     SizedBox(width: AppSizes.sizedBoxSmallWidth),
                     Image.asset(

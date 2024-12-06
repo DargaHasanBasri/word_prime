@@ -46,7 +46,9 @@ class PostListItem extends StatelessWidget {
               Padding(
                 padding: AppPaddings.paddingMediumTop,
                 child: InteractItemsRow(
-                  onTabLike: () => onTabLike.call(),
+                  onTabLike: () {
+                    onTabLike.call();
+                  },
                   onTabComment: () => onTabComment.call(),
                   onTabSave: () => onTabSave.call(),
                   onTabShare: () => onTabShare.call(),

@@ -3,28 +3,36 @@ import 'package:word_prime/export.dart';
 
 class ProfilePostItem extends StatelessWidget {
   final PostModel? postModel;
-  const ProfilePostItem({super.key, required this.postModel});
+  final VoidCallback onTapPost;
+  const ProfilePostItem({
+    super.key,
+    required this.postModel,
+    required this.onTapPost,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onTertiaryContainer,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black.withOpacity(0.25),
-            offset: Offset(0, 4),
-            blurRadius: 4,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () => onTapPost.call(),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onTertiaryContainer,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.black.withOpacity(0.25),
+              offset: Offset(0, 4),
+              blurRadius: 4,
+            ),
+          ],
+        ),
+        child: postModel?.postImageAddress == null
+            ? Padding(
+                padding: AppPaddings.paddingMediumAll,
+                child: _buildWithoutImage(context),
+              )
+            : _buildWithImage(context),
       ),
-      child: postModel?.postImageAddress == null
-          ? Padding(
-              padding: AppPaddings.paddingMediumAll,
-              child: _buildWithoutImage(context),
-            )
-          : _buildWithImage(context),
     );
   }
 
@@ -63,6 +71,7 @@ class ProfilePostItem extends StatelessWidget {
                   CustomUserCircleAvatar(
                     circleRadius: 16,
                     borderPadding: 0,
+                    profileImgAddress: postModel?.userProfileImage,
                   ),
                   SizedBox(width: 8),
                   Expanded(
@@ -126,6 +135,7 @@ class ProfilePostItem extends StatelessWidget {
             CustomUserCircleAvatar(
               circleRadius: 16,
               borderPadding: 0,
+              profileImgAddress: postModel?.userProfileImage,
             ),
             SizedBox(width: 8),
             Expanded(

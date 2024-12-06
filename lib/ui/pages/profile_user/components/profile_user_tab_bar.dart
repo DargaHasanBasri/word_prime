@@ -10,90 +10,65 @@ class ProfileUserTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              whichIndex.value = 0;
-            },
-            child: Column(
-              children: [
-                Text(
-                  'Posts',
-                  style: TextStyle(
-                    color: whichIndex.value == 0
-                        ? AppColors.cornflowerBlue
-                        : AppColors.cornflowerBlue.withOpacity(0.5),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  height: 2,
-                  color: whichIndex.value == 0
-                      ? AppColors.cornflowerBlue
-                      : AppColors.cornflowerBlue.withOpacity(0.5),
-                ),
-              ],
-            ),
-          ),
+        whichIndex.value == 0
+            ? Text(
+          LocaleKeys.profilePage_posts.locale,
+          style: Theme.of(context).textTheme.headlineSmall,
+        )
+            : whichIndex.value == 1
+            ? Text(
+          LocaleKeys.profilePage_saved.locale,
+          style: Theme.of(context).textTheme.headlineSmall,
+        )
+            : Text(
+          LocaleKeys.profilePage_favorites.locale,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              whichIndex.value = 1;
-            },
-            child: Column(
-              children: [
-                Text(
-                  LocaleKeys.profilePage_saved.locale,
-                  style: TextStyle(
-                    color: whichIndex.value == 1
-                        ? AppColors.cornflowerBlue
-                        : AppColors.cornflowerBlue.withOpacity(0.5),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  height: 2,
-                  color: whichIndex.value == 1
-                      ? AppColors.cornflowerBlue
-                      : AppColors.cornflowerBlue.withOpacity(0.5),
-                ),
-              ],
-            ),
+        PopupMenuButton<int>(
+          color: Theme.of(context).colorScheme.primary,
+          icon: Image.asset(
+            AppAssets.icChoicePath,
+            height: 24,
+            width: 24,
           ),
-        ),
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              whichIndex.value = 2;
-            },
-            child: Column(
-              children: [
-                Text(
-                  LocaleKeys.profilePage_favorites.locale,
-                  style: TextStyle(
-                    color: whichIndex.value == 2
-                        ? AppColors.cornflowerBlue
-                        : AppColors.cornflowerBlue.withOpacity(0.5),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  height: 2,
-                  color: whichIndex.value == 2
-                      ? AppColors.cornflowerBlue
-                      : AppColors.cornflowerBlue.withOpacity(0.5),
-                ),
-              ],
+          onSelected: (int selectedIndex) {
+            switch (selectedIndex) {
+              case 0:
+                whichIndex.value = 0; // Posts
+                break;
+              case 1:
+                whichIndex.value = 1; // Saved
+                break;
+              case 2:
+                whichIndex.value = 2; // Liked
+                break;
+            }
+          },
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
+            PopupMenuItem<int>(
+              value: 0,
+              child: Text(
+                LocaleKeys.profilePage_posts.locale,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
             ),
-          ),
+            PopupMenuItem<int>(
+              value: 1,
+              child: Text(
+                LocaleKeys.profilePage_saved.locale,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            ),
+            PopupMenuItem<int>(
+              value: 2,
+              child: Text(
+                LocaleKeys.profilePage_favorites.locale,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            ),
+          ],
         ),
       ],
     );

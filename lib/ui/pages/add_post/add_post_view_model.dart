@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:image_picker/image_picker.dart';
 import 'package:word_prime/base/repository/firebase_storage_repository.dart';
 import 'package:word_prime/export.dart';
 

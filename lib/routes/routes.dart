@@ -26,7 +26,8 @@ final class Routes {
   static const String ResetPassword = 'resetPasswordProvider';
   static const String AddWord = 'addWordProvider';
   static const String MyWordList = 'myWordListProvider';
-  static const String ProfileUser = 'ProfileUserProvider';
+  static const String ProfileUser = 'profileUserProvider';
+  static const String PostDetail = 'postDetailProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -85,11 +86,11 @@ final class Routes {
           builder: (context) => const MainTabProvider(),
         );
       case Routes.Home:
-        final ValueNotifier<UserModel?> userModelNotifier =
+        final ValueNotifier<UserModel?> currentUserNotifier =
             settings.arguments as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
           builder: (context) => HomeProvider(
-            userNotifier: userModelNotifier,
+            currentUserNotifier: currentUserNotifier,
           ),
         );
       case Routes.Activity:
@@ -116,7 +117,7 @@ final class Routes {
             settings.arguments as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
           builder: (context) =>
-              ProfileProvider(userNotifier: userModelNotifier),
+              ProfileProvider(currentUserNotifier: userModelNotifier),
         );
       case Routes.FollowerFollow:
         final bool isFollow = settings.arguments as bool;
@@ -155,10 +156,25 @@ final class Routes {
           ),
         );
       case Routes.ProfileUser:
-        final String? userId = settings.arguments as String?;
+        final List<dynamic> arguments = settings.arguments as List;
+        final String? userId = arguments[0] as String?;
+        final ValueNotifier<UserModel?> currentUserModelNotifier =
+            arguments[1] as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
           builder: (context) => ProfileUserProvider(
             userId: userId,
+            currentUserNotifier: currentUserModelNotifier,
+          ),
+        );
+      case Routes.PostDetail:
+        final List<dynamic> arguments = settings.arguments as List;
+        final PostModel? currentPost = arguments[0] as PostModel?;
+        final ValueNotifier<UserModel?> currentUserModelNotifier =
+            arguments[1] as ValueNotifier<UserModel?>;
+        return MaterialPageRoute(
+          builder: (context) => PostDetailProvider(
+            currentPost: currentPost,
+            currentUserNotifier: currentUserModelNotifier,
           ),
         );
       default:

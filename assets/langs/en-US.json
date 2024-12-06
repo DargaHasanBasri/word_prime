@@ -134,7 +134,8 @@
     "follow": "Follow",
     "myWords": "My Words",
     "saved": "Saved",
-    "favorites": "Favorites"
+    "favorites": "Favorites",
+    "posts": "Posts"
   },
   "onboardingPage": {
     "onboardingFirstTitle": "Discover new words and expand your vocabulary every day!",
@@ -183,6 +184,10 @@
     "hoursAgo": "Hours ago",
     "minutesAgo": "Minutes ago",
     "justNow": "Just now",
-    "added": "Added"
+    "added": "Added",
+    "weekAbbreviation": "wk ago",
+    "daysAbbreviation": "d ago",
+    "hoursAbbreviation": "h ago",
+    "minutesAbbreviation": "min ago"
   }
 }
