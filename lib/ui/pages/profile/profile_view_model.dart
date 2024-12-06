@@ -35,7 +35,19 @@ class ProfileViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> getAddedAndSavedPosts({
+  Future<void> getLikedPosts() async {
+    User? _currentUser = FirebaseAuth.instance.currentUser;
+    if (_currentUser != null) {
+      likedPostsNotifier.value = await PostRepository().fetchAllLikedPosts(
+        userId: _currentUser.uid,
+      );
+      log('data fetched: ${likedPostsNotifier.value}');
+    } else {
+      log('currentUser : null');
+    }
+  }
+
+  Future<void> getAddedSavedLikedPosts({
     required VoidCallback showProgress,
     required VoidCallback hideProgress,
   }) async {
@@ -43,6 +55,7 @@ class ProfileViewModel extends BaseViewModel {
     await Future.wait([
       getAddedPosts(),
       getSavedPosts(),
+      getLikedPosts(),
     ]);
     hideProgress.call();
   }

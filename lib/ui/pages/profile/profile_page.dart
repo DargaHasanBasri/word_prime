@@ -17,7 +17,7 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
   @override
   void initState() {
     _vm = Provider.of<ProfileViewModel>(context, listen: false);
-    _vm.getAddedAndSavedPosts(
+    _vm.getAddedSavedLikedPosts(
       showProgress: () => showProgress(context),
       hideProgress: () => hideProgress(),
     );
@@ -94,17 +94,22 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                       Padding(
                         padding: AppPaddings.appPaddingMainTabBottom,
                         child: ValueListenableBuilder(
-                          valueListenable: _vm.savedPostsNotifier,
+                          valueListenable: _vm.likedPostsNotifier,
                           builder: (_, __, ___) {
                             return ValueListenableBuilder(
-                              valueListenable: _vm.addedPostsNotifier,
+                              valueListenable: _vm.savedPostsNotifier,
                               builder: (_, __, ___) {
-                                return _buildGridView(
-                                  postModel: _vm.tabIndex.value == 0
-                                      ? _vm.addedPostsNotifier.value
-                                      : _vm.tabIndex.value == 1
-                                          ? _vm.savedPostsNotifier.value
-                                          : _vm.addedPostsNotifier.value,
+                                return ValueListenableBuilder(
+                                  valueListenable: _vm.addedPostsNotifier,
+                                  builder: (_, __, ___) {
+                                    return _buildGridView(
+                                      postModel: _vm.tabIndex.value == 0
+                                          ? _vm.addedPostsNotifier.value
+                                          : _vm.tabIndex.value == 1
+                                              ? _vm.savedPostsNotifier.value
+                                              : _vm.likedPostsNotifier.value,
+                                    );
+                                  },
                                 );
                               },
                             );

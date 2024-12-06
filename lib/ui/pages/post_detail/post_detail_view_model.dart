@@ -42,4 +42,20 @@ class PostDetailViewModel extends BaseViewModel {
     await fetchPostComments();
     hideProgress.call();
   }
+
+  Future<void> likedPost() async {
+    await PostRepository().likePost(
+      userId: currentUserNotifier.value?.userId,
+      postId: currentPost?.postId,
+      wordLevel: currentPost?.wordLevel,
+    );
+  }
+
+  Future<void> savedPost() async {
+    await PostRepository().savePost(
+      userId: currentUserNotifier.value?.userId,
+      postId: currentPost?.postId,
+      wordLevel: currentPost?.wordLevel,
+    );
+  }
 }

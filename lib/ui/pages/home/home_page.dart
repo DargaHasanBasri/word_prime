@@ -93,8 +93,18 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                       padding: AppPaddings.appPaddingHorizontal,
                       child: PostListItem(
                         postModel: postModel,
-                        onTabLike: () {},
-                        onTabSave: () {},
+                        onTabLike: () {
+                          _vm.likedPost(
+                            postId: postModel?.postId,
+                            wordLevel: postModel?.wordLevel,
+                          );
+                        },
+                        onTabSave: () {
+                          _vm.savedPost(
+                            postId: postModel?.postId,
+                            wordLevel: postModel?.wordLevel,
+                          );
+                        },
                         onTabShare: () {},
                         onTabTranslate: () {},
                         onTabChoice: () {},

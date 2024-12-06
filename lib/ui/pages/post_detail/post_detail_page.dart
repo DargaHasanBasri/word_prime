@@ -85,9 +85,13 @@ class _PostDetailPageState extends BaseStatefulState<PostDetailPage> {
               Padding(
                 padding: AppPaddings.paddingMediumRight,
                 child: InteractItemsColumn(
-                  onTabLike: () {},
+                  onTabLike: () {
+                    _vm.likedPost();
+                  },
+                  onTabSave: () {
+                    _vm.savedPost();
+                  },
                   onTabComment: () {},
-                  onTabSave: () {},
                   postModel: _vm.currentPost,
                 ),
               ),

@@ -136,12 +136,26 @@ class PostRepository {
       final savedPostsReference =
           _userCollectionReference.doc(userId).collection('saved_posts');
 
-      await savedPostsReference.doc(postId).set({
-        'post_id': postId,
-        'word_level': wordLevel,
-      });
+      final currentDoc = await savedPostsReference.doc(postId).get();
 
-      log('Post başarıyla kaydedildi! Post ID: $postId');
+      if (currentDoc.exists) {
+        await savedPostsReference.doc(postId).delete();
+        await _postCollectionReference.doc(postId).update({
+          'total_saves': FieldValue.increment(-1),
+        });
+        log("total saves success decrease");
+      } else {
+        await savedPostsReference.doc(postId).set({
+          'post_id': postId,
+          'word_level': wordLevel,
+        });
+        log('Post başarıyla kaydedildi! Post ID: $postId');
+
+        await _postCollectionReference.doc(postId).update({
+          'total_saves': FieldValue.increment(1),
+        });
+        log("total saves success increase");
+      }
     } catch (e) {
       log('Post kaydetme başarısız! Hata: $e');
       rethrow;
@@ -165,12 +179,12 @@ class PostRepository {
   Future<List<PostModel?>?> fetchAllSavedPosts({
     required String userId,
   }) async {
-    final allAddedPosts = _postsHandler.fetchItemsFromSubCollection(
+    final allSavedPosts = _postsHandler.fetchItemsFromSubCollection(
       userId: userId,
       subCollectionName: 'saved_posts',
       model: PostModel(),
     );
-    return allAddedPosts;
+    return allSavedPosts;
   }
 
   Future<void> addComment({
@@ -195,7 +209,7 @@ class PostRepository {
         await _postCollectionReference.doc(postId).update({
           'total_comments': FieldValue.increment(1),
         });
-        log("total comments success decrease");
+        log("total comments success increase");
       } catch (e) {
         log("total comments error decrease");
         rethrow;
@@ -233,5 +247,50 @@ class PostRepository {
       log('An error occurred: $e');
       return null;
     }
+  }
+
+  Future<void> likePost({
+    required String? userId,
+    required String? postId,
+    required String? wordLevel,
+  }) async {
+    try {
+      final likedPostsReference =
+          _userCollectionReference.doc(userId).collection('liked_posts');
+
+      final currentDoc = await likedPostsReference.doc(postId).get();
+
+      if (currentDoc.exists) {
+        await likedPostsReference.doc(postId).delete();
+        await _postCollectionReference.doc(postId).update({
+          'total_likes': FieldValue.increment(-1),
+        });
+        log("total likes success decrease");
+      } else {
+        await likedPostsReference.doc(postId).set({
+          'post_id': postId,
+          'word_level': wordLevel,
+        });
+        log('Post başarıyla beğenildi! Post ID: $postId');
+        await _postCollectionReference.doc(postId).update({
+          'total_likes': FieldValue.increment(1),
+        });
+        log("total likes success increase");
+      }
+    } catch (e) {
+      log('Post beğenme başarısız! Hata: $e');
+      rethrow;
+    }
+  }
+
+  Future<List<PostModel?>?> fetchAllLikedPosts({
+    required String userId,
+  }) async {
+    final allLikedPosts = _postsHandler.fetchItemsFromSubCollection(
+      userId: userId,
+      subCollectionName: 'liked_posts',
+      model: PostModel(),
+    );
+    return allLikedPosts;
   }
 }
