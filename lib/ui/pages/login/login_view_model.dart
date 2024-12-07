@@ -29,41 +29,27 @@ class LoginViewModel extends BaseViewModel {
     /// Callback to show error message
     required void Function(String message) showErrorSnackBar,
   }) async {
-    try {
-      /// Show progress indicator at the start of the login process
-      showProgress.call();
+    /// Show progress indicator at the start of the login process
+    showProgress.call();
 
-      /// Firebase user login with provided email and password
-      UserCredential? userCredential = await ServiceAuthentication().login(
-        email: emailInput.value,
-        password: passwordInput.value,
-      );
+    /// Firebase user login with provided email and password
+    UserCredential? userCredential = await ServiceAuthentication().login(
+      email: emailInput.value,
+      password: passwordInput.value,
+    );
 
-      if (userCredential != null) {
-        /// Retrieve the user ID from the UserCredential object
+    if (userCredential != null) {
+      /// Save the email  locally for future use
+      await serviceLocalStorage.setString('email', emailInput.value);
+      log("email saved");
 
-        /// Save the email  locally for future use
-        await serviceLocalStorage.setString('email', emailInput.value);
-        log("email saved");
-
-        /// Call the success callback after successful login
-        onLoginSuccess.call();
-      }
-    } on FirebaseAuthException catch (e) {
-      /// Handle specific FirebaseAuthExceptions
-      if (e.code == 'user-not-found') {
-        showErrorSnackBar(LocaleKeys.warningMessages_userNotFound.locale);
-        log('An error occurred in ViewModel: $e');
-      } else if (e.code == 'wrong-password') {
-        showErrorSnackBar(LocaleKeys.warningMessages_wrongPassword.locale);
-      }
-    } catch (e) {
-      log('An error occurred in ViewModel: $e');
-      showErrorSnackBar(LocaleKeys.warningMessages_errorOccurred.locale);
-    } finally {
-      /// Ensure the progress indicator is hidden regardless of the outcome
-      hideProgress.call();
+      /// Call the success callback after successful login
+      onLoginSuccess.call();
+    } else {
+      showErrorSnackBar(LocaleKeys.warningMessages_userNotFound.locale);
     }
+
+    hideProgress.call();
   }
 
   /// Complete login process with Google.
