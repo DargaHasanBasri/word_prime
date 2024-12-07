@@ -6,6 +6,8 @@ class InteractItemsRow extends StatelessWidget {
   final VoidCallback onTabSave;
   final VoidCallback onTabShare;
   final PostModel? postModel;
+  final bool? isLiked;
+  final bool? isSaved;
   const InteractItemsRow({
     super.key,
     required this.onTabLike,
@@ -13,12 +15,14 @@ class InteractItemsRow extends StatelessWidget {
     required this.onTabSave,
     required this.postModel,
     required this.onTabShare,
+    required this.isLiked,
+    required this.isSaved,
   });
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<bool> isActiveLike = ValueNotifier(false);
-    final ValueNotifier<bool> isActiveSave = ValueNotifier(false);
+    final ValueNotifier<bool> isActiveLike = ValueNotifier(isLiked ?? false);
+    final ValueNotifier<bool> isActiveSave = ValueNotifier(isSaved ?? false);
     return Row(
       children: [
         ValueListenableBuilder(

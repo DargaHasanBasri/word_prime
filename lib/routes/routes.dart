@@ -60,9 +60,13 @@ final class Routes {
           builder: (context) => ForgotPasswordMethodProvider(),
         );
       case Routes.AddPost:
-        final String englishWordLevel = settings.arguments as String;
+        final List<dynamic> arguments = settings.arguments as List;
+        final ValueNotifier<UserModel?> currentUserModelNotifier =
+            arguments[0] as ValueNotifier<UserModel?>;
+        final String englishWordLevel = arguments[1] as String;
         return MaterialPageRoute(
           builder: (context) => AddPostProvider(
+            currentUserNotifier: currentUserModelNotifier,
             wordLevel: englishWordLevel,
           ),
         );
@@ -145,13 +149,21 @@ final class Routes {
           ),
         );
       case Routes.AddWord:
+        final ValueNotifier<UserModel?> currentUserNotifier =
+            settings.arguments as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
-          builder: (context) => const AddWordProvider(),
+          builder: (context) => AddWordProvider(
+            currentUserNotifier: currentUserNotifier,
+          ),
         );
       case Routes.MyWordList:
-        final String englishLevel = settings.arguments as String;
+        final List<dynamic> arguments = settings.arguments as List;
+        final ValueNotifier<UserModel?> currentUserNotifier =
+            arguments[0] as ValueNotifier<UserModel?>;
+        final String englishLevel = arguments[1] as String;
         return MaterialPageRoute(
           builder: (context) => MyWordListProvider(
+            currentUserNotifier: currentUserNotifier,
             englishLevel: englishLevel,
           ),
         );

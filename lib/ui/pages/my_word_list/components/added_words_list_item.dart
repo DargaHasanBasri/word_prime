@@ -8,6 +8,9 @@ class AddedWordsListItem extends StatelessWidget {
   final VoidCallback onTabShare;
   final VoidCallback onTabTranslate;
   final PostModel? postModel;
+  final bool? isLiked;
+  final bool? isSaved;
+
   const AddedWordsListItem({
     super.key,
     required this.onTabLike,
@@ -17,6 +20,8 @@ class AddedWordsListItem extends StatelessWidget {
     required this.postModel,
     required this.onTabChoice,
     required this.onTabShare,
+    required this.isLiked,
+    required this.isSaved,
   });
 
   @override
@@ -38,6 +43,8 @@ class AddedWordsListItem extends StatelessWidget {
                     Padding(
                       padding: AppPaddings.paddingMediumTop,
                       child: InteractItemsRow(
+                        isLiked: isLiked,
+                        isSaved: isSaved,
                         onTabLike: () => onTabLike.call(),
                         onTabComment: () => onTabComment.call(),
                         onTabSave: () => onTabSave.call(),
@@ -57,6 +64,8 @@ class AddedWordsListItem extends StatelessWidget {
                       padding: AppPaddings.paddingSmallHorizontal +
                           AppPaddings.paddingLargeRight,
                       child: InteractItemsColumn(
+                        isLiked: isLiked,
+                        isSaved: isSaved,
                         onTabLike: () => onTabLike.call(),
                         onTabComment: () => onTabComment.call(),
                         onTabSave: () => onTabSave.call(),

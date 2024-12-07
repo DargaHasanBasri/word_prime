@@ -9,6 +9,8 @@ class PostListItem extends StatelessWidget {
   final VoidCallback onTabChoice;
   final VoidCallback onTabUserProfile;
   final PostModel? postModel;
+  final bool? isLiked;
+  final bool? isSaved;
 
   const PostListItem({
     super.key,
@@ -20,6 +22,8 @@ class PostListItem extends StatelessWidget {
     required this.onTabChoice,
     required this.postModel,
     required this.onTabUserProfile,
+    required this.isLiked,
+    required this.isSaved,
   });
 
   @override
@@ -46,6 +50,8 @@ class PostListItem extends StatelessWidget {
               Padding(
                 padding: AppPaddings.paddingMediumTop,
                 child: InteractItemsRow(
+                  isLiked: isLiked,
+                  isSaved: isSaved,
                   onTabLike: () {
                     onTabLike.call();
                   },

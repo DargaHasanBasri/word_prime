@@ -16,6 +16,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
   @override
   void initState() {
     _vm = Provider.of<HomeViewModel>(context, listen: false);
+
     _vm.getFetchPosts(
       showProgress: () => showProgress(context),
       hideProgress: () => hideProgress(),
@@ -81,89 +82,110 @@ class _HomePageState extends BaseStatefulState<HomePage> {
             ),
           ),
           ValueListenableBuilder(
-              valueListenable: _vm.postsNotifier,
-              builder: (_, __, ___) {
-                return ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: _vm.postsNotifier.value?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    final postModel = _vm.postsNotifier.value?[index];
-                    return Padding(
-                      padding: AppPaddings.appPaddingHorizontal,
-                      child: PostListItem(
-                        postModel: postModel,
-                        onTabLike: () {
-                          _vm.likedPost(
-                            postId: postModel?.postId,
-                            wordLevel: postModel?.wordLevel,
-                          );
-                        },
-                        onTabSave: () {
-                          _vm.savedPost(
-                            postId: postModel?.postId,
-                            wordLevel: postModel?.wordLevel,
-                          );
-                        },
-                        onTabShare: () {},
-                        onTabTranslate: () {},
-                        onTabChoice: () {},
-                        onTabComment: () {
-                          _vm.fetchPostComments(
-                            showProgress: () => showProgress(context),
-                            hideProgress: () => hideProgress(),
-                            postId: postModel?.postId,
-                          );
-                          showCustomBottomSheet(
-                            context: context,
-                            child: ValueListenableBuilder(
-                              valueListenable: _vm.commentsNotifier,
-                              builder: (_, __, ___) {
-                                return CustomCommentBottomSheet(
-                                  commentController: _commentController,
-                                  currentUserProfileImage: _vm
-                                      .currentUserNotifier
-                                      .value
-                                      ?.profileImageAddress,
-                                  comments: _vm.commentsNotifier.value,
-                                  onPressSuffixIcon: () async {
-                                    await _vm.addNewComments(
-                                      showProgress: () => showProgress(context),
-                                      hideProgress: () => hideProgress(),
-                                      postId: postModel?.postId,
-                                      comment: _commentController.text,
-                                    );
-                                    _commentController.clear();
-                                    _vm.fetchPostComments(
-                                      showProgress: () => showProgress(context),
-                                      hideProgress: () => hideProgress(),
-                                      postId: postModel?.postId,
-                                    );
-                                  },
+            valueListenable: _vm.savedPostsNotifier,
+            builder: (_, __, ___) {
+              return ValueListenableBuilder(
+                valueListenable: _vm.likedPostsNotifier,
+                builder: (_, __, ___) {
+                  return ValueListenableBuilder(
+                    valueListenable: _vm.postsNotifier,
+                    builder: (_, __, ___) {
+                      return ListView.separated(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: _vm.postsNotifier.value?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          final postModel = _vm.postsNotifier.value?[index];
+                          final bool isPostLiked = _vm.likedPostsNotifier.value
+                                  ?.contains(postModel?.postId) ??
+                              false;
+                          final bool isPostSaved = _vm.savedPostsNotifier.value
+                                  ?.contains(postModel?.postId) ??
+                              false;
+                          return Padding(
+                            padding: AppPaddings.appPaddingHorizontal,
+                            child: PostListItem(
+                              postModel: postModel,
+                              isLiked: isPostLiked,
+                              isSaved: isPostSaved,
+                              onTabLike: () {
+                                _vm.likedPost(
+                                  postId: postModel?.postId,
+                                  wordLevel: postModel?.wordLevel,
                                 );
                               },
+                              onTabSave: () {
+                                _vm.savedPost(
+                                  postId: postModel?.postId,
+                                  wordLevel: postModel?.wordLevel,
+                                );
+                              },
+                              onTabShare: () {},
+                              onTabTranslate: () {},
+                              onTabChoice: () {},
+                              onTabComment: () {
+                                _vm.fetchPostComments(
+                                  showProgress: () => showProgress(context),
+                                  hideProgress: () => hideProgress(),
+                                  postId: postModel?.postId,
+                                );
+                                showCustomBottomSheet(
+                                  context: context,
+                                  child: ValueListenableBuilder(
+                                    valueListenable: _vm.commentsNotifier,
+                                    builder: (_, __, ___) {
+                                      return CustomCommentBottomSheet(
+                                        commentController: _commentController,
+                                        currentUserProfileImage: _vm
+                                            .currentUserNotifier
+                                            .value
+                                            ?.profileImageAddress,
+                                        comments: _vm.commentsNotifier.value,
+                                        onPressSuffixIcon: () async {
+                                          await _vm.addNewComments(
+                                            showProgress: () =>
+                                                showProgress(context),
+                                            hideProgress: () => hideProgress(),
+                                            postId: postModel?.postId,
+                                            comment: _commentController.text,
+                                          );
+                                          _commentController.clear();
+                                          _vm.fetchPostComments(
+                                            showProgress: () =>
+                                                showProgress(context),
+                                            hideProgress: () => hideProgress(),
+                                            postId: postModel?.postId,
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              onTabUserProfile: () => appRoutes.navigateTo(
+                                Routes.ProfileUser,
+                                arguments: [
+                                  postModel?.userId,
+                                  _vm.currentUserNotifier,
+                                ],
+                              ),
                             ),
                           );
                         },
-                        onTabUserProfile: () => appRoutes.navigateTo(
-                          Routes.ProfileUser,
-                          arguments: [
-                            postModel?.userId,
-                            _vm.currentUserNotifier,
-                          ],
+                        separatorBuilder: (context, index) => Padding(
+                          padding: AppPaddings.appPaddingAll,
+                          child: Container(
+                            height: 1,
+                            color: AppColors.platinum.withOpacity(0.3),
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) => Padding(
-                    padding: AppPaddings.appPaddingAll,
-                    child: Container(
-                      height: 1,
-                      color: AppColors.platinum.withOpacity(0.3),
-                    ),
-                  ),
-                );
-              }),
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          ),
         ],
       ),
     );

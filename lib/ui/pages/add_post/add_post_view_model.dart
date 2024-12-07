@@ -3,8 +3,10 @@ import 'package:word_prime/base/repository/firebase_storage_repository.dart';
 import 'package:word_prime/export.dart';
 
 class AddPostViewModel extends BaseViewModel {
+  final ValueNotifier<UserModel?> currentUserNotifier;
   final String wordLevel;
   AddPostViewModel(
+    this.currentUserNotifier,
     this.wordLevel,
   );
 
@@ -36,39 +38,37 @@ class AddPostViewModel extends BaseViewModel {
     try {
       showProgress.call();
 
-      String? postUrlPath;
       turkishSentences.value?.add(turkishSentencesInput.value);
       englishSentences.value?.add(englishSentencesInput.value);
+
+      String? postUrlPath;
       final imageReference =
           FirebaseStorageRepository().createImageReference(_selectedFile);
       if (imageReference != null && selectedImageBytesNotifier.value != null) {
         await imageReference.putData(selectedImageBytesNotifier.value!);
         postUrlPath = await imageReference.getDownloadURL();
       }
-
       String? postImageAddress = postUrlPath;
 
-      User? _currentUser = FirebaseAuth.instance.currentUser;
-      if (_currentUser != null) {
-        await PostRepository().addPost(
-          postModel: PostModel(
-            userId: _currentUser.uid,
-            totalComments: 0,
-            totalLikes: 0,
-            totalSaves: 0,
-            wordLevel: wordLevel,
-            postImageAddress: postImageAddress,
-            userName: _currentUser.displayName,
-            userProfileImage: _currentUser.photoURL,
-            createdDate: Timestamp.now(),
-            updatedDate: Timestamp.now(),
-            wordEnglish: englishWordInput.value,
-            wordTurkish: turkishWordInput.value,
-            sentenceEnglish: englishSentences.value,
-            sentenceTurkish: turkishSentences.value,
-          ),
-        );
-      }
+      await PostRepository().addPost(
+        postModel: PostModel(
+          userId: currentUserNotifier.value?.userId,
+          totalComments: 0,
+          totalLikes: 0,
+          totalSaves: 0,
+          wordLevel: wordLevel,
+          postImageAddress: postImageAddress,
+          userName: currentUserNotifier.value?.userName,
+          userProfileImage: currentUserNotifier.value?.profileImageAddress,
+          createdDate: Timestamp.now(),
+          updatedDate: Timestamp.now(),
+          wordEnglish: englishWordInput.value,
+          wordTurkish: turkishWordInput.value,
+          sentenceEnglish: englishSentences.value,
+          sentenceTurkish: turkishSentences.value,
+        ),
+      );
+
       successAdded.call();
     } catch (e) {
       log('ViewModel An error occurred: $e');

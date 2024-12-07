@@ -1,1 +1,1 @@
-flutter clean; flutter pub get; flutter pub get;
+flutter clean; flutter pub get;
