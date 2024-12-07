@@ -201,9 +201,10 @@ class PostRepository {
         );
         String commentId = _documentReference.id;
         await _documentReference.update({'comment_id': commentId});
+      } else {
+        log('Yorum ekleme başarısız!');
+        return;
       }
-
-      log('Yorum ekleme başarısız!');
 
       try {
         await _postCollectionReference.doc(postId).update({
@@ -215,7 +216,7 @@ class PostRepository {
         rethrow;
       }
 
-      log('Yorum başarıyla eklendi! Post ID: $postId, Comment: ${commentModel?.toJson()}');
+      log('Yorum başarıyla eklendi! Post ID: $postId, Comment: ${commentModel.toJson()}');
     } catch (e) {
       log('Yorum ekleme başarısız! Hata: $e');
       rethrow;
@@ -292,5 +293,28 @@ class PostRepository {
       model: PostModel(),
     );
     return allLikedPosts;
+  }
+
+  Future<List<String?>?> fetchLikedOrSavedPostIds({
+    required String subCollectionName,
+    required String? userId,
+  }) async {
+    try {
+      final reference =
+          _userCollectionReference.doc(userId).collection(subCollectionName);
+
+      final querySnapshotIds = await reference.get();
+
+      final postIds = querySnapshotIds.docs
+          .map((doc) => doc.data()['post_id'] as String)
+          .toList();
+
+      if (postIds.isEmpty) return [];
+
+      return postIds;
+    } catch (e) {
+      log('Id list getirme başarısız! Hata: $e');
+      rethrow;
+    }
   }
 }

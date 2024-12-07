@@ -53,7 +53,9 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
       case 1:
         return ActivityProvider();
       case 2:
-        return AddWordProvider();
+        return AddWordProvider(
+          currentUserNotifier: _vm.userNotifier,
+        );
       case 3:
         return TasksProvider();
       case 4:

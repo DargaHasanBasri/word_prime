@@ -34,17 +34,21 @@ class LoginViewModel extends BaseViewModel {
       showProgress.call();
 
       /// Firebase user login with provided email and password
-      await ServiceAuthentication().login(
+      UserCredential? userCredential = await ServiceAuthentication().login(
         email: emailInput.value,
         password: passwordInput.value,
       );
 
-      /// Save the email locally for future use
-      await serviceLocalStorage.setString('email', emailInput.value);
-      log("email saved");
+      if (userCredential != null) {
+        /// Retrieve the user ID from the UserCredential object
 
-      /// Call the success callback after successful login
-      onLoginSuccess.call();
+        /// Save the email  locally for future use
+        await serviceLocalStorage.setString('email', emailInput.value);
+        log("email saved");
+
+        /// Call the success callback after successful login
+        onLoginSuccess.call();
+      }
     } on FirebaseAuthException catch (e) {
       /// Handle specific FirebaseAuthExceptions
       if (e.code == 'user-not-found') {

@@ -5,18 +5,22 @@ class InteractItemsColumn extends StatelessWidget {
   final VoidCallback onTabComment;
   final VoidCallback onTabSave;
   final PostModel? postModel;
+  final bool? isLiked;
+  final bool? isSaved;
   const InteractItemsColumn({
     super.key,
     required this.onTabLike,
     required this.onTabComment,
     required this.onTabSave,
     required this.postModel,
+    required this.isLiked,
+    required this.isSaved,
   });
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<bool> isActiveLike = ValueNotifier(false);
-    final ValueNotifier<bool> isActiveSave = ValueNotifier(false);
+    final ValueNotifier<bool> isActiveLike = ValueNotifier(isLiked ?? false);
+    final ValueNotifier<bool> isActiveSave = ValueNotifier(isSaved ?? false);
     return Column(
       children: [
         ValueListenableBuilder(

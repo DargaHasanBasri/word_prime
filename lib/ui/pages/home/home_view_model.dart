@@ -11,18 +11,48 @@ class HomeViewModel extends BaseViewModel {
   final ValueNotifier<bool> isActiveTranslate = ValueNotifier(false);
 
   final ValueNotifier<List<PostModel?>?> postsNotifier = ValueNotifier(null);
+  final ValueNotifier<List<String?>?> likedPostsNotifier = ValueNotifier(null);
+  final ValueNotifier<List<String?>?> savedPostsNotifier = ValueNotifier(null);
   final ValueNotifier<List<CommentModel?>?> commentsNotifier =
       ValueNotifier(null);
 
   Future<void> getFetchPosts({
-    required VoidCallback showProgress,
-    required VoidCallback hideProgress,
+    required VoidCallback? showProgress,
+    required VoidCallback? hideProgress,
   }) async {
     try {
-      showProgress.call();
+      showProgress?.call();
       postsNotifier.value = await PostRepository().fetchPost();
       log('data fetched: ${postsNotifier.value}');
-      hideProgress.call();
+      await getLikedPostIds();
+      await getSavedPostIds();
+      hideProgress?.call();
+    } catch (e) {
+      log('ViewModel An error occurred: $e');
+    }
+  }
+
+  Future<void> getLikedPostIds() async {
+    try {
+      likedPostsNotifier.value =
+          await PostRepository().fetchLikedOrSavedPostIds(
+        subCollectionName: 'liked_posts',
+        userId: currentUserNotifier.value?.userId,
+      );
+      log('data fetched liked list: ${likedPostsNotifier.value}');
+    } catch (e) {
+      log('ViewModel An error occurred: $e');
+    }
+  }
+
+  Future<void> getSavedPostIds() async {
+    try {
+      savedPostsNotifier.value =
+          await PostRepository().fetchLikedOrSavedPostIds(
+        subCollectionName: 'saved_posts',
+        userId: currentUserNotifier.value?.userId,
+      );
+      log('data fetched saved list: ${savedPostsNotifier.value}');
     } catch (e) {
       log('ViewModel An error occurred: $e');
     }
@@ -70,6 +100,10 @@ class HomeViewModel extends BaseViewModel {
       postId: postId,
       wordLevel: wordLevel,
     );
+    getFetchPosts(
+      showProgress: () {},
+      hideProgress: () {},
+    );
   }
 
   Future<void> savedPost({
@@ -80,6 +114,10 @@ class HomeViewModel extends BaseViewModel {
       userId: currentUserNotifier.value?.userId,
       postId: postId,
       wordLevel: wordLevel,
+    );
+    getFetchPosts(
+      showProgress: () {},
+      hideProgress: () {},
     );
   }
 }

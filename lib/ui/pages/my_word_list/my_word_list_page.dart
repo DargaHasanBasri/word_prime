@@ -1,4 +1,5 @@
 import 'package:word_prime/export.dart';
+import 'package:word_prime/ui/pages/my_word_list/components/added_empty_list.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/added_words_list_item.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/my_word_list_tab_bar.dart';
 import 'package:word_prime/ui/pages/my_word_list/components/saved_posts_list_item.dart';
@@ -50,7 +51,10 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
         onPressed: () {
           appRoutes.navigateTo(
             Routes.AddPost,
-            arguments: _vm.englishLevel,
+            arguments: [
+              _vm.currentUserNotifier,
+              _vm.englishLevel,
+            ],
           );
         },
       ),
@@ -84,23 +88,36 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
               ),
             ),
             ValueListenableBuilder(
-              valueListenable: _vm.isAddedItem,
+              valueListenable: _vm.savedPostsIdsNotifier,
               builder: (_, __, ___) {
-                return Expanded(
-                  child: _vm.isSaved.value
-                      ? ValueListenableBuilder(
-                          valueListenable: _vm.isSavedItem,
-                          builder: (_, __, ___) {
-                            return _vm.isSavedItem.value
-                                ? savedList()
-                                : SizedBox();
-                          },
-                        )
-                      : _vm.isAddedItem.value
-                          ? addedList()
-                          : Center(
-                              child: _emptyAddedItem(),
-                            ),
+                return ValueListenableBuilder(
+                  valueListenable: _vm.likedPostsIdsNotifier,
+                  builder: (_, __, ___) {
+                    return ValueListenableBuilder(
+                      valueListenable: _vm.isAddedItem,
+                      builder: (_, __, ___) {
+                        return Expanded(
+                          child: _vm.isSaved.value
+                              ? ValueListenableBuilder(
+                                  valueListenable: _vm.isSavedItem,
+                                  builder: (_, __, ___) {
+                                    return _vm.isSavedItem.value
+                                        ? savedList()
+                                        : SizedBox();
+                                  },
+                                )
+                              : _vm.isAddedItem.value
+                                  ? addedList()
+                                  : Padding(
+                                      padding: AppPaddings.appPaddingHorizontal,
+                                      child: Center(
+                                        child: AddedEmptyList(),
+                                      ),
+                                    ),
+                        );
+                      },
+                    );
+                  },
                 );
               },
             ),
@@ -142,31 +159,6 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
     );
   }
 
-  Widget _emptyAddedItem() {
-    return Padding(
-      padding: AppPaddings.appPaddingHorizontal,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(AppAssets.imgImgEmptyWordListPath),
-          Padding(
-            padding: AppPaddings.paddingSmallVertical,
-            child: Text(
-              LocaleKeys.myWordList_title.locale,
-              style: Theme.of(context).textTheme.headlineMedium,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Text(
-            LocaleKeys.myWordList_subTitle.locale,
-            style: Theme.of(context).textTheme.titleSmall,
-            textAlign: TextAlign.center,
-          )
-        ],
-      ),
-    );
-  }
-
   Widget addedList() {
     return ValueListenableBuilder(
       valueListenable: _vm.addedPostsNotifier,
@@ -180,28 +172,62 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
           itemCount: _vm.addedPostsNotifier.value?.length ?? 0,
           itemBuilder: (context, index) {
             final postModelData = _vm.addedPostsNotifier.value?[index];
+            final bool isPostLiked = _vm.likedPostsIdsNotifier.value
+                    ?.contains(postModelData?.postId) ??
+                false;
+            final bool isPostSaved = _vm.savedPostsIdsNotifier.value
+                    ?.contains(postModelData?.postId) ??
+                false;
             return Padding(
               padding: AppPaddings.appPaddingHorizontal,
               child: AddedWordsListItem(
                 postModel: postModelData,
-                onTabLike: () {},
-                onTabSave: () async {
-                  showProgress(context);
-                  await PostRepository().savePost(
-                    userId: postModelData?.userId,
+                isLiked: isPostLiked,
+                isSaved: isPostSaved,
+                onTabLike: () {
+                  _vm.likedPost(
                     postId: postModelData?.postId,
                     wordLevel: postModelData?.wordLevel,
                   );
-                  hideProgress();
+                },
+                onTabSave: () {
+                  _vm.savedPost(
+                    postId: postModelData?.postId,
+                    wordLevel: postModelData?.wordLevel,
+                  );
                 },
                 onTabComment: () {
+                  _vm.fetchPostComments(
+                    showProgress: () => showProgress(context),
+                    hideProgress: () => hideProgress(),
+                    postId: postModelData?.postId,
+                  );
                   showCustomBottomSheet(
                     context: context,
-                    child: CustomCommentBottomSheet(
-                      commentController: _commentController,
-                      onPressSuffixIcon: () {},
-                      currentUserProfileImage: '',
-                      comments: [],
+                    child: ValueListenableBuilder(
+                      valueListenable: _vm.commentsNotifier,
+                      builder: (_, __, ___) {
+                        return CustomCommentBottomSheet(
+                          commentController: _commentController,
+                          currentUserProfileImage: _vm
+                              .currentUserNotifier.value?.profileImageAddress,
+                          comments: _vm.commentsNotifier.value,
+                          onPressSuffixIcon: () async {
+                            await _vm.addNewComments(
+                              showProgress: () => showProgress(context),
+                              hideProgress: () => hideProgress(),
+                              postId: postModelData?.postId,
+                              comment: _commentController.text,
+                            );
+                            _commentController.clear();
+                            _vm.fetchPostComments(
+                              showProgress: () => showProgress(context),
+                              hideProgress: () => hideProgress(),
+                              postId: postModelData?.postId,
+                            );
+                          },
+                        );
+                      },
                     ),
                   );
                 },
@@ -270,49 +296,92 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
   }
 
   Widget savedList() {
-    return ListView.separated(
-      controller: _savedScrollController,
-      physics: BouncingScrollPhysics(),
-      padding:
-          AppPaddings.appPaddingMainTabBottom + AppPaddings.paddingLargeTop,
-      shrinkWrap: true,
-      itemCount: _vm.savedPostsNotifier.value?.length ?? 0,
-      itemBuilder: (context, index) {
-        final postModel = _vm.savedPostsNotifier.value?[index];
-        return Padding(
-          padding: AppPaddings.appPaddingHorizontal,
-          child: SavedPostsListItem(
-            postModel: postModel,
-            onTabLike: () {},
-            onTabSave: () {},
-            onTabComment: () {
-              showCustomBottomSheet(
-                context: context,
-                child: CustomCommentBottomSheet(
-                  commentController: _commentController,
-                  onPressSuffixIcon: () {},
-                  currentUserProfileImage: '',
-                  comments: [],
+    return ValueListenableBuilder(
+      valueListenable: _vm.savedPostsNotifier,
+      builder: (_, __, ___) {
+        return ListView.separated(
+          controller: _savedScrollController,
+          physics: BouncingScrollPhysics(),
+          padding:
+              AppPaddings.appPaddingMainTabBottom + AppPaddings.paddingLargeTop,
+          shrinkWrap: true,
+          itemCount: _vm.savedPostsNotifier.value?.length ?? 0,
+          itemBuilder: (context, index) {
+            final postModel = _vm.savedPostsNotifier.value?[index];
+            final bool isPostLiked =
+                _vm.likedPostsIdsNotifier.value?.contains(postModel?.postId) ??
+                    false;
+            return Padding(
+              padding: AppPaddings.appPaddingHorizontal,
+              child: SavedPostsListItem(
+                postModel: postModel,
+                isLiked: isPostLiked,
+                onTabLike: () {
+                  _vm.likedPost(
+                    postId: postModel?.postId,
+                    wordLevel: postModel?.wordLevel,
+                  );
+                },
+                onTabSave: () {
+                  _vm.savedPost(
+                    postId: postModel?.postId,
+                    wordLevel: postModel?.wordLevel,
+                  );
+                },
+                onTabComment: () {
+                  _vm.fetchPostComments(
+                    showProgress: () => showProgress(context),
+                    hideProgress: () => hideProgress(),
+                    postId: postModel?.postId,
+                  );
+                  showCustomBottomSheet(
+                    context: context,
+                    child: ValueListenableBuilder(
+                      valueListenable: _vm.commentsNotifier,
+                      builder: (_, __, ___) {
+                        return CustomCommentBottomSheet(
+                          commentController: _commentController,
+                          currentUserProfileImage: _vm
+                              .currentUserNotifier.value?.profileImageAddress,
+                          comments: _vm.commentsNotifier.value,
+                          onPressSuffixIcon: () async {
+                            await _vm.addNewComments(
+                              showProgress: () => showProgress(context),
+                              hideProgress: () => hideProgress(),
+                              postId: postModel?.postId,
+                              comment: _commentController.text,
+                            );
+                            _commentController.clear();
+                            _vm.fetchPostComments(
+                              showProgress: () => showProgress(context),
+                              hideProgress: () => hideProgress(),
+                              postId: postModel?.postId,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  );
+                },
+                onTabTranslate: () {},
+                onTabChoice: () {},
+                onTabShare: () {},
+                onTabUserProfile: () => appRoutes.navigateTo(
+                  Routes.ProfileUser,
+                  arguments: postModel?.userId,
                 ),
-              );
-            },
-            onTabTranslate: () {},
-            onTabChoice: () {},
-            onTabShare: () {},
-            onTabUserProfile: () => appRoutes.navigateTo(
-              Routes.ProfileUser,
-              arguments: postModel?.userId,
+              ),
+            );
+          },
+          separatorBuilder: (context, index) => Padding(
+            padding: AppPaddings.appPaddingAll,
+            child: Container(
+              height: 1,
+              color: AppColors.platinum.withOpacity(0.3),
             ),
           ),
         );
       },
-      separatorBuilder: (context, index) => Padding(
-        padding: AppPaddings.appPaddingAll,
-        child: Container(
-          height: 1,
-          color: AppColors.platinum.withOpacity(0.3),
-        ),
-      ),
     );
   }
 }

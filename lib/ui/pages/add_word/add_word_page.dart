@@ -10,6 +10,14 @@ class AddWordPage extends StatefulWidget {
 }
 
 class _AddWordPageState extends BaseStatefulState<AddWordPage> {
+  late final AddWordViewModel _vm;
+
+  @override
+  void initState() {
+    _vm = Provider.of<AddWordViewModel>(context, listen: false);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +45,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
                   log('A1 click');
                   appRoutes.navigateTo(
                     Routes.MyWordList,
-                    arguments: EnglishWordLevel.A1.level,
+                    arguments: [
+                      _vm.currentUserNotifier,
+                      EnglishWordLevel.A1.level,
+                    ],
                   );
                 },
               ),
@@ -50,7 +61,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
                   log('A2 click');
                   appRoutes.navigateTo(
                     Routes.MyWordList,
-                    arguments: EnglishWordLevel.A2.level,
+                    arguments: [
+                      _vm.currentUserNotifier,
+                      EnglishWordLevel.A2.level,
+                    ],
                   );
                 },
               ),
@@ -68,7 +82,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
                     log('B1 click');
                     appRoutes.navigateTo(
                       Routes.MyWordList,
-                      arguments: EnglishWordLevel.B1.level,
+                      arguments: [
+                        _vm.currentUserNotifier,
+                        EnglishWordLevel.B1.level,
+                      ],
                     );
                   },
                 ),
@@ -81,7 +98,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
                     log('B2 click');
                     appRoutes.navigateTo(
                       Routes.MyWordList,
-                      arguments: EnglishWordLevel.B2.level,
+                      arguments: [
+                        _vm.currentUserNotifier,
+                        EnglishWordLevel.B2.level,
+                      ],
                     );
                   },
                 ),
@@ -100,7 +120,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
                     log('C1 click');
                     appRoutes.navigateTo(
                       Routes.MyWordList,
-                      arguments: EnglishWordLevel.C1.level,
+                      arguments: [
+                        _vm.currentUserNotifier,
+                        EnglishWordLevel.C1.level,
+                      ],
                     );
                   },
                 ),
@@ -113,7 +136,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
                     log('C2 click');
                     appRoutes.navigateTo(
                       Routes.MyWordList,
-                      arguments: EnglishWordLevel.C2.level,
+                      arguments: [
+                        _vm.currentUserNotifier,
+                        EnglishWordLevel.C2.level,
+                      ],
                     );
                   },
                 ),

@@ -110,47 +110,65 @@ class _AddPostPageState extends BaseStatefulState<AddPostPage> {
             builder: (_, __, ___) {
               return AddPhotoContainer(
                 onTap: () {
-                  _vm.pickedWordImage();
+                  if (_vm.currentUserNotifier.value!.totalPost! < 5) {
+                    _vm.pickedWordImage();
+                  } else {
+                    showSnackBar(
+                      context: context,
+                      content: CustomSnackBarContent(
+                        text:
+                            'Resim yükleyebilmeniz için lütfen premium satın alın'
+                            ' ya da resimsiz devam edin',
+                        iconType: CustomSnackBarType.info,
+                      ),
+                    );
+                  }
                 },
                 selectedImageBytes: _vm.selectedImageBytesNotifier.value,
               );
             },
           ),
           ValueListenableBuilder(
-            valueListenable: _vm.englishWordInput,
+            valueListenable: _vm.currentUserNotifier,
             builder: (_, __, ___) {
               return ValueListenableBuilder(
-                valueListenable: _vm.turkishWordInput,
+                valueListenable: _vm.englishWordInput,
                 builder: (_, __, ___) {
-                  return Padding(
-                    padding: AppPaddings.appPaddingVertical,
-                    child: CustomButton(
-                      title:
-                          LocaleKeys.addPost_buttonTitle.locale.toUpperCase(),
-                      backgroundColor: _vm.isEmptyInputText()
-                          ? AppColors.cornflowerBlue.withOpacity(0.4)
-                          : AppColors.cornflowerBlue,
-                      onClick: () {
-                        _vm.isEmptyInputText()
-                            ? showSnackBar(
-                                context: context,
-                                content: CustomSnackBarContent(
-                                  text: LocaleKeys.warningMessages_emptySpace,
-                                  iconType: CustomSnackBarType.info,
-                                ),
-                              )
-                            : _vm.addNewPost(
-                                showProgress: () => showProgress(context),
-                                hideProgress: () => hideProgress(),
-                                successAdded: () {
-                                  appRoutes.navigateToReplacement(
-                                    Routes.AddPostSuccessful,
-                                    arguments: _vm.wordLevel,
+                  return ValueListenableBuilder(
+                    valueListenable: _vm.turkishWordInput,
+                    builder: (_, __, ___) {
+                      return Padding(
+                        padding: AppPaddings.appPaddingVertical,
+                        child: CustomButton(
+                          title: LocaleKeys.addPost_buttonTitle.locale
+                              .toUpperCase(),
+                          backgroundColor: _vm.isEmptyInputText()
+                              ? AppColors.cornflowerBlue.withOpacity(0.4)
+                              : AppColors.cornflowerBlue,
+                          onClick: () {
+                            _vm.isEmptyInputText()
+                                ? showSnackBar(
+                                    context: context,
+                                    content: CustomSnackBarContent(
+                                      text:
+                                          LocaleKeys.warningMessages_emptySpace,
+                                      iconType: CustomSnackBarType.info,
+                                    ),
+                                  )
+                                : _vm.addNewPost(
+                                    showProgress: () => showProgress(context),
+                                    hideProgress: () => hideProgress(),
+                                    successAdded: () {
+                                      appRoutes.navigateToReplacement(
+                                        Routes.AddPostSuccessful,
+                                        arguments: _vm.wordLevel,
+                                      );
+                                    },
                                   );
-                                },
-                              );
-                      },
-                    ),
+                          },
+                        ),
+                      );
+                    },
                   );
                 },
               );

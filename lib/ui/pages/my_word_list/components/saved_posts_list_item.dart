@@ -9,6 +9,7 @@ class SavedPostsListItem extends StatelessWidget {
   final VoidCallback onTabTranslate;
   final VoidCallback onTabUserProfile;
   final PostModel? postModel;
+  final bool? isLiked;
   const SavedPostsListItem({
     super.key,
     required this.onTabLike,
@@ -19,6 +20,7 @@ class SavedPostsListItem extends StatelessWidget {
     required this.onTabChoice,
     required this.onTabShare,
     required this.onTabUserProfile,
+    required this.isLiked,
   });
 
   @override
@@ -42,6 +44,8 @@ class SavedPostsListItem extends StatelessWidget {
                     Padding(
                       padding: AppPaddings.paddingMediumTop,
                       child: InteractItemsRow(
+                        isLiked: isLiked,
+                        isSaved: true,
                         onTabLike: () => onTabLike.call(),
                         onTabComment: () => onTabComment.call(),
                         onTabSave: () => onTabSave.call(),
@@ -61,6 +65,8 @@ class SavedPostsListItem extends StatelessWidget {
                       padding: AppPaddings.paddingSmallHorizontal +
                           AppPaddings.paddingLargeRight,
                       child: InteractItemsColumn(
+                        isLiked: isLiked,
+                        isSaved: true,
                         onTabLike: () => onTabLike.call(),
                         onTabComment: () => onTabComment.call(),
                         onTabSave: () => onTabSave.call(),

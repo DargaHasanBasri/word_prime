@@ -50,7 +50,7 @@ class _GetStartedPageState extends BaseStatefulState<GetStartedPage> {
                 child: CustomButton(
                   title: LocaleKeys.getStartedPage_title.locale.toUpperCase(),
                   onClick: () {
-                    appRoutes.navigateTo(Routes.Register);
+                    appRoutes.navigateTo(Routes.Login);
                   },
                 ),
               ),
