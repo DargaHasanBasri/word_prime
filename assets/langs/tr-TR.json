@@ -156,7 +156,7 @@
     "errorOccurred ": "Bir hata oluştu. Lütfen tekrar deneyin!",
     "emailNotYetVerified": "E-posta henüz doğrulanmadı!",
     "emailAlreadyVerified": "E-posta zaten doğrulanmış!",
-    "userNotFound": "No users found for this email!",
+    "userNotFound": "Bu email kullanıcısı bulunamadı ya da yanlış email girdiniz!",
     "wrongPassword": "Kullanıcı bilgileri yanlış. Tekrar Deneyin!"
   },
   "emailVerificationPage": {

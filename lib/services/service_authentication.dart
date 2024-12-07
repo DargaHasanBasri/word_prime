@@ -111,13 +111,8 @@ class ServiceAuthentication {
       );
       return userCredential;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        /// If the user cannot be found via email, an error is logged.
-        log("No user found for that email.", error: e);
-        rethrow;
-      } else if (e.code == 'wrong-password') {
-        /// If the password is incorrect, the error is logged.
-        log("Wrong password provided for that user.", error: e);
+      if (e.code == 'invalid-email') {
+        log("E-posta adresi hatalı bir biçimde yazılmış.", error: e);
         rethrow;
       }
     } catch (e) {
@@ -164,7 +159,7 @@ class ServiceAuthentication {
       }
 
       final userDocRef =
-      FirebaseCollections.users.reference.doc(firebaseUser.uid);
+          FirebaseCollections.users.reference.doc(firebaseUser.uid);
 
       /// Check if the user document already exists.
       final userDocSnapshot = await userDocRef.get();
