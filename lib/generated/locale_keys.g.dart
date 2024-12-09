@@ -99,6 +99,10 @@ abstract class  LocaleKeys {
   static const homePage_welcome = 'homePage.welcome';
   static const homePage_searchText = 'homePage.searchText';
   static const homePage = 'homePage';
+  static const searchPage_title = 'searchPage.title';
+  static const searchPage_searchText = 'searchPage.searchText';
+  static const searchPage_emptySearch = 'searchPage.emptySearch';
+  static const searchPage = 'searchPage';
   static const activityPage_myActivity = 'activityPage.myActivity';
   static const activityPage_popularQuiz = 'activityPage.popularQuiz';
   static const activityPage_addedWordsQuiz = 'activityPage.addedWordsQuiz';

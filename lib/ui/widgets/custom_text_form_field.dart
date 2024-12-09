@@ -1,7 +1,7 @@
 import 'package:word_prime/export.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
+  CustomTextFormField({
     required this.controller,
     this.hintTextColor,
     this.textFieldTitleColor,
@@ -11,6 +11,7 @@ class CustomTextFormField extends StatelessWidget {
     String? hintText,
     String? textFieldTitle,
     String? prefixIconAddress,
+    Color? prefixIconColor,
     String? suffixIconAddress,
     double? borderRadius,
     Color? textFieldBgColor,
@@ -27,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
         textFieldTitle = textFieldTitle ?? '',
         hintText = hintText ?? '',
         prefixIconAddress = prefixIconAddress ?? 'assets/images/ic_sms.png',
+        prefixIconColor = prefixIconColor ?? AppColors.santaGrey,
         suffixIconAddress = suffixIconAddress ?? 'assets/images/ic_sms.png',
         borderRadius = borderRadius ?? 16,
         isAutoTrue = isAutoTrue ?? false,
@@ -45,6 +47,7 @@ class CustomTextFormField extends StatelessWidget {
   final Color textFieldBgColor;
   final Color? hintTextColor;
   final Color? textFieldTitleColor;
+  final Color? prefixIconColor;
   final bool isAutoTrue;
   final bool isPrefixIcon;
   final bool isSuffixIcon;
@@ -75,6 +78,7 @@ class CustomTextFormField extends StatelessWidget {
                     prefixIconAddress,
                     width: AppSizes.appOverallIconWidth,
                     height: AppSizes.appOverallIconHeight,
+                    color: prefixIconColor,
                   )
                 : null,
             suffixIcon: isSuffixIcon
@@ -84,6 +88,7 @@ class CustomTextFormField extends StatelessWidget {
                       suffixIconAddress,
                       width: AppSizes.appOverallIconWidth,
                       height: AppSizes.appOverallIconHeight,
+                      color: AppColors.santaGrey,
                     ),
                   )
                 : null,
@@ -135,7 +140,8 @@ class CustomTextFormField extends StatelessWidget {
               textFieldTitle,
               style: TextStyle(
                 fontSize: 14,
-                color: textFieldTitleColor ?? Theme.of(context).colorScheme.secondary,
+                color: textFieldTitleColor ??
+                    Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.w700,
               ),
             ),

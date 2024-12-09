@@ -18,6 +18,7 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
   Timestamp? updatedDate;
   List<String>? sentenceTurkish;
   List<String>? sentenceEnglish;
+  List<String>? wordKeywords;
 
   PostModel({
     this.postId,
@@ -35,6 +36,7 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
     this.updatedDate,
     this.sentenceTurkish,
     this.sentenceEnglish,
+    this.wordKeywords,
   });
 
   @override
@@ -53,7 +55,8 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
         createdDate,
         updatedDate,
         sentenceTurkish,
-        sentenceEnglish
+        sentenceEnglish,
+        wordKeywords
       ];
 
   PostModel copyWith({
@@ -72,6 +75,7 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
     Timestamp? updatedDate,
     List<String>? sentenceTurkish,
     List<String>? sentenceEnglish,
+    List<String>? wordKeywords,
   }) {
     return PostModel(
       postId: postId ?? this.postId,
@@ -89,6 +93,7 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
       updatedDate: updatedDate ?? this.updatedDate,
       sentenceTurkish: sentenceTurkish ?? this.sentenceTurkish,
       sentenceEnglish: sentenceEnglish ?? this.sentenceEnglish,
+      wordKeywords: wordKeywords ?? this.wordKeywords,
     );
   }
 
@@ -109,6 +114,7 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
       'updated_date': updatedDate,
       'sentence_turkish': sentenceTurkish,
       'sentence_english': sentenceEnglish,
+      'word_keywords': wordKeywords,
     };
   }
 
@@ -132,6 +138,9 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
           ?.map((e) => e as String)
           .toList(),
       sentenceEnglish: (json['sentence_english'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      wordKeywords: (json['word_keywords'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
     );

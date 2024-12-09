@@ -131,3 +131,6 @@ export 'package:word_prime/ui/pages/post_detail/post_detail_view_model.dart';
 export 'package:word_prime/ui/pages/post_detail/post_detail_provider.dart';
 export 'package:word_prime/base/enums/time_ago_keys.dart';
 export 'package:image_picker/image_picker.dart';
+export 'package:word_prime/ui/pages/search/search_page.dart';
+export 'package:word_prime/ui/pages/search/search_view_model.dart';
+export 'package:word_prime/ui/pages/search/search_provider.dart';

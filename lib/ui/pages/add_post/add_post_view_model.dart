@@ -66,6 +66,10 @@ class AddPostViewModel extends BaseViewModel {
           wordTurkish: turkishWordInput.value,
           sentenceEnglish: englishSentences.value,
           sentenceTurkish: turkishSentences.value,
+          wordKeywords: [
+            turkishWordInput.value.toLowerCase(),
+            englishWordInput.value.toLowerCase(),
+          ],
         ),
       );
 
