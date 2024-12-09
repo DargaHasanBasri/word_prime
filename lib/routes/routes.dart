@@ -28,6 +28,7 @@ final class Routes {
   static const String MyWordList = 'myWordListProvider';
   static const String ProfileUser = 'profileUserProvider';
   static const String PostDetail = 'postDetailProvider';
+  static const String Search = 'searchProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -188,6 +189,10 @@ final class Routes {
             currentPost: currentPost,
             currentUserNotifier: currentUserModelNotifier,
           ),
+        );
+      case Routes.Search:
+        return MaterialPageRoute(
+          builder: (context) => SearchProvider(),
         );
       default:
         return MaterialPageRoute(

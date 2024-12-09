@@ -1,3 +1,4 @@
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:word_prime/export.dart';
 
 class SplashPage extends StatefulWidget {
@@ -58,6 +59,24 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
               textAlign: TextAlign.center,
             ),
           ),
+          Padding(
+            padding: AppPaddings.paddingLargeTop,
+            child: ValueListenableBuilder(
+              valueListenable: _vm.isLoading,
+              builder: (_, loading, ___) {
+                return loading
+                    ? Column(
+                        children: [
+                          SpinKitFadingCircle(
+                            color: Theme.of(context).colorScheme.secondary,
+                            size: 50.0,
+                          ),
+                        ],
+                      )
+                    : SizedBox(height: 50);
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -65,8 +84,9 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
 
   Future<void> waitAndNavigate(BuildContext context) async {
     await Future.delayed(
-      const Duration(seconds: 4),
+      const Duration(seconds: 2),
       () {
+        _vm.isLoading.value = false;
         _vm.isLoggedIn()
             ? appRoutes.navigateToReplacement(Routes.MainTab)
             : appRoutes.navigateToReplacement(Routes.Onboarding);

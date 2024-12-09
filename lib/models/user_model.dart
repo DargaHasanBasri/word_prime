@@ -10,6 +10,7 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
   bool? emailVerification;
   int? totalPost;
   int? totalScore;
+  List<String>? userNameKeywords;
 
   UserModel({
     this.email,
@@ -20,6 +21,7 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
     this.emailVerification,
     this.totalPost,
     this.totalScore,
+    this.userNameKeywords,
   });
 
   @override
@@ -31,7 +33,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
         userName,
         emailVerification,
         totalPost,
-        totalScore
+        totalScore,
+        userNameKeywords
       ];
 
   UserModel copyWith({
@@ -43,6 +46,7 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
     bool? emailVerification,
     int? totalPost,
     int? totalScore,
+    List<String>? userNameKeywords,
   }) {
     return UserModel(
       email: email ?? this.email,
@@ -53,6 +57,7 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
       emailVerification: emailVerification ?? this.emailVerification,
       totalPost: totalPost ?? this.totalPost,
       totalScore: totalScore ?? this.totalScore,
+      userNameKeywords: userNameKeywords ?? this.userNameKeywords,
     );
   }
 
@@ -66,6 +71,7 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
       'email_verification': emailVerification,
       'total_post': totalPost,
       'total_score': totalScore,
+      'user_name_keywords': userNameKeywords,
     };
   }
 
@@ -80,6 +86,9 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
       emailVerification: json['email_verification'] as bool?,
       totalPost: json['total_post'] as int?,
       totalScore: json['total_score'] as int?,
+      userNameKeywords: (json['user_name_keywords'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
   }
 }

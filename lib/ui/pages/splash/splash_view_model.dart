@@ -21,4 +21,6 @@ class SplashViewModel extends BaseViewModel {
   bool isLoggedIn() {
     return isLoggedInWithGoogle() || isLoggedInEmailPassword();
   }
+
+  ValueNotifier<bool> isLoading = ValueNotifier(true);
 }

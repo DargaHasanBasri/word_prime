@@ -22,6 +22,22 @@ class ServiceAuthentication {
     }
   }
 
+  Future<List<String>> generateSearchKeywords({
+    required String? userName,
+  }) async {
+    List<String> keywords = [];
+
+    if (userName != null) {
+      List<String> words = userName.toLowerCase().split(' ');
+
+      keywords.addAll(words);
+
+      keywords.add(userName.toLowerCase());
+    }
+
+    return keywords;
+  }
+
   /// Creates a new user record.
   /// A new user is registered on Firebase Authentication using the email and
   /// password information in the given 'UserModel' object. If successful,
@@ -54,6 +70,8 @@ class ServiceAuthentication {
         /// Assigns the user's identity (UID) to the `userId` field
         String uid = userCredential.user!.uid;
         userModel.userId = uid;
+        userModel.userNameKeywords =
+            await generateSearchKeywords(userName: userModel.userName);
 
         /// Saves user data to Firestore
         await FirebaseCollections.users.reference.doc(userModel.userId).set(

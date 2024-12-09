@@ -31,6 +31,30 @@ class PostRepository {
     }
   }
 
+  Future<List<PostModel?>?> fetchWordByQuery({
+    required String searchText,
+  }) async {
+    try {
+      final response = await _postCollectionReference
+          .where('word_keywords', arrayContains: searchText)
+          .withConverter(
+        fromFirestore: (snapshot, _) {
+          return PostModel().fromFirebase(snapshot);
+        },
+        toFirestore: (value, _) {
+          return {};
+        },
+      ).get();
+
+      List<PostModel?> posts = response.docs.map((doc) => doc.data()).toList();
+
+      return posts;
+    } catch (e) {
+      log('An error occurred while retrieving post data: $e');
+      return null;
+    }
+  }
+
   Future<void> addPost({PostModel? postModel}) async {
     try {
       DocumentReference _documentReference = await _postCollectionReference.add(

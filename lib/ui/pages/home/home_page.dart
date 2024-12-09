@@ -1,5 +1,6 @@
 import 'package:word_prime/base/events/refresh_posts_event.dart';
 import 'package:word_prime/export.dart';
+import 'package:word_prime/ui/pages/home/components/home_search_bar.dart';
 import 'package:word_prime/ui/pages/home/components/post_list_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -46,39 +47,10 @@ class _HomePageState extends BaseStatefulState<HomePage> {
         children: [
           Padding(
             padding: AppPaddings.appPaddingAll,
-            child: Container(
-              padding: AppPaddings.paddingSmallHorizontal,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  width: 1,
-                ),
-              ),
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Image.asset(
-                      AppAssets.icSearchPath,
-                      color: AppColors.santaGrey,
-                      width: 24,
-                      height: 24,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      LocaleKeys.homePage_searchText.locale,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.w400,
-                          ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
+            child: HomeSearchBar(
+              onTapSearchBar: () {
+                appRoutes.navigateTo(Routes.Search);
+              },
             ),
           ),
           ValueListenableBuilder(

@@ -68,4 +68,28 @@ class UserRepository {
       log('Update error: $e');
     }
   }
+
+  Future<List<UserModel?>?> fetchUserByQuery({
+    required String searchText,
+  }) async {
+    try {
+      final response = await _userCollectionReference
+          .where('user_name_keywords', arrayContains: searchText)
+          .withConverter(
+        fromFirestore: (snapshot, _) {
+          return UserModel().fromFirebase(snapshot);
+        },
+        toFirestore: (value, _) {
+          return {};
+        },
+      ).get();
+
+      List<UserModel?> users = response.docs.map((doc) => doc.data()).toList();
+
+      return users;
+    } catch (e) {
+      log('An error occurred while retrieving user data: $e');
+      return null;
+    }
+  }
 }
