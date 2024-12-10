@@ -1,4 +1,3 @@
-import 'package:word_prime/base/events/refresh_posts_event.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/profile_user_details/components/profile_user_details_bottom_sheet.dart';
 import 'package:word_prime/ui/pages/profile_user_details/components/profile_user_details_metric.dart';
@@ -57,8 +56,11 @@ class _ProfileUserDetailsPageState
                 return ValueListenableBuilder(
                   valueListenable: _vm.userNotifier,
                   builder: (_, __, ___) {
+                    bool isCurrentUser =
+                        _vm.userId == _vm.currentUserNotifier.value?.userId;
                     return ProfileUserDetailsMetric(
                       userModel: _vm.userNotifier.value,
+                      isCurrentUser: isCurrentUser,
                       onTapFollowButton: () {
                         _vm.isFollowed.value
                             ? showCustomBottomSheet(
@@ -217,7 +219,6 @@ class _ProfileUserDetailsPageState
       leading: IconButton(
         onPressed: () {
           appRoutes.popIfBackStackNotEmpty();
-          eventBus.fire(new RefreshPostsEvent());
           eventBus.fire(new RefreshUserInfoEvent());
         },
         icon: Image.asset(

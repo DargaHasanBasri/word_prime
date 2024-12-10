@@ -7,6 +7,7 @@ class AddedWordsListItem extends StatelessWidget {
   final VoidCallback onTabChoice;
   final VoidCallback onTabShare;
   final VoidCallback onTabTranslate;
+  final VoidCallback onTabPost;
   final PostModel? postModel;
   final bool? isLiked;
   final bool? isSaved;
@@ -22,6 +23,7 @@ class AddedWordsListItem extends StatelessWidget {
     required this.onTabShare,
     required this.isLiked,
     required this.isSaved,
+    required this.onTabPost,
   });
 
   @override
@@ -39,6 +41,7 @@ class AddedWordsListItem extends StatelessWidget {
                   children: [
                     PostWithoutImage(
                       postModel: postModel,
+                      onTabPost: () => onTabPost.call(),
                     ),
                     Padding(
                       padding: AppPaddings.paddingMediumTop,
@@ -75,6 +78,7 @@ class AddedWordsListItem extends StatelessWidget {
                     Expanded(
                       child: PostWithImage(
                         postModel: postModel,
+                        onTabPost: () => onTabPost.call(),
                       ),
                     ),
                   ],

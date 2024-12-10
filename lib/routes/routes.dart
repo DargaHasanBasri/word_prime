@@ -200,8 +200,12 @@ final class Routes {
           ),
         );
       case Routes.Search:
+        final ValueNotifier<UserModel?> currentUserNotifier =
+            settings.arguments as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
-          builder: (context) => SearchProvider(),
+          builder: (context) => SearchProvider(
+            currentUserNotifier: currentUserNotifier,
+          ),
         );
       case Routes.MyProfileFollowedFollowers:
         final List<dynamic> arguments = settings.arguments as List;

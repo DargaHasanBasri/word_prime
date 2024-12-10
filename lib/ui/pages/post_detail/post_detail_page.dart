@@ -75,7 +75,15 @@ class _PostDetailPageState extends BaseStatefulState<PostDetailPage> {
         PostUserInfo(
           postModel: _vm.currentPost,
           onTabChoice: () {},
-          onTabUserProfile: () {},
+          onTabUserProfile: () {
+            appRoutes.navigateTo(
+              Routes.ProfileUserDetails,
+              arguments: [
+                _vm.currentPost?.userId,
+                _vm.currentUserNotifier,
+              ],
+            );
+          },
         ),
         Padding(
           padding: AppPaddings.paddingMediumVertical,
@@ -101,11 +109,13 @@ class _PostDetailPageState extends BaseStatefulState<PostDetailPage> {
                   ? Expanded(
                       child: PostWithoutImage(
                         postModel: _vm.currentPost,
+                        onTabPost: () {},
                       ),
                     )
                   : Expanded(
                       child: PostWithImage(
                         postModel: _vm.currentPost,
+                        onTabPost: () {},
                       ),
                     ),
             ],
@@ -126,6 +136,15 @@ class _PostDetailPageState extends BaseStatefulState<PostDetailPage> {
         return UserCommentDetails(
           commentModel: commentModel,
           dateTime: commentModel?.createdDate?.toDateTime(),
+          onTabUserProfile: () {
+            appRoutes.navigateTo(
+              Routes.ProfileUserDetails,
+              arguments: [
+                commentModel?.userId,
+                _vm.currentUserNotifier,
+              ],
+            );
+          },
         );
       },
       separatorBuilder: (context, index) => SizedBox(

@@ -51,6 +51,15 @@ class _MyProfileFollowedFollowersPageState
               buttonTitle: _vm.isFollowedPage
                   ? LocaleKeys.following.locale
                   : LocaleKeys.follow.locale,
+              onTapUserProfile: () {
+                appRoutes.navigateTo(
+                  Routes.ProfileUserDetails,
+                  arguments: [
+                    userModel?[index]?.userId,
+                    _vm.currentUserNotifier,
+                  ],
+                );
+              },
               onTap: () {
                 _vm.isFollowedPage
                     ? showCustomBottomSheet(
@@ -86,29 +95,33 @@ class _MyProfileFollowedFollowersPageState
   Widget _followerListItem({
     required UserModel? userModel,
     required VoidCallback onTap,
+    required VoidCallback onTapUserProfile,
     required String buttonTitle,
   }) {
     return Row(
       children: [
         Expanded(
           flex: 2,
-          child: Row(
-            children: [
-              CustomUserCircleAvatar(
-                borderPadding: 0,
-                borderWidth: 0,
-                circleRadius: 24,
-                profileImgAddress: userModel?.profileImageAddress,
-              ),
-              Padding(
-                padding: AppPaddings.paddingSmallLeft,
-                child: Text(
-                  '${userModel?.userName ?? ''}',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  overflow: TextOverflow.ellipsis,
+          child: GestureDetector(
+            onTap: () => onTapUserProfile.call(),
+            child: Row(
+              children: [
+                CustomUserCircleAvatar(
+                  borderPadding: 0,
+                  borderWidth: 0,
+                  circleRadius: 24,
+                  profileImgAddress: userModel?.profileImageAddress,
                 ),
-              ),
-            ],
+                Padding(
+                  padding: AppPaddings.paddingSmallLeft,
+                  child: Text(
+                    '${userModel?.userName ?? ''}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         Expanded(

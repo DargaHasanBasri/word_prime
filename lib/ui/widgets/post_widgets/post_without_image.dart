@@ -2,9 +2,12 @@ import 'package:word_prime/export.dart';
 
 class PostWithoutImage extends StatelessWidget {
   final PostModel? postModel;
+  final VoidCallback? onTabPost;
+
   const PostWithoutImage({
     super.key,
     required this.postModel,
+    required this.onTabPost,
   });
 
   @override
@@ -17,15 +20,19 @@ class PostWithoutImage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'İngilizce Kelime: ${postModel?.wordEnglish ?? ''}\n'
-                'İngilizce Cümle: ${postModel?.sentenceEnglish?[0] ?? ''}',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.surfaceContainerHigh,
-                      fontWeight: FontWeight.w400,
-                    ),
-                maxLines: 8,
-                overflow: TextOverflow.ellipsis,
+              GestureDetector(
+                onTap: () => onTabPost?.call(),
+                child: Text(
+                  'İngilizce Kelime: ${postModel?.wordEnglish ?? ''}\n'
+                  'İngilizce Cümle: ${postModel?.sentenceEnglish?[0] ?? ''}',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color:
+                            Theme.of(context).colorScheme.surfaceContainerHigh,
+                        fontWeight: FontWeight.w400,
+                      ),
+                  maxLines: 8,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               SizedBox(height: AppSizes.sizedBoxXSmallHeight),
               Align(

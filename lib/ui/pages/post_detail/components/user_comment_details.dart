@@ -3,10 +3,13 @@ import 'package:word_prime/export.dart';
 class UserCommentDetails extends StatelessWidget {
   final CommentModel? commentModel;
   final DateTime? dateTime;
+  final VoidCallback onTabUserProfile;
+
   const UserCommentDetails({
     super.key,
     required this.commentModel,
     required this.dateTime,
+    required this.onTabUserProfile,
   });
 
   @override
@@ -18,10 +21,13 @@ class UserCommentDetails extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomUserCircleAvatar(
-                circleRadius: 16,
-                borderWidth: 0,
-                profileImgAddress: commentModel?.userProfileImage,
+              GestureDetector(
+                onTap: () => onTabUserProfile.call(),
+                child: CustomUserCircleAvatar(
+                  circleRadius: 16,
+                  borderWidth: 0,
+                  profileImgAddress: commentModel?.userProfileImage,
+                ),
               ),
               SizedBox(width: AppSizes.sizedBoxSmallWidth),
               Expanded(
@@ -32,11 +38,14 @@ class UserCommentDetails extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Flexible(
-                          child: Text(
-                            '${commentModel?.userName ?? ''}',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
+                          child: GestureDetector(
+                            onTap: () => onTabUserProfile.call(),
+                            child: Text(
+                              '${commentModel?.userName ?? ''}',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ),
                           ),
                         ),
                         SizedBox(width: AppSizes.sizedBoxSmallWidth),

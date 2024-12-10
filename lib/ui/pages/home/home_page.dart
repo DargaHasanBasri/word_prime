@@ -49,7 +49,10 @@ class _HomePageState extends BaseStatefulState<HomePage> {
             padding: AppPaddings.appPaddingAll,
             child: HomeSearchBar(
               onTapSearchBar: () {
-                appRoutes.navigateTo(Routes.Search);
+                appRoutes.navigateTo(
+                  Routes.Search,
+                  arguments: _vm.currentUserNotifier,
+                );
               },
             ),
           ),
@@ -134,13 +137,24 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                                   ),
                                 );
                               },
-                              onTabUserProfile: () => appRoutes.navigateTo(
-                                Routes.ProfileUserDetails,
-                                arguments: [
-                                  postModel?.userId,
-                                  _vm.currentUserNotifier,
-                                ],
-                              ),
+                              onTabUserProfile: () {
+                                appRoutes.navigateTo(
+                                  Routes.ProfileUserDetails,
+                                  arguments: [
+                                    postModel?.userId,
+                                    _vm.currentUserNotifier,
+                                  ],
+                                );
+                              },
+                              onTabPost: () {
+                                appRoutes.navigateTo(
+                                  Routes.PostDetail,
+                                  arguments: [
+                                    postModel,
+                                    _vm.currentUserNotifier,
+                                  ],
+                                );
+                              },
                             ),
                           );
                         },
@@ -173,6 +187,15 @@ class _HomePageState extends BaseStatefulState<HomePage> {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Padding(
+                  padding: AppPaddings.paddingSmallHorizontal,
+                  child: CustomUserCircleAvatar(
+                    circleRadius: 14,
+                    borderPadding: 0,
+                    profileImgAddress:
+                        _vm.currentUserNotifier.value?.profileImageAddress,
+                  ),
+                ),
                 Expanded(
                   child: Text(
                     '${LocaleKeys.homePage_welcome.locale}, '
@@ -184,22 +207,11 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                     overflow: TextOverflow.fade,
                   ),
                 ),
-                Row(
-                  children: [
-                    CustomUserCircleAvatar(
-                      circleRadius: 14,
-                      borderPadding: 0,
-                      profileImgAddress:
-                          _vm.currentUserNotifier.value?.profileImageAddress,
-                    ),
-                    SizedBox(width: AppSizes.sizedBoxSmallWidth),
-                    Image.asset(
-                      AppAssets.icNotificationPath,
-                      width: AppSizes.appOverallIconWidth,
-                      height: AppSizes.appOverallIconWidth,
-                    ),
-                  ],
-                )
+                Image.asset(
+                  AppAssets.icNotificationPath,
+                  width: AppSizes.appOverallIconWidth,
+                  height: AppSizes.appOverallIconWidth,
+                ),
               ],
             );
           }),

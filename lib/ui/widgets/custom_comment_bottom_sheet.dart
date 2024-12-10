@@ -5,6 +5,7 @@ class CustomCommentBottomSheet extends StatelessWidget {
   final VoidCallback onPressSuffixIcon;
   final String? currentUserProfileImage;
   final List<CommentModel?>? comments;
+
   const CustomCommentBottomSheet({
     super.key,
     required this.commentController,
@@ -143,7 +144,7 @@ class CustomCommentBottomSheet extends StatelessWidget {
                         ),
                         SizedBox(width: AppSizes.sizedBoxSmallWidth),
                         Text(
-                          AppUtility().timeAgo(dateTime,isAbbreviation: true),
+                          AppUtility().timeAgo(dateTime, isAbbreviation: true),
                           style:
                               Theme.of(context).textTheme.titleSmall?.copyWith(
                                     fontSize: 14,

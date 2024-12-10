@@ -8,6 +8,7 @@ class SavedPostsListItem extends StatelessWidget {
   final VoidCallback onTabShare;
   final VoidCallback onTabTranslate;
   final VoidCallback onTabUserProfile;
+  final VoidCallback onTabPost;
   final PostModel? postModel;
   final bool? isLiked;
   const SavedPostsListItem({
@@ -20,6 +21,7 @@ class SavedPostsListItem extends StatelessWidget {
     required this.onTabChoice,
     required this.onTabShare,
     required this.onTabUserProfile,
+    required this.onTabPost,
     required this.isLiked,
   });
 
@@ -40,6 +42,7 @@ class SavedPostsListItem extends StatelessWidget {
                   children: [
                     PostWithoutImage(
                       postModel: postModel,
+                      onTabPost: () => onTabPost.call(),
                     ),
                     Padding(
                       padding: AppPaddings.paddingMediumTop,
@@ -76,6 +79,7 @@ class SavedPostsListItem extends StatelessWidget {
                     Expanded(
                       child: PostWithImage(
                         postModel: postModel,
+                        onTabPost: () => onTabPost.call(),
                       ),
                     ),
                   ],
