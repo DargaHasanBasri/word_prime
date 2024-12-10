@@ -48,7 +48,7 @@ class _SettingsPageState extends BaseStatefulState<SettingsPage> {
             children: [
               SettingsItem(
                 title: LocaleKeys.settings_profileDetails.locale,
-                onTab: () => appRoutes.navigateTo(Routes.ProfileDetails),
+                onTab: () => appRoutes.navigateTo(Routes.MyProfileDetails),
                 iconAddress: AppAssets.icUserPath,
                 isFirst: true,
               ),

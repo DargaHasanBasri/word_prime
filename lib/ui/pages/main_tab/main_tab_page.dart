@@ -59,7 +59,7 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
       case 3:
         return TasksProvider();
       case 4:
-        return ProfileProvider(
+        return MyProfileProvider(
           currentUserNotifier: _vm.userNotifier,
         );
       default:

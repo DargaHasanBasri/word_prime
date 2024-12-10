@@ -45,6 +45,9 @@ final class AppAssets {
   static String icChoicePath = _imagePath('ic_choice');
   static String icSharePath = _imagePath('ic_share');
   static String icSearchPath = _imagePath('ic_search');
+  static String icTabBarPost = _imagePath('ic_tab_bar_posts');
+  static String icTabBarLiked = _imagePath('ic_tab_bar_liked');
+  static String icTabBarSaved = _imagePath('ic_tab_bar_saved');
   static String imgSuccessfulPath = _imagePath('img_successful');
   static String imgExampPostPath = _imagePath('img_examp_post');
   static String imgQuizAnalysisPath = _imagePath('img_quiz_analysis');

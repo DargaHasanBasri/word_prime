@@ -20,7 +20,7 @@ class BaseFirestore<T extends BaseModel<T>> {
   /// [model]: An instance of the model class that extends BaseModel<T>
   /// used for deserialization. Returns a list of items of type T that match
   /// the criteria or an empty list if no items are found
-  Future<List<T?>> fetchItemsByQuery({
+  Future<List<T?>> fetchPostsByQuery({
     required String userId,
     required String subCollectionName,
     required String field,
@@ -67,7 +67,7 @@ class BaseFirestore<T extends BaseModel<T>> {
     }
   }
 
-  Future<List<T?>> fetchItemsFromSubCollection({
+  Future<List<T?>> fetchPostsFromSubCollection({
     required String userId,
     required String subCollectionName,
     required T model,

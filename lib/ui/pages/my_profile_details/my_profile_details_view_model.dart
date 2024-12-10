@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:word_prime/export.dart';
 
-class ProfileDetailsViewModel extends BaseViewModel {
+class MyProfileDetailsViewModel extends BaseViewModel {
   /// Variable where I keep the change of the value of the isHaveObscure
   /// property in the text form field
   ValueNotifier<bool> isActive = ValueNotifier(true);

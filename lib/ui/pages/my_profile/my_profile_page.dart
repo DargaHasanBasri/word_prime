@@ -1,22 +1,22 @@
 import 'package:word_prime/export.dart';
-import 'package:word_prime/ui/pages/profile/components/profile_detail_container.dart';
-import 'package:word_prime/ui/pages/profile/components/current_user_profile_info.dart';
+import 'package:word_prime/ui/pages/my_profile/components/current_user_profile_info.dart';
+import 'package:word_prime/ui/pages/my_profile/components/profile_detail_container.dart';
+import 'package:word_prime/ui/pages/my_profile/components/profile_tab_bar.dart';
 import 'package:word_prime/ui/widgets/profile_post_item.dart';
-import 'package:word_prime/ui/pages/profile/components/profile_tab_bar.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class MyProfilePage extends StatefulWidget {
+  const MyProfilePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<MyProfilePage> createState() => _MyProfilePageState();
 }
 
-class _ProfilePageState extends BaseStatefulState<ProfilePage> {
-  late final ProfileViewModel _vm;
+class _MyProfilePageState extends BaseStatefulState<MyProfilePage> {
+  late final MyProfileViewModel _vm;
 
   @override
   void initState() {
-    _vm = Provider.of<ProfileViewModel>(context, listen: false);
+    _vm = Provider.of<MyProfileViewModel>(context, listen: false);
     _vm.getAddedSavedLikedPosts(
       showProgress: () => showProgress(context),
       hideProgress: () => hideProgress(),
@@ -63,14 +63,20 @@ class _ProfilePageState extends BaseStatefulState<ProfilePage> {
                           onTapWordButton: () {},
                           onTapFollowButton: () {
                             appRoutes.navigateTo(
-                              Routes.FollowerFollow,
-                              arguments: true,
+                              Routes.MyProfileFollowedFollowers,
+                              arguments: [
+                                true,
+                                _vm.currentUserNotifier,
+                              ],
                             );
                           },
                           onTapFollowerButton: () {
                             appRoutes.navigateTo(
-                              Routes.FollowerFollow,
-                              arguments: false,
+                              Routes.MyProfileFollowedFollowers,
+                              arguments: [
+                                false,
+                                _vm.currentUserNotifier,
+                              ],
                             );
                           },
                         ),

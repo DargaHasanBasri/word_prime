@@ -12,23 +12,26 @@ final class Routes {
   static const String AddPost = 'addPostProvider';
   static const String AddPostSuccessful = 'addPostSuccessfulProvider';
   static const String Settings = 'settingsProvider';
-  static const String ProfileDetails = 'profileDetailsProvider';
+  static const String MyProfileDetails = 'myProfileDetailsProvider';
   static const String MainTab = 'mainTabProvider';
   static const String Home = 'homeProvider';
   static const String Activity = 'activityProvider';
   static const String Tasks = 'tasksProvider';
   static const String TaskList = 'taskListProvider';
   static const String LeaderBoard = 'leaderBoardProvider';
-  static const String Profile = 'profileProvider';
-  static const String FollowerFollow = 'followerFollowProvider';
+  static const String MyProfile = 'myProfileProvider';
+  static const String ProfileUserFollowedFollowers =
+      'profileUserFollowedFollowersProvider';
   static const String Quiz = 'quizProvider';
   static const String EmailVerification = 'emailVerificationProvider';
   static const String ResetPassword = 'resetPasswordProvider';
   static const String AddWord = 'addWordProvider';
   static const String MyWordList = 'myWordListProvider';
-  static const String ProfileUser = 'profileUserProvider';
+  static const String ProfileUserDetails = 'profileUserDetailsProvider';
   static const String PostDetail = 'postDetailProvider';
   static const String Search = 'searchProvider';
+  static const String MyProfileFollowedFollowers =
+      'myProfileFollowedFollowersProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -82,9 +85,9 @@ final class Routes {
         return MaterialPageRoute(
           builder: (context) => const SettingsProvider(),
         );
-      case Routes.ProfileDetails:
+      case Routes.MyProfileDetails:
         return MaterialPageRoute(
-          builder: (context) => const ProfileDetailsProvider(),
+          builder: (context) => const MyProfileDetailsProvider(),
         );
       case Routes.MainTab:
         return MaterialPageRoute(
@@ -117,18 +120,24 @@ final class Routes {
         return MaterialPageRoute(
           builder: (context) => const LeaderboardProvider(),
         );
-      case Routes.Profile:
+      case Routes.MyProfile:
         final ValueNotifier<UserModel?> userModelNotifier =
             settings.arguments as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
           builder: (context) =>
-              ProfileProvider(currentUserNotifier: userModelNotifier),
+              MyProfileProvider(currentUserNotifier: userModelNotifier),
         );
-      case Routes.FollowerFollow:
-        final bool isFollow = settings.arguments as bool;
+      case Routes.ProfileUserFollowedFollowers:
+        final List<dynamic> arguments = settings.arguments as List;
+        final bool isFollowedPage = arguments[0] as bool;
+        final String userId = arguments[1] as String;
+        final ValueNotifier<UserModel?> currentUserNotifier =
+            arguments[2] as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
-          builder: (context) => FollowerFollowProvider(
-            isFollow: isFollow,
+          builder: (context) => ProfileUserFollowedFollowersProvider(
+            isFollowedPage: isFollowedPage,
+            userId: userId,
+            currentUserNotifier: currentUserNotifier,
           ),
         );
       case Routes.Quiz:
@@ -168,13 +177,13 @@ final class Routes {
             englishLevel: englishLevel,
           ),
         );
-      case Routes.ProfileUser:
+      case Routes.ProfileUserDetails:
         final List<dynamic> arguments = settings.arguments as List;
         final String? userId = arguments[0] as String?;
         final ValueNotifier<UserModel?> currentUserModelNotifier =
             arguments[1] as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
-          builder: (context) => ProfileUserProvider(
+          builder: (context) => ProfileUserDetailsProvider(
             userId: userId,
             currentUserNotifier: currentUserModelNotifier,
           ),
@@ -193,6 +202,17 @@ final class Routes {
       case Routes.Search:
         return MaterialPageRoute(
           builder: (context) => SearchProvider(),
+        );
+      case Routes.MyProfileFollowedFollowers:
+        final List<dynamic> arguments = settings.arguments as List;
+        final bool isFollowedPage = arguments[0] as bool;
+        final ValueNotifier<UserModel?> currentUserNotifier =
+            arguments[1] as ValueNotifier<UserModel?>;
+        return MaterialPageRoute(
+          builder: (context) => MyProfileFollowedFollowersProvider(
+            isFollowedPage: isFollowedPage,
+            currentUserNotifier: currentUserNotifier,
+          ),
         );
       default:
         return MaterialPageRoute(

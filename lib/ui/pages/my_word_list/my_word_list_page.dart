@@ -367,7 +367,7 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                 onTabChoice: () {},
                 onTabShare: () {},
                 onTabUserProfile: () => appRoutes.navigateTo(
-                  Routes.ProfileUser,
+                  Routes.ProfileUserDetails,
                   arguments: postModel?.userId,
                 ),
               ),

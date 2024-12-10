@@ -1,9 +1,9 @@
 import 'package:word_prime/export.dart';
 
-class ProfileUserProvider extends StatelessWidget {
+class ProfileUserDetailsProvider extends StatelessWidget {
   final String? userId;
   final ValueNotifier<UserModel?> currentUserNotifier;
-  const ProfileUserProvider({
+  const ProfileUserDetailsProvider({
     super.key,
     required this.userId,
     required this.currentUserNotifier,
@@ -12,11 +12,11 @@ class ProfileUserProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => ProfileUserViewModel(
+      create: (context) => ProfileUserDetailsViewModel(
         userId,
         currentUserNotifier,
       ),
-      child: ProfileUserPage(),
+      child: ProfileUserDetailsPage(),
     );
   }
 }
