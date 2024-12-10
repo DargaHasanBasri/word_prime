@@ -87,19 +87,47 @@ class _SearchPageState extends BaseStatefulState<SearchPage> {
                                     itemCount: combinedList.length,
                                     itemBuilder: (context, index) {
                                       if (index < (postList?.length ?? 0)) {
-                                        final post = postList?[index];
-                                        return post?.postImageAddress != null
+                                        final postModel = postList?[index];
+                                        return postModel?.postImageAddress !=
+                                                null
                                             ? SearchPostWithImage(
-                                                postModel: post,
+                                                postModel: postModel,
+                                                onTapPostWithImage: () {
+                                                  appRoutes.navigateTo(
+                                                    Routes.PostDetail,
+                                                    arguments: [
+                                                      postModel,
+                                                      _vm.currentUserNotifier,
+                                                    ],
+                                                  );
+                                                },
                                               )
                                             : SearchPostWithoutImage(
-                                                postModel: post,
+                                                postModel: postModel,
+                                                onTapPostWithoutImage: () {
+                                                  appRoutes.navigateTo(
+                                                    Routes.PostDetail,
+                                                    arguments: [
+                                                      postModel,
+                                                      _vm.currentUserNotifier,
+                                                    ],
+                                                  );
+                                                },
                                               );
                                       } else {
                                         final user = userList?[
                                             index - (postList?.length ?? 0)];
                                         return SearchUserInfo(
                                           userModel: user,
+                                          onTapUserInfo: () {
+                                            appRoutes.navigateTo(
+                                              Routes.ProfileUserDetails,
+                                              arguments: [
+                                                user?.userId,
+                                                _vm.currentUserNotifier,
+                                              ],
+                                            );
+                                          },
                                         );
                                       }
                                     },

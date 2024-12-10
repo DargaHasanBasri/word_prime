@@ -6,6 +6,7 @@ class ProfileUserDetailsMetric extends StatelessWidget {
   final VoidCallback onTapFollowing;
   final VoidCallback onTapFollowers;
   final String? buttonTitle;
+  final bool isCurrentUser;
   const ProfileUserDetailsMetric({
     super.key,
     required this.userModel,
@@ -13,6 +14,7 @@ class ProfileUserDetailsMetric extends StatelessWidget {
     required this.buttonTitle,
     required this.onTapFollowing,
     required this.onTapFollowers,
+    required this.isCurrentUser,
   });
 
   @override
@@ -112,14 +114,16 @@ class ProfileUserDetailsMetric extends StatelessWidget {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: CustomButton(
-                    title: buttonTitle ?? '',
-                    borderRadius: 16,
-                    titleVerticalPadding: 6,
-                    onClick: () => onTapFollowButton.call(),
-                  ),
-                ),
+                isCurrentUser
+                    ? SizedBox()
+                    : Expanded(
+                        child: CustomButton(
+                          title: buttonTitle ?? '',
+                          borderRadius: 16,
+                          titleVerticalPadding: 6,
+                          onClick: () => onTapFollowButton.call(),
+                        ),
+                      ),
               ],
             ),
           ),

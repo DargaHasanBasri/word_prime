@@ -3,6 +3,9 @@ import 'dart:developer';
 import 'package:word_prime/export.dart';
 
 class SearchViewModel extends BaseViewModel {
+  final ValueNotifier<UserModel?> currentUserNotifier;
+  SearchViewModel(this.currentUserNotifier);
+
   ValueNotifier<List<UserModel?>?> userListNotifier = ValueNotifier(null);
   ValueNotifier<List<PostModel?>?> postListNotifier = ValueNotifier(null);
   ValueNotifier<bool> isSearch = ValueNotifier(false);

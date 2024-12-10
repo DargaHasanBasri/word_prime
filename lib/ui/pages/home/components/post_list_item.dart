@@ -8,6 +8,7 @@ class PostListItem extends StatelessWidget {
   final VoidCallback onTabTranslate;
   final VoidCallback onTabChoice;
   final VoidCallback onTabUserProfile;
+  final VoidCallback onTabPost;
   final PostModel? postModel;
   final bool? isLiked;
   final bool? isSaved;
@@ -22,6 +23,7 @@ class PostListItem extends StatelessWidget {
     required this.onTabChoice,
     required this.postModel,
     required this.onTabUserProfile,
+    required this.onTabPost,
     required this.isLiked,
     required this.isSaved,
   });
@@ -43,9 +45,11 @@ class PostListItem extends StatelessWidget {
               postModel?.postImageAddress == null
                   ? PostWithoutImage(
                       postModel: postModel,
+                      onTabPost: () => onTabPost.call(),
                     )
                   : PostWithImage(
                       postModel: postModel,
+                      onTabPost: () => onTabPost.call(),
                     ),
               Padding(
                 padding: AppPaddings.paddingMediumTop,

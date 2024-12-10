@@ -59,7 +59,16 @@ class _ProfileUserFollowedFollowersPageState
                     buttonTitle: isFollowedUser
                         ? LocaleKeys.following.locale
                         : LocaleKeys.follow.locale,
-                    onTap: () {
+                    onTapUserProfile: () {
+                      appRoutes.navigateTo(
+                        Routes.ProfileUserDetails,
+                        arguments: [
+                          userModel?[index]?.userId,
+                          _vm.currentUserNotifier,
+                        ],
+                      );
+                    },
+                    onTapButton: () {
                       isFollowedUser
                           ? showCustomBottomSheet(
                               context: context,
@@ -94,7 +103,8 @@ class _ProfileUserFollowedFollowersPageState
 
   Widget _followerListItem({
     required UserModel? userModel,
-    required VoidCallback onTap,
+    required VoidCallback onTapButton,
+    required VoidCallback onTapUserProfile,
     required String buttonTitle,
     required bool isCurrentUser,
   }) {
@@ -102,23 +112,26 @@ class _ProfileUserFollowedFollowersPageState
       children: [
         Expanded(
           flex: 2,
-          child: Row(
-            children: [
-              CustomUserCircleAvatar(
-                borderPadding: 0,
-                borderWidth: 0,
-                circleRadius: 24,
-                profileImgAddress: userModel?.profileImageAddress,
-              ),
-              Padding(
-                padding: AppPaddings.paddingSmallLeft,
-                child: Text(
-                  '${userModel?.userName ?? ''}',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  overflow: TextOverflow.ellipsis,
+          child: GestureDetector(
+            onTap: () => onTapUserProfile.call(),
+            child: Row(
+              children: [
+                CustomUserCircleAvatar(
+                  borderPadding: 0,
+                  borderWidth: 0,
+                  circleRadius: 24,
+                  profileImgAddress: userModel?.profileImageAddress,
                 ),
-              ),
-            ],
+                Padding(
+                  padding: AppPaddings.paddingSmallLeft,
+                  child: Text(
+                    '${userModel?.userName ?? ''}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         Expanded(
@@ -128,7 +141,7 @@ class _ProfileUserFollowedFollowersPageState
                   title: buttonTitle,
                   borderRadius: 8,
                   titleVerticalPadding: 6,
-                  onClick: () => onTap.call(),
+                  onClick: () => onTapButton.call(),
                 ),
         ),
       ],

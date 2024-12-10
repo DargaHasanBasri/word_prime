@@ -280,6 +280,15 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                 },
                 onTabTranslate: () {},
                 onTabShare: () {},
+                onTabPost: () {
+                  appRoutes.navigateTo(
+                    Routes.PostDetail,
+                    arguments: [
+                      postModelData,
+                      _vm.currentUserNotifier,
+                    ],
+                  );
+                },
               ),
             );
           },
@@ -366,10 +375,24 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                 onTabTranslate: () {},
                 onTabChoice: () {},
                 onTabShare: () {},
-                onTabUserProfile: () => appRoutes.navigateTo(
-                  Routes.ProfileUserDetails,
-                  arguments: postModel?.userId,
-                ),
+                onTabUserProfile: () {
+                  appRoutes.navigateTo(
+                    Routes.ProfileUserDetails,
+                    arguments: [
+                      postModel?.userId,
+                      _vm.currentUserNotifier,
+                    ],
+                  );
+                },
+                onTabPost: () {
+                  appRoutes.navigateTo(
+                    Routes.PostDetail,
+                    arguments: [
+                      postModel,
+                      _vm.currentUserNotifier,
+                    ],
+                  );
+                },
               ),
             );
           },

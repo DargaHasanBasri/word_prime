@@ -3,8 +3,13 @@ import 'package:word_prime/export.dart';
 
 class PostWithImage extends StatelessWidget {
   final PostModel? postModel;
+  final VoidCallback? onTabPost;
 
-  const PostWithImage({super.key, required this.postModel});
+  const PostWithImage({
+    super.key,
+    required this.postModel,
+    required this.onTabPost,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,10 @@ class PostWithImage extends StatelessWidget {
       children: [
         Padding(
           padding: AppPaddings.paddingMediumBottom,
-          child: _postImage(),
+          child: GestureDetector(
+            onTap: () => onTabPost?.call(),
+            child: _postImage(),
+          ),
         ),
         _getUserSentences(context),
       ],
