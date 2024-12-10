@@ -95,7 +95,7 @@ class PostRepository {
     required String userId,
     required String wordLevel,
   }) async {
-    final addedPosts = _postsHandler.fetchItemsByQuery(
+    final addedPosts = _postsHandler.fetchPostsByQuery(
       userId: userId,
       subCollectionName: 'added_posts',
       field: 'word_level',
@@ -108,7 +108,7 @@ class PostRepository {
   Future<List<PostModel?>?> fetchAllAddedPosts({
     required String userId,
   }) async {
-    final allAddedPosts = _postsHandler.fetchItemsFromSubCollection(
+    final allAddedPosts = _postsHandler.fetchPostsFromSubCollection(
       userId: userId,
       subCollectionName: 'added_posts',
       model: PostModel(),
@@ -190,7 +190,7 @@ class PostRepository {
     required String userId,
     required String wordLevel,
   }) async {
-    final savedPosts = _postsHandler.fetchItemsByQuery(
+    final savedPosts = _postsHandler.fetchPostsByQuery(
       userId: userId,
       subCollectionName: 'saved_posts',
       field: 'word_level',
@@ -203,7 +203,7 @@ class PostRepository {
   Future<List<PostModel?>?> fetchAllSavedPosts({
     required String userId,
   }) async {
-    final allSavedPosts = _postsHandler.fetchItemsFromSubCollection(
+    final allSavedPosts = _postsHandler.fetchPostsFromSubCollection(
       userId: userId,
       subCollectionName: 'saved_posts',
       model: PostModel(),
@@ -311,7 +311,7 @@ class PostRepository {
   Future<List<PostModel?>?> fetchAllLikedPosts({
     required String userId,
   }) async {
-    final allLikedPosts = _postsHandler.fetchItemsFromSubCollection(
+    final allLikedPosts = _postsHandler.fetchPostsFromSubCollection(
       userId: userId,
       subCollectionName: 'liked_posts',
       model: PostModel(),

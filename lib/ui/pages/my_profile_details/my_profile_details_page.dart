@@ -1,20 +1,20 @@
 import 'package:word_prime/export.dart';
 
-class ProfileDetailsPage extends StatefulWidget {
-  const ProfileDetailsPage({super.key});
+class MyProfileDetailsPage extends StatefulWidget {
+  const MyProfileDetailsPage({super.key});
 
   @override
-  State<ProfileDetailsPage> createState() => _ProfileDetailsPageState();
+  State<MyProfileDetailsPage> createState() => _ProfileDetailsPageState();
 }
 
-class _ProfileDetailsPageState extends BaseStatefulState<ProfileDetailsPage> {
-  late final ProfileDetailsViewModel _vm;
+class _ProfileDetailsPageState extends BaseStatefulState<MyProfileDetailsPage> {
+  late final MyProfileDetailsViewModel _vm;
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
 
   @override
   void initState() {
-    _vm = Provider.of<ProfileDetailsViewModel>(context, listen: false);
+    _vm = Provider.of<MyProfileDetailsViewModel>(context, listen: false);
     _vm.getUserDetails();
     super.initState();
   }

@@ -10,6 +10,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
   bool? emailVerification;
   int? totalPost;
   int? totalScore;
+  int? totalFollow;
+  int? totalFollower;
   List<String>? userNameKeywords;
 
   UserModel({
@@ -21,6 +23,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
     this.emailVerification,
     this.totalPost,
     this.totalScore,
+    this.totalFollow,
+    this.totalFollower,
     this.userNameKeywords,
   });
 
@@ -34,6 +38,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
         emailVerification,
         totalPost,
         totalScore,
+        totalFollow,
+        totalFollower,
         userNameKeywords
       ];
 
@@ -46,6 +52,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
     bool? emailVerification,
     int? totalPost,
     int? totalScore,
+    int? totalFollow,
+    int? totalFollower,
     List<String>? userNameKeywords,
   }) {
     return UserModel(
@@ -57,6 +65,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
       emailVerification: emailVerification ?? this.emailVerification,
       totalPost: totalPost ?? this.totalPost,
       totalScore: totalScore ?? this.totalScore,
+      totalFollow: totalFollow ?? this.totalFollow,
+      totalFollower: totalFollower ?? this.totalFollower,
       userNameKeywords: userNameKeywords ?? this.userNameKeywords,
     );
   }
@@ -71,6 +81,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
       'email_verification': emailVerification,
       'total_post': totalPost,
       'total_score': totalScore,
+      'total_follow': totalFollow,
+      'total_follower': totalFollower,
       'user_name_keywords': userNameKeywords,
     };
   }
@@ -86,6 +98,8 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
       emailVerification: json['email_verification'] as bool?,
       totalPost: json['total_post'] as int?,
       totalScore: json['total_score'] as int?,
+      totalFollow: json['total_follow'] as int?,
+      totalFollower: json['total_follower'] as int?,
       userNameKeywords: (json['user_name_keywords'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),

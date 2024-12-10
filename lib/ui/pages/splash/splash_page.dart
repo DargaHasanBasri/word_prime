@@ -68,7 +68,7 @@ class _SplashPageState extends BaseStatefulState<SplashPage> {
                     ? Column(
                         children: [
                           SpinKitFadingCircle(
-                            color: Theme.of(context).colorScheme.secondary,
+                            color: AppColors.white,
                             size: 50.0,
                           ),
                         ],

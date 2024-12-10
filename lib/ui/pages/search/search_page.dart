@@ -1,6 +1,5 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/search/components/search_empty_list.dart';
-import 'package:word_prime/ui/pages/search/components/search_post_interact_items.dart';
 import 'package:word_prime/ui/pages/search/components/search_post_with_image.dart';
 import 'package:word_prime/ui/pages/search/components/search_post_without_image.dart';
 import 'package:word_prime/ui/pages/search/components/search_user_info.dart';

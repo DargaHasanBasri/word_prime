@@ -135,7 +135,7 @@ class _HomePageState extends BaseStatefulState<HomePage> {
                                 );
                               },
                               onTabUserProfile: () => appRoutes.navigateTo(
-                                Routes.ProfileUser,
+                                Routes.ProfileUserDetails,
                                 arguments: [
                                   postModel?.userId,
                                   _vm.currentUserNotifier,

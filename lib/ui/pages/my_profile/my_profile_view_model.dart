@@ -1,10 +1,9 @@
 import 'dart:developer';
-
 import 'package:word_prime/export.dart';
 
-class ProfileViewModel extends BaseViewModel {
+class MyProfileViewModel extends BaseViewModel {
   final ValueNotifier<UserModel?> currentUserNotifier;
-  ProfileViewModel(this.currentUserNotifier);
+  MyProfileViewModel(this.currentUserNotifier);
 
   ValueNotifier<int> tabIndex = ValueNotifier(0);
   ValueNotifier<List<PostModel?>?> addedPostsNotifier = ValueNotifier(null);

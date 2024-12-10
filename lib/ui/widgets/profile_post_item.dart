@@ -17,7 +17,7 @@ class ProfilePostItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onTertiaryContainer,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
               color: AppColors.black.withOpacity(0.25),
@@ -40,7 +40,7 @@ class ProfilePostItem extends StatelessWidget {
     DateTime? createdDate = postModel?.createdDate?.toDateTime();
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
           image: CachedNetworkImageProvider(
             postModel?.postImageAddress ??
@@ -63,7 +63,7 @@ class ProfilePostItem extends StatelessWidget {
                     .onTertiaryContainer
                     .withOpacity(0.8),
                 borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(8),
+                  bottom: Radius.circular(16),
                 ),
               ),
               child: Row(

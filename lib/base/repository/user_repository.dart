@@ -92,4 +92,147 @@ class UserRepository {
       return null;
     }
   }
+
+  Future<void> followUser({required String? targetUserId}) async {
+    try {
+      final bool isTrue = _currentUser != null &&
+          targetUserId != null &&
+          targetUserId.isNotEmpty;
+      if (isTrue) {
+        final currentUserId = _currentUser!.uid;
+        await Future.wait([
+          _userCollectionReference
+              .doc(targetUserId)
+              .collection('followers')
+              .doc(currentUserId)
+              .set({
+            'follower_id': currentUserId,
+          }),
+          _userCollectionReference
+              .doc(currentUserId)
+              .collection('followed')
+              .doc(targetUserId)
+              .set({
+            'followed_id': targetUserId,
+          }),
+          _userCollectionReference
+              .doc(targetUserId)
+              .update({'total_follower': FieldValue.increment(1)}),
+          _userCollectionReference
+              .doc(currentUserId)
+              .update({'total_follow': FieldValue.increment(1)}),
+        ]);
+      }
+      log('Takipçi ekleme başarılı');
+    } catch (e) {
+      log('Takipçi ekleme başarısız: $e');
+      rethrow;
+    }
+  }
+
+  Future<void> unfollowUser({required String? targetUserId}) async {
+    try {
+      final bool isTrue = _currentUser != null &&
+          targetUserId != null &&
+          targetUserId.isNotEmpty;
+      if (isTrue) {
+        final String currentUserId = _currentUser!.uid;
+        await Future.wait([
+          _userCollectionReference
+              .doc(targetUserId)
+              .collection('followers')
+              .doc(currentUserId)
+              .delete(),
+          _userCollectionReference
+              .doc(currentUserId)
+              .collection('followed')
+              .doc(targetUserId)
+              .delete(),
+          _userCollectionReference
+              .doc(targetUserId)
+              .update({'total_follower': FieldValue.increment(-1)}),
+          _userCollectionReference
+              .doc(currentUserId)
+              .update({'total_follow': FieldValue.increment(-1)}),
+        ]);
+      }
+      log('Takipten çıkma işlemi başarılı');
+    } catch (e) {
+      log('Takipten çıkma işlemi başarısız: $e');
+      rethrow;
+    }
+  }
+
+  Future<bool> isUserFollowed(String? userIdToCheck) async {
+    if (userIdToCheck == null || userIdToCheck.isEmpty) {
+      debugPrint('userIdToCheck is null. Cannot check followed status.');
+      return false;
+    }
+    try {
+      final userDoc = _userCollectionReference.doc(_currentUser?.uid);
+      final querySnapshot = await userDoc
+          .collection('followed')
+          .where('followed_id', isEqualTo: userIdToCheck)
+          .limit(1)
+          .get();
+
+      return querySnapshot.docs.isNotEmpty;
+    } catch (e) {
+      debugPrint('Error checking followed status: $e');
+      return false;
+    }
+  }
+
+  Future<List<UserModel?>> fetchFollowedAndFollower({
+    required String? userId,
+    required bool isFollow,
+  }) async {
+    try {
+      final subCollectionName = isFollow ? 'followed' : 'followers';
+
+      final subCollectionSnapshot = await _userCollectionReference
+          .doc(userId)
+          .collection(subCollectionName)
+          .get();
+
+      final userIds = subCollectionSnapshot.docs.map((doc) => doc.id).toList();
+
+      if(userIds.isEmpty) return [];
+
+      final userSnapshots = await _userCollectionReference
+          .where(FieldPath.documentId, whereIn: userIds)
+          .withConverter(
+        fromFirestore: (snapshot, _) {
+          return UserModel().fromFirebase(snapshot);
+        },
+        toFirestore: (value, _) {
+          return {};
+        },
+      ).get();
+
+      final users = userSnapshots.docs.map((doc) => doc.data()).toList();
+      return users;
+    } catch (e) {
+      log('Error fetching followed/followers: $e');
+      return [];
+    }
+  }
+
+  Future<List<String?>> fetchFollowedUserIds({
+    required String? targetUserId,
+  }) async {
+    try {
+      final subCollectionSnapshot = await _userCollectionReference
+          .doc(targetUserId)
+          .collection('followed')
+          .get();
+
+      final userIds = subCollectionSnapshot.docs.map((doc) => doc.id).toList();
+
+      return userIds;
+    } catch (e) {
+      log('Error fetching followed ids: $e');
+      return [];
+    }
+  }
 }
