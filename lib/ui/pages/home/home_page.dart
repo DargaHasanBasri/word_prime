@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:word_prime/base/events/refresh_posts_event.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/home/components/home_search_bar.dart';
@@ -13,6 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends BaseStatefulState<HomePage> {
   late final HomeViewModel _vm;
   TextEditingController _commentController = TextEditingController();
+  late StreamSubscription<RefreshPostsEvent>? _eventSubscription;
 
   @override
   void initState() {
@@ -22,13 +24,21 @@ class _HomePageState extends BaseStatefulState<HomePage> {
       showProgress: () => showProgress(context),
       hideProgress: () => hideProgress(),
     );
-    eventBus.on<RefreshPostsEvent>().listen((event) {
+
+    _eventSubscription = eventBus.on<RefreshPostsEvent>().listen((event) {
       _vm.getFetchPosts(
         showProgress: () => showProgress(context),
         hideProgress: () => hideProgress(),
       );
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _eventSubscription?.cancel();
+    _commentController.dispose();
+    super.dispose();
   }
 
   @override

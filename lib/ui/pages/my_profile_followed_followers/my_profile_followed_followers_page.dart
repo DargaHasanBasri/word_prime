@@ -39,54 +39,62 @@ class _MyProfileFollowedFollowersPageState
 
   Widget _buildBody() {
     return ValueListenableBuilder(
-      valueListenable: _vm.followedOrFollowersNotifier,
-      builder: (_, userModel, ___) {
-        return ListView.separated(
-          padding: AppPaddings.paddingMediumVertical,
-          physics: BouncingScrollPhysics(),
-          itemCount: userModel?.length ?? 0,
-          itemBuilder: (context, index) {
-            return _followerListItem(
-              userModel: userModel?[index],
-              buttonTitle: _vm.isFollowedPage
-                  ? LocaleKeys.following.locale
-                  : LocaleKeys.follow.locale,
-              onTapUserProfile: () {
-                appRoutes.navigateTo(
-                  Routes.ProfileUserDetails,
-                  arguments: [
-                    userModel?[index]?.userId,
-                    _vm.currentUserNotifier,
-                  ],
+      valueListenable: _vm.followedUserIdsNotifier,
+      builder: (_, followedUserIds, ___) {
+        return ValueListenableBuilder(
+          valueListenable: _vm.followedOrFollowersNotifier,
+          builder: (_, userModel, ___) {
+            return ListView.separated(
+              padding: AppPaddings.paddingMediumVertical,
+              physics: BouncingScrollPhysics(),
+              itemCount: userModel?.length ?? 0,
+              itemBuilder: (context, index) {
+                final bool isFollowedUser =
+                    followedUserIds?.contains(userModel?[index]?.userId) ??
+                        false;
+                return _followerListItem(
+                  userModel: userModel?[index],
+                  buttonTitle: isFollowedUser
+                      ? LocaleKeys.following.locale
+                      : LocaleKeys.follow.locale,
+                  onTapUserProfile: () {
+                    appRoutes.navigateTo(
+                      Routes.ProfileUserDetails,
+                      arguments: [
+                        userModel?[index]?.userId,
+                        _vm.currentUserNotifier,
+                      ],
+                    );
+                  },
+                  onTapButton: () {
+                    isFollowedUser
+                        ? showCustomBottomSheet(
+                            context: context,
+                            child: ProfileUserDetailsBottomSheet(
+                              onTapPoke: () {},
+                              onTapUnfollow: () async {
+                                await _vm.unFollowUser(
+                                  targetUserId: userModel?[index]?.userId,
+                                  showProgress: () => showProgress(context),
+                                  hideProgress: () => hideProgress(),
+                                );
+                                appRoutes.popIfBackStackNotEmpty();
+                              },
+                            ),
+                          )
+                        : _vm.followUser(
+                            showProgress: () => showProgress(context),
+                            hideProgress: () => hideProgress(),
+                            targetUserId: userModel?[index]?.userId,
+                          );
+                  },
                 );
               },
-              onTap: () {
-                _vm.isFollowedPage
-                    ? showCustomBottomSheet(
-                        context: context,
-                        child: ProfileUserDetailsBottomSheet(
-                          onTapPoke: () {},
-                          onTapUnfollow: () async {
-                            await _vm.unFollowUser(
-                              targetUserId: userModel?[index]?.userId,
-                              showProgress: () => showProgress(context),
-                              hideProgress: () => hideProgress(),
-                            );
-                            appRoutes.popIfBackStackNotEmpty();
-                          },
-                        ),
-                      )
-                    : _vm.followUser(
-                        showProgress: () => showProgress(context),
-                        hideProgress: () => hideProgress(),
-                        targetUserId: userModel?[index]?.userId,
-                      );
-              },
+              separatorBuilder: (context, index) => SizedBox(
+                height: AppSizes.sizedBoxMediumHeight,
+              ),
             );
           },
-          separatorBuilder: (context, index) => SizedBox(
-            height: AppSizes.sizedBoxMediumHeight,
-          ),
         );
       },
     );
@@ -94,7 +102,7 @@ class _MyProfileFollowedFollowersPageState
 
   Widget _followerListItem({
     required UserModel? userModel,
-    required VoidCallback onTap,
+    required VoidCallback onTapButton,
     required VoidCallback onTapUserProfile,
     required String buttonTitle,
   }) {
@@ -129,7 +137,7 @@ class _MyProfileFollowedFollowersPageState
             title: buttonTitle,
             borderRadius: 8,
             titleVerticalPadding: 6,
-            onClick: () => onTap.call(),
+            onClick: () => onTapButton.call(),
           ),
         ),
       ],
@@ -139,7 +147,10 @@ class _MyProfileFollowedFollowersPageState
   AppBar _buildAppBar() {
     return AppBar(
       leading: IconButton(
-        onPressed: () => appRoutes.popIfBackStackNotEmpty(),
+        onPressed: () {
+          appRoutes.popIfBackStackNotEmpty();
+          eventBus.fire(new RefreshUserInfoEvent());
+        },
         icon: Image.asset(
           AppAssets.icArrowBackLeftPath,
           color: Theme.of(context).colorScheme.secondary,

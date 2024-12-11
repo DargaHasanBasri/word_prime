@@ -197,7 +197,7 @@ class UserRepository {
 
       final userIds = subCollectionSnapshot.docs.map((doc) => doc.id).toList();
 
-      if(userIds.isEmpty) return [];
+      if (userIds.isEmpty) return [];
 
       final userSnapshots = await _userCollectionReference
           .where(FieldPath.documentId, whereIn: userIds)

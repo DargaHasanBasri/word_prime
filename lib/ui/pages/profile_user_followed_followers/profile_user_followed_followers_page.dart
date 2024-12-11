@@ -1,3 +1,4 @@
+import 'package:word_prime/base/events/refresh_profile_user_info.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/profile_user_details/components/profile_user_details_bottom_sheet.dart';
 
@@ -68,7 +69,7 @@ class _ProfileUserFollowedFollowersPageState
                         ],
                       );
                     },
-                    onTapButton: () {
+                    onTapButton: () async {
                       isFollowedUser
                           ? showCustomBottomSheet(
                               context: context,
@@ -84,7 +85,7 @@ class _ProfileUserFollowedFollowersPageState
                                 },
                               ),
                             )
-                          : _vm.followUser(
+                          : await _vm.followUser(
                               showProgress: () => showProgress(context),
                               hideProgress: () => hideProgress(),
                               targetUserId: userModel?[index]?.userId,
@@ -151,7 +152,10 @@ class _ProfileUserFollowedFollowersPageState
   AppBar _buildAppBar() {
     return AppBar(
       leading: IconButton(
-        onPressed: () => appRoutes.popIfBackStackNotEmpty(),
+        onPressed: () {
+          eventBus.fire(new RefreshProfileUserInfoEvent());
+          appRoutes.popIfBackStackNotEmpty();
+        },
         icon: Image.asset(
           AppAssets.icArrowBackLeftPath,
           color: Theme.of(context).colorScheme.secondary,

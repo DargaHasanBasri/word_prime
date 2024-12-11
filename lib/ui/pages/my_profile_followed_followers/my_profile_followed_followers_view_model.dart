@@ -12,19 +12,22 @@ class MyProfileFollowedFollowersViewModel extends BaseViewModel {
   final ValueNotifier<bool> isFollowed = ValueNotifier(false);
   final ValueNotifier<List<UserModel?>?> followedOrFollowersNotifier =
       ValueNotifier(null);
+  final ValueNotifier<List<String?>?> followedUserIdsNotifier =
+      ValueNotifier(null);
 
   Future<void> getFollowedAndFollower({
     required VoidCallback? showProgress,
     required VoidCallback? hideProgress,
   }) async {
     showProgress?.call();
+    getFollowedUserIds();
     followedOrFollowersNotifier.value =
         await UserRepository().fetchFollowedAndFollower(
       userId: currentUserNotifier.value?.userId,
       isFollow: isFollowedPage,
     );
     hideProgress?.call();
-    log('User data fetched: ${followedOrFollowersNotifier.value}');
+    log('fetched followed/followers user data: ${followedOrFollowersNotifier.value}');
   }
 
   Future<void> followUser({
@@ -57,5 +60,17 @@ class MyProfileFollowedFollowersViewModel extends BaseViewModel {
       )
     ]);
     hideProgress.call();
+  }
+
+  Future<void> getFollowedUserIds() async {
+    try {
+      followedUserIdsNotifier.value =
+          await UserRepository().fetchFollowedUserIds(
+        targetUserId: currentUserNotifier.value?.userId,
+      );
+      log('fetched followed list: ${followedUserIdsNotifier.value}');
+    } catch (e) {
+      log('ViewModel An error occurred: $e');
+    }
   }
 }
