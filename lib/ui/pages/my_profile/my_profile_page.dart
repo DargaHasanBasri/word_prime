@@ -17,6 +17,7 @@ class _MyProfilePageState extends BaseStatefulState<MyProfilePage> {
   @override
   void initState() {
     _vm = Provider.of<MyProfileViewModel>(context, listen: false);
+    eventBus.fire(new RefreshUserInfoEvent());
     _vm.getAddedSavedLikedPosts(
       showProgress: () => showProgress(context),
       hideProgress: () => hideProgress(),

@@ -17,7 +17,7 @@ class ProfileUserDetailsViewModel extends BaseViewModel {
     if (userId != null) {
       userNotifier.value = await UserRepository().fetchUser(userId);
       isFollowed.value = await UserRepository().isUserFollowed(userId);
-      log('User data fetched: ${userNotifier.value?.toJson()}');
+      log('profile details User data fetched: ${userNotifier.value?.toJson()}\n');
     } else {
       log('userId : null');
     }
@@ -28,7 +28,7 @@ class ProfileUserDetailsViewModel extends BaseViewModel {
       addedPostsNotifier.value = await PostRepository().fetchAllAddedPosts(
         userId: userId!,
       );
-      log('data addedPosts fetched: ${addedPostsNotifier.value}');
+      log('data addedPosts fetched: ${addedPostsNotifier.value}\n');
     } else {
       log('userId : null');
     }
@@ -39,7 +39,7 @@ class ProfileUserDetailsViewModel extends BaseViewModel {
       savedPostsNotifier.value = await PostRepository().fetchAllSavedPosts(
         userId: userId!,
       );
-      log('data savedPosts fetched: ${savedPostsNotifier.value}');
+      log('data savedPosts fetched: ${savedPostsNotifier.value}\n');
     } else {
       log('userId : null');
     }
@@ -50,7 +50,7 @@ class ProfileUserDetailsViewModel extends BaseViewModel {
       likedPostsNotifier.value = await PostRepository().fetchAllLikedPosts(
         userId: userId!,
       );
-      log('data likedPost fetched: ${likedPostsNotifier.value}');
+      log('data likedPost fetched: ${likedPostsNotifier.value}\n');
     } else {
       log('userId : null');
     }

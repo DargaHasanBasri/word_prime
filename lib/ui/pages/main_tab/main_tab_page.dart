@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/main_tab/components/custom_bottom_navigation_bar.dart';
 
@@ -10,17 +11,24 @@ class MainTabPage extends StatefulWidget {
 
 class _MainTabPageState extends BaseStatefulState<MainTabPage> {
   late final MainTabViewModel _vm;
+  late StreamSubscription<RefreshUserInfoEvent>? _eventSubscription;
 
   @override
   void initState() {
     _vm = Provider.of<MainTabViewModel>(context, listen: false);
 
     _vm.getUserData();
-    eventBus.on<RefreshUserInfoEvent>().listen((event) {
+    _eventSubscription = eventBus.on<RefreshUserInfoEvent>().listen((event) {
       _vm.getUserData();
     });
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _eventSubscription?.cancel();
+    super.dispose();
   }
 
   @override

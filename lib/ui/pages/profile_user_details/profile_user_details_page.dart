@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:word_prime/base/events/refresh_profile_user_info.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/profile_user_details/components/profile_user_details_bottom_sheet.dart';
 import 'package:word_prime/ui/pages/profile_user_details/components/profile_user_details_metric.dart';
@@ -15,6 +17,7 @@ class _ProfileUserDetailsPageState
     with SingleTickerProviderStateMixin {
   late final ProfileUserDetailsViewModel _vm;
   late TabController _tabController;
+  late StreamSubscription<RefreshProfileUserInfoEvent>? _eventSubscription;
 
   @override
   void initState() {
@@ -24,11 +27,15 @@ class _ProfileUserDetailsPageState
       showProgress: () => showProgress(context),
       hideProgress: () => hideProgress(),
     );
+    _eventSubscription = eventBus.on<RefreshProfileUserInfoEvent>().listen((event) {
+      _vm.getUserData();
+    });
     super.initState();
   }
 
   @override
   void dispose() {
+    _eventSubscription?.cancel();
     _tabController.dispose();
     super.dispose();
   }

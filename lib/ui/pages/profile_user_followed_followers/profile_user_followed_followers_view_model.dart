@@ -23,6 +23,7 @@ class ProfileUserFollowedFollowersViewModel extends BaseViewModel {
     required VoidCallback? hideProgress,
   }) async {
     showProgress?.call();
+    getFollowedUserIds();
     followedOrFollowersNotifier.value =
         await UserRepository().fetchFollowedAndFollower(
       userId: userId,
@@ -53,7 +54,10 @@ class ProfileUserFollowedFollowersViewModel extends BaseViewModel {
     showProgress.call();
     await Future.wait([
       UserRepository().unfollowUser(targetUserId: targetUserId),
-      getFollowedUserIds(),
+      getFollowedAndFollower(
+        showProgress: () {},
+        hideProgress: () {},
+      ),
     ]);
     hideProgress.call();
   }
