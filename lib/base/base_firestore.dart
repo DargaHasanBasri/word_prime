@@ -109,4 +109,18 @@ class BaseFirestore<T extends BaseModel<T>> {
       rethrow;
     }
   }
+
+  Future<bool> update<T extends BaseModel<T>>(
+    CollectionReference collectionRef,
+    T? model,
+    String? docId,
+  ) async {
+    try {
+      if (model == null || docId == null) return false;
+      await collectionRef.doc(docId).update(model.toJson());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

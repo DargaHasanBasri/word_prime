@@ -71,6 +71,7 @@ class UserModel extends BaseModel<UserModel> with EquatableMixin {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'email': email,

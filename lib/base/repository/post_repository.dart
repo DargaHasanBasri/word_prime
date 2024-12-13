@@ -341,4 +341,15 @@ class PostRepository {
       rethrow;
     }
   }
+
+  Future<bool> postUpdate({
+    required PostModel? model,
+    required String? docId,
+  }) async {
+    return await _postsHandler.update(
+      _postCollectionReference,
+      model,
+      docId,
+    );
+  }
 }
