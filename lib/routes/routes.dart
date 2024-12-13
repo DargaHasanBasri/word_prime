@@ -20,6 +20,8 @@ final class Routes {
   static const String TaskList = 'taskListProvider';
   static const String LeaderBoard = 'leaderBoardProvider';
   static const String MyProfile = 'myProfileProvider';
+  static const String MyProfileFollowedFollowers =
+      'myProfileFollowedFollowersProvider';
   static const String ProfileUserFollowedFollowers =
       'profileUserFollowedFollowersProvider';
   static const String Quiz = 'quizProvider';
@@ -30,8 +32,7 @@ final class Routes {
   static const String ProfileUserDetails = 'profileUserDetailsProvider';
   static const String PostDetail = 'postDetailProvider';
   static const String Search = 'searchProvider';
-  static const String MyProfileFollowedFollowers =
-      'myProfileFollowedFollowersProvider';
+  static const String UpdatePost = 'updatePostProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -216,6 +217,17 @@ final class Routes {
           builder: (context) => MyProfileFollowedFollowersProvider(
             isFollowedPage: isFollowedPage,
             currentUserNotifier: currentUserNotifier,
+          ),
+        );
+      case Routes.UpdatePost:
+        final List<dynamic> arguments = settings.arguments as List;
+        final ValueNotifier<UserModel?> currentUserNotifier =
+            arguments[0] as ValueNotifier<UserModel?>;
+        final PostModel? currentPostModel = arguments[1] as PostModel?;
+        return MaterialPageRoute(
+          builder: (context) => UpdatePostProvider(
+            currentUserNotifier: currentUserNotifier,
+            currentPostModel: currentPostModel,
           ),
         );
       default:

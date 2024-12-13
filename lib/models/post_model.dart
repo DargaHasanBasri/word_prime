@@ -97,6 +97,7 @@ class PostModel extends BaseModel<PostModel> with EquatableMixin {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'post_id': postId,

@@ -52,6 +52,7 @@ class CommentModel extends BaseModel<CommentModel> with EquatableMixin {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'comment_id': commentId,

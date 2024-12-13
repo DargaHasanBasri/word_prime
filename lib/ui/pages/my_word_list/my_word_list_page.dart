@@ -235,7 +235,15 @@ class _MyWordListPageState extends BaseStatefulState<MyWordListPage> {
                   showCustomBottomSheet(
                     context: context,
                     child: CustomChoicesBottomSheet(
-                      onTapUpdate: () {},
+                      onTapUpdate: () {
+                        appRoutes.navigateTo(
+                          Routes.UpdatePost,
+                          arguments: [
+                            _vm.currentUserNotifier,
+                            postModelData,
+                          ],
+                        );
+                      },
                       onTapDelete: () {
                         showPopupDialog(
                           context: context,

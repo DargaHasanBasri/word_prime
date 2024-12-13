@@ -137,3 +137,6 @@ export 'package:word_prime/ui/pages/my_profile_details/my_profile_details_provid
 export 'package:word_prime/ui/pages/profile_user_followed_followers/profile_user_followed_followers_page.dart';
 export 'package:word_prime/ui/pages/profile_user_followed_followers/profile_user_followed_followers_view_model.dart';
 export 'package:word_prime/ui/pages/profile_user_followed_followers/profile_user_followed_followers_provider.dart';
+export 'package:word_prime/ui/pages/update_post/update_post_page.dart';
+export 'package:word_prime/ui/pages/update_post/update_post_view_model.dart';
+export 'package:word_prime/ui/pages/update_post/update_post_provider.dart';
