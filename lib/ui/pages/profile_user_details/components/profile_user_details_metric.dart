@@ -45,7 +45,7 @@ class ProfileUserDetailsMetric extends StatelessWidget {
                       child: _metricItem(
                         context,
                         metricCount: userModel?.totalPost ?? 0,
-                        metricName: 'Word',
+                        metricName: LocaleKeys.word.locale,
                       ),
                     ),
                     Expanded(
@@ -62,7 +62,7 @@ class ProfileUserDetailsMetric extends StatelessWidget {
                           child: _metricItem(
                             context,
                             metricCount: userModel?.totalFollow ?? 0,
-                            metricName: 'Following',
+                            metricName: LocaleKeys.following.locale,
                           ),
                         ),
                       ),
@@ -73,7 +73,7 @@ class ProfileUserDetailsMetric extends StatelessWidget {
                         child: _metricItem(
                           context,
                           metricCount: userModel?.totalFollower ?? 0,
-                          metricName: 'Followers',
+                          metricName: LocaleKeys.profilePage_follower.locale,
                         ),
                       ),
                     ),

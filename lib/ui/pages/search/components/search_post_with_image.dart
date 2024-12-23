@@ -74,6 +74,7 @@ class SearchPostWithImage extends StatelessWidget {
                     Text(
                       AppUtility().timeAgo(
                         postModel?.createdDate?.toDateTime(),
+                        isAbbreviation: true,
                       ),
                     ),
                   ],
