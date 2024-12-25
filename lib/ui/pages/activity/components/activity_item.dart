@@ -4,23 +4,20 @@ class ActivityItem extends StatelessWidget {
   final Color backgroundColor;
   final String titleEmoji;
   final String title;
-  final int chapterCount;
-  final bool isZeroChapterCount;
-  final VoidCallback onTapStart;
+  final VoidCallback onTapEnter;
   const ActivityItem({
     super.key,
     required this.backgroundColor,
     required this.titleEmoji,
     required this.title,
-    required this.chapterCount,
-    required this.onTapStart,
-    required this.isZeroChapterCount,
+    required this.onTapEnter,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: AppPaddings.paddingMediumAll,
+      height: 200,
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(12),
@@ -34,41 +31,34 @@ class ActivityItem extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            titleEmoji,
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          SizedBox(height: AppSizes.sizedBoxXSmallHeight),
-          Container(
-            height: AppSizes.activityItemTitleContainerHeight,
-            child: Text(
-              title,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    overflow: TextOverflow.ellipsis,
-                    color: AppColors.white,
-                  ),
-              maxLines: 2,
-            ),
-          ),
-          SizedBox(height: AppSizes.sizedBoxXSmallHeight),
-          Visibility(
-            visible: !isZeroChapterCount,
-            child: Text(
-              '${chapterCount} ${LocaleKeys.activityPage_chapter.locale}',
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    overflow: TextOverflow.ellipsis,
-                    color: AppColors.white,
-                  ),
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                titleEmoji,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              SizedBox(height: AppSizes.sizedBoxXSmallHeight),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  overflow: TextOverflow.ellipsis,
+                  color: AppColors.white,
+                ),
+                maxLines: 3,
+              ),
+            ],
           ),
           SizedBox(height: AppSizes.sizedBoxOverallHeight),
           CustomButton(
-            title: LocaleKeys.start.locale,
-            titleVerticalPadding: 8,
+            title: 'ENTER',
+            titleVerticalPadding: 6,
+            borderRadius: 16,
             backgroundColor: Colors.transparent,
             borderColor: AppColors.white,
-            onClick: () => onTapStart.call(),
+            onClick: () => onTapEnter.call(),
           ),
         ],
       ),

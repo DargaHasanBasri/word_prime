@@ -40,4 +40,7 @@ final class AppSizes {
   static const double wordLevelIconWidth = 50.0;
   static const double wordLevelIconHeight = 50.0;
 
+  static const double wordQuizLevelIconWidth = 40.0;
+  static const double wordQuizLevelIconHeight = 40.0;
+
 }

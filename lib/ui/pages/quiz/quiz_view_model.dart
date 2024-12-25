@@ -2,6 +2,13 @@ import 'dart:async';
 import 'package:word_prime/export.dart';
 
 class QuizViewModel extends BaseViewModel {
+  final String quizType;
+  final String languageLevel;
+  QuizViewModel(
+    this.quizType,
+    this.languageLevel,
+  );
+
   ValueNotifier<String> correctOption = ValueNotifier('APPLE');
   ValueNotifier<String?> selectedOption = ValueNotifier(null);
 

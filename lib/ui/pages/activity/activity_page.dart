@@ -1,3 +1,4 @@
+import 'package:word_prime/base/enums/quiz_type.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/activity/components/activity_item.dart';
 import 'package:word_prime/ui/pages/activity/components/analysis_results.dart';
@@ -36,10 +37,11 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
                 backgroundColor: AppColors.lavenderPurple,
                 titleEmoji: AppLocaleConstants.EMOJI_BRAIN,
                 title: LocaleKeys.activityPage_addedWordsQuiz.locale,
-                chapterCount: 10,
-                isZeroChapterCount: false,
-                onTapStart: () {
-                  appRoutes.navigateTo(Routes.Quiz);
+                onTapEnter: () {
+                  appRoutes.navigateTo(
+                    Routes.QuizSelection,
+                    arguments: QuizType.Added.type,
+                  );
                 },
               ),
             ),
@@ -48,10 +50,13 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
               child: ActivityItem(
                 backgroundColor: AppColors.wildBlueYonder,
                 titleEmoji: AppLocaleConstants.EMOJI_CONTROL,
-                title: LocaleKeys.activityPage_popularQuiz.locale,
-                chapterCount: 10,
-                isZeroChapterCount: false,
-                onTapStart: () {},
+                title: LocaleKeys.activityPage_savedQuiz.locale,
+                onTapEnter: () {
+                  appRoutes.navigateTo(
+                    Routes.QuizSelection,
+                    arguments: QuizType.Saved.type,
+                  );
+                },
               ),
             ),
           ],
@@ -64,9 +69,7 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
                 backgroundColor: AppColors.neptune,
                 titleEmoji: AppLocaleConstants.EMOJI_QUESTION_MARK,
                 title: '${LocaleKeys.activityPage_soon.locale}...',
-                chapterCount: 0,
-                isZeroChapterCount: true,
-                onTapStart: () {},
+                onTapEnter: () {},
               ),
             ),
             SizedBox(width: AppSizes.sizedBoxMediumWidth),
@@ -75,9 +78,7 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
                 backgroundColor: AppColors.watermelon,
                 titleEmoji: AppLocaleConstants.EMOJI_LIGHTBULB,
                 title: '${LocaleKeys.activityPage_soon.locale}...',
-                chapterCount: 0,
-                isZeroChapterCount: true,
-                onTapStart: () {},
+                onTapEnter: () {},
               ),
             ),
           ],

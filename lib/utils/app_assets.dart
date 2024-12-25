@@ -64,6 +64,7 @@ final class AppAssets {
   static String icLevelB2Path = _imagePath('ic_level_b2');
   static String icLevelC1Path = _imagePath('ic_level_c1');
   static String icLevelC2Path = _imagePath('ic_level_c2');
+  static String icMixedPath = _imagePath('ic_mixed');
 
   static String _imagePath(String fileName) => '$_basePath$fileName.png';
 }

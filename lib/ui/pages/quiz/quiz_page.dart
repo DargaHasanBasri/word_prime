@@ -140,7 +140,7 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
                 subTitle: LocaleKeys.warningMessages_quizQuitMsgSubTitle.locale,
                 onTapCancelButton: () {
                   appRoutes.popIfBackStackNotEmpty();
-                  _vm.startTimer();
+                  _vm.selectedOption.value != null ? null : _vm.startTimer();
                 },
                 onTapConfirmButton: () {
                   appRoutes.popPages(2);
