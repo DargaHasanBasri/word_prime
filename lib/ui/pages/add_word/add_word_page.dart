@@ -40,7 +40,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
           children: [
             Expanded(
               child: WordEnglishLevel(
+                backgroundColor: AppColors.cornflowerBlue,
                 englishLevelTitle: 'A1',
+                iconAddress: AppAssets.icLevelA1Path,
+                iconColor: AppColors.white,
                 onTapLevel: () {
                   log('A1 click');
                   appRoutes.navigateTo(
@@ -56,7 +59,9 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
             SizedBox(width: AppSizes.sizedBoxOverallHeight),
             Expanded(
               child: WordEnglishLevel(
+                backgroundColor: AppColors.lavenderPurple,
                 englishLevelTitle: 'A2',
+                iconAddress: AppAssets.icLevelA2Path,
                 onTapLevel: () {
                   log('A2 click');
                   appRoutes.navigateTo(
@@ -77,7 +82,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
             children: [
               Expanded(
                 child: WordEnglishLevel(
+                  backgroundColor: AppColors.wildBlueYonder,
                   englishLevelTitle: 'B1',
+                  iconAddress: AppAssets.icLevelB1Path,
+                  iconColor: AppColors.white,
                   onTapLevel: () {
                     log('B1 click');
                     appRoutes.navigateTo(
@@ -93,7 +101,9 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
               SizedBox(width: AppSizes.sizedBoxOverallHeight),
               Expanded(
                 child: WordEnglishLevel(
+                  backgroundColor: AppColors.neptune,
                   englishLevelTitle: 'B2',
+                  iconAddress: AppAssets.icLevelB2Path,
                   onTapLevel: () {
                     log('B2 click');
                     appRoutes.navigateTo(
@@ -115,7 +125,10 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
             children: [
               Expanded(
                 child: WordEnglishLevel(
+                  backgroundColor: AppColors.rhino,
                   englishLevelTitle: 'C1',
+                  iconAddress: AppAssets.icLevelC1Path,
+                  iconColor: AppColors.white,
                   onTapLevel: () {
                     log('C1 click');
                     appRoutes.navigateTo(
@@ -131,7 +144,9 @@ class _AddWordPageState extends BaseStatefulState<AddWordPage> {
               SizedBox(width: AppSizes.sizedBoxOverallHeight),
               Expanded(
                 child: WordEnglishLevel(
+                  backgroundColor: AppColors.watermelon,
                   englishLevelTitle: 'C2',
+                  iconAddress: AppAssets.icLevelC2Path,
                   onTapLevel: () {
                     log('C2 click');
                     appRoutes.navigateTo(

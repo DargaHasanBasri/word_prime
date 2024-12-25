@@ -2,12 +2,18 @@ import 'package:word_prime/export.dart';
 
 class WordEnglishLevel extends StatelessWidget {
   final String englishLevelTitle;
+  final String iconAddress;
+  final Color? iconColor;
+  final Color backgroundColor;
   final VoidCallback onTapLevel;
 
   const WordEnglishLevel({
     super.key,
     required this.englishLevelTitle,
     required this.onTapLevel,
+    required this.iconAddress,
+    required this.backgroundColor,
+    this.iconColor,
   });
 
   @override
@@ -16,32 +22,41 @@ class WordEnglishLevel extends StatelessWidget {
       onTap: () => onTapLevel.call(),
       child: Container(
         height: AppSizes.englishLevelContainerHeight,
-        padding: AppPaddings.paddingSmallVertical +
-            AppPaddings.paddingMediumHorizontal,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSecondaryContainer,
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.onPrimaryContainer,
-          ),
           boxShadow: [
             BoxShadow(
-              color: Theme.of(context).colorScheme.secondary.withOpacity(0.10),
-              blurRadius: 4,
+              color: AppColors.black.withOpacity(0.25),
               offset: Offset(0, 4),
+              blurRadius: 4,
             ),
           ],
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Stack(
           children: [
-            Text(
-              englishLevelTitle,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.w400,
-                  ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
+            Padding(
+              padding: AppPaddings.paddingSmallAll,
+              child: Text(
+                englishLevelTitle,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: AppColors.white,
+                    ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: AppPaddings.paddingSmallAll,
+                child: Image.asset(
+                  iconAddress,
+                  width: AppSizes.wordLevelIconWidth,
+                  height: AppSizes.wordLevelIconHeight,
+                  color: iconColor,
+                ),
+              ),
             ),
           ],
         ),

@@ -58,6 +58,12 @@ final class AppAssets {
   static String imgImgGetStartedPath = _imagePath('img_get_started');
   static String imgImgEmptyWordListPath = _imagePath('img_empty_word_list');
   static String imgImgEmptySearchListPath = _imagePath('img_empty_search');
+  static String icLevelA1Path = _imagePath('ic_level_a1');
+  static String icLevelA2Path = _imagePath('ic_level_a2');
+  static String icLevelB1Path = _imagePath('ic_level_b1');
+  static String icLevelB2Path = _imagePath('ic_level_b2');
+  static String icLevelC1Path = _imagePath('ic_level_c1');
+  static String icLevelC2Path = _imagePath('ic_level_c2');
 
   static String _imagePath(String fileName) => '$_basePath$fileName.png';
 }

@@ -36,4 +36,8 @@ final class AppSizes {
   static const double sizedBoxXSmallHeight = 4.0;
 
   static const double englishLevelContainerHeight = 150;
+
+  static const double wordLevelIconWidth = 50.0;
+  static const double wordLevelIconHeight = 50.0;
+
 }
