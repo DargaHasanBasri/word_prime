@@ -32,6 +32,8 @@ abstract class  LocaleKeys {
   static const optional = 'optional';
   static const added = 'added';
   static const saved = 'saved';
+  static const quizAddedTitle = 'quizAddedTitle';
+  static const quizSavedTitle = 'quizSavedTitle';
   static const splashPage_title = 'splashPage.title';
   static const splashPage = 'splashPage';
   static const getStartedPage_title = 'getStartedPage.title';
@@ -104,7 +106,7 @@ abstract class  LocaleKeys {
   static const searchPage_emptySearch = 'searchPage.emptySearch';
   static const searchPage = 'searchPage';
   static const activityPage_myActivity = 'activityPage.myActivity';
-  static const activityPage_popularQuiz = 'activityPage.popularQuiz';
+  static const activityPage_savedQuiz = 'activityPage.savedQuiz';
   static const activityPage_addedWordsQuiz = 'activityPage.addedWordsQuiz';
   static const activityPage_soon = 'activityPage.soon';
   static const activityPage_quizAnalysis = 'activityPage.quizAnalysis';

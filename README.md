@@ -62,9 +62,19 @@ Word Prime, kullanıcıların birçok kelimeyi birlikte akılda kalıcı ve eğl
     <table>
         <tr>
             <td>Home Page</td>
+            <td>Activity Page</td>
         </tr>  
         <tr>
             <td><img src="word_prime_readme_SS/dark_SS/main_tab_SS/dark_home_page.jpeg" width=250 height=500></td>
+            <td><img src="word_prime_readme_SS/dark_SS/main_tab_SS/dark_my_activity_page.jpeg" width=250 height=500></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>Add Word Page</td>
+        </tr>  
+        <tr>
+            <td><img src="word_prime_readme_SS/dark_SS/main_tab_SS/dark_add_word_page.jpeg" width=250 height=500></td>
         </tr>
     </table>
 </details>
@@ -167,6 +177,18 @@ Word Prime, kullanıcıların birçok kelimeyi birlikte akılda kalıcı ve eğl
     </table>
 </details>
 
+<details>
+    <summary>Quiz Flow</summary>
+    <table>
+        <tr>
+            <td>Quiz Selection Page</td>
+        </tr>  
+        <tr>
+            <td><img src="word_prime_readme_SS/dark_SS/quiz_SS/dark_quiz_selection_page.jpeg" width=250 height=500></td>
+        </tr>
+    </table>
+</details>
+
 ## App Light Mode Screenshots TR
 
 <details>
@@ -222,12 +244,23 @@ Word Prime, kullanıcıların birçok kelimeyi birlikte akılda kalıcı ve eğl
     <table>
         <tr>
             <td>Home Page</td>
+            <td>Activity Page</td>
         </tr>  
         <tr>
             <td><img src="word_prime_readme_SS/light_SS/main_tab_SS/light_home_page.jpeg" width=250 height=500></td>
+            <td><img src="word_prime_readme_SS/light_SS/main_tab_SS/light_my_activity_page.jpeg" width=250 height=500></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>Add Word Page</td>
+        </tr>  
+        <tr>
+            <td><img src="word_prime_readme_SS/light_SS/main_tab_SS/light_add_word_page.jpeg" width=250 height=500></td>
         </tr>
     </table>
 </details>
+
 
 <details>
     <summary>Add Post (Word) Flow</summary>
@@ -323,6 +356,18 @@ Word Prime, kullanıcıların birçok kelimeyi birlikte akılda kalıcı ve eğl
         </tr>  
         <tr>
             <td><img src="word_prime_readme_SS/light_SS/search_SS/light_search_not_found.jpeg" width=250 height=500></td>
+        </tr>
+    </table>
+</details>
+
+<details>
+    <summary>Quiz Flow</summary>
+    <table>
+        <tr>
+            <td>Quiz Selection Page</td>
+        </tr>  
+        <tr>
+            <td><img src="word_prime_readme_SS/light_SS/quiz_SS/light_quiz_selection_page.jpeg" width=250 height=500></td>
         </tr>
     </table>
 </details>

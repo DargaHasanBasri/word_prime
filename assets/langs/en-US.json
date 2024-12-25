@@ -30,6 +30,8 @@
   "optional": "Optional",
   "added": "Added",
   "saved": "Saved",
+  "quizAddedTitle": "Quiz With Added Words",
+  "quizSavedTitle": "Quiz With Saved Words",
   "splashPage": {
     "title": "Unlock a world full of words with us!"
   },
@@ -113,7 +115,7 @@
   },
   "activityPage": {
     "myActivity": "My Activity",
-    "popularQuiz": "Quiz with the Most Popular Words",
+    "savedQuiz": "Quiz with the Words You Saved",
     "addedWordsQuiz": "Quiz with the Words You Added",
     "soon": "Soon",
     "quizAnalysis": "My Quiz Analysis Results",

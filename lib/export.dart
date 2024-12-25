@@ -140,3 +140,6 @@ export 'package:word_prime/ui/pages/profile_user_followed_followers/profile_user
 export 'package:word_prime/ui/pages/update_post/update_post_page.dart';
 export 'package:word_prime/ui/pages/update_post/update_post_view_model.dart';
 export 'package:word_prime/ui/pages/update_post/update_post_provider.dart';
+export 'package:word_prime/ui/pages/quiz_selection/quiz_selection_page.dart';
+export 'package:word_prime/ui/pages/quiz_selection/quiz_selection_view_model.dart';
+export 'package:word_prime/ui/pages/quiz_selection/quiz_selection_provider.dart';

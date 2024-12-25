@@ -33,6 +33,7 @@ final class Routes {
   static const String PostDetail = 'postDetailProvider';
   static const String Search = 'searchProvider';
   static const String UpdatePost = 'updatePostProvider';
+  static const String QuizSelection = 'quizSelectionProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -142,8 +143,14 @@ final class Routes {
           ),
         );
       case Routes.Quiz:
+        final List<dynamic> arguments = settings.arguments as List;
+        final String quizType = arguments[0] as String;
+        final String languageLevel = arguments[1] as String;
         return MaterialPageRoute(
-          builder: (context) => const QuizProvider(),
+          builder: (context) => QuizProvider(
+            quizType: quizType,
+            languageLevel: languageLevel,
+          ),
         );
       case Routes.EmailVerification:
         final String userEmail = settings.arguments as String;
@@ -228,6 +235,13 @@ final class Routes {
           builder: (context) => UpdatePostProvider(
             currentUserNotifier: currentUserNotifier,
             currentPostModel: currentPostModel,
+          ),
+        );
+      case Routes.QuizSelection:
+        final String quizType = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => QuizSelectionProvider(
+            quizType: quizType,
           ),
         );
       default:

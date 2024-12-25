@@ -28,8 +28,10 @@
   "confirm": "Onayla",
   "logout": "Çıkış Yap",
   "optional": "İsteğe Bağlı",
-  "added": "Eklenenler",
-  "saved": "Kaydedilenler",
+  "added": "Eklenen",
+  "saved": "Kaydedilen",
+  "quizAddedTitle": "Eklenen Kelimeler ile Quiz",
+  "quizSavedTitle": "Kaydedilen Kelimeler ile Quiz",
   "splashPage": {
     "title": "Kelimelerle dolu bir dünyanın kilidini bizimle açın!"
   },
@@ -113,7 +115,7 @@
   },
   "activityPage": {
     "myActivity": "Aktiviteler",
-    "popularQuiz": "En Popüler Kelimelerle Quiz",
+    "savedQuiz": "Kaydettiğin Kelimelerle Quiz",
     "addedWordsQuiz": "Eklediğin Kelimelerle Quiz",
     "soon": "Yakında",
     "quizAnalysis": "Quiz Analiz Sonuçlarım",
