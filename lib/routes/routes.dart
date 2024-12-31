@@ -34,6 +34,7 @@ final class Routes {
   static const String Search = 'searchProvider';
   static const String UpdatePost = 'updatePostProvider';
   static const String QuizSelection = 'quizSelectionProvider';
+  static const String TimeUp = 'timeUpProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -104,8 +105,12 @@ final class Routes {
           ),
         );
       case Routes.Activity:
+        final ValueNotifier<UserModel?> currentUserNotifier =
+            settings.arguments as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
-          builder: (context) => const ActivityProvider(),
+          builder: (context) => ActivityProvider(
+            currentUserNotifier: currentUserNotifier,
+          ),
         );
       case Routes.Tasks:
         return MaterialPageRoute(
@@ -238,11 +243,19 @@ final class Routes {
           ),
         );
       case Routes.QuizSelection:
-        final String quizType = settings.arguments as String;
+        final List<dynamic> arguments = settings.arguments as List;
+        final String quizType = arguments[0] as String;
+        final ValueNotifier<UserModel?> currentUserNotifier =
+            arguments[1] as ValueNotifier<UserModel?>;
         return MaterialPageRoute(
           builder: (context) => QuizSelectionProvider(
             quizType: quizType,
+            currentUserNotifier: currentUserNotifier,
           ),
+        );
+      case Routes.TimeUp:
+        return MaterialPageRoute(
+          builder: (context) => const TimeUpProvider(),
         );
       default:
         return MaterialPageRoute(

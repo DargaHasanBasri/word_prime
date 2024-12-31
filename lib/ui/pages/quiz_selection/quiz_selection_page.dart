@@ -15,6 +15,10 @@ class _QuizSelectionPageState extends BaseStatefulState<QuizSelectionPage> {
   @override
   void initState() {
     _vm = Provider.of<QuizSelectionViewModel>(context, listen: false);
+    _vm.newQuestionGeneration(
+      showProgress: () => showProgress(context),
+      hideProgress: () => hideProgress(),
+    );
     super.initState();
   }
 
@@ -41,13 +45,15 @@ class _QuizSelectionPageState extends BaseStatefulState<QuizSelectionPage> {
               iconAddress: AppAssets.icLevelA1Path,
               iconColor: AppColors.white,
               onTapStart: () {
-                appRoutes.navigateTo(
-                  Routes.Quiz,
-                  arguments: [
-                    _vm.quizType,
-                    EnglishWordLevel.A1.level,
-                  ],
-                );
+                _vm.levelCounts.value[EnglishWordLevel.A1.level] == 0
+                    ? showPopUp(EnglishWordLevel.A1.level)
+                    : appRoutes.navigateTo(
+                        Routes.Quiz,
+                        arguments: [
+                          _vm.quizType,
+                          EnglishWordLevel.A1.level,
+                        ],
+                      );
               },
             ),
           ),
@@ -56,13 +62,15 @@ class _QuizSelectionPageState extends BaseStatefulState<QuizSelectionPage> {
             englishLevelTitle: 'A2 ${LocaleKeys.level.locale}',
             iconAddress: AppAssets.icLevelA2Path,
             onTapStart: () {
-              appRoutes.navigateTo(
-                Routes.Quiz,
-                arguments: [
-                  _vm.quizType,
-                  EnglishWordLevel.A2.level,
-                ],
-              );
+              _vm.levelCounts.value[EnglishWordLevel.A2.level] == 0
+                  ? showPopUp(EnglishWordLevel.A2.level)
+                  : appRoutes.navigateTo(
+                      Routes.Quiz,
+                      arguments: [
+                        _vm.quizType,
+                        EnglishWordLevel.A2.level,
+                      ],
+                    );
             },
           ),
           Padding(
@@ -73,13 +81,15 @@ class _QuizSelectionPageState extends BaseStatefulState<QuizSelectionPage> {
               iconAddress: AppAssets.icLevelB1Path,
               iconColor: AppColors.white,
               onTapStart: () {
-                appRoutes.navigateTo(
-                  Routes.Quiz,
-                  arguments: [
-                    _vm.quizType,
-                    EnglishWordLevel.B1.level,
-                  ],
-                );
+                _vm.levelCounts.value[EnglishWordLevel.B1.level] == 0
+                    ? showPopUp(EnglishWordLevel.B1.level)
+                    : appRoutes.navigateTo(
+                        Routes.Quiz,
+                        arguments: [
+                          _vm.quizType,
+                          EnglishWordLevel.B1.level,
+                        ],
+                      );
               },
             ),
           ),
@@ -88,13 +98,15 @@ class _QuizSelectionPageState extends BaseStatefulState<QuizSelectionPage> {
             englishLevelTitle: 'B2 ${LocaleKeys.level.locale}',
             iconAddress: AppAssets.icLevelB2Path,
             onTapStart: () {
-              appRoutes.navigateTo(
-                Routes.Quiz,
-                arguments: [
-                  _vm.quizType,
-                  EnglishWordLevel.B2.level,
-                ],
-              );
+              _vm.levelCounts.value[EnglishWordLevel.B2.level] == 0
+                  ? showPopUp(EnglishWordLevel.B2.level)
+                  : appRoutes.navigateTo(
+                      Routes.Quiz,
+                      arguments: [
+                        _vm.quizType,
+                        EnglishWordLevel.B2.level,
+                      ],
+                    );
             },
           ),
           Padding(
@@ -105,13 +117,15 @@ class _QuizSelectionPageState extends BaseStatefulState<QuizSelectionPage> {
               iconAddress: AppAssets.icLevelC1Path,
               iconColor: AppColors.white,
               onTapStart: () {
-                appRoutes.navigateTo(
-                  Routes.Quiz,
-                  arguments: [
-                    _vm.quizType,
-                    EnglishWordLevel.C1.level,
-                  ],
-                );
+                _vm.levelCounts.value[EnglishWordLevel.C1.level] == 0
+                    ? showPopUp(EnglishWordLevel.C1.level)
+                    : appRoutes.navigateTo(
+                        Routes.Quiz,
+                        arguments: [
+                          _vm.quizType,
+                          EnglishWordLevel.C1.level,
+                        ],
+                      );
               },
             ),
           ),
@@ -120,13 +134,15 @@ class _QuizSelectionPageState extends BaseStatefulState<QuizSelectionPage> {
             englishLevelTitle: 'C2 ${LocaleKeys.level.locale}',
             iconAddress: AppAssets.icLevelC2Path,
             onTapStart: () {
-              appRoutes.navigateTo(
-                Routes.Quiz,
-                arguments: [
-                  _vm.quizType,
-                  EnglishWordLevel.C2.level,
-                ],
-              );
+              _vm.levelCounts.value[EnglishWordLevel.C2.level] == 0
+                  ? showPopUp(EnglishWordLevel.C2.level)
+                  : appRoutes.navigateTo(
+                      Routes.Quiz,
+                      arguments: [
+                        _vm.quizType,
+                        EnglishWordLevel.C2.level,
+                      ],
+                    );
             },
           ),
           Padding(
@@ -147,6 +163,31 @@ class _QuizSelectionPageState extends BaseStatefulState<QuizSelectionPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void showPopUp(String wordLevel) {
+    showPopupDialog(
+      context: context,
+      child: Padding(
+        padding: AppPaddings.appPaddingHorizontal,
+        child: CustomAppPopup(
+          title: "Bu Seviyede Yetersiz Kelime",
+          subTitle: "Lütfen Kelime Ekleyin!",
+          onTapConfirmButton: () {
+            appRoutes.navigateTo(
+              Routes.MyWordList,
+              arguments: [
+                _vm.currentUserNotifier,
+                wordLevel,
+              ],
+            );
+          },
+          onTapCancelButton: () {
+            appRoutes.popIfBackStackNotEmpty();
+          },
+        ),
       ),
     );
   }

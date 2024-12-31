@@ -11,6 +11,14 @@ class ActivityPage extends StatefulWidget {
 }
 
 class _ActivityPageState extends BaseStatefulState<ActivityPage> {
+  late final ActivityViewModel _vm;
+
+  @override
+  void initState() {
+    _vm = Provider.of<ActivityViewModel>(context, listen: false);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +48,10 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
                 onTapEnter: () {
                   appRoutes.navigateTo(
                     Routes.QuizSelection,
-                    arguments: QuizType.Added.type,
+                    arguments: [
+                      QuizType.Added.type,
+                      _vm.currentUserNotifier,
+                    ],
                   );
                 },
               ),
@@ -54,7 +65,10 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
                 onTapEnter: () {
                   appRoutes.navigateTo(
                     Routes.QuizSelection,
-                    arguments: QuizType.Saved.type,
+                    arguments: [
+                      QuizType.Saved.type,
+                      _vm.currentUserNotifier,
+                    ],
                   );
                 },
               ),
