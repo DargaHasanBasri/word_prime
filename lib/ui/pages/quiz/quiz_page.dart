@@ -1,5 +1,6 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/quiz/components/answer_options.dart';
+import 'package:word_prime/ui/pages/quiz/components/question_transiton_animation.dart';
 import 'package:word_prime/ui/widgets/custom_timer_progress_indicator.dart';
 
 class QuizPage extends StatefulWidget {
@@ -15,6 +16,10 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
   @override
   void initState() {
     _vm = Provider.of<QuizViewModel>(context, listen: false);
+    _vm.getQuiz(
+      showProgress: () => showProgress(context),
+      hideProgress: () => hideProgress(),
+    );
     _vm.startTimer();
     super.initState();
   }
@@ -32,49 +37,108 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
   }
 
   Widget _buildBody() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _examplePicture(),
-        Padding(
-          padding: AppPaddings.paddingMediumVertical,
-          child: _questionContent(),
-        ),
-        AnswerOptions(
-          options: ['APPLE', 'BANANA', 'CHERRY'],
-          correctOption: _vm.correctOption,
-          selectedOption: _vm.selectedOption,
-          onCorrectAnswer: () {
-            debugPrint('test true answer');
-            _vm.stopTimer(reset: false);
-          },
-          onIncorrectAnswer: () {
-            debugPrint('test false answer');
-            _vm.stopTimer(reset: false);
-          },
-        ),
-      ],
+    return SingleChildScrollView(
+      child: ValueListenableBuilder(
+        valueListenable: _vm.seconds,
+        builder: (_, secondsValue, __) {
+          // Check if seconds is 0
+          if (secondsValue == 0) {
+            // Using WidgetsBinding to avoid build-time navigation
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              appRoutes.navigateRemoveUntil(Routes.TimeUp);
+            });
+            _vm.selectedOption.value = null;
+            _vm.timer?.cancel();
+          }
+          return _buildQuestion();
+        },
+      ),
     );
   }
 
-  Widget _questionContent() {
+  Widget _buildQuestion() {
+    return ValueListenableBuilder(
+      valueListenable: _vm.questionNotifier,
+      builder: (_, __, ___) {
+        return ValueListenableBuilder(
+          valueListenable: _vm.isLoading,
+          builder: (_, __, ___) {
+            final currentItem =
+                _vm.questionNotifier.value?[_vm.currentQuestionIndex.value];
+            return QuestionTransition(
+              isLoading: _vm.isLoading.value,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  currentItem?.questionImageAddress != null
+                      ? _examplePicture()
+                      : SizedBox(),
+                  Padding(
+                    padding: AppPaddings.paddingMediumVertical,
+                    child: _questionContent(
+                      currentItem,
+                      _vm.currentQuestionIndex.value + 1,
+                      _vm.questionNotifier.value?.length,
+                    ),
+                  ),
+                  Padding(
+                    padding: currentItem?.questionImageAddress != null
+                        ? EdgeInsets.zero
+                        : AppPaddings.appPaddingVertical,
+                    child: AnswerOptions(
+                      options: currentItem?.options ?? [],
+                      correctOption: currentItem?.answerWord ?? "",
+                      selectedOption: _vm.selectedOption,
+                      onCorrectAnswer: () {
+                        debugPrint('test true answer');
+                        _vm.stopTimer(reset: false);
+                      },
+                      onIncorrectAnswer: () {
+                        debugPrint('test false answer');
+                        _vm.stopTimer(reset: false);
+                      },
+                      onClickNext: () async {
+                        await _vm.isLastQuestion()
+                            ? appRoutes.navigateRemoveUntil(Routes.MainTab)
+                            : null;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _questionContent(
+    QuestionModel? questionModel,
+    int? currentQuestion,
+    int? totalQuestion,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Question 12 of 20',
+          questionModel?.questionWord == null
+              ? ""
+              : "Question ${currentQuestion} of ${totalQuestion}",
           style: TextStyle(
             color: AppColors.white,
             fontSize: 12,
             fontWeight: FontWeight.w400,
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 8),
         Text(
-          'What is the English meaning of the word apple?',
+          questionModel?.questionWord == null
+              ? ""
+              : "'${questionModel?.questionWord}' kelimesinin Türkçe anlamı nedir?",
           style: TextStyle(
             color: AppColors.white,
-            fontSize: 30,
+            fontSize: 22,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -94,7 +158,7 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
           borderRadius: BorderRadius.circular(16),
           child: Image.asset(
             AppAssets.imgExampPostPath,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
         ),
       ),
