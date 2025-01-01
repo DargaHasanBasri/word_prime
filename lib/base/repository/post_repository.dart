@@ -1,13 +1,20 @@
 import 'dart:developer';
 import 'package:word_prime/base/base_firestore.dart';
+import 'package:word_prime/base/repository/quiz_repository.dart';
 import 'package:word_prime/export.dart';
 
 class PostRepository {
+  /// Reference to the 'posts' collection in Firestore
   final _postCollectionReference = FirebaseCollections.posts.reference;
+
+  /// Reference to the 'users' collection in Firestore
   final _userCollectionReference = FirebaseCollections.users.reference;
+
+  /// Object representing the currently logged in user.
   User? _currentUser = FirebaseAuth.instance.currentUser;
 
-  final _postsHandler = BaseFirestore<PostModel>();
+  /// Logger object for logging operations,
+  var _logger = Logger(printer: PrettyPrinter());
 
   Future<List<PostModel?>?> fetchPost() async {
     try {
@@ -55,14 +62,23 @@ class PostRepository {
     }
   }
 
-  Future<void> addPost({PostModel? postModel}) async {
+  /// It keeps the information received from the user in postModel and
+  /// adds this data to firestore
+  Future<bool> addPost({PostModel? postModel}) async {
     try {
+      /// It adds the "postModel" data to the "_postCollectionReference" i.e.
+      /// posts collection and _documentReference is returned.
       DocumentReference _documentReference = await _postCollectionReference.add(
         postModel?.toJson(),
       );
+
+      /// The automatic post ID "postId" created by Firestore is assigned.
+      /// The 'post_id' field is added to the post document.
       String postId = _documentReference.id;
       await _documentReference.update({'post_id': postId});
 
+      /// The user's "added_posts" id is manually given the value 'postId'
+      /// and the values 'post_id' and 'word_level' are added to this sub-collection.
       await _userCollectionReference
           .doc(postModel?.userId)
           .collection('added_posts')
@@ -74,20 +90,31 @@ class PostRepository {
         },
       );
 
-      log('Post yükleme işlemi başarılı! Added data: ${postModel?.toJson()}');
+      /// Adds "added_words" information via QuizRepository.
+      await QuizRepository().addAddedWords(
+        model: AddedWordModel(
+          addedWordId: postId,
+          wordLevel: postModel?.wordLevel,
+          wordEn: postModel?.wordEnglish,
+          wordTr: postModel?.wordTurkish,
+          wordImageAddress: postModel?.postImageAddress,
+        ),
+      );
 
-      try {
-        await _userCollectionReference.doc(_currentUser!.uid).update({
-          'total_post': FieldValue.increment(1),
-        });
-        log("total post success increment");
-      } catch (e) {
-        log("total post error increment");
-        rethrow;
-      }
+      /// Increases the user's total post count by one
+      await _userCollectionReference.doc(_currentUser!.uid).update({
+        'total_post': FieldValue.increment(1),
+      });
+
+      _logger.i("Post upload successful and total post success increment!\n"
+          "Added data: ${postModel?.toJson()}");
+
+      /// Returns true if the operation is successful
+      return true;
     } catch (e) {
-      log('Post yükleme başarısız!');
-      rethrow;
+      /// In case of error, the log message is printed and returns false.
+      _logger.w("Post upload failed!");
+      return false;
     }
   }
 
@@ -95,7 +122,7 @@ class PostRepository {
     required String userId,
     required String wordLevel,
   }) async {
-    final addedPosts = _postsHandler.fetchPostsByQuery(
+    final addedPosts = BaseFirestore<PostModel>().fetchPostsByQuery(
       userId: userId,
       subCollectionName: 'added_posts',
       field: 'word_level',
@@ -108,7 +135,8 @@ class PostRepository {
   Future<List<PostModel?>?> fetchAllAddedPosts({
     required String userId,
   }) async {
-    final allAddedPosts = _postsHandler.fetchPostsFromSubCollection(
+    final allAddedPosts =
+        BaseFirestore<PostModel>().fetchPostsFromSubCollection(
       userId: userId,
       subCollectionName: 'added_posts',
       model: PostModel(),
@@ -190,7 +218,7 @@ class PostRepository {
     required String userId,
     required String wordLevel,
   }) async {
-    final savedPosts = _postsHandler.fetchPostsByQuery(
+    final savedPosts = BaseFirestore<PostModel>().fetchPostsByQuery(
       userId: userId,
       subCollectionName: 'saved_posts',
       field: 'word_level',
@@ -203,7 +231,8 @@ class PostRepository {
   Future<List<PostModel?>?> fetchAllSavedPosts({
     required String userId,
   }) async {
-    final allSavedPosts = _postsHandler.fetchPostsFromSubCollection(
+    final allSavedPosts =
+        BaseFirestore<PostModel>().fetchPostsFromSubCollection(
       userId: userId,
       subCollectionName: 'saved_posts',
       model: PostModel(),
@@ -311,7 +340,8 @@ class PostRepository {
   Future<List<PostModel?>?> fetchAllLikedPosts({
     required String userId,
   }) async {
-    final allLikedPosts = _postsHandler.fetchPostsFromSubCollection(
+    final allLikedPosts =
+        BaseFirestore<PostModel>().fetchPostsFromSubCollection(
       userId: userId,
       subCollectionName: 'liked_posts',
       model: PostModel(),
@@ -346,7 +376,7 @@ class PostRepository {
     required PostModel? model,
     required String? docId,
   }) async {
-    return await _postsHandler.update(
+    return await BaseFirestore<PostModel>().update(
       _postCollectionReference,
       model,
       docId,

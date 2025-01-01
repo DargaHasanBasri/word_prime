@@ -6,11 +6,37 @@ class QuizRepository {
   /// Creates Firestore database object.
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  /// Reference to the 'users' collection in Firestore
+  final _userCollectionReference = FirebaseCollections.users.reference;
+
   /// Object representing the currently logged in user.
   final User? _currentUser = FirebaseAuth.instance.currentUser;
 
   /// Logger object for logging operations,
   var _logger = Logger(printer: PrettyPrinter());
+
+  /// Adds user-added words to firestore to 'added_words' subcollection
+  Future<bool> addAddedWords({required AddedWordModel model}) async {
+    try {
+      /// Accesses the user document in Firestore and creates a document
+      /// in the Subcollection "added_words". It determines the document ID manually.
+      /// Saves the JSON data of the model as a document.
+      await _userCollectionReference
+          .doc(_currentUser?.uid)
+          .collection("added_words")
+          .doc(model.addedWordId)
+          .set(model.toJson());
+
+      _logger.i("addAddedWords SUCCESS");
+
+      /// Returns true if the operation is successful
+      return true;
+    } catch (e) {
+      /// In case of error, the log message is printed and returns false.
+      _logger.w("Error fetching from $e");
+      return false;
+    }
+  }
 
   /// The data of the added_words subcollection is fetched from the firestore
   /// and returned as List<AddedWordModel?>.
