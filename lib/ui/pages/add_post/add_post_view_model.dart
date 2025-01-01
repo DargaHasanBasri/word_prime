@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:word_prime/base/repository/firebase_storage_repository.dart';
+import 'package:word_prime/base/repository/quiz_repository.dart';
 import 'package:word_prime/export.dart';
 
 class AddPostViewModel extends BaseViewModel {
@@ -72,7 +73,6 @@ class AddPostViewModel extends BaseViewModel {
           ],
         ),
       );
-
       successAdded.call();
     } catch (e) {
       log('ViewModel An error occurred: $e');
