@@ -34,32 +34,6 @@ class MyProfileDetailsViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> profileDetailsUpdate() async {
-    try {
-      String? userName;
-      String? email;
-
-      if (userNotifier.value?.userName != fullNameInput.value) {
-        userName = fullNameInput.value;
-      }
-      if (userNotifier.value?.email != emailInput.value) {
-        email = emailInput.value;
-      }
-
-      if (userName == null && email == null) {
-        log('No changes detected.');
-        return;
-      }
-
-      await UserRepository().updateProfileDetails(
-        userName: userName,
-        email: email,
-      );
-    } catch (e) {
-      log('ViewModel An error occurred: $e');
-    }
-  }
-
   Future<void> processPasswordReset({
     required VoidCallback onSendLinkSuccess,
     required VoidCallback showProgress,

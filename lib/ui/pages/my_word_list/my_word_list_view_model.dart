@@ -41,7 +41,7 @@ class MyWordListViewModel extends BaseViewModel {
 
   Future<void> getSavedPosts() async {
     try {
-      savedPostsNotifier.value = await PostRepository().fetchSavedPosts(
+      savedPostsNotifier.value = await PostRepository().fetchSavedPostsByQuery(
         userId: '${currentUserNotifier.value?.userId}',
         wordLevel: englishLevel,
       );

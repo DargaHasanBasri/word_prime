@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logger/logger.dart';
 import 'package:word_prime/base/base_model.dart';
@@ -198,10 +197,13 @@ class BaseFirestore<T extends BaseModel<T>> {
       /// Map the queried documents to their corresponding model instances
       /// and return as a list.
       final posts = querySnapshotPosts.docs.map((doc) => doc.data()).toList();
+
+      /// Successful query result log message.
+      _logger.i("Posts were fetched successfully! Post Data: ${posts[0]}...");
       return posts;
     } catch (e) {
       /// Log any errors that occur during the process for debugging
-      log('Fetch items by IDs error: $e');
+      _logger.w("Fetch items by IDs error: $e");
       rethrow;
     }
   }
@@ -241,10 +243,13 @@ class BaseFirestore<T extends BaseModel<T>> {
       /// Map the queried documents to their corresponding model instances
       /// and return as a list.
       final posts = querySnapshotPosts.docs.map((doc) => doc.data()).toList();
+
+      /// Successful query result log message.
+      _logger.i("Posts were fetched successfully from $subCollectionName! Post Data: ${posts[0]}...");
       return posts;
     } catch (e) {
       /// Log any errors that occur during the process for debugging
-      log('Fetch all items from sub-collection error: $e');
+      _logger.w("Fetch all items from $subCollectionName error: $e");
       rethrow;
     }
   }

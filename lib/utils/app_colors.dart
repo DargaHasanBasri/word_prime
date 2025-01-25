@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+/// It collects and manages the application's colors centrally.
 final class AppColors {
   AppColors._();
   static Color backgroundColor = const Color(0xffffffff);

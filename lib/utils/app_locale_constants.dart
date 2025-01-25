@@ -1,5 +1,10 @@
 import 'dart:ui';
 
+/// Contains constant values used throughout the application.
+/// These constants include the name of the app, language options,
+/// locale settings, emoji symbols, and
+/// Contains default user information. This class is consistent throughout
+/// the application and allows having a central resource.
 final class AppLocaleConstants {
   AppLocaleConstants._();
 

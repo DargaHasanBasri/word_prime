@@ -126,9 +126,7 @@ class _ProfileDetailsPageState extends BaseStatefulState<MyProfileDetailsPage> {
           padding: AppPaddings.appPaddingVertical,
           child: CustomButton(
             title: LocaleKeys.profileDetail_update.locale.toUpperCase(),
-            onClick: () {
-              _vm.profileDetailsUpdate();
-            },
+            onClick: () {},
           ),
         ),
       ],

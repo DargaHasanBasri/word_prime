@@ -1,3 +1,8 @@
+/// The AppAssets class centralizes access to the application's asset files.
+/// This class manages the file paths of all images used in the application and
+/// provides easy access to each of these files. Thus, even if the file path of
+/// the images is changed, it is sufficient to update them in one place
+/// throughout the entire application.
 final class AppAssets {
   AppAssets._();
   static const _basePath = 'assets/images/';
@@ -68,5 +73,7 @@ final class AppAssets {
   static String icSandTimerPath = _imagePath('ic_sand_timer');
   static String icEmptyQuestionListPath = _imagePath('ic_empty_question_list');
 
+  /// The `_imagePath` method adds the `.png`
+  /// extension to the given file name and returns the full file path.
   static String _imagePath(String fileName) => '$_basePath$fileName.png';
 }
