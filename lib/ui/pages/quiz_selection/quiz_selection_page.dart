@@ -1,6 +1,7 @@
 import 'package:word_prime/base/enums/english_word_level.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/quiz_selection/components/quiz_level.dart';
+import 'package:word_prime/ui/widgets/insufficient_word_popup.dart';
 
 class QuizSelectionPage extends StatefulWidget {
   const QuizSelectionPage({super.key});
@@ -172,19 +173,10 @@ class _QuizSelectionPageState extends BaseStatefulState<QuizSelectionPage> {
       context: context,
       child: Padding(
         padding: AppPaddings.appPaddingHorizontal,
-        child: CustomAppPopup(
-          title: "Bu Seviyede Yetersiz Kelime",
-          subTitle: "Lütfen Kelime Ekleyin!",
-          onTapConfirmButton: () {
-            appRoutes.navigateTo(
-              Routes.MyWordList,
-              arguments: [
-                _vm.currentUserNotifier,
-                wordLevel,
-              ],
-            );
-          },
-          onTapCancelButton: () {
+        child: InsufficientWordPopup(
+          title: LocaleKeys.quizSelection_insufficientWordTitle.locale,
+          subTitle: LocaleKeys.quizSelection_insufficientWordSubTitle.locale,
+          onTapDone: () {
             appRoutes.popIfBackStackNotEmpty();
           },
         ),

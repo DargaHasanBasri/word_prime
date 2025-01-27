@@ -82,12 +82,6 @@ class QuizRepository {
       'C2': 0,
     };
 
-    for (var word in allAddedWords) {
-      if (word != null && levelCounts.containsKey(word.wordLevel)) {
-        levelCounts[word.wordLevel] = levelCounts[word.wordLevel]! + 1;
-      }
-    }
-
     /// Added word count check returns false if less than 3
     /// prints the warning message to the terminal with logger.
     if (allAddedWords.length < 3) {
@@ -97,6 +91,14 @@ class QuizRepository {
 
     /// Fetch user quiz questions.
     final userQuizQuestions = await fetchAddedWordsQuiz();
+
+    for (var word in userQuizQuestions) {
+      if (word != null &&
+          word.isAnswered == false &&
+          levelCounts.containsKey(word.questionLevel)) {
+        levelCounts[word.questionLevel] = levelCounts[word.questionLevel]! + 1;
+      }
+    }
 
     /// Important: 'questionId' is the firestore equivalent 'wordId' value.
     /// 'existingQuizWordIds' assigns the word ids of existing quiz questions.
@@ -253,5 +255,26 @@ class QuizRepository {
           "is_answered": false,
         });
     return allAddedWordsQuizzes;
+  }
+
+  Future<bool> questionAnswered({
+    required String? questionId,
+    required bool isTrue,
+  }) async {
+    try {
+      await _userCollectionReference
+          .doc(_currentUser?.uid)
+          .collection("added_words_quiz")
+          .doc(questionId)
+          .update({
+        "is_answered": true,
+        "is_true": isTrue,
+      });
+      _logger.i("The response has been sent to firebase successfully.");
+      return true;
+    } catch (e) {
+      _logger.w("An error occurred while sending the reply. Error: $e");
+      return false;
+    }
   }
 }

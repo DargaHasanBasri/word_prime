@@ -34,6 +34,11 @@ abstract class  LocaleKeys {
   static const saved = 'saved';
   static const quizAddedTitle = 'quizAddedTitle';
   static const quizSavedTitle = 'quizSavedTitle';
+  static const next = 'next';
+  static const congratulations = 'congratulations';
+  static const correctAnswerMsg = 'correctAnswerMsg';
+  static const wrongMsg = 'wrongMsg';
+  static const question = 'question';
   static const splashPage_title = 'splashPage.title';
   static const splashPage = 'splashPage';
   static const getStartedPage_title = 'getStartedPage.title';
@@ -180,5 +185,14 @@ abstract class  LocaleKeys {
   static const timeAgoMsg_hoursAbbreviation = 'timeAgoMsg.hoursAbbreviation';
   static const timeAgoMsg_minutesAbbreviation = 'timeAgoMsg.minutesAbbreviation';
   static const timeAgoMsg = 'timeAgoMsg';
+  static const quizDone_congratulationsMsg = 'quizDone.congratulationsMsg';
+  static const quizDone_success = 'quizDone.success';
+  static const quizDone_time = 'quizDone.time';
+  static const quizDone_totalScore = 'quizDone.totalScore';
+  static const quizDone_buttonTitle = 'quizDone.buttonTitle';
+  static const quizDone = 'quizDone';
+  static const quizSelection_insufficientWordTitle = 'quizSelection.insufficientWordTitle';
+  static const quizSelection_insufficientWordSubTitle = 'quizSelection.insufficientWordSubTitle';
+  static const quizSelection = 'quizSelection';
 
 }

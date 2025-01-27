@@ -35,6 +35,7 @@ final class Routes {
   static const String UpdatePost = 'updatePostProvider';
   static const String QuizSelection = 'quizSelectionProvider';
   static const String TimeUp = 'timeUpProvider';
+  static const String QuizDone = 'quizDoneProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -256,6 +257,20 @@ final class Routes {
       case Routes.TimeUp:
         return MaterialPageRoute(
           builder: (context) => const TimeUpProvider(),
+        );
+      case Routes.QuizDone:
+        final List<dynamic> arguments = settings.arguments as List;
+        final int totalCorrect = arguments[0] as int;
+        final int totalWrong = arguments[1] as int;
+        final int totalElapsedTime = arguments[2] as int;
+        final String quizLevel = arguments[3] as String;
+        return MaterialPageRoute(
+          builder: (context) => QuizDoneProvider(
+            totalCorrect: totalCorrect,
+            totalWrong: totalWrong,
+            totalElapsedTime: totalElapsedTime,
+            quizLevel: quizLevel,
+          ),
         );
       default:
         return MaterialPageRoute(

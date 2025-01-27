@@ -1,7 +1,8 @@
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/quiz/components/answer_options.dart';
+import 'package:word_prime/ui/pages/quiz/components/custom_app_bar.dart';
 import 'package:word_prime/ui/pages/quiz/components/question_transiton_animation.dart';
-import 'package:word_prime/ui/widgets/custom_timer_progress_indicator.dart';
+import 'package:word_prime/ui/widgets/custom_quiz_check_bottom_sheet.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
@@ -26,12 +27,25 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.rhino,
-      appBar: _buildAppBar(),
-      body: Padding(
-        padding: AppPaddings.appPaddingHorizontal,
-        child: _buildBody(),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        _showExitDialog();
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.rhino,
+        appBar: CustomAppBar(
+          progressIndicatorTimeNotifier: _vm.seconds,
+          exitOnTap: () {
+            _vm.stopTimer(reset: false);
+            _showExitDialog();
+          },
+        ),
+        body: Padding(
+          padding: AppPaddings.appPaddingHorizontal,
+          child: _buildBody(),
+        ),
       ),
     );
   }
@@ -52,6 +66,27 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
           }
           return _buildQuestion();
         },
+      ),
+    );
+  }
+
+  void _showExitDialog() {
+    _vm.stopTimer(reset: false);
+    showPopupDialog(
+      context: context,
+      child: Padding(
+        padding: AppPaddings.appPaddingHorizontal,
+        child: CustomAppPopup(
+          title: LocaleKeys.warningMessages_quizQuitMsgTitle.locale,
+          subTitle: LocaleKeys.warningMessages_quizQuitMsgSubTitle.locale,
+          onTapCancelButton: () {
+            appRoutes.popIfBackStackNotEmpty();
+            _vm.selectedOption.value != null ? null : _vm.startTimer();
+          },
+          onTapConfirmButton: () {
+            appRoutes.popPages(2);
+          },
+        ),
       ),
     );
   }
@@ -89,18 +124,68 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
                       options: currentItem?.options ?? [],
                       correctOption: currentItem?.answerWord ?? "",
                       selectedOption: _vm.selectedOption,
-                      onCorrectAnswer: () {
-                        debugPrint('test true answer');
+                      onCorrectAnswer: () async {
                         _vm.stopTimer(reset: false);
+                        _vm.totalCorrect.value++;
+                        _vm.totalElapsedTime.value +=
+                            (AppLocaleConstants.MAX_SECONDS -
+                                _vm.seconds.value);
+                        await _vm.answered(
+                          questionId: currentItem?.questionId,
+                          isTrue: true,
+                        );
+                        showQuizCheckBottomSheet(
+                          context: context,
+                          child: CustomQuizCheckBottomSheet(
+                            isCorrect: true,
+                            onTapNext: () async {
+                              Navigator.pop(context);
+                              await _vm.isLastQuestion()
+                                  ? appRoutes.navigateRemoveUntil(
+                                      Routes.QuizDone,
+                                      arguments: [
+                                        _vm.totalCorrect.value,
+                                        _vm.totalWrong.value,
+                                        _vm.totalElapsedTime.value,
+                                        _vm.languageLevel,
+                                      ],
+                                    )
+                                  : null;
+                            },
+                          ),
+                        );
                       },
-                      onIncorrectAnswer: () {
-                        debugPrint('test false answer');
+                      onIncorrectAnswer: () async {
                         _vm.stopTimer(reset: false);
-                      },
-                      onClickNext: () async {
-                        await _vm.isLastQuestion()
-                            ? appRoutes.navigateRemoveUntil(Routes.MainTab)
-                            : null;
+                        _vm.totalWrong.value++;
+                        _vm.totalElapsedTime.value +=
+                            (AppLocaleConstants.MAX_SECONDS -
+                                _vm.seconds.value);
+                        await _vm.answered(
+                          questionId: currentItem?.questionId,
+                          isTrue: false,
+                        );
+                        showQuizCheckBottomSheet(
+                          context: context,
+                          child: CustomQuizCheckBottomSheet(
+                            isCorrect: false,
+                            correctAnswer: currentItem?.answerWord ?? "",
+                            onTapNext: () async {
+                              Navigator.pop(context);
+                              await _vm.isLastQuestion()
+                                  ? appRoutes.navigateRemoveUntil(
+                                      Routes.QuizDone,
+                                      arguments: [
+                                        _vm.totalCorrect.value,
+                                        _vm.totalWrong.value,
+                                        _vm.totalElapsedTime.value,
+                                        _vm.languageLevel,
+                                      ],
+                                    )
+                                  : null;
+                            },
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -124,7 +209,7 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
         Text(
           questionModel?.questionWord == null
               ? ""
-              : "Question ${currentQuestion} of ${totalQuestion}",
+              : "${LocaleKeys.question.locale} ${currentQuestion} of ${totalQuestion}",
           style: TextStyle(
             color: AppColors.white,
             fontSize: 12,
@@ -161,112 +246,6 @@ class _QuizPageState extends BaseStatefulState<QuizPage> {
             fit: BoxFit.cover,
           ),
         ),
-      ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: AppColors.rhino,
-      toolbarHeight: AppSizes.toolbarHeight,
-      automaticallyImplyLeading: false,
-      title: Stack(
-        children: [
-          _exitButton(),
-          Center(
-            child: CustomTimerProgressIndicator(
-              time: _vm.seconds,
-            ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: _scoreBoard(),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _exitButton() {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(50),
-        splashColor: AppColors.white.withOpacity(0.1),
-        onTap: () {
-          _vm.stopTimer(reset: false);
-          showPopupDialog(
-            context: context,
-            child: Padding(
-              padding: AppPaddings.appPaddingHorizontal,
-              child: CustomAppPopup(
-                title: LocaleKeys.warningMessages_quizQuitMsgTitle.locale,
-                subTitle: LocaleKeys.warningMessages_quizQuitMsgSubTitle.locale,
-                onTapCancelButton: () {
-                  appRoutes.popIfBackStackNotEmpty();
-                  _vm.selectedOption.value != null ? null : _vm.startTimer();
-                },
-                onTapConfirmButton: () {
-                  appRoutes.popPages(2);
-                },
-              ),
-            ),
-          );
-        },
-        child: Ink(
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            border: Border.all(
-              color: AppColors.white.withOpacity(0.30),
-              width: 3,
-            ),
-          ),
-          child: Image.asset(
-            AppAssets.icClosePath,
-            width: 12,
-            height: 12,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _scoreBoard() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 2) +
-          EdgeInsets.only(right: 2, left: 8),
-      decoration: ShapeDecoration(
-        shape: StadiumBorder(side: BorderSide.none),
-        color: AppColors.white,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            '12',
-            style: TextStyle(
-              color: AppColors.mirage,
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          SizedBox(width: 4),
-          Container(
-            padding: EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              color: AppColors.pastelBlue,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: Image.asset(
-              AppAssets.icScorePath,
-              width: 24,
-              height: 24,
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -149,3 +149,6 @@ export 'package:logger/logger.dart';
 export 'package:word_prime/ui/pages/time_up/time_up_page.dart';
 export 'package:word_prime/ui/pages/time_up/time_up_view_model.dart';
 export 'package:word_prime/ui/pages/time_up/time_up_provider.dart';
+export 'package:word_prime/ui/pages/quiz_done/quiz_done_page.dart';
+export 'package:word_prime/ui/pages/quiz_done/quiz_done_view_model.dart';
+export 'package:word_prime/ui/pages/quiz_done/quiz_done_provider.dart';

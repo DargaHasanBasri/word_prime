@@ -182,4 +182,28 @@ abstract class BaseStatefulState<T extends StatefulWidget> extends State<T> {
       ),
     );
   }
+
+  void showQuizCheckBottomSheet({
+    required BuildContext context,
+    required Widget child,
+  }) {
+    showModalBottomSheet<void>(
+      context: context,
+      enableDrag: false,
+      useSafeArea: true,
+      isScrollControlled: true,
+      barrierColor: AppColors.mirage.withOpacity(0.0),
+      builder: (context) {
+        return PopScope(
+          canPop: false,
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: child,
+          ),
+        );
+      },
+    );
+  }
 }

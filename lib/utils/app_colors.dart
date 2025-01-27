@@ -31,4 +31,8 @@ final class AppColors {
   static Color greenishTeal = const Color(0xff25D076);
   static Color ruddyPink = const Color(0xffE88B8C);
   static Color fadedOrange = const Color(0xffE89148);
+  static Color veryLightGreen = const Color(0xff90EE90);
+  static Color carouselPink = const Color(0xffE3735E);
+  static Color yellowGreen = const Color(0xff57cc02);
+  static Color lightRed = const Color(0xffff4b4c);
 }

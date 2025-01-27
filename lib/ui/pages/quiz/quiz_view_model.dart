@@ -18,6 +18,10 @@ class QuizViewModel extends BaseViewModel {
   Timer? timer;
   ValueNotifier<int> seconds = ValueNotifier(AppLocaleConstants.MAX_SECONDS);
 
+  ValueNotifier<int> totalCorrect = ValueNotifier(0);
+  ValueNotifier<int> totalWrong = ValueNotifier(0);
+  ValueNotifier<int> totalElapsedTime = ValueNotifier(0);
+
   Future<void> getQuiz({
     required VoidCallback showProgress,
     required VoidCallback hideProgress,
@@ -62,6 +66,16 @@ class QuizViewModel extends BaseViewModel {
       timer?.cancel();
       return true;
     }
+  }
+
+  Future<void> answered({
+    required String? questionId,
+    required bool isTrue,
+  }) async {
+    await QuizRepository().questionAnswered(
+      questionId: questionId,
+      isTrue: isTrue,
+    );
   }
 
   void startTimer() {
