@@ -32,6 +32,11 @@
   "saved": "Saved",
   "quizAddedTitle": "Quiz With Added Words",
   "quizSavedTitle": "Quiz With Saved Words",
+  "next": "Next",
+  "congratulations": "Congratulations!",
+  "correctAnswerMsg": "Correct answer:",
+  "wrongMsg": "Wrong!",
+  "question": "Question",
   "splashPage": {
     "title": "Unlock a world full of words with us!"
   },
@@ -196,5 +201,16 @@
     "daysAbbreviation": "d ago",
     "hoursAbbreviation": "h ago",
     "minutesAbbreviation": "min ago"
+  },
+  "quizDone": {
+    "congratulationsMsg": "Congratulations you've completed this quiz!",
+    "success": "Success",
+    "time": "Time",
+    "totalScore": "Total Score",
+    "buttonTitle": "Get Score"
+  },
+  "quizSelection" : {
+    "insufficientWordTitle": "Please Add Word or Do I Remember? / My Mistakes Do the Exercises!",
+    "insufficientWordSubTitle": "Insufficient Words or Added Words at This Level Have Been Answered!"
   }
 }

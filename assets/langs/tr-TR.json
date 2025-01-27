@@ -32,6 +32,11 @@
   "saved": "Kaydedilen",
   "quizAddedTitle": "Eklenen Kelimeler ile Quiz",
   "quizSavedTitle": "Kaydedilen Kelimeler ile Quiz",
+  "next": "Devam Et",
+  "congratulations": "Aferin!",
+  "correctAnswerMsg": "Doğru cevap:",
+  "wrongMsg": "Yanlış!",
+  "question": "Soru",
   "splashPage": {
     "title": "Kelimelerle dolu bir dünyanın kilidini bizimle açın!"
   },
@@ -196,5 +201,16 @@
     "daysAbbreviation": "g önce",
     "hoursAbbreviation": "sa önce",
     "minutesAbbreviation": "dk önce"
+  },
+  "quizDone": {
+    "congratulationsMsg": "Tebrikler, bu testi tamamladınız!",
+    "success": "Başarı",
+    "time": "Süre",
+    "totalScore": "Toplam Puan",
+    "buttonTitle": "Skorunu Al"
+  },
+  "quizSelection" : {
+    "insufficientWordTitle": "Lütfen Kelime Ekleyin ya da Hatırlıyor muyum? / Hatalarım Alıştırmaları Yapın!",
+    "insufficientWordSubTitle": "Bu Seviyede Yetersiz Kelime ya da Eklenen Kelimeler Cevaplandırılmış!"
   }
 }
