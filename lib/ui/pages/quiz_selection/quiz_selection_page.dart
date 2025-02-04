@@ -36,146 +36,150 @@ class _QuizSelectionPageState extends BaseStatefulState<QuizSelectionPage> {
 
   Widget _buildBody() {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: AppPaddings.appPaddingVertical,
-            child: QuizLevel(
-              backgroundColor: AppColors.cornflowerBlue,
-              englishLevelTitle: 'A1 ${LocaleKeys.level.locale}',
-              iconAddress: AppAssets.icLevelA1Path,
-              iconColor: AppColors.white,
-              onTapStart: () {
-                _vm.levelCounts.value[EnglishWordLevel.A1.level] == 0
-                    ? showPopUp(EnglishWordLevel.A1.level)
-                    : appRoutes.navigateTo(
+      child: ValueListenableBuilder(
+          valueListenable: _vm.levelCounts,
+          builder: (_, __, ___) {
+            return Column(
+              children: [
+                Padding(
+                  padding: AppPaddings.appPaddingVertical,
+                  child: QuizLevel(
+                    backgroundColor: AppColors.cornflowerBlue,
+                    englishLevelTitle: 'A1 ${LocaleKeys.level.locale}',
+                    iconAddress: AppAssets.icLevelA1Path,
+                    iconColor: AppColors.white,
+                    onTapStart: () {
+                      _vm.levelCounts.value[EnglishWordLevel.A1.level]! < 3
+                          ? showPopUp()
+                          : appRoutes.navigateTo(
+                              Routes.Quiz,
+                              arguments: [
+                                _vm.quizType,
+                                EnglishWordLevel.A1.level,
+                              ],
+                            );
+                    },
+                  ),
+                ),
+                QuizLevel(
+                  backgroundColor: AppColors.lavenderPurple,
+                  englishLevelTitle: 'A2 ${LocaleKeys.level.locale}',
+                  iconAddress: AppAssets.icLevelA2Path,
+                  onTapStart: () {
+                    _vm.levelCounts.value[EnglishWordLevel.A2.level]! < 3
+                        ? showPopUp()
+                        : appRoutes.navigateTo(
+                            Routes.Quiz,
+                            arguments: [
+                              _vm.quizType,
+                              EnglishWordLevel.A2.level,
+                            ],
+                          );
+                  },
+                ),
+                Padding(
+                  padding: AppPaddings.appPaddingVertical,
+                  child: QuizLevel(
+                    backgroundColor: AppColors.neptune,
+                    englishLevelTitle: 'B1 ${LocaleKeys.level.locale}',
+                    iconAddress: AppAssets.icLevelB1Path,
+                    iconColor: AppColors.white,
+                    onTapStart: () {
+                      _vm.levelCounts.value[EnglishWordLevel.B1.level]! < 3
+                          ? showPopUp()
+                          : appRoutes.navigateTo(
+                              Routes.Quiz,
+                              arguments: [
+                                _vm.quizType,
+                                EnglishWordLevel.B1.level,
+                              ],
+                            );
+                    },
+                  ),
+                ),
+                QuizLevel(
+                  backgroundColor: AppColors.wildBlueYonder,
+                  englishLevelTitle: 'B2 ${LocaleKeys.level.locale}',
+                  iconAddress: AppAssets.icLevelB2Path,
+                  onTapStart: () {
+                    _vm.levelCounts.value[EnglishWordLevel.B2.level]! < 3
+                        ? showPopUp()
+                        : appRoutes.navigateTo(
+                            Routes.Quiz,
+                            arguments: [
+                              _vm.quizType,
+                              EnglishWordLevel.B2.level,
+                            ],
+                          );
+                  },
+                ),
+                Padding(
+                  padding: AppPaddings.appPaddingVertical,
+                  child: QuizLevel(
+                    backgroundColor: AppColors.pastelBlue,
+                    englishLevelTitle: 'C1 ${LocaleKeys.level.locale}',
+                    iconAddress: AppAssets.icLevelC1Path,
+                    iconColor: AppColors.white,
+                    onTapStart: () {
+                      _vm.levelCounts.value[EnglishWordLevel.C1.level]! < 3
+                          ? showPopUp()
+                          : appRoutes.navigateTo(
+                              Routes.Quiz,
+                              arguments: [
+                                _vm.quizType,
+                                EnglishWordLevel.C1.level,
+                              ],
+                            );
+                    },
+                  ),
+                ),
+                QuizLevel(
+                  backgroundColor: AppColors.rhino,
+                  englishLevelTitle: 'C2 ${LocaleKeys.level.locale}',
+                  iconAddress: AppAssets.icLevelC2Path,
+                  onTapStart: () {
+                    _vm.levelCounts.value[EnglishWordLevel.C2.level]! < 3
+                        ? showPopUp()
+                        : appRoutes.navigateTo(
+                            Routes.Quiz,
+                            arguments: [
+                              _vm.quizType,
+                              EnglishWordLevel.C2.level,
+                            ],
+                          );
+                  },
+                ),
+                Padding(
+                  padding: AppPaddings.appPaddingVertical,
+                  child: QuizLevel(
+                    backgroundColor: AppColors.artyClickRed,
+                    englishLevelTitle: 'Mixed ${LocaleKeys.level.locale}',
+                    iconAddress: AppAssets.icMixedPath,
+                    onTapStart: () {
+                      appRoutes.navigateTo(
                         Routes.Quiz,
                         arguments: [
                           _vm.quizType,
-                          EnglishWordLevel.A1.level,
+                          EnglishWordLevel.Mix.level,
                         ],
                       );
-              },
-            ),
-          ),
-          QuizLevel(
-            backgroundColor: AppColors.lavenderPurple,
-            englishLevelTitle: 'A2 ${LocaleKeys.level.locale}',
-            iconAddress: AppAssets.icLevelA2Path,
-            onTapStart: () {
-              _vm.levelCounts.value[EnglishWordLevel.A2.level] == 0
-                  ? showPopUp(EnglishWordLevel.A2.level)
-                  : appRoutes.navigateTo(
-                      Routes.Quiz,
-                      arguments: [
-                        _vm.quizType,
-                        EnglishWordLevel.A2.level,
-                      ],
-                    );
-            },
-          ),
-          Padding(
-            padding: AppPaddings.appPaddingVertical,
-            child: QuizLevel(
-              backgroundColor: AppColors.neptune,
-              englishLevelTitle: 'B1 ${LocaleKeys.level.locale}',
-              iconAddress: AppAssets.icLevelB1Path,
-              iconColor: AppColors.white,
-              onTapStart: () {
-                _vm.levelCounts.value[EnglishWordLevel.B1.level] == 0
-                    ? showPopUp(EnglishWordLevel.B1.level)
-                    : appRoutes.navigateTo(
-                        Routes.Quiz,
-                        arguments: [
-                          _vm.quizType,
-                          EnglishWordLevel.B1.level,
-                        ],
-                      );
-              },
-            ),
-          ),
-          QuizLevel(
-            backgroundColor: AppColors.wildBlueYonder,
-            englishLevelTitle: 'B2 ${LocaleKeys.level.locale}',
-            iconAddress: AppAssets.icLevelB2Path,
-            onTapStart: () {
-              _vm.levelCounts.value[EnglishWordLevel.B2.level] == 0
-                  ? showPopUp(EnglishWordLevel.B2.level)
-                  : appRoutes.navigateTo(
-                      Routes.Quiz,
-                      arguments: [
-                        _vm.quizType,
-                        EnglishWordLevel.B2.level,
-                      ],
-                    );
-            },
-          ),
-          Padding(
-            padding: AppPaddings.appPaddingVertical,
-            child: QuizLevel(
-              backgroundColor: AppColors.pastelBlue,
-              englishLevelTitle: 'C1 ${LocaleKeys.level.locale}',
-              iconAddress: AppAssets.icLevelC1Path,
-              iconColor: AppColors.white,
-              onTapStart: () {
-                _vm.levelCounts.value[EnglishWordLevel.C1.level] == 0
-                    ? showPopUp(EnglishWordLevel.C1.level)
-                    : appRoutes.navigateTo(
-                        Routes.Quiz,
-                        arguments: [
-                          _vm.quizType,
-                          EnglishWordLevel.C1.level,
-                        ],
-                      );
-              },
-            ),
-          ),
-          QuizLevel(
-            backgroundColor: AppColors.rhino,
-            englishLevelTitle: 'C2 ${LocaleKeys.level.locale}',
-            iconAddress: AppAssets.icLevelC2Path,
-            onTapStart: () {
-              _vm.levelCounts.value[EnglishWordLevel.C2.level] == 0
-                  ? showPopUp(EnglishWordLevel.C2.level)
-                  : appRoutes.navigateTo(
-                      Routes.Quiz,
-                      arguments: [
-                        _vm.quizType,
-                        EnglishWordLevel.C2.level,
-                      ],
-                    );
-            },
-          ),
-          Padding(
-            padding: AppPaddings.appPaddingVertical,
-            child: QuizLevel(
-              backgroundColor: AppColors.artyClickRed,
-              englishLevelTitle: 'Mixed ${LocaleKeys.level.locale}',
-              iconAddress: AppAssets.icMixedPath,
-              onTapStart: () {
-                appRoutes.navigateTo(
-                  Routes.Quiz,
-                  arguments: [
-                    _vm.quizType,
-                    EnglishWordLevel.Mix.level,
-                  ],
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+                    },
+                  ),
+                ),
+              ],
+            );
+          }),
     );
   }
 
-  void showPopUp(String wordLevel) {
+  void showPopUp() {
     showPopupDialog(
       context: context,
       child: Padding(
         padding: AppPaddings.appPaddingHorizontal,
         child: InsufficientWordPopup(
-          title: LocaleKeys.quizSelection_insufficientWordTitle.locale,
-          subTitle: LocaleKeys.quizSelection_insufficientWordSubTitle.locale,
+          title:LocaleKeys.quizSelection_insufficientWordSubTitle.locale,
+          subTitle: LocaleKeys.quizSelection_insufficientWordTitle.locale,
           onTapDone: () {
             appRoutes.popIfBackStackNotEmpty();
           },

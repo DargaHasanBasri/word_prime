@@ -125,7 +125,11 @@
     "soon": "Soon",
     "quizAnalysis": "My Quiz Analysis Results",
     "seeAll": "See All",
-    "chapter": "Chapter"
+    "chapter": "Chapter",
+    "notEnoughTitleMsg": "Not Enough Words",
+    "notEnoughSubTitleMsg": "Please Add Word",
+    "doYouRemember": "Do you Remember?",
+    "myMistakes": "My Mistakes!"
   },
   "tasksPage": {
     "myTasks": "My Tasks",
@@ -210,7 +214,7 @@
     "buttonTitle": "Get Score"
   },
   "quizSelection" : {
-    "insufficientWordTitle": "Please Add Word or Do I Remember? / My Mistakes Do the Exercises!",
-    "insufficientWordSubTitle": "Insufficient Words or Added Words at This Level Have Been Answered!"
+    "insufficientWordTitle": "Insufficient Words or Added Words at This Level Have Been Answered!",
+    "insufficientWordSubTitle": "There must be at least 3 unanswered words! Or Do I Remember? / My Mistakes Do the Exercises!"
   }
 }

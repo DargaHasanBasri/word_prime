@@ -2,6 +2,7 @@ import 'package:word_prime/base/enums/quiz_type.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/activity/components/activity_item.dart';
 import 'package:word_prime/ui/pages/activity/components/analysis_results.dart';
+import 'package:word_prime/ui/widgets/insufficient_word_popup.dart';
 
 class ActivityPage extends StatefulWidget {
   const ActivityPage({super.key});
@@ -43,16 +44,18 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
             Expanded(
               child: ActivityItem(
                 backgroundColor: AppColors.lavenderPurple,
-                titleEmoji: AppLocaleConstants.EMOJI_BRAIN,
+                titleEmoji: AppLocaleConstants.EMOJI_QUESTION_MARK,
                 title: LocaleKeys.activityPage_addedWordsQuiz.locale,
-                onTapEnter: () {
-                  appRoutes.navigateTo(
-                    Routes.QuizSelection,
-                    arguments: [
-                      QuizType.Added.type,
-                      _vm.currentUserNotifier,
-                    ],
-                  );
+                onTapEnter: () async {
+                  await _vm.isAddedWords()
+                      ? showPopUp()
+                      : appRoutes.navigateTo(
+                          Routes.QuizSelection,
+                          arguments: [
+                            QuizType.Added.type,
+                            _vm.currentUserNotifier,
+                          ],
+                        );
                 },
               ),
             ),
@@ -62,15 +65,7 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
                 backgroundColor: AppColors.wildBlueYonder,
                 titleEmoji: AppLocaleConstants.EMOJI_CONTROL,
                 title: LocaleKeys.activityPage_savedQuiz.locale,
-                onTapEnter: () {
-                  appRoutes.navigateTo(
-                    Routes.QuizSelection,
-                    arguments: [
-                      QuizType.Saved.type,
-                      _vm.currentUserNotifier,
-                    ],
-                  );
-                },
+                onTapEnter: () {},
               ),
             ),
           ],
@@ -81,8 +76,8 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
             Expanded(
               child: ActivityItem(
                 backgroundColor: AppColors.neptune,
-                titleEmoji: AppLocaleConstants.EMOJI_QUESTION_MARK,
-                title: '${LocaleKeys.activityPage_soon.locale}...',
+                titleEmoji: AppLocaleConstants.EMOJI_BRAIN,
+                title: '${LocaleKeys.activityPage_doYouRemember.locale}',
                 onTapEnter: () {},
               ),
             ),
@@ -91,7 +86,7 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
               child: ActivityItem(
                 backgroundColor: AppColors.watermelon,
                 titleEmoji: AppLocaleConstants.EMOJI_LIGHTBULB,
-                title: '${LocaleKeys.activityPage_soon.locale}...',
+                title: '${LocaleKeys.activityPage_myMistakes.locale}',
                 onTapEnter: () {},
               ),
             ),
@@ -116,6 +111,22 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
               color: AppColors.white,
               fontWeight: FontWeight.w700,
             ),
+      ),
+    );
+  }
+
+  void showPopUp() {
+    showPopupDialog(
+      context: context,
+      child: Padding(
+        padding: AppPaddings.appPaddingHorizontal,
+        child: InsufficientWordPopup(
+          title: LocaleKeys.activityPage_notEnoughTitleMsg.locale,
+          subTitle: LocaleKeys.activityPage_notEnoughSubTitleMsg.locale,
+          onTapDone: () {
+            appRoutes.popIfBackStackNotEmpty();
+          },
+        ),
       ),
     );
   }

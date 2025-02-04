@@ -117,6 +117,10 @@ abstract class  LocaleKeys {
   static const activityPage_quizAnalysis = 'activityPage.quizAnalysis';
   static const activityPage_seeAll = 'activityPage.seeAll';
   static const activityPage_chapter = 'activityPage.chapter';
+  static const activityPage_notEnoughTitleMsg = 'activityPage.notEnoughTitleMsg';
+  static const activityPage_notEnoughSubTitleMsg = 'activityPage.notEnoughSubTitleMsg';
+  static const activityPage_doYouRemember = 'activityPage.doYouRemember';
+  static const activityPage_myMistakes = 'activityPage.myMistakes';
   static const activityPage = 'activityPage';
   static const tasksPage_myTasks = 'tasksPage.myTasks';
   static const tasksPage_tasksWeekly = 'tasksPage.tasksWeekly';

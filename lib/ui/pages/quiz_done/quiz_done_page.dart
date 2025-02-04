@@ -102,7 +102,19 @@ class _QuizDonePageState extends BaseStatefulState<QuizDonePage> {
                 child: CustomButton(
                   borderRadius: 16,
                   title: LocaleKeys.quizDone_buttonTitle.locale.toUpperCase(),
-                  onClick: () {
+                  onClick: () async {
+                    showProgress(context);
+                    await _vm.quizAnalysis()
+                        ? hideProgress()
+                        : showSnackBar(
+                            context: context,
+                            content: CustomSnackBarContent(
+                              text: LocaleKeys
+                                  .warningMessages_unexpectedError.locale,
+                              iconType: CustomSnackBarType.error,
+                            ),
+                          );
+
                     appRoutes.navigateRemoveUntil(Routes.MainTab);
                   },
                 ),

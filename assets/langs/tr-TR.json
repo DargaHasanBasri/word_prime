@@ -125,7 +125,11 @@
     "soon": "Yakında",
     "quizAnalysis": "Quiz Analiz Sonuçlarım",
     "seeAll": "Tümünü Gör",
-    "chapter": "Bölüm"
+    "chapter": "Bölüm",
+    "notEnoughTitleMsg": "Yetersiz Kelime",
+    "notEnoughSubTitleMsg": "Lütfen Kelime Ekleyin",
+    "doYouRemember": "Hatırlıyor musun?",
+    "myMistakes": "Hatalarım!"
   },
   "tasksPage": {
     "myTasks": "Görevler",
@@ -210,7 +214,7 @@
     "buttonTitle": "Skorunu Al"
   },
   "quizSelection" : {
-    "insufficientWordTitle": "Lütfen Kelime Ekleyin ya da Hatırlıyor muyum? / Hatalarım Alıştırmaları Yapın!",
-    "insufficientWordSubTitle": "Bu Seviyede Yetersiz Kelime ya da Eklenen Kelimeler Cevaplandırılmış!"
+    "insufficientWordTitle": "Bu Seviyede Yetersiz Kelime ya da Eklenen Kelimeler Cevaplandırılmış!",
+    "insufficientWordSubTitle": "En az cevaplandırılmamış 3 kelime olmalı! Kelime Ekleyin ya da Hatırlıyor muyum? / Hatalarım Alıştırmaları Yapın!"
   }
 }
