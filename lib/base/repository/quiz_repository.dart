@@ -2,6 +2,8 @@ import 'package:word_prime/base/base_firestore.dart';
 import 'package:word_prime/export.dart';
 import 'dart:math';
 
+import 'package:word_prime/models/quiz_analysis_model.dart';
+
 class QuizRepository {
   /// Creates Firestore database object.
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -92,11 +94,16 @@ class QuizRepository {
     /// Fetch user quiz questions.
     final userQuizQuestions = await fetchAddedWordsQuiz();
 
-    for (var word in userQuizQuestions) {
-      if (word != null &&
-          word.isAnswered == false &&
-          levelCounts.containsKey(word.questionLevel)) {
-        levelCounts[word.questionLevel] = levelCounts[word.questionLevel]! + 1;
+    /// Starting the loop for each item in the list 'userQuizQuestions'.
+    for (var userQuizQuestion in userQuizQuestions) {
+      /// If 'userQuizQuestion' is not null and has not been answered yet
+      /// and if the value 'questionLevel' exists in levelCounts then the action is done.
+      if (userQuizQuestion != null &&
+          userQuizQuestion.isAnswered == false &&
+          levelCounts.containsKey(userQuizQuestion.questionLevel)) {
+        /// Increases the number of the corresponding 'questionLevel' by one.
+        levelCounts[userQuizQuestion.questionLevel] =
+            levelCounts[userQuizQuestion.questionLevel]! + 1;
       }
     }
 
@@ -123,6 +130,15 @@ class QuizRepository {
       newWordsList,
       allAddedWords,
     );
+
+    for (var newWord in newWordsList) {
+      /// If 'newWord' is not null
+      /// and if the value 'wordLevel' exists in levelCounts then the action is done.
+      if (newWord != null && levelCounts.containsKey(newWord.wordLevel)) {
+        /// Increases the number of the corresponding 'questionLevel' by one.
+        levelCounts[newWord.wordLevel] = levelCounts[newWord.wordLevel]! + 1;
+      }
+    }
 
     /// '_createQuizForWords' returns true if successful
     return (true, levelCounts);
@@ -274,6 +290,26 @@ class QuizRepository {
       return true;
     } catch (e) {
       _logger.w("An error occurred while sending the reply. Error: $e");
+      return false;
+    }
+  }
+
+  Future<bool> addCompletedQuizAnalysis(
+      {required QuizAnalysisModel quizAnalysisModel}) async {
+    try {
+      final docQuizAnalysisRef = _userCollectionReference
+          .doc(_currentUser?.uid)
+          .collection('quiz_analysis')
+          .doc();
+
+      final autoId = docQuizAnalysisRef.id;
+      final updatedModel = quizAnalysisModel.copyWith(analysisId: autoId);
+      await docQuizAnalysisRef.set(updatedModel.toJson());
+
+      _logger.i("Adding analysis was successful.");
+      return true;
+    } catch (e) {
+      _logger.w("Adding analysis failed. Error: $e");
       return false;
     }
   }

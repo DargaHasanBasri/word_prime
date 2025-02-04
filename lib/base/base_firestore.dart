@@ -63,10 +63,17 @@ class BaseFirestore<T extends BaseModel<T>> {
       final items = querySnapshot.docs.map((doc) => doc.data()).toList();
 
       /// Successful query result log message
-      _logger.i(
-        "SUCCESS fetch from $mainCollection${subCollection != null ? '/$subCollection' : ''}\n"
-        "items count: ${items.length}, ${items[0].toString()}...",
-      );
+      if (items.isNotEmpty) {
+        _logger.i(
+          "SUCCESS fetch from $mainCollection${subCollection != null ? '/$subCollection' : ''}\n"
+          "items count: ${items.length}, ${items[0].toString()}...",
+        );
+      } else {
+        _logger.i(
+          "SUCCESS fetch from $mainCollection${subCollection != null ? '/$subCollection' : ''}\n"
+          "items count: 0",
+        );
+      }
 
       return items;
     } catch (e) {
@@ -245,7 +252,8 @@ class BaseFirestore<T extends BaseModel<T>> {
       final posts = querySnapshotPosts.docs.map((doc) => doc.data()).toList();
 
       /// Successful query result log message.
-      _logger.i("Posts were fetched successfully from $subCollectionName! Post Data: ${posts[0]}...");
+      _logger.i(
+          "Posts were fetched successfully from $subCollectionName! Post Data: ${posts[0]}...");
       return posts;
     } catch (e) {
       /// Log any errors that occur during the process for debugging
