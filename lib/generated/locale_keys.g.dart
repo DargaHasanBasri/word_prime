@@ -198,5 +198,28 @@ abstract class  LocaleKeys {
   static const quizSelection_insufficientWordTitle = 'quizSelection.insufficientWordTitle';
   static const quizSelection_insufficientWordSubTitle = 'quizSelection.insufficientWordSubTitle';
   static const quizSelection = 'quizSelection';
+  static const quizAnalysis_appBarTitle = 'quizAnalysis.appBarTitle';
+  static const quizAnalysis_buttonTitle = 'quizAnalysis.buttonTitle';
+  static const quizAnalysis_chartSubTitle = 'quizAnalysis.chartSubTitle';
+  static const quizAnalysis_chartTitle = 'quizAnalysis.chartTitle';
+  static const quizAnalysis_chartLevelTitle = 'quizAnalysis.chartLevelTitle';
+  static const quizAnalysis_correctTitle = 'quizAnalysis.correctTitle';
+  static const quizAnalysis_incorrectTitle = 'quizAnalysis.incorrectTitle';
+  static const quizAnalysis = 'quizAnalysis';
+  static const days_monday = 'days.monday';
+  static const days_mon = 'days.mon';
+  static const days_tuesday = 'days.tuesday';
+  static const days_tue = 'days.tue';
+  static const days_wednesday = 'days.wednesday';
+  static const days_wed = 'days.wed';
+  static const days_thursday = 'days.thursday';
+  static const days_thu = 'days.thu';
+  static const days_friday = 'days.friday';
+  static const days_fri = 'days.fri';
+  static const days_saturday = 'days.saturday';
+  static const days_sat = 'days.sat';
+  static const days_sunday = 'days.sunday';
+  static const days_sun = 'days.sun';
+  static const days = 'days';
 
 }

@@ -1,4 +1,3 @@
-import 'package:word_prime/base/enums/english_word_level.dart';
 import 'package:word_prime/export.dart';
 import 'package:word_prime/ui/pages/quiz_selection/components/quiz_level.dart';
 import 'package:word_prime/ui/widgets/insufficient_word_popup.dart';

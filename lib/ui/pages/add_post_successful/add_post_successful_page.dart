@@ -19,11 +19,20 @@ class _AddPostSuccessfulPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      body: Padding(
-        padding: AppPaddings.appPaddingHorizontal,
-        child: _buildBody(),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        appRoutes.navigateRemoveUntil(
+          Routes.MainTab,
+          arguments: 2,
+        );
+      },
+      child: Scaffold(
+        body: Padding(
+          padding: AppPaddings.appPaddingHorizontal,
+          child: _buildBody(),
+        ),
       ),
     );
   }
@@ -31,11 +40,25 @@ class _AddPostSuccessfulPageState
   Widget _buildBody() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
           child: _successContent(),
         ),
-        _customButtonsColumn(),
+        Padding(
+          padding: AppPaddings.appPaddingLargeVertical,
+          child: CustomButton(
+            title: LocaleKeys.addPost_backHome.locale,
+            backgroundColor: Colors.transparent,
+            borderColor: Theme.of(context).colorScheme.secondary,
+            onClick: () {
+              appRoutes.navigateRemoveUntil(
+                Routes.MainTab,
+                arguments: 2,
+              );
+            },
+          ),
+        ),
       ],
     );
   }
@@ -52,49 +75,16 @@ class _AddPostSuccessfulPageState
           padding: AppPaddings.paddingSmallVertical,
           child: Text(
             LocaleKeys.addPost_successTitle.locale,
-            style: TextStyle(
-              color: AppColors.mirage,
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
-            ),
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
             textAlign: TextAlign.center,
           ),
         ),
         Text(
           LocaleKeys.addPost_successMsg.locale,
-          style: TextStyle(
-            color: AppColors.paleSky,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
+          style: Theme.of(context).textTheme.titleSmall,
           textAlign: TextAlign.center,
-        ),
-      ],
-    );
-  }
-
-  Widget _customButtonsColumn() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        CustomButton(
-          title: LocaleKeys.addPost_buttonTitle.locale,
-          onClick: () {
-            appRoutes.navigateRemoveUntil(Routes.MainTab);
-          },
-        ),
-        Padding(
-          padding: AppPaddings.paddingMediumVertical,
-          child: CustomButton(
-            title: LocaleKeys.addPost_backHome.locale,
-            titleColor: AppColors.mirage,
-            backgroundColor: Colors.transparent,
-            borderColor: AppColors.mirage,
-            onClick: () {
-              appRoutes.navigateTo(Routes.MainTab);
-            },
-          ),
         ),
       ],
     );

@@ -216,5 +216,30 @@
   "quizSelection" : {
     "insufficientWordTitle": "Insufficient Words or Added Words at This Level Have Been Answered!",
     "insufficientWordSubTitle": "There must be at least 3 unanswered words! Or Do I Remember? / My Mistakes Do the Exercises!"
+  },
+  "quizAnalysis" : {
+    "appBarTitle": "Quiz Analysis",
+    "buttonTitle": "See Results",
+    "chartSubTitle": "Number of Correct - Incorrect",
+    "chartTitle": "All",
+    "chartLevelTitle": "Level",
+    "correctTitle": "Correct",
+    "incorrectTitle": "Incorrect"
+  },
+  "days": {
+    "monday": "Monday",
+    "mon": "Mon",
+    "tuesday": "Tuesday",
+    "tue": "Tue",
+    "wednesday": "Wednesday",
+    "wed": "Wed",
+    "thursday": "Thursday",
+    "thu": "Thu",
+    "friday": "Friday",
+    "fri": "Fri",
+    "saturday": "Saturday",
+    "sat": "Sat",
+    "sunday": "Sunday",
+    "sun": "Sun"
   }
 }

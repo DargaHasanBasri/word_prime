@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:word_prime/base/enums/english_word_level.dart';
 import 'package:word_prime/export.dart';
 
 class AddWordPage extends StatefulWidget {
