@@ -16,12 +16,11 @@ class _MainTabPageState extends BaseStatefulState<MainTabPage> {
   @override
   void initState() {
     _vm = Provider.of<MainTabViewModel>(context, listen: false);
-
+    _vm.currentIndex.value = _vm.tabIndex ?? 0;
     _vm.getUserData();
     _eventSubscription = eventBus.on<RefreshUserInfoEvent>().listen((event) {
       _vm.getUserData();
     });
-
     super.initState();
   }
 

@@ -1,7 +1,11 @@
 import 'package:word_prime/export.dart';
 
 class AnalysisResults extends StatelessWidget {
-  const AnalysisResults({super.key});
+  final VoidCallback onTapQuizAnalysis;
+  const AnalysisResults({
+    super.key,
+    required this.onTapQuizAnalysis,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +45,7 @@ class AnalysisResults extends StatelessWidget {
                     title: LocaleKeys.activityPage_seeAll.locale,
                     titleVerticalPadding: 8,
                     borderRadius: 8,
+                    onClick: () => onTapQuizAnalysis.call(),
                   )
                 ],
               ),

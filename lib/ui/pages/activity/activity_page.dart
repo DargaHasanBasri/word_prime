@@ -95,7 +95,11 @@ class _ActivityPageState extends BaseStatefulState<ActivityPage> {
         SizedBox(height: AppSizes.sizedBoxOverallHeight),
         Padding(
           padding: AppPaddings.appPaddingMainTabBottom,
-          child: AnalysisResults(),
+          child: AnalysisResults(
+            onTapQuizAnalysis: () {
+              appRoutes.navigateTo(Routes.QuizAnalysis);
+            },
+          ),
         ),
       ],
     );

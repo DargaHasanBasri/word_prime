@@ -36,6 +36,7 @@ final class Routes {
   static const String QuizSelection = 'quizSelectionProvider';
   static const String TimeUp = 'timeUpProvider';
   static const String QuizDone = 'quizDoneProvider';
+  static const String QuizAnalysis = 'quizAnalysisProvider';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -94,8 +95,11 @@ final class Routes {
           builder: (context) => const MyProfileDetailsProvider(),
         );
       case Routes.MainTab:
+        final int? tabIndex = settings.arguments as int?;
         return MaterialPageRoute(
-          builder: (context) => const MainTabProvider(),
+          builder: (context) => MainTabProvider(
+            tabIndex: tabIndex ?? 0,
+          ),
         );
       case Routes.Home:
         final ValueNotifier<UserModel?> currentUserNotifier =
@@ -271,6 +275,10 @@ final class Routes {
             totalElapsedTime: totalElapsedTime,
             quizLevel: quizLevel,
           ),
+        );
+      case Routes.QuizAnalysis:
+        return MaterialPageRoute(
+          builder: (context) => const QuizAnalysisProvider(),
         );
       default:
         return MaterialPageRoute(

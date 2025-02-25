@@ -2,8 +2,6 @@ import 'package:word_prime/base/base_firestore.dart';
 import 'package:word_prime/export.dart';
 import 'dart:math';
 
-import 'package:word_prime/models/quiz_analysis_model.dart';
-
 class QuizRepository {
   /// Creates Firestore database object.
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -273,6 +271,8 @@ class QuizRepository {
     return allAddedWordsQuizzes;
   }
 
+  /// When the user answers a question, the correctness and
+  /// answered status of that question is updated in Firebase.
   Future<bool> questionAnswered({
     required String? questionId,
     required bool isTrue,
@@ -294,22 +294,236 @@ class QuizRepository {
     }
   }
 
-  Future<bool> addCompletedQuizAnalysis(
-      {required QuizAnalysisModel quizAnalysisModel}) async {
+  Future<bool> addCompletedQuizAnalysis({
+    required QuizAnalysisModel quizAnalysisModel,
+  }) async {
     try {
-      final docQuizAnalysisRef = _userCollectionReference
+      /// Check if quiz date and level are valid.
+      bool isValid = (quizAnalysisModel.quizDate == null ||
+          quizAnalysisModel.quizLevel == null);
+
+      /// If the conditions are not valid, it returns false.
+      /// If it is valid, it does not enter and continues operations.
+      if (isValid) {
+        _logger.w("Quiz date or level is missing");
+        return false;
+      }
+
+      /// Convert Timestamp to DateTime object with (toDateTime()) extension.
+      final quizDateTime = quizAnalysisModel.quizDate!.toDateTime();
+
+      /// It creates the starting value of the day and is kept by 'startOfDay'.
+      final startOfDay = Timestamp.fromDate(
+        DateTime(
+          quizDateTime.year,
+          quizDateTime.month,
+          quizDateTime.day,
+          0,
+          0,
+          0,
+        ),
+      );
+
+      /// Creates the end value of the day and is kept by 'endOfDay'.
+      final endOfDay = Timestamp.fromDate(
+        DateTime(
+          quizDateTime.year,
+          quizDateTime.month,
+          quizDateTime.day,
+          23,
+          59,
+          59,
+        ),
+      );
+
+      /// Queries the user's quiz analyzes for the specified date and level.
+      final querySnapshot = await _userCollectionReference
           .doc(_currentUser?.uid)
           .collection('quiz_analysis')
-          .doc();
+          .where('quiz_date', isGreaterThanOrEqualTo: startOfDay)
+          .where('quiz_date', isLessThanOrEqualTo: endOfDay)
+          .where('quiz_level', isEqualTo: quizAnalysisModel.quizLevel)
+          .get();
 
-      final autoId = docQuizAnalysisRef.id;
-      final updatedModel = quizAnalysisModel.copyWith(analysisId: autoId);
-      await docQuizAnalysisRef.set(updatedModel.toJson());
+      /// If there is a record on the same day and level, it updates the existing record.
+      if (querySnapshot.docs.isNotEmpty) {
+        final existingDoc = querySnapshot.docs.first;
+        final existingAnalysis = QuizAnalysisModel().fromJson(
+          existingDoc.data(),
+        );
 
-      _logger.i("Adding analysis was successful.");
-      return true;
+        /// Combines new incoming data with existing analysis.
+        final updatedAnalysis = QuizAnalysisModel(
+          analysisId: existingAnalysis.analysisId,
+          quizDate: existingAnalysis.quizDate,
+          totalCorrect: (existingAnalysis.totalCorrect ?? 0) +
+              (quizAnalysisModel.totalCorrect ?? 0),
+          totalWrong: (existingAnalysis.totalWrong ?? 0) +
+              (quizAnalysisModel.totalWrong ?? 0),
+          totalElapsedTime: (existingAnalysis.totalElapsedTime ?? 0) +
+              (quizAnalysisModel.totalElapsedTime ?? 0),
+          totalScore: (existingAnalysis.totalScore ?? 0) +
+              (quizAnalysisModel.totalScore ?? 0),
+          totalQuestion: (existingAnalysis.totalQuestion ?? 0) +
+              (quizAnalysisModel.totalQuestion ?? 0),
+          quizLevel: existingAnalysis.quizLevel,
+        );
+
+        /// Calculates success percentage
+        if (updatedAnalysis.totalQuestion != null) {
+          final successRate =
+              updatedAnalysis.totalCorrect! / updatedAnalysis.totalQuestion!;
+          updatedAnalysis.successPercentage = (successRate * 100).toInt();
+        }
+
+        /// Updates existing record
+        await _userCollectionReference
+            .doc(_currentUser?.uid)
+            .collection('quiz_analysis')
+            .doc(existingAnalysis.analysisId)
+            .update(updatedAnalysis.toJson());
+
+        _logger.i("Existing analysis updated successfully.");
+        return true;
+      } else {
+        /// Creates a new quiz analysis.
+        final docQuizAnalysisRef = _userCollectionReference
+            .doc(_currentUser?.uid)
+            .collection('quiz_analysis')
+            .doc();
+
+        /// Automatically create ID for new document.
+        final autoId = docQuizAnalysisRef.id;
+
+        /// Create new model and add ID.
+        final updatedModel = quizAnalysisModel.copyWith(analysisId: autoId);
+
+        /// Save new document to Firestore.
+        await docQuizAnalysisRef.set(updatedModel.toJson());
+
+        _logger.i("New analysis added successfully.");
+        return true;
+      }
     } catch (e) {
-      _logger.w("Adding analysis failed. Error: $e");
+      /// Create log record and return false in case of error.
+      _logger.w("Quiz analysis operation failed. Error: $e");
+      return false;
+    }
+  }
+
+  Future<bool> addCompletedQuizAnalysisDaily({
+    required QuizAnalysisModel quizAnalysisModel,
+  }) async {
+    try {
+      /// Check if quiz date is valid.
+      if (quizAnalysisModel.quizDate == null) {
+        _logger.w("Quiz date is missing");
+        return false;
+      }
+
+      /// Convert Timestamp to DateTime object with (toDateTime()) extension.
+      final quizDateTime = quizAnalysisModel.quizDate!.toDateTime();
+
+      /// It creates the starting value of the day and is kept by 'startOfDay'.
+      final startOfDay = Timestamp.fromDate(
+        DateTime(
+          quizDateTime.year,
+          quizDateTime.month,
+          quizDateTime.day,
+          0,
+          0,
+          0,
+        ),
+      );
+
+      /// Creates the end value of the day and is kept by 'endOfDay'.
+      final endOfDay = Timestamp.fromDate(
+        DateTime(
+          quizDateTime.year,
+          quizDateTime.month,
+          quizDateTime.day,
+          23,
+          59,
+          59,
+        ),
+      );
+
+      /// Queries the user's quiz analyzes for the specified date.
+      final querySnapshot = await _userCollectionReference
+          .doc(_currentUser?.uid)
+          .collection('analysis_all_daily')
+          .where('quiz_date', isGreaterThanOrEqualTo: startOfDay)
+          .where('quiz_date', isLessThanOrEqualTo: endOfDay)
+          .get();
+
+      /// Checking whether there is a daily analysis available for the same day,
+      /// if so, it is entered.
+      if (querySnapshot.docs.isNotEmpty) {
+        /// Retrieves the current document
+        final existingDoc = querySnapshot.docs.first;
+
+        /// It receives the JSON format data coming from Firestore
+        /// with existingDoc.data() and converts it into a model object
+        /// with QuizAnalysisModel().fromJson().
+        final existingAnalysis = QuizAnalysisModel().fromJson(
+          existingDoc.data(),
+        );
+
+        /// Merge the values (add new stats to existing ones).
+        final updatedAnalysis = QuizAnalysisModel(
+          analysisId: existingAnalysis.analysisId,
+          quizDate: existingAnalysis.quizDate,
+          totalCorrect: (existingAnalysis.totalCorrect ?? 0) +
+              (quizAnalysisModel.totalCorrect ?? 0),
+          totalWrong: (existingAnalysis.totalWrong ?? 0) +
+              (quizAnalysisModel.totalWrong ?? 0),
+          totalElapsedTime: (existingAnalysis.totalElapsedTime ?? 0) +
+              (quizAnalysisModel.totalElapsedTime ?? 0),
+          totalScore: (existingAnalysis.totalScore ?? 0) +
+              (quizAnalysisModel.totalScore ?? 0),
+          totalQuestion: (existingAnalysis.totalQuestion ?? 0) +
+              (quizAnalysisModel.totalQuestion ?? 0),
+          quizLevel: existingAnalysis.quizLevel,
+        );
+
+        /// Calculates the updated success percentage.
+        if (updatedAnalysis.totalQuestion != null) {
+          final successRate =
+              updatedAnalysis.totalCorrect! / updatedAnalysis.totalQuestion!;
+          updatedAnalysis.successPercentage = (successRate * 100).toInt();
+        }
+
+        /// Updates the existing document
+        await _userCollectionReference
+            .doc(_currentUser?.uid)
+            .collection('analysis_all_daily')
+            .doc(existingAnalysis.analysisId)
+            .update(updatedAnalysis.toJson());
+
+        _logger.i("Existing daily analysis updated successfully.");
+        return true;
+      } else {
+        /// If the current daily analysis is not found, it creates a new one.
+        final docDailyAnalysisRef = _userCollectionReference
+            .doc(_currentUser?.uid)
+            .collection('analysis_all_daily')
+            .doc();
+
+        /// Automatically create ID for new document.
+        final autoId = docDailyAnalysisRef.id;
+
+        /// Create new model and add ID.
+        final dailyModel = quizAnalysisModel.copyWith(analysisId: autoId);
+
+        /// Save new document to Firestore.
+        await docDailyAnalysisRef.set(dailyModel.toJson());
+
+        _logger.i("New daily analysis added successfully.");
+        return true;
+      }
+    } catch (e) {
+      /// Create log record and return false in case of error.
+      _logger.w("Daily quiz analysis operation failed. Error: $e");
       return false;
     }
   }

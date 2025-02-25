@@ -1,8 +1,10 @@
 import 'dart:developer';
-
 import 'package:word_prime/export.dart';
 
 class MainTabViewModel extends BaseViewModel {
+  final int? tabIndex;
+  MainTabViewModel(this.tabIndex);
+
   ValueNotifier<int> currentIndex = ValueNotifier(0);
   ValueNotifier<UserModel?> userNotifier = ValueNotifier(null);
 

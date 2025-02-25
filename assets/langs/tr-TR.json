@@ -216,5 +216,30 @@
   "quizSelection" : {
     "insufficientWordTitle": "Bu Seviyede Yetersiz Kelime ya da Eklenen Kelimeler Cevaplandırılmış!",
     "insufficientWordSubTitle": "En az cevaplandırılmamış 3 kelime olmalı! Kelime Ekleyin ya da Hatırlıyor muyum? / Hatalarım Alıştırmaları Yapın!"
+  },
+  "quizAnalysis" : {
+    "appBarTitle": "Quiz Analizi",
+    "buttonTitle": "Sonuçları Gör",
+    "chartSubTitle": "Doğru - Yanlış Sayısı",
+    "chartTitle": "Tamamı",
+    "chartLevelTitle": "Seviye",
+    "correctTitle": "Doğru",
+    "incorrectTitle": "Yanlış"
+  },
+  "days": {
+    "monday": "Pazartesi",
+    "mon": "Pzt",
+    "tuesday": "Salı",
+    "tue": "Sal",
+    "wednesday": "Çarşamba",
+    "wed": "Çar",
+    "thursday": "Perşembe",
+    "thu": "Per",
+    "friday": "Cuma",
+    "fri": "Cum",
+    "saturday": "Cumartesi",
+    "sat": "Cmt",
+    "sunday": "Pazar",
+    "sun": "Paz"
   }
 }

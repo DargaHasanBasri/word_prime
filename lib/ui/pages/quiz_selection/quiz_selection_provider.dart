@@ -3,7 +3,6 @@ import 'package:word_prime/export.dart';
 class QuizSelectionProvider extends StatelessWidget {
   final String quizType;
   final ValueNotifier<UserModel?> currentUserNotifier;
-
   const QuizSelectionProvider({
     super.key,
     required this.quizType,

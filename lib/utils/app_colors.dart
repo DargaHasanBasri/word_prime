@@ -35,4 +35,5 @@ final class AppColors {
   static Color carouselPink = const Color(0xffE3735E);
   static Color yellowGreen = const Color(0xff57cc02);
   static Color lightRed = const Color(0xffff4b4c);
+  static Color water = const Color(0xffeef4fe);
 }
